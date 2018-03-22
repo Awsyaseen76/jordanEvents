@@ -1,0 +1,17 @@
+<div ng-app = 'jordanEvents' class="container">
+	<h1>All available events</h1>
+	<hr class="my-3">
+
+	<div class="container">
+		<div class="row">
+			<div class="card border-success col-xl-4 aws-margin10" ng-repeat='event in model.eventsList' style="max-width: 20rem;">
+			  <div class="card-header text-danger"><h4>{{event.name}}</h4></div>
+			  <div class="card-body">
+			    <h4 class="card-title">Category: {{event.category}} - Sub-Category: {{event.subcategory}}</h4>
+			    <p class="card-text">Details: {{event.details}}</p>
+			  </div>
+			</div>
+		</div>
+	</div>
+
+</div>

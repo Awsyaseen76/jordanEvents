@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Jordan Events</title>
+	<!-- jQuery -->
+	<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+	<!-- Popper -->
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+	<!-- Bootstrap -->
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+	<!-- Sketchy Theme -->
+	<link href="https://maxcdn.bootstrapcdn.com/bootswatch/4.0.0/sketchy/bootstrap.min.css" rel="stylesheet" integrity="sha384-QAdi7HQouHzrMcg66qFdsKV2BCFW/iVhCRvooAkqS4d5rXV8Hlu+X8MY3ao03fgn" crossorigin="anonymous">
+	<!-- Local css -->
+	<link rel="stylesheet" type="text/css" href="css/style.css">
+	
+	<!-- Angular -->
+	<script type="text/javascript" src="vendor/angular/angular.js"></script>
+	<!-- Angular Route -->
+	<script type="text/javascript" src="vendor/angular/angular-route.js"></script>
+	
+	<script type="text/javascript" src="js/app.js"></script>
+	<script type="text/javascript" src="js/config.js"></script>
+	<script type="text/javascript" src="makers/controllers/loginMaker.controller.client.js"></script>
+	<script type="text/javascript" src="makers/controllers/registerMaker.controller.client.js"></script>
+	<script type="text/javascript" src="makers/controllers/makerProfile.controller.client.js"></script>
+	<script type="text/javascript" src="users/controllers/loginUser.controller.client.js"></script>
+	<script type="text/javascript" src="users/controllers/registerUser.controller.client.js"></script>
+	<script type="text/javascript" src="users/controllers/allEventsUser.controller.client.js"></script>
+	<script type="text/javascript" src="users/controllers/userProfile.controller.client.js"></script>
+	<script type="text/javascript" src="users/services/user.service.client.js"></script>
+	<script type="text/javascript" src="users/services/events.service.client.js"></script>
+	<script type="text/javascript" src="makers/services/maker.service.client.js"></script>
+
+</head>
+<body ng-app="jordanEvents">
+	<div>
+		<nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+		  <a class="navbar-brand text-warning" href="#">Jordan Events</a>
+		  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarColor01" aria-controls="navbarColor01" aria-expanded="false" aria-label="Toggle navigation">
+		    <span class="navbar-toggler-icon"></span>
+		  </button>
+
+		  <div class="collapse navbar-collapse" id="navbarColor01">
+		    <ul class="navbar-nav mr-auto">
+		      <li class="nav-item active">
+		        <a class="nav-link" href="/">Home <span class="sr-only">(current)</span></a>
+		      </li>
+		      <li class="nav-item">
+		        <a class="nav-link" href="#">Events</a>
+		      </li>
+		      <li class="nav-item">
+		        <a class="nav-link" href="#!/login">Login</a>
+		      </li>
+		    </ul>
+		    <form class="form-inline my-2 my-lg-0">
+		      <input class="form-control mr-sm-2" type="text" placeholder="Search">
+		      <button class="btn btn-secondary my-2 my-sm-0" type="submit">Search</button>
+		    </form>
+		  </div>
+		</nav>
+	</div>
+	<br>
+	<br>
+
+			<div ng-view></div>
+
+</body>
+</html>

@@ -1,0 +1,34 @@
+<div class="container " ng-app="jordanEvents">
+	<div class="jumbotron" >
+	  <h1 class="display-3">Event Makers Login</h1>
+	  <hr class="my-4">
+	  <form>
+	  	<fieldset>
+			  <div class="form-group">
+		      	<label for="email">Email address</label>
+		      	<input type="email" 
+		      			class="form-control" 
+		      			id="email" 
+		      			aria-describedby="emailHelp" 
+		      			placeholder="Enter email" 
+		      			ng-model="model.maker.email">
+		      	<small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
+		      	<div nd-show="error" class="text-danger">{{model.error}}</div>
+	    	</div>
+	    	
+	    	<div class="form-group">
+		      	<label for="password">Password</label>
+		      	<input type="password" 
+		      			class="form-control" 
+      					id="password" 
+      					placeholder="Password" 
+      					ng-model="model.maker.password">
+			</div>
+	  	
+	  		<button type="submit" class="btn btn-success" ng-click="model.loginMaker(model.maker)">Login</button>
+	  		<a class="btn btn-warning" href="#!/registerMaker" role="button">Register</a>
+	  	</fieldset>
+	  </form>
+	</div>
+</div>
+<h1>{{model.test}}</h1>
