@@ -17,7 +17,7 @@
 					model.error = 'Please check your eamil and password'
 					return
 				}
-				var foundUser = userService.findUserByEmail(user);
+				var foundUser = userService.matchUser(user);
 				model.error = null;
 				if (foundUser === null){
 					model.error = 'Please check your eamil and password';

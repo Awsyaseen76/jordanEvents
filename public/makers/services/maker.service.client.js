@@ -4,12 +4,11 @@
 		.service('makerService', makerService)
 
 		function makerService(){
-			var model = this;
 
-			model.findMakerByEmail = findMakerByEmail;
-			model.addNewMaker = addNewMaker;
-			model.matchMaker = matchMaker;
-			model.findMakerById = findMakerById;
+			this.findMakerByEmail = findMakerByEmail;
+			this.addNewMaker = addNewMaker;
+			this.matchMaker = matchMaker;
+			this.findMakerById = findMakerById;
 
 			function init(){
 			}
