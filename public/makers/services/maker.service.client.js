@@ -46,7 +46,6 @@
 					if (checkMaker === null){
 						maker.makerId = Date.now()+''
 						makers.push(maker);
-						console.log(makers)
 						return maker;
 					} else {
 						return null;

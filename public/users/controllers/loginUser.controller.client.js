@@ -23,7 +23,6 @@
 					model.error = 'Please check your eamil and password';
 					return 
 				} else {
-					console.log(foundUser)
 					$location.url('/userProfile/'+foundUser.userId);
 					return foundUser;
 				}

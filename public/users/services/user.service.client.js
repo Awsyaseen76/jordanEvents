@@ -21,7 +21,7 @@
 						];
 			function matchUser(user){
 				for(var u in users){
-					if (user.email === users[u].email && usrt.password === musers[u].password){
+					if (user.email === users[u].email && user.password === users[u].password){
 						return users[u];
 					}
 				}

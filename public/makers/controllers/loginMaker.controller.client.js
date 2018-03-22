@@ -22,6 +22,7 @@
 			var matchMaker = makerService.matchMaker(maker)
 			if (matchMaker === null){
 				model.error = 'Please check your email and password';
+				return;
 			}
 			$location.url('/makerProfile/'+matchMaker.makerId)
 		}

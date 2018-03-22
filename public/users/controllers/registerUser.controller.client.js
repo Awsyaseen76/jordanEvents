@@ -7,7 +7,6 @@
 			var model = this;
 
 			function init(){
-				console.log('hi from the registerUserController')
 			}
 			init();	
 			model.registerSubmit = registerSubmit;
