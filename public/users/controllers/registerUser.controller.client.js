@@ -3,7 +3,7 @@
 		.module('jordanEvents')
 		.controller('registerUserController', registerUserController)
 
-		function registerUserController(userService, $location){
+		function registerUserController(userService, $location, $rootScope){
 			var model = this;
 
 			function init(){
@@ -22,6 +22,7 @@
 					if (newUser === null){
 						model.error = 'This email is already registered'
 					} else {
+						$rootScope.loggedUser = newUser;
 						$location.url('/userProfile/'+newUser.userId)
 					}
 				} else {

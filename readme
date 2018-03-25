@@ -35,4 +35,5 @@ Todolist:
 - [x] Create register make
 - [x] Create maker profile page
 - [x] Create events page
+- [ ] view events related to each maker on the profile page
 - [ ] Create add event page for the maker after he/she logged in

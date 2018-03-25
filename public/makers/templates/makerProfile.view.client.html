@@ -1,9 +1,21 @@
+<div class="container">
+	<div class="row">
+		<div class="col-4">
+			<h3 class="text-danger">Maker Profile:</h3>
+			<hr>
+			<h5>Name: {{model.makerProfile.name}}</h5>
+			<h5>Email: {{model.makerProfile.email}}</h5>
+			<h5>Id: {{model.makerProfile.makerId}}</h5>
+		</div>
+		<div class="col-8">
+			<h3>maker events</h1>
+			<hr>
+			<div class="row">
+				<div class="col-6">	
+					<div ng-include src="'../views/htmlComponents/eventsListComponent/makerEventsList-component.view.client.html'"></div>
 
-<br>
-<br>
-<div>
-	<h1 class="text-danger">Maker Profile:</h1>
-	<h4>Name: {{model.makerProfile.name}}</h4>
-	<h4>Email: {{model.makerProfile.email}}</h4>
-	<h4>Id: {{model.makerProfile.makerId}}</h4>
+				</div>
+			</div>
+		</div>
+	</div>
 </div>

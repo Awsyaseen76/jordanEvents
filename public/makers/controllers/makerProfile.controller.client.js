@@ -1,23 +1,24 @@
-(function(){
+(function() {
 	angular
 		.module('jordanEvents')
-		.controller('makerProfileController', makerProfileController)
+		.controller('makerProfileController', makerProfileController);
 
-		function makerProfileController($routeParams, makerService){
-			var model = this;
-			function init(){
-				var _makerId = $routeParams['makerId'];
-				model.makerProfile = makerService.findMakerById(_makerId);
-				if (model.makerProfile === null){
-					model.error = 'Please login with your email and password';
-					return;
-				} else {
-					return model.makerProfile;
-				}
+	function makerProfileController($routeParams, makerService) {
+		var model = this;
+
+		function init() {
+			var _makerId = $routeParams.makerId;
+			model.makerProfile = makerService.findMakerById(_makerId);
+			if (model.makerProfile === null) {
+				model.error = 'Please login with your email and password';
+				return;
+			} else {
+				return model.makerProfile;
 			}
-			init();
-			
-			
-
 		}
+		init();
+
+
+
+	}
 })();

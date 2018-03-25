@@ -23,6 +23,7 @@
 	<script type="text/javascript" src="makers/controllers/loginMaker.controller.client.js"></script>
 	<script type="text/javascript" src="makers/controllers/registerMaker.controller.client.js"></script>
 	<script type="text/javascript" src="makers/controllers/makerProfile.controller.client.js"></script>
+	<script type="text/javascript" src="makers/controllers/makerEventsList.controller.client.js"></script>
 	<script type="text/javascript" src="users/controllers/loginUser.controller.client.js"></script>
 	<script type="text/javascript" src="users/controllers/registerUser.controller.client.js"></script>
 	<script type="text/javascript" src="users/controllers/allEventsUser.controller.client.js"></script>
@@ -30,9 +31,13 @@
 	<script type="text/javascript" src="users/services/user.service.client.js"></script>
 	<script type="text/javascript" src="users/services/events.service.client.js"></script>
 	<script type="text/javascript" src="makers/services/maker.service.client.js"></script>
+	<script type="text/javascript" src="views/services/events.service.client.js"></script>
+
 
 </head>
 <body ng-app="jordanEvents">
+	
+	<!-- navbar -->
 	<div>
 		<nav class="navbar navbar-expand-lg navbar-dark bg-primary">
 		  <a class="navbar-brand text-warning" href="#">Jordan Events</a>
@@ -49,7 +54,28 @@
 		        <a class="nav-link" href="#">Events</a>
 		      </li>
 		      <li class="nav-item">
-		        <a class="nav-link" href="#!/login">Login</a>
+		        <a class="nav-link" href="#!/loginUser" ng-show="!loggedUser">Login User</a>
+		      </li>
+		      <li class="nav-item">
+		        <a class="nav-link" href="#!/loginMaker" ng-show="!loggedMaker">Login Maker</a>
+		      </li>
+		      <li class="nav-item">
+		        <a class="nav-link" href="#" ng-click="logoutUser()" ng-show="loggedUser">Logout User</a>
+		      </li>
+		      <li class="nav-item">
+		        <a class="nav-link" ng-click="logoutMaker()" href="#" ng-show="loggedMaker">Logout Maker</a>
+		      </li>
+		      <li class="nav-item">
+		        <a class="nav-link" href="#!/userProfile/{{loggedUser.userId}}" ng-show="loggedUser">User Profile</a>
+		      </li>
+		      <li class="nav-item">
+		        <a class="nav-link" href="#!/makerProfile/{{loggedMaker.makerId}}" ng-show="loggedMaker">Maker Profile</a>
+		      </li>
+		      <li class="nav-item">
+		        <a class="nav-link" href="#!/contact">Contact</a>
+		      </li>
+		      <li class="nav-item">
+		        <a class="nav-link" href="#!/about">About</a>
 		      </li>
 		    </ul>
 		    <form class="form-inline my-2 my-lg-0">
@@ -59,10 +85,10 @@
 		  </div>
 		</nav>
 	</div>
-	<br>
-	<br>
 
-			<div ng-view></div>
+	<!-- //////////////////////////////////////////////////////////////////////////////////////// -->
+
+	<div ng-view></div>
 
 </body>
 </html>

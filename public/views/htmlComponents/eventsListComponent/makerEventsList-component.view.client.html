@@ -1,0 +1,14 @@
+<div>
+	<h2>Event Maker Name: {{model.loggedMaker.name}}</h2>
+	<h1>Events List: </h1>
+	<div class="row">
+		<div class="col-4"> <h3>Name</h3> </div>
+		<div class="col-4"> <h3>Category</h3> </div>
+		<div class="col-4"> <h3>Sub-Category</h3> </div>
+	</div>	
+	<div class="row" ng-repeat="event in model.eventsList">
+		<div class="col-4"> <h3>{{event.name}}</h3> </div>
+		<div class="col-4"> <h3>{{event.category}}</h3> </div>
+		<div class="col-4"> <h3>{{event.subcategory}}</h3> </div>	
+	</div>
+</div>

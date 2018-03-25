@@ -1,12 +1,12 @@
-(function(){
+(function() {
 	angular
 		.module('jordanEvents')
 		.config(configuration);
 
-	function configuration($routeProvider){
+	function configuration($routeProvider) {
 		$routeProvider
 			.when('/', {
-				templateUrl: 'pages/home.html'
+				templateUrl: '../views/pages/home.html'
 			})
 			.when('/allEvents', {
 				templateUrl: 'users/templates/allEvents.view.client.html',
@@ -42,6 +42,17 @@
 				templateUrl: 'makers/templates/makerProfile.view.client.html',
 				controller: 'makerProfileController',
 				controllerAs: 'model'
+			})
+			.when('/makerProfile/:makerId/eventsList', {
+				templateUrl: 'makers/templates/makerEventsList.view.client.html',
+				controller: 'makerEventsListController',
+				controllerAs: 'model'
+			})
+			.when('/contact', {
+				templateUrl: '../views/pages/contact.view.client.html'
+			})
+			.when('/about', {
+				templateUrl: '../views/pages/about.view.client.html'
 			})
 	}
 })();
