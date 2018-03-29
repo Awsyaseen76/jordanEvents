@@ -29,12 +29,12 @@
 	<script type="text/javascript" src="makers/controllers/makerEditEvent.controller.client.js"></script>
 	<script type="text/javascript" src="users/controllers/loginUser.controller.client.js"></script>
 	<script type="text/javascript" src="users/controllers/registerUser.controller.client.js"></script>
-	<script type="text/javascript" src="users/controllers/allEventsUser.controller.client.js"></script>
 	<script type="text/javascript" src="users/controllers/userProfile.controller.client.js"></script>
 	<script type="text/javascript" src="users/services/user.service.client.js"></script>
-	<script type="text/javascript" src="users/services/events.service.client.js"></script>
+	<script type="text/javascript" src="events/controllers/allEvents.controller.client.js"></script>
+	<script type="text/javascript" src="events/controllers/eventDetails.controller.client.js""></script>
+	<script type="text/javascript" src="events/services/events.service.client.js"></script>
 	<script type="text/javascript" src="makers/services/maker.service.client.js"></script>
-	<script type="text/javascript" src="views/services/events.service.client.js"></script>
 
 
 </head>
@@ -54,7 +54,7 @@
 		        <a class="nav-link" href="/">Home <span class="sr-only">(current)</span></a>
 		      </li>
 		      <li class="nav-item">
-		        <a class="nav-link" href="#">Events</a>
+		        <a class="nav-link" href="#!/allEvents">Events</a>
 		      </li>
 		      <li class="nav-item">
 		        <a class="nav-link" href="#!/loginUser" ng-show="!loggedUser">Login User</a>

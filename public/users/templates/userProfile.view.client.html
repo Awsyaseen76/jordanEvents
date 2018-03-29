@@ -1,7 +1,22 @@
-<div>
+<div class="container">
 	<h1>User Profile:</h1>
 	<h5 ng-show="model.error">{{model.error}}</h5>
 	<h4>Email: {{model.userProfile.email}}</h4>
 	<h4>Name: {{model.userProfile.name}}</h4>
 	<h4>UserId: {{model.userProfile.userId}}</h4>
+	<h4>Registered Events:</h4>
+	<hr>
+	<div class="container">
+		<div class="row">
+			<div class="card border-success col-xl-4 aws-margin10" ng-repeat='event in model.userProfile.registeredEventsList' style="max-width: 20rem;">
+			  <div class="card-header text-danger"><h3>{{event.name}}</h3></div>
+			  <div class="card-body">
+			    <h5 class="card-title">Category: {{event.category}}</h5>
+			    <h5 class="card-title">Sub-Category: {{event.subcategory}}</h5>
+			    <p class="card-text">Details: {{event.details}}</p>
+			    <a href="" ng-click="model.removeRegisteredEvent(event.eventId, model.userProfile.userId)" class=" btn btn-default pull-right">Remove...</a>
+			  </div>
+			</div>
+		</div>
+	</div>
 </div>

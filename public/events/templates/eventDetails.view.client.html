@@ -1,0 +1,18 @@
+<div class="container">
+	<h1 class="text-danger">Event details</h1>
+	<hr>
+
+	<div class="alert alert-danger" role="alert" ng-show="model.error">
+  		Please login or register to register on this event <a href="#!/loginUser" class="alert-link">Login / Register</a>
+	</div>
+
+	<h3>Event Name: {{model.eventDetails.name}}</h3>
+	<h3>Event Category: {{model.eventDetails.category}}</h3>
+	<h3>Event Sub-Category: {{model.eventDetails.subcategory}}</h3>
+	<h3>Event Details: {{model.eventDetails.details}}</h3>
+	<br>
+
+	<a href="" class="btn btn-lg btn-success" ng-click="model.eventRegistration(model.eventDetails)">Register</a>
+	<a href="#!/allEvents" class="btn btn-lg btn-danger">Cancel</a>
+
+</div>

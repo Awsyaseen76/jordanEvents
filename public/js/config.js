@@ -9,8 +9,13 @@
 				templateUrl: '../views/pages/home.html'
 			})
 			.when('/allEvents', {
-				templateUrl: 'users/templates/allEvents.view.client.html',
+				templateUrl: 'events/templates/allEvents.view.client.html',
 				controller: 'allEventsController',
+				controllerAs: 'model'
+			})
+			.when('/allEvents/:eventId',{
+				templateUrl: 'events/templates/eventDetails.view.client.html',
+				controller: 'eventDetailsController',
 				controllerAs: 'model'
 			})
 			.when('/loginUser', {

@@ -14,16 +14,6 @@ three parts of the prject:
 
 
 
-
-
-
-
-
-
-
-
-
-
 Todolist:
 
 - [x] Create the home page
@@ -37,5 +27,16 @@ Todolist:
 - [x] Create events page
 - [x] view events related to each logged in maker on the profile page
 - [x] Create add event page for the logged in maker after he/she logged in
+
+29/mar/2018
 - [x] Edit particular event.
 - [x] Remove Event from event list by event maker.
+
+29/mar/2018
+- [x] Add details button to each event lead to the event page details.
+- [x] Create event details page.
+- [x] Add register button on the event details page.
+- [x] If user dosen't logged in the promt user to login or register.
+- [x] User register for particular event from events list.
+- [x] show the registered events on the user profile page.
+- [x] remove previously registered event from user event list.
