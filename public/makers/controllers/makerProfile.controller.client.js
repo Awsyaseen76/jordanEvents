@@ -3,7 +3,7 @@
 		.module('jordanEvents')
 		.controller('makerProfileController', makerProfileController);
 
-	function makerProfileController($routeParams, makerService) {
+	function makerProfileController($routeParams, makerService, eventsService) {
 		var model = this;
 
 		function init() {

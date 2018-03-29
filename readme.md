@@ -32,8 +32,10 @@ Todolist:
 - [x] Create user register
 - [x] Create user profile page
 - [x] Create login maker
-- [x] Create register make
+- [x] Create register maker
 - [x] Create maker profile page
 - [x] Create events page
-- [ ] view events related to each maker on the profile page
-- [ ] Create add event page for the maker after he/she logged in
+- [x] view events related to each logged in maker on the profile page
+- [x] Create add event page for the logged in maker after he/she logged in
+- [x] Edit particular event.
+- [x] Remove Event from event list by event maker.

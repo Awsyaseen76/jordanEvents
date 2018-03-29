@@ -48,6 +48,16 @@
 				controller: 'makerEventsListController',
 				controllerAs: 'model'
 			})
+			.when('/makerProfile/:makerId/newEvent', {
+				templateUrl: 'makers/templates/makerNewEvent.view.client.html',
+				controller: 'makerNewEventController',
+				controllerAs: 'model'
+			})
+			.when('/makerProfile/:makerId/editEvent', {
+				templateUrl: 'makers/templates/makerEditEvent.view.client.html',
+				controller: 'makerEditEventController',
+				controllerAs: 'model'
+			})
 			.when('/contact', {
 				templateUrl: '../views/pages/contact.view.client.html'
 			})

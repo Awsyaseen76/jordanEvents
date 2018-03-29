@@ -1,0 +1,84 @@
+<div class="container">
+	<div class="row">
+		<div class="col-3"  style="overflow-y: scroll; height:400px;" >
+			<!-- Left side -->
+			<h3>Events List</h3>
+			<hr>
+			<div class="row">
+				<div class="col-10"> <h5>Name</h5> </div>
+				<div class="col-2"> 
+					<h5>Edit</h5>
+				</div>
+			</div>
+			<div class="row" ng-repeat="event in model.eventsList">
+				<div class="col-10"> <h5>{{event.name}}</h5> </div>
+				<div class="col-2"> <h5><a href="#"><span class="glyphicon glyphicon-edit" aria-hidden="true"></span></a></h5> </div>	
+			</div>
+			<ul>
+				<li>test</li>
+				<li>test</li>
+				<li>test</li>
+				<li>test</li>
+				<li>test</li>
+				<li>test</li>
+				<li>test</li>
+				<li>test</li>
+				<li>test</li>
+				<li>test</li>
+				<li>test</li>
+				<li>test</li>
+				<li>test</li>
+				<li>test</li>
+				<li>test</li>
+				<li>test</li>
+				<li>test</li>
+				<li>test</li>
+				<li>test</li>
+			</ul>
+		</div>
+		<div class="col-1"></div>
+		<div class="col-8">
+			<!-- Right side -->
+			<h1>New Event</h1>
+
+			<div class="form-group">
+				<form>
+					<fieldset>
+				    <legend>New Event:</legend>
+
+					<div class="form-group">
+						<label for="eventName">Event Name:</label>
+						<input class="form-control" type="text" name="eventName" id="eventName" ng-model="newEvent.name">
+				    </div>
+
+
+				    <div class="form-group">
+						<label for="category">Category:</label>
+						<input class="form-control" type="text" name="category" id="category" ng-model="newEvent.category">
+					</div>
+
+					<div class="form-group">
+						<label for="subcategory">Sub-Category:</label>
+						<input class="form-control" type="text" name="subcategory" id="subcategory" ng-model="newEvent.subcategory">
+					</div>
+
+					<div class="form-group">
+						<label for="details">Details:</label>
+						<textarea class="form-control" rows="4" cols="50" name="details" id="details" ng-model="newEvent.details"></textarea>
+					</div>
+
+					<button type="button" name="create" class="btn btn-primary" ng-click="model.createEvent(newEvent)">Create</button>
+
+					</fieldset>
+
+				</form>
+			</div>
+		</div>
+	</div>
+	
+
+	
+	<br>
+	<hr>
+	
+</div>

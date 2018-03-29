@@ -1,14 +1,47 @@
 <div>
-	<h2>Event Maker Name: {{model.loggedMaker.name}}</h2>
-	<h1>Events List: </h1>
+	<h2>Event Maker Name: {{model.makerName}}</h2>
+	<h4>Events List: </h4>
 	<div class="row">
-		<div class="col-4"> <h3>Name</h3> </div>
-		<div class="col-4"> <h3>Category</h3> </div>
-		<div class="col-4"> <h3>Sub-Category</h3> </div>
+		<div class="col-4"> <h4>Name</h4> </div>
+		<div class="col-3"> <h4>Category</h4> </div>
+		<div class="col-3"> <h4>Sub-Category</h4> </div>
+		<div class="col-1"> <h4>Edit</h4> </div>
+		<div class="col-1"> <h4>Remove</h4> </div>
 	</div>	
 	<div class="row" ng-repeat="event in model.eventsList">
-		<div class="col-4"> <h3>{{event.name}}</h3> </div>
-		<div class="col-4"> <h3>{{event.category}}</h3> </div>
-		<div class="col-4"> <h3>{{event.subcategory}}</h3> </div>	
+		<div class="col-4"> <h4>{{event.name}}</h4> </div>
+		<div class="col-3"> <h4>{{event.category}}</h4> </div>
+		<div class="col-3"> <h4>{{event.subcategory}}</h4> </div>
+		<div class="col-1"> <h5><a href="#!/makerProfile/{{event.makerId}}/editEvent"><span class="glyphicon glyphicon-edit" aria-hidden="true"></span></a></h5> </div>
+		<div class="col-1" ng-click="model.removeEvent(event.eventId)"> <h5><a href="" ><span class="glyphicon glyphicon-remove" aria-hidden="true"></span></a></h5> </div>
+
+
+
+		<!-- for the future try the modal to make it work the problem with the below one that the modal disappear but the blur still on the screen -->
+		<!-- Modal to confirm the remove of an event-->
+
+		<!-- <div class="modal collapse" id="{{event.name}}">
+		  <div class="modal-dialog" role="dialog">
+		    <div class="modal-content">
+		      <div class="modal-header">
+		        <h5 class="modal-title">Confirm removing event</h5>
+		        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+		          <span aria-hidden="true">&times;</span>
+		        </button>
+		      </div>
+		      <div class="modal-body">
+		        <h4>Are your sure you want to remove the following event:</h4>
+		        <div><p>{{event.name}}</p></div>
+		        <div><p>{{event.makerId}}</p></div>
+		      </div>
+		      <div class="modal-footer">
+		        <button type="button" class="btn btn-primary" ng-click="model.removeEvent(event.eventId)">Remove</button>
+		        <button type="button" class="btn btn-secondary" data-dismiss="modal" >Cancel</button>
+		      </div>
+		    </div>
+		  </div>
+		</div> -->
+
+
 	</div>
 </div>
