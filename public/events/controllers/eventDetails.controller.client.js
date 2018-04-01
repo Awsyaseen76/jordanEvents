@@ -16,13 +16,16 @@
 			model.eventRegistration = eventRegistration;
 
 			function eventRegistration(event){
-				console.log($rootScope.loggedUser);
 				if (!$rootScope.loggedUser){
 					model.error = true;
 				} else {
 					var userId = $rootScope.loggedUser.userId;
-					userService.addEventToUserEventsList(event, userId);
-					$location.url('/userProfile/'+userId);
+					var addEventPromise = userService.addEventToUserEventsList(event, userId);
+					addEventPromise.then(function (response){
+						userId = response.data.userId;
+						$location.url('/userProfile/'+userId);
+						
+					});
 				}
 			}
 		}

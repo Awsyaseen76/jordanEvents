@@ -8,9 +8,9 @@
 
 		function init() {}
 		init();
-		model.registerSubmit = registerSubmit;
+		model.registerMaker = registerMaker;
 
-		function registerSubmit(maker, password2) {
+		function registerMaker(maker, password2) {
 			if (!maker) {
 				model.error = 'Please fill all the requested fields';
 				return;

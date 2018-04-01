@@ -1,7 +1,7 @@
 (function(){
 	angular
 		.module('jordanEvents')
-		.controller('loginUserController', loginUserController)
+		.controller('loginUserController', loginUserController);
 
 		function loginUserController($location, userService, $rootScope){
 			var model = this;
@@ -19,19 +19,23 @@
 
 			function loginSubmit(user){
 				if (!user){
-					model.error = 'Please check your eamil and password'
-					return
-				}
-				var foundUser = userService.matchUser(user);
-				model.error = null;
-				if (foundUser === null){
 					model.error = 'Please check your eamil and password';
-					return 
-				} else {
-					$rootScope.loggedUser = foundUser;
-					$location.url('/userProfile/'+foundUser.userId);
-					return foundUser;
+					return;
 				}
+				var promise = userService.findUserByUsernameAndPassword(user.email, user.password);
+				promise.then(function(response){
+					var foundUser = response.data;
+					model.error = null;
+					if (foundUser === '0'){
+						model.error = 'Please check your eamil and password';
+						return;
+					} else {
+						$rootScope.loggedUser = foundUser;
+						$location.url('/userProfile/'+foundUser.userId);
+						return foundUser;
+					}
+					
+				});
 			}
 		}
 })();

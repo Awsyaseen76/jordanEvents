@@ -1,29 +1,40 @@
 (function(){
 	angular
 		.module('jordanEvents')
-		.controller('userProfileController', userProfileController)
+		.controller('userProfileController', userProfileController);
 
-		function userProfileController(userService, $routeParams, eventsService){
+		function userProfileController(userService, $routeParams, eventsService, $location){
 			var model = this;
 			function init(){
-				model.hello = 'hi from the userProfileController';
 				var _userId = $routeParams.userId;
-				model.userProfile = userService.findUserbyId(_userId);
-				if (model.userProfile === null){
-					model.error = 'Please login to view your profile details';
-					return;
-				} else {
-					model.error=null;
-					return model.userProfile;
-				}
+				getUserProfile(_userId);
 			}
 			init();
 
+			
+			model.getUserProfile = getUserProfile;
 			model.removeRegisteredEvent = removeRegisteredEvent;
+
+			function getUserProfile(userId){
+				userService.findUserbyId(userId)
+					.then(function(response){
+						var userProfile = response.data;
+						if (userProfile === '0'){
+							model.error = 'Please login to view your profile details';
+							return;
+						} else {
+							model.error=null;
+							model.userProfile = userProfile;
+					}	
+				});
+			}
 
 			function removeRegisteredEvent(eventId){
 				var _userId = $routeParams.userId;
-				userService.removeRegisteredEvent(_userId, eventId);
+				userService.removeRegisteredEvent(_userId, eventId)
+					.then(function(response){
+						getUserProfile(_userId);
+					});
 			}
 
 		}

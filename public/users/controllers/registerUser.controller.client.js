@@ -9,24 +9,41 @@
 			function init(){
 			}
 			init();	
-			model.registerSubmit = registerSubmit;
+			model.registerUser = registerUser;
 
-			function registerSubmit(user, password2){
+			function registerUser(user, password2){
 				if (!user){
 					model.error = 'Please fill all the requested fields';
 					return;
 				}
 				if (user.password === password2){
 					model.error = null;
-					var newUser = userService.addNewUser(user)
-					if (newUser === null){
-						model.error = 'This email is already registered'
-					} else {
-						$rootScope.loggedUser = newUser;
-						$location.url('/userProfile/'+newUser.userId)
-					}
-				} else {
-					model.error = 'Please double check that the two passwords are matched';
+					// 1. check if user eamil already exist
+					var promiseFindUserByEmail = userService.findUserByEmail(user.email);
+					promiseFindUserByEmail.then(function(response){
+						// 2. if the user email not exists (return 0) then add the user to the users in the server
+						if(response.data === '0'){
+							var promiseAddNewUser = userService.addNewUser(user);
+							promiseAddNewUser.then(function(response){
+								var newUser = response.data;
+								console.log('new user added to users: '+ newUser);
+								$rootScope.loggedUser = newUser;
+								$location.url('/userProfile/'+newUser.userId);
+								return;
+							});
+						} else {
+							model.error = 'This email is already registered';
+						}
+					});
+
+				// 	if (newUser === null){
+				// 		model.error = 'This email is already registered'
+				// 	} else {
+				// 		$rootScope.loggedUser = newUser;
+				// 		$location.url('/userProfile/'+newUser.userId)
+				// 	}
+				// } else {
+				// 	model.error = 'Please double check that the two passwords are matched';
 				}
 			}
 		}
