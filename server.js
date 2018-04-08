@@ -15,7 +15,13 @@ app.use(bodyParser.urlencoded({
 var func = require('./server/app');
 func(app)
 */
-require('./server/app')(app);
+
+require('./server/user.service.server')(app);
+require('./server/maker.service.server')(app);
+
+
+
+// require('./server/app')(app);
 
 
 app.listen(3000, function() {

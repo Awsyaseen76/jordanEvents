@@ -3,72 +3,47 @@
 		.module('jordanEvents')
 		.service('makerService', makerService);
 
-	function makerService() {
+	function makerService($http) {
 
 		this.findMakerByEmail = findMakerByEmail;
-		this.addNewMaker = addNewMaker;
 		this.matchMaker = matchMaker;
 		this.findMakerById = findMakerById;
-		
 
 		function init() {}
 		init();
 
-		
 		function findMakerById(makerId) {
-			for (var m in makers) {
-				if (makerId === makers[m].makerId) {
-					return makers[m];
-				}
-			}
-			return null;
+			var url = '/api/maker/?makerId=' + makerId;
+			return $http.get(url)
+				.then(function(response) {
+					var makerProfile = response.data;
+					return makerProfile;
+				});
 		}
 
 		function findMakerByEmail(maker) {
-			for (var m in makers) {
-				if (maker.email === makers[m].email) {
-					return makers[m];
-				}
-			}
-			return null;
+			var url = '/api/maker/makerEmail=' + maker.email;
+			return $http.get(url)
+				.then(function(response) {
+					var result = response.data;
+					if(result === 'email already exist'){
+						return ('email already exist');
+					} else{
+						return $http.post('/api/maker/', maker);
+					}
+				});
 		}
 
 		function matchMaker(maker) {
-			for (var m in makers) {
-				if (maker.email === makers[m].email && maker.password === makers[m].password) {
-					return makers[m];
-				}
-			}
-			return null;
+			var email = maker.email;
+			var password = maker.password;
+			var url = '/api/maker?email=' + email + '&password=' + password;
+			return $http.get(url)
+				.then(function(response) {
+					var matchedMaker = response.data;
+					return matchedMaker;
+				});
 		}
-
-		function addNewMaker(maker) {
-			var checkMaker = findMakerByEmail(maker);
-			if (checkMaker === null) {
-				maker.makerId = Date.now() + '';
-				makers.push(maker);
-				return maker;
-			} else {
-				return null;
-			}
-		}
-
-		var makers = [{
-			'makerId': '111',
-			'email': 'maker1@email.com',
-			'password': '1',
-			'name': 'Maker 1'
-		}, {
-			'makerId': '222',
-			'email': 'maker2@email.com',
-			'password': '2',
-			'name': 'Maker 2'
-		}, {
-			'makerId': '333',
-			'email': 'maker3@email.com',
-			'password': '3',
-			'name': 'Maker 3'
-		}];
 
 	}
 })();

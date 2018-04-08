@@ -8,17 +8,18 @@
 
 		function init() {
 			var _makerId = $routeParams.makerId;
-			model.makerProfile = makerService.findMakerById(_makerId);
-			if (model.makerProfile === null) {
-				model.error = 'Please login with your email and password';
-				return;
-			} else {
-				return model.makerProfile;
-			}
+			makerService.findMakerById(_makerId)
+				.then(function (makerProfile){
+					model.makerProfile = makerProfile;
+					if (model.makerProfile === 'error') {
+						model.error = 'Please login with your email and password';
+						return;
+					} else {
+						return model.makerProfile;
+					}
+				});
 		}
 		init();
-
-
 
 	}
 })();

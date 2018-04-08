@@ -22,20 +22,20 @@
 					model.error = 'Please check your eamil and password';
 					return;
 				}
-				var promise = userService.findUserByUsernameAndPassword(user.email, user.password);
-				promise.then(function(response){
-					var foundUser = response.data;
-					model.error = null;
-					if (foundUser === '0'){
-						model.error = 'Please check your eamil and password';
-						return;
-					} else {
-						$rootScope.loggedUser = foundUser;
-						$location.url('/userProfile/'+foundUser.userId);
-						return foundUser;
-					}
-					
-				});
+				userService.findUserByUsernameAndPassword(user.email, user.password)
+					.then(function(response){
+						var foundUser = response.data;
+						model.error = null;
+						if (foundUser === '0'){
+							model.error = 'Please check your eamil and password';
+							return;
+						} else {
+							$rootScope.loggedUser = foundUser;
+							$location.url('/userProfile/'+foundUser.userId);
+							return foundUser;
+						}
+						
+					});
 			}
 		}
 })();

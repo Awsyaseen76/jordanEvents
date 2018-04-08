@@ -20,17 +20,20 @@
 		function loginMaker(maker) {
 			model.error = null;
 			if (!maker) {
-				model.error = 'Please fill the required fiels';
+				model.error = 'Please fill the required fields';
 				return;
 			}
-			var matchMaker = makerService.matchMaker(maker);
-			if (matchMaker === null) {
-				model.error = 'Please check your email and password';
-				return;
-			}
-			var makerId = matchMaker.makerId;
-			$rootScope.loggedMaker = matchMaker;
-			$location.url('/makerProfile/' + makerId);
+			makerService.matchMaker(maker)
+				.then(function(matchedMaker){
+					if (matchedMaker === 'error') {
+						model.error = 'Please check your email and password';
+						return;
+					} else {
+						var makerId = matchedMaker.makerId;
+						$rootScope.loggedMaker = matchedMaker;
+						$location.url('/makerProfile/' + makerId);
+					}	
+				});
 		}
 	}
 })();
