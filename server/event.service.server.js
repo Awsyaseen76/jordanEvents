@@ -77,7 +77,6 @@ module.exports = function(app) {
 		}
 		if(req.query.makerId){
 			res.send(findEventsByMakerId(req.query.makerId));
-			// console.log('Hi....... ',req.query.makerId);
 			return;
 		}
 		
@@ -98,7 +97,6 @@ module.exports = function(app) {
 	}
 
 	function findEventsByMakerId(makerId){
-		// console.log('im here');
 		var eventsList = [];
 			for(var e in events){
 				if(makerId === events[e].makerId){
@@ -111,7 +109,7 @@ module.exports = function(app) {
 	function addNewEvent(req, res){
 		var newEvent = req.body;
 		events.push(newEvent);
-		return newEvent;
+		res.send(newEvent);
 	}
 
 	function updateEvent(req, res){
@@ -132,7 +130,6 @@ module.exports = function(app) {
 
 	function removeEvent(req, res){
 		var eventId = req.query.eventId;
-		console.log(eventId);
 		for(var e in events){
 			if(eventId === events[e].eventId){
 				events.splice(e, 1);

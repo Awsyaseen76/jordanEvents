@@ -20,7 +20,7 @@
 			function createEvent(newEvent){
 				newEvent.makerId = _makerId;
 				eventsService.addNewEvent(newEvent)
-					.then(function(){
+					.then(function(addedEvent){
 						$location.url('/makerProfile/{{_makerId}}/eventsList');
 					});
 			}

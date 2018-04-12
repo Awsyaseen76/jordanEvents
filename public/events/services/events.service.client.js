@@ -88,8 +88,6 @@
 		function findEventByEventId(eventId){
 			return $http.get('/api/event?eventId=' + eventId)
 				.then(function(response){
-					console.log('findEventByEventId');
-					console.log(response.data);
 					return response.data;
 				});
 		}
@@ -112,8 +110,6 @@
 
 		function updateEvent(newEvent, eventId){
 			// var url = '/api/event/' + eventId;
-			console.log(newEvent);
-			console.log(eventId);
 			return $http.put('/api/event/?eventId='+eventId, newEvent)
 				.then(function (response){
 					return response.data;					
@@ -133,7 +129,6 @@
 			var url = '/api/event/?eventId=' + eventId;
 			return $http.delete(url)
 				.then(function(response){
-					console.log(response.data);
 					return response.data;
 				});
 			// for(var e in events){
