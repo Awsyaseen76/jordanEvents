@@ -30,28 +30,7 @@
 						$location.url('/makerProfile/' + makerId);
 					});
 
-				// var newMaker;
-				// makerService.findMakerByEmail(maker)
-				// 	.then(function(matchedMaker){
-				// 		console.log(matchedMaker);
-						// if(matchedMaker === 'its ok'){
-						// 	return makerService.addNewMaker(maker)
-						// 		.then(function(response){
-						// 			$rootScope.loggedMaker = response.data;
-						// 			$location.url('/makerProfile/' + response.data.makerId);
-						// 			// return response.data;
-						// 		});
-						// }
-						// console.log(response);
-						// return response.data;
-					// });
-				
-				// if (newMaker === null) {
-				// 	model.error = 'This email is already registered';
-				// } else {
-				// 	$rootScope.loggedMaker = newMaker;
-				// 	$location.url('/makerProfile/' + newMaker.makerId);
-				// }
+
 			} else {
 				model.error = 'Please double check that the two passwords are matched';
 			}

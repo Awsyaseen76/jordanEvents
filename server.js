@@ -18,10 +18,7 @@ func(app)
 
 require('./server/user.service.server')(app);
 require('./server/maker.service.server')(app);
-
-
-
-// require('./server/app')(app);
+require('./server/event.service.server')(app);
 
 
 app.listen(3000, function() {

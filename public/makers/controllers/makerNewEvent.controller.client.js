@@ -10,13 +10,19 @@
 			init();
 			var _makerId = $routeParams.makerId;
 			
-			model.eventsList = eventsService.findEventsByMakerId(_makerId);
+			
+			eventsService.findEventsByMakerId(_makerId)
+				.then(function(event){
+					model.eventsList = event;
+				});
 			model.createEvent = createEvent;
 
 			function createEvent(newEvent){
 				newEvent.makerId = _makerId;
-				eventsService.addNewEvent(newEvent);
-				$location.url('/makerProfile/{{_makerId}}/eventsList');
+				eventsService.addNewEvent(newEvent)
+					.then(function(){
+						$location.url('/makerProfile/{{_makerId}}/eventsList');
+					});
 			}
 		}
 })();

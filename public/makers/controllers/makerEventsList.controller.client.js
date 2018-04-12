@@ -11,7 +11,11 @@
 			var loggedMakerId = $rootScope.loggedMaker.makerId;
 			model.makerName = makerName;
 			model.makerId = loggedMakerId;
-			model.eventsList = eventsService.findEventsByMakerId(loggedMakerId);
+			eventsService.findEventsByMakerId(loggedMakerId)
+				.then(function(events){
+					model.eventsList = events;
+					// return model.eventsList;
+				});
 		}
 		init();
 
@@ -19,9 +23,11 @@
 
 		function removeEvent(eventId){
 			var makerId = $rootScope.loggedMaker.makerId;
-			var removedEvent = eventsService.removeEvent(eventId);
-			var url = "/makerProfile/" + makerId;
-			$location.url(url);
+			eventsService.removeEvent(eventId)
+				.then(function(deleted){
+					var url = "/makerProfile/" + makerId;
+					$location.url(url);
+				});
 		}
 	}
 })();

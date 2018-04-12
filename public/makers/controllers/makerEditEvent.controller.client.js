@@ -3,13 +3,17 @@
 		.module('jordanEvents')
 		.controller('makerEditEventController', makerEditEventController);
 
-	function makerEditEventController(eventsService, $rootScope){
+	function makerEditEventController(eventsService, $rootScope, $location){
 		var model = this;
 
 		function init(){
 			var loggedMakerId = $rootScope.loggedMaker.makerId;
-			model.eventsList = eventsService.findEventsByMakerId(loggedMakerId);
+			eventsService.findEventsByMakerId(loggedMakerId)
+				.then(function(events){
+					model.eventsList = events;
+				});
 			model.selectedEvent = null;
+			// console.log(model.eventsList);
 		}
 		init();
 
@@ -17,13 +21,22 @@
 		model.selectEvent = selectEvent;
 
 		function updateEvent(newEvent){
-			var eventId = model.selectedEvent;
-			var updatedEvent = eventsService.updateEvent(newEvent, eventId);
+			var eventId = model.selectedEvent.eventId;
+			eventsService.updateEvent(newEvent, eventId)
+				.then(function(updatedEvent){
+					console.log(updatedEvent);
+					var url = "/makerProfile/" + updatedEvent.makerId;
+					$location.url(url);
+				});
 		}
 
 		function selectEvent(eventId){
-			var foundEvent = eventsService.findEventByEventId(eventId);
-			model.selectedEvent = foundEvent;
+			eventsService.findEventByEventId(eventId)
+				.then(function(event){
+					// model.foundEvent = event;
+					console.log(event);
+					model.selectedEvent = event;
+				});
 			// return model.foundEvent;
 		}
 

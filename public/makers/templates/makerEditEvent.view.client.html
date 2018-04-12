@@ -27,11 +27,11 @@
 				<form>
 					<fieldset>
 				    <legend>New Event:</legend>
-				    <h1>{{model.foundEvent.name}}</h1>
+				    <!-- <h1>{{model.foundEvent.name}}</h1>
 				    <h1>{{model.foundEvent.category}}</h1>
 				    <h1>{{model.foundEvent.subcategory}}</h1>
 				    <h1>{{model.foundEvent.details}}</h1>
-
+ -->
 
 					<div class="form-group">
 						<label for="eventName">Event Name:</label>
@@ -54,7 +54,7 @@
 						<textarea class="form-control" rows="4" cols="50" name="details" id="details" ng-model="model.selectedEvent.details"></textarea>
 					</div>
 
-					<button type="button" name="save" class="btn btn-primary" ng-click="model.updateEvent(newEvent)">Update</button>
+					<button type="button" name="save" class="btn btn-primary" ng-click="model.updateEvent(model.selectedEvent)">Update</button>
 
 					</fieldset>
 

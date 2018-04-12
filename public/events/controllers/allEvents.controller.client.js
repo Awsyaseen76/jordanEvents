@@ -7,7 +7,10 @@
 		var model = this;
 		
 		function init(){
-			model.eventsList = eventsService.allEvents;
+			eventsService.getAllEvents()
+				.then(function(events){
+					model.eventsList = events;		
+				});
 		}
 		init();
 	}

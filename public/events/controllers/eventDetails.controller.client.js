@@ -8,8 +8,11 @@
 
 			function init(){
 				var eventId = $routeParams.eventId;
-				var eventDetails = eventsService.findEventByEventId(eventId);
-				model.eventDetails = eventDetails;
+				// var eventDetails = eventsService.findEventByEventId(eventId);
+				eventsService.findEventByEventId(eventId)
+					.then(function(eventDetails){
+						model.eventDetails = eventDetails;
+					});
 			}
 			init();
 
@@ -20,11 +23,10 @@
 					model.error = true;
 				} else {
 					var userId = $rootScope.loggedUser.userId;
-					var addEventPromise = userService.addEventToUserEventsList(event, userId);
-					addEventPromise.then(function (response){
+					userService.addEventToUserEventsList(event, userId)
+						.then(function (response){
 						userId = response.data.userId;
 						$location.url('/userProfile/'+userId);
-						
 					});
 				}
 			}
