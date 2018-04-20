@@ -7,13 +7,12 @@
 		var model = this;
 
 		function init(){
-			var loggedMakerId = $rootScope.loggedMaker.makerId;
+			var loggedMakerId = $rootScope.loggedMaker._id;
 			eventsService.findEventsByMakerId(loggedMakerId)
 				.then(function(events){
 					model.eventsList = events;
 				});
 			model.selectedEvent = null;
-			// console.log(model.eventsList);
 		}
 		init();
 
@@ -21,10 +20,9 @@
 		model.selectEvent = selectEvent;
 
 		function updateEvent(newEvent){
-			var eventId = model.selectedEvent.eventId;
+			var eventId = model.selectedEvent._id;
 			eventsService.updateEvent(newEvent, eventId)
 				.then(function(updatedEvent){
-					console.log(updatedEvent);
 					var url = "/makerProfile/" + updatedEvent.makerId;
 					$location.url(url);
 				});
@@ -34,7 +32,6 @@
 			eventsService.findEventByEventId(eventId)
 				.then(function(event){
 					// model.foundEvent = event;
-					console.log(event);
 					model.selectedEvent = event;
 				});
 			// return model.foundEvent;

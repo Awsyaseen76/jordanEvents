@@ -1,4 +1,17 @@
 .aws-margin10 {
 	margin: auto;
-	margin-top: 10px;
+	margin-top: 80px;
+}
+
+.aws-margin0 {
+	margin: auto;
+	margin-top: 10px;	
+}
+
+.sticky-nav-top {
+  position: fixed;
+  top: 0px;
+  left: 0px;
+  right: 0px;
+  z-index: 1;
 }

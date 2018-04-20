@@ -72,9 +72,6 @@
 		this.findEventsByMakerId = findEventsByMakerId;
 		this.addNewEvent = addNewEvent;
 		this.updateEvent = updateEvent;
-
-
-
 		this.removeEvent = removeEvent;
 
 
@@ -86,21 +83,21 @@
 		}
 
 		function findEventByEventId(eventId){
-			return $http.get('/api/event?eventId=' + eventId)
+			return $http.get('/api/event/' + eventId)
 				.then(function(response){
 					return response.data;
 				});
 		}
 
 		function findEventsByMakerId(makerId) {
-			return $http.get('/api/event?makerId=' + makerId)
+			return $http.get('/api/makerEvents/' + makerId)
 				.then(function(response){
 					return response.data;
 				});
 		}
 
 		function addNewEvent(newEvent){
-			newEvent.eventId = Date.now() + '';
+			//newEvent.eventId = Date.now() + '';
 			return $http.post('/api/event/', newEvent)
 				.then(function(response){
 					return response.data;
@@ -108,10 +105,11 @@
 			// events.push(newEvent);
 		}
 
-		function updateEvent(newEvent, eventId){
+		function updateEvent(updatedEvent, eventId){
 			// var url = '/api/event/' + eventId;
-			return $http.put('/api/event/?eventId='+eventId, newEvent)
+			return $http.put('/api/event/?eventId='+eventId, updatedEvent)
 				.then(function (response){
+					console.log(response.data);
 					return response.data;					
 				});			
 			// for(var e in events){
@@ -125,8 +123,8 @@
 		}
 
 
-		function removeEvent(eventId){
-			var url = '/api/event/?eventId=' + eventId;
+		function removeEvent(makerId, eventId){
+			var url = '/api/event/?eventId=' + eventId + '&makerId='+makerId;
 			return $http.delete(url)
 				.then(function(response){
 					return response.data;

@@ -1,15 +1,15 @@
-<div class="container">	
+<div class="container aws-margin10">	
 	<div>
 		<h3 class="text-danger">Maker Profile:</h3>
 		<hr>
 		<h5>Name: {{model.makerProfile.name}}</h5>
 		<h5>Email: {{model.makerProfile.email}}</h5>
-		<h5>Id: {{model.makerProfile.makerId}}</h5>
+		<h5>Id: {{model.makerProfile._id}}</h5>
 	</div>
 	<div>
-		<a class="btn btn-primary" href="#!/makerProfile/{{model.makerProfile.makerId}}/eventsList">Events List</a>
-		<a class="btn btn-primary" href="#!/makerProfile/{{model.makerProfile.makerId}}/newEvent">New Event</a>
-		<a class="btn btn-primary" href="#!/makerProfile/{{model.makerProfile.makerId}}/editEvent">Edit / Remove Event</a>
+		<a class="btn btn-primary" href="#!/makerProfile/{{model.makerProfile._id}}/eventsList">Events List</a>
+		<a class="btn btn-primary" href="#!/makerProfile/{{model.makerProfile._id}}/newEvent">New Event</a>
+		<a class="btn btn-primary" href="#!/makerProfile/{{model.makerProfile._id}}/editEvent">Edit Event</a>
 
 	</div>
 </div>

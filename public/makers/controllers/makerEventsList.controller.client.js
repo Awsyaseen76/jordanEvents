@@ -8,7 +8,7 @@
 
 		function init() {
 			var makerName = $rootScope.loggedMaker.name;
-			var loggedMakerId = $rootScope.loggedMaker.makerId;
+			var loggedMakerId = $rootScope.loggedMaker._id;
 			model.makerName = makerName;
 			model.makerId = loggedMakerId;
 			eventsService.findEventsByMakerId(loggedMakerId)
@@ -21,9 +21,9 @@
 
 		model.removeEvent = removeEvent;
 
-		function removeEvent(eventId){
-			var makerId = $rootScope.loggedMaker.makerId;
-			eventsService.removeEvent(eventId)
+		function removeEvent(makerId, eventId){
+			//var makerId = $rootScope.loggedMaker._id;
+			eventsService.removeEvent(makerId, eventId)
 				.then(function(deleted){
 					var url = "/makerProfile/" + makerId;
 					$location.url(url);

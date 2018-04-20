@@ -12,8 +12,6 @@
 
 
 		function registerMaker(maker, password2) {
-			console.log(maker);
-			console.log(password2);
 			if (!maker) {
 				model.error = 'Please fill all the requested fields';
 				return;
@@ -22,12 +20,20 @@
 				model.error = null;
 
 				return makerService.findMakerByEmail(maker)
-					.then(function(response){
-						var matchedMaker = response.data;
-						console.log(matchedMaker);
-						var makerId = matchedMaker.makerId;
-						$rootScope.loggedMaker = matchedMaker;
-						$location.url('/makerProfile/' + makerId);
+					.then(function(result){
+						if(result === 'email already exist'){
+							model.error = 'email already exist';
+							return;
+						} else{
+							return makerService.createMaker(maker)
+								.then(function(result){
+									var matchedMaker = result;
+									var makerId = matchedMaker._id;
+									$rootScope.loggedMaker = matchedMaker;
+									$location.url('/makerProfile/' + makerId);
+									return;
+								});
+						}
 					});
 
 

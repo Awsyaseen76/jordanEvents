@@ -23,13 +23,13 @@
 				model.error = 'Please fill the required fields';
 				return;
 			}
-			makerService.matchMaker(maker)
+			makerService.loginMaker(maker)
 				.then(function(matchedMaker){
 					if (matchedMaker === 'error') {
 						model.error = 'Please check your email and password';
 						return;
 					} else {
-						var makerId = matchedMaker.makerId;
+						var makerId = matchedMaker._id;
 						$rootScope.loggedMaker = matchedMaker;
 						$location.url('/makerProfile/' + makerId);
 					}	

@@ -1,9 +1,9 @@
-<div class="container">
+<div class="container aws-margin10">
 	<h1>All available events</h1>
 	<hr class="my-3">
 	<div class="container">
 		<div class="row">
-			<div class="card border-success col-xl-4 aws-margin10" ng-repeat='event in model.eventsList' style="max-width: 20rem;">
+			<div class="card border-success col-xl-4 aws-margin0" ng-repeat='event in model.eventsList' style="max-width: 20rem;">
 			  <div class="card-header text-danger"><h3>{{event.name}}</h3></div>
 			  <div class="card-body">
 			    <h5 class="card-title">Category: {{event.category}}</h5>
@@ -14,5 +14,4 @@
 			</div>
 		</div>
 	</div>
-
 </div>

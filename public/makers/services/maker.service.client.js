@@ -5,9 +5,10 @@
 
 	function makerService($http) {
 
-		this.findMakerByEmail = findMakerByEmail;
-		this.matchMaker = matchMaker;
 		this.findMakerById = findMakerById;
+		this.findMakerByEmail = findMakerByEmail;
+		this.loginMaker = loginMaker;
+		this.createMaker = createMaker;
 
 		function init() {}
 		init();
@@ -22,26 +23,40 @@
 		}
 
 		function findMakerByEmail(maker) {
-			var url = '/api/maker/makerEmail=' + maker.email;
+			var url = '/api/maker/' + maker.email;
 			return $http.get(url)
 				.then(function(response) {
 					var result = response.data;
-					if(result === 'email already exist'){
+					if(result.email){
 						return ('email already exist');
 					} else{
-						return $http.post('/api/maker/', maker);
+						return ('ready');
 					}
 				});
 		}
 
-		function matchMaker(maker) {
+		function loginMaker(maker) {
 			var email = maker.email;
 			var password = maker.password;
-			var url = '/api/maker?email=' + email + '&password=' + password;
+			// var url = '/api/maker?email=' + email + '&password=' + password;
+			var url = '/api/maker/login/?email=' + email + '&password=' + password;
 			return $http.get(url)
 				.then(function(response) {
-					var matchedMaker = response.data;
-					return matchedMaker;
+					if(response.data){
+						var matchedMaker = response.data;
+						return matchedMaker;
+					} else{
+						return ('error');
+					}
+				});
+		}
+
+		
+
+		function createMaker(maker){
+			return $http.post('/api/maker/', maker)
+				.then(function(response){
+					return(response.data);
 				});
 		}
 
