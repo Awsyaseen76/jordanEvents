@@ -40,3 +40,11 @@ Todolist:
 - [x] User register for particular event from events list.
 - [x] show the registered events on the user profile page.
 - [x] remove previously registered event from user event list.
+
+??/Apr/2018
+- [x] connect to mongoDB
+- [x] refactor events and makers to mongoDB and mongoose
+
+20/Apr/2018
+- [x] refactor user to be on mongoDB and mongoose.
+

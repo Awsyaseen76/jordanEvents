@@ -3,7 +3,7 @@
 	<h5 ng-show="model.error">{{model.error}}</h5>
 	<h4>Email: {{model.userProfile.email}}</h4>
 	<h4>Name: {{model.userProfile.name}}</h4>
-	<h4>UserId: {{model.userProfile.userId}}</h4>
+	<h4>UserId: {{model.userProfile._id}}</h4>
 	<h4>Registered Events:</h4>
 	<hr>
 	<div class="container">
@@ -14,7 +14,7 @@
 			    <h5 class="card-title">Category: {{event.category}}</h5>
 			    <h5 class="card-title">Sub-Category: {{event.subcategory}}</h5>
 			    <p class="card-text">Details: {{event.details}}</p>
-			    <a href="" ng-click="model.removeRegisteredEvent(event.eventId, model.userProfile.userId)" class=" btn btn-default pull-right">Remove...</a>
+			    <a href="" ng-click="model.removeRegisteredEvent(model.userProfile._id, event._id)" class=" btn btn-default pull-right">Remove...</a>
 			  </div>
 			</div>
 		</div>

@@ -22,10 +22,10 @@
 				if (!$rootScope.loggedUser){
 					model.error = true;
 				} else {
-					var userId = $rootScope.loggedUser.userId;
+					var userId = $rootScope.loggedUser._id;
 					userService.addEventToUserEventsList(event, userId)
 						.then(function (response){
-						userId = response.data.userId;
+						// userId = response.data.userId;
 						$location.url('/userProfile/'+userId);
 					});
 				}

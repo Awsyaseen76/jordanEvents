@@ -21,7 +21,6 @@
 				newEvent.makerId = _makerId;
 				eventsService.addNewEvent(newEvent)
 					.then(function(addedEvent){
-						console.log(addedEvent);
 						$location.url('/makerProfile/{{_makerId}}/eventsList');
 					});
 			}

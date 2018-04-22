@@ -22,7 +22,7 @@
 					model.error = 'Please check your eamil and password';
 					return;
 				}
-				userService.findUserByUsernameAndPassword(user.email, user.password)
+				userService.loginUser(user.email, user.password)
 					.then(function(response){
 						var foundUser = response.data;
 						model.error = null;
@@ -31,7 +31,7 @@
 							return;
 						} else {
 							$rootScope.loggedUser = foundUser;
-							$location.url('/userProfile/'+foundUser.userId);
+							$location.url('/userProfile/'+foundUser._id);
 							return foundUser;
 						}
 						

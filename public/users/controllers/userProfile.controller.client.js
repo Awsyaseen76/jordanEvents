@@ -29,11 +29,11 @@
 				});
 			}
 
-			function removeRegisteredEvent(eventId){
-				var _userId = $routeParams.userId;
-				userService.removeRegisteredEvent(_userId, eventId)
+			function removeRegisteredEvent(userId, eventId){
+				// var _userId = $routeParams.userId;
+				userService.removeRegisteredEvent(userId, eventId)
 					.then(function(response){
-						getUserProfile(_userId);
+						getUserProfile(userId);
 					});
 			}
 

@@ -41,7 +41,6 @@ function addNewEvent(makerId, event){
 }
 
 function updateEvent(eventId, updatedEvent){
-	console.log(updatedEvent);
 	return eventsDB.update({_id: eventId}, {$set: updatedEvent});
 }
 

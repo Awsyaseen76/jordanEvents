@@ -8,7 +8,7 @@
 			function init(){
 			}
 			init();
-			this.findUserByUsernameAndPassword = findUserByUsernameAndPassword;
+			this.loginUser = loginUser;
 			this.findUserByEmail = findUserByEmail;
 			this.addNewUser = addNewUser;
 			this.findUserbyId = findUserbyId;
@@ -47,8 +47,8 @@
 				// }
 			}
 
-			function findUserByUsernameAndPassword(userName, password){ 
-				var url = '/api/loginUser?username='+userName+'&password='+password;
+			function loginUser(username, password){ 
+				var url = '/api/loginUser?username='+username+'&password='+password;
 				return $http.get(url);
 				// for(var u in users){
 				// 	if (user.email === users[u].email && user.password === users[u].password){

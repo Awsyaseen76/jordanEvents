@@ -36,7 +36,6 @@ module.exports = function(app) {
 				.findMakerByEmail(makerEmail)
 				.then(function(result){
 					if(result){
-						console.log(result);
 						res.send(result);
 						return;
 					} else {

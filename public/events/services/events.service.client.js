@@ -109,7 +109,6 @@
 			// var url = '/api/event/' + eventId;
 			return $http.put('/api/event/?eventId='+eventId, updatedEvent)
 				.then(function (response){
-					console.log(response.data);
 					return response.data;					
 				});			
 			// for(var e in events){
