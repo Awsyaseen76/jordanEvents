@@ -52,7 +52,7 @@
 						.then(function(response){
 							var newUser = response.data;
 							$rootScope.loggedUser = newUser;
-							$location.url('/userProfile/'+newUser.userId);
+							$location.url('/userProfile/'+newUser._id);
 							return;
 						});
 
