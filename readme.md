@@ -48,3 +48,17 @@ Todolist:
 20/Apr/2018
 - [x] refactor user to be on mongoDB and mongoose.
 
+
+22/Apr/2018
+- [x] fix the registration for event to check first if user already register with the event before.
+
+
+23/Apr/2018
+- [ ] encryption 
+
+
+
+
+
+
+

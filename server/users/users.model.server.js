@@ -45,6 +45,21 @@ function getAllUsers(){
 function addEventToUserEventsList(userId, eventId){
 	return findUserbyId(userId)
 		.then(function(user){
+			for(var i=0; i<user.registeredEventsList.length; i++){
+				if(user.registeredEventsList[i]._id == eventId){
+					return('already registered'); 
+				}
+			}
+			// console.log(user.registeredEventsList.length);
+			// for(var e in user.registeredEventsList){
+				// for(var i in user.registeredEventsList[e])
+				// {
+					// console.log(user.registeredEventsList[e][i]._id == eventId);
+				// }
+				// if(user.registeredEventsList[e] === eventId){
+				// 	return('already registered');
+				// }
+			// }
 			user.registeredEventsList.push(eventId);
 			return user.save();
 		});

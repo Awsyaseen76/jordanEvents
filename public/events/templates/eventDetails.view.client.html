@@ -2,8 +2,12 @@
 	<h1 class="text-danger">Event details</h1>
 	<hr>
 
-	<div class="alert alert-danger" role="alert" ng-show="model.error">
-  		Please login or register to register on this event <a href="#!/loginUser" class="alert-link">Login / Register</a>
+	<div class="alert alert-danger" role="alert" ng-show="model.error1">
+  		<p>{{model.error1}}</p>
+  		<a href="#!/loginUser" class="alert-link">Login / Register</a>
+	</div>
+	<div class="alert alert-danger" role="alert" ng-show="model.error2">
+  		<p>{{model.error2}}</p>
 	</div>
 
 	<h3>Event Name: {{model.eventDetails.name}}</h3>
