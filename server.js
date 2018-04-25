@@ -1,6 +1,12 @@
-var express = require('express');
-var app = express();
-var bodyParser = require('body-parser');
+var express 	 = require('express');
+var app 		 = express();
+var bodyParser 	 = require('body-parser');
+
+// security
+var cookieParser = require('cookie-parser');
+var session      = require('express-session');
+
+require('dotenv').config();
 
 app.use(express.static(__dirname + '/public'));
 
@@ -8,6 +14,8 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({
 	extended: true
 }));
+
+console.log(process.env.PWD);
 
 
 // connecting to the database
