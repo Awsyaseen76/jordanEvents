@@ -6,6 +6,7 @@ var bodyParser 	 = require('body-parser');
 var cookieParser = require('cookie-parser');
 var session      = require('express-session');
 
+// to add secret variables to the process.env through the .env file which it ignored from gitting to github
 require('dotenv').config();
 
 app.use(express.static(__dirname + '/public'));
@@ -15,7 +16,9 @@ app.use(bodyParser.urlencoded({
 	extended: true
 }));
 
-console.log(process.env.PWD);
+
+console.log(process.env.SECRET + " "+ process.env.SECRET2);
+
 
 
 // connecting to the database
