@@ -13,8 +13,13 @@
 		init();
 
 		$rootScope.logoutMaker = function (){
-			$rootScope.loggedMaker = null;
-			$location.url('/home');
+			makerService
+					.logoutMaker()
+					.then(function(response){
+						$rootScope.loggedMaker = null;
+						$location.url('/');
+						
+					});
 		};
 
 		function loginMaker(maker) {
@@ -23,17 +28,24 @@
 				model.error = 'Please fill the required fields';
 				return;
 			}
-			makerService.loginMaker(maker)
-				.then(function(matchedMaker){
-					if (matchedMaker === 'error') {
-						model.error = 'Please check your email and password';
-						return;
-					} else {
-						var makerId = matchedMaker._id;
-						$rootScope.loggedMaker = matchedMaker;
-						$location.url('/makerProfile/' + makerId);
-					}	
-				});
+			makerService.loginMaker(maker.email, maker.password)
+				.then(
+					// if sccess
+					function(matchedMaker){
+						if (matchedMaker === '0') {
+							model.error = 'Please check your email and password';
+							return;
+						} else {
+							var makerId = matchedMaker._id;
+							$rootScope.loggedMaker = matchedMaker;
+							$location.url('/makerProfile/' + makerId);
+						}	
+					},
+					// if error
+					function(err){
+						return err;
+					}
+				);
 		}
 	}
 })();

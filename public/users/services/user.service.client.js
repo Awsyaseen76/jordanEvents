@@ -11,9 +11,11 @@
 			this.loginUser = loginUser;
 			this.findUserByEmail = findUserByEmail;
 			this.addNewUser = addNewUser;
-			this.findUserbyId = findUserbyId;
+			this.findUserById = findUserById;
 			this.addEventToUserEventsList = addEventToUserEventsList;
 			this.removeRegisteredEvent = removeRegisteredEvent;
+			this.checkUserLogin = checkUserLogin;
+			this.logoutUser = logoutUser;
 
 
 			// var users = [
@@ -22,6 +24,25 @@
 			// 				{'userId': '333', 'email': 'user3@email.com', 'password': '3', 'name': 'User 3', 'registeredEventsList': []},
 			// 			];
 			
+			function logoutUser(){
+				return $http
+					.get('/api/logoutUser')
+					.then(function(response){
+						return response.data;
+					});
+			}
+
+
+			function checkUserLogin(){
+				var url = '/api/checkUserLogin';
+				return $http
+						.get(url)
+						.then(function(result){
+							return result.data;
+						});
+			}
+
+
 			function removeRegisteredEvent(userId, eventId){
 				var url = '/api/removeEventFromUser?userId='+userId+'&eventId='+eventId;
 				return $http.delete(url);
@@ -47,9 +68,21 @@
 				// }
 			}
 
-			function loginUser(username, password){ 
-				var url = '/api/loginUser?username='+username+'&password='+password;
-				return $http.get(url);
+			function loginUser(username, password){
+				console.log(username, password);
+				var url = '/api/user/login';
+				return $http.post(url, {username: username, password: password})
+					.then(function(response) {
+						if(response.data){
+							var matchedUser = response.data;
+							return matchedUser;
+						} else if(response.data === false){
+							return '0';
+						}
+					},
+						function(err){
+							return err;
+					});
 				// for(var u in users){
 				// 	if (user.email === users[u].email && user.password === users[u].password){
 				// 		return users[u];
@@ -58,7 +91,7 @@
 				// return null;
 			}
 
-			function findUserbyId(userId){
+			function findUserById(userId){
 				var url = '/api/userProfile/'+userId;
 				return $http.get(url);
 				// for(var u in users){

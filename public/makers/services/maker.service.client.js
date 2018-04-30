@@ -9,9 +9,22 @@
 		this.findMakerByEmail = findMakerByEmail;
 		this.loginMaker = loginMaker;
 		this.createMaker = createMaker;
+		this.checkMakerLogin = checkMakerLogin;
+		this.logoutMaker = logoutMaker;
 
 		function init() {}
 		init();
+
+
+		function logoutMaker(){
+			return $http
+					.get('/api/logoutMaker')
+					.then(function(response){
+						return response.data;
+					});
+		}
+
+
 
 		function findMakerById(makerId) {
 			var url = '/api/maker/?makerId=' + makerId;
@@ -35,19 +48,18 @@
 				});
 		}
 
-		function loginMaker(maker) {
-			var email = maker.email;
-			var password = maker.password;
-			// var url = '/api/maker?email=' + email + '&password=' + password;
-			var url = '/api/maker/login/?email=' + email + '&password=' + password;
-			return $http.get(url)
+		function loginMaker(username, password) {
+			var url = '/api/maker/login';
+			return $http.post(url, {username: username, password: password})
 				.then(function(response) {
-					if(response.data){
-						var matchedMaker = response.data;
-						return matchedMaker;
-					} else{
-						return ('error');
+					console.log(response);
+					if(response.data == '0'){
+						return '0';
 					}
+						return response.data;
+				},
+				function(err){
+					return err;
 				});
 		}
 
@@ -58,6 +70,19 @@
 				.then(function(response){
 					return(response.data);
 				});
+		}
+
+
+
+
+		function checkMakerLogin(){
+			var url = '/api/checkMakerLogin';
+			return $http
+					.get(url)
+					.then(function(result){
+						console.log(result);
+						return result.data;
+					});
 		}
 
 	}

@@ -1,6 +1,16 @@
+
 var usersDB = require('./users.model.server.js');
 
 module.exports = function(app) {
+
+
+var passport = require('passport');
+console.log('user step 1');
+var LocalStrategy = require('passport-local').Strategy;
+console.log('user step 2');
+passport.use('localUser', new LocalStrategy(userStrategy));
+console.log('user step 3');
+// put the user object in the cookies and then compare the logged with the cookies via deserializeUser
 
 
 	// var users = [{
@@ -26,11 +36,82 @@ module.exports = function(app) {
 	// http handlers
 	app.get('/api/checkUserEmail/:userEmail', findUserByEmail);
 	app.post('/api/registerUser/', addNewUser);
-	app.get('/api/loginUser', loginUser);
-	app.get('/api/userProfile/:userId', findUserbyId);
+	app.get('/api/userProfile/:userId', findUserById);
 	app.get('/api/getAllUsers', getAllUsers);
+	app.post('/api/user/login', passport.authenticate('localUser'), loginUser);
 	app.post('/api/addEventToUser/:userId', addEventToUserEventsList);
 	app.delete('/api/removeEventFromUser', removeRegisteredEvent);
+	app.get('/api/checkUserLogin', checkUserLogin);
+	app.get('/api/logoutUser', logoutUser);
+
+
+// passport.serializeUser(serializeUser);
+// passport.deserializeUser(deserializeUser);
+
+
+
+	function logoutUser(req, res){
+		console.log('im going to logout the user');
+		req.logOut();
+    	res.sendStatus(200);
+	}
+
+	function checkUserLogin(req, res){
+		// this one show the current user in the session // it is like req.isAuthenticated() function 
+		//console.log(req.session.passport.user);
+		// console.log(req.isAuthenticated());
+		res.send(req.isAuthenticated()? req.user : '0');
+	}
+
+	function userStrategy(username, password, done) {
+		console.log('user step 4');
+		usersDB
+			.loginUser(username, password)
+			.then(
+				function(user){
+					console.log('user step 5');
+					if(!user){
+						return done(null, false);
+					} else {
+						return done(null, user);
+					}
+				},
+				function(err){
+					if(err){
+						return done(err);
+					}
+				}
+			);
+	}
+
+
+	function loginUser(req, res){
+		console.log('user step 7');
+		var user = req.user;
+		res.json(user);
+
+		// var username = req.body.username;
+		// var password = req.body.password;
+		// // res.json(user);
+		// usersDB
+		// 	.loginUser(username, password)
+		// 	.then(
+		// 		// if success
+		// 		function(user){				
+		// 		if(user){
+		// 			res.send(user);
+		// 			return;
+		// 		}
+		// 		res.send('0');
+		// 	}, 
+		// 	// if error
+		// 	function(err){
+		// 		res.sendStatus(404).send(err);
+		// 		return;
+		// 	});
+		
+	}
+
 
 	function getAllUsers(req, res){
 		usersDB
@@ -81,31 +162,11 @@ module.exports = function(app) {
 		// res.send(newUser);
 	}
 
-	function loginUser(req, res){
-		var username = req.query.username;
-		var password = req.query.password;
-		usersDB
-			.loginUser(username, password)
-			.then(function(user){
-				if(user){
-					res.send(user);
-					return;
-				}
-				res.send('0');
-			});
-		// for(var u in users){
-		// 	if (userName === users[u].email && password === users[u].password){
-		// 		res.send(users[u]);
-		// 		return;
-		// 	}
-		// }
-		// res.send('0');
-	}
 
-	function findUserbyId(req, res){
+	function findUserById(req, res){
 		var userId = req.params.userId;
 		usersDB
-			.findUserbyId(userId)
+			.findUserById(userId)
 			.then(function(user){
 				if(user){
 					res.send(user);
@@ -150,18 +211,29 @@ module.exports = function(app) {
 			.then(function(status){
 				res.send(status);
 			});
-		// for(var u in users){
-		// 	if(userId === users[u].userId){
-		// 		for(var e in users[u].registeredEventsList){
-		// 			if(eventId === users[u].registeredEventsList[e].eventId){
-		// 				users[u].registeredEventsList.splice(e, 1);
-		// 				res.sendStatus(200);
-		// 				return;
-		// 			}
-		// 		}
-		// 	}
-		// }
-		// res.sendStatus(404);
 	}
 
+
+	// function serializeUser(user, done) {
+	// 	console.log('user step 6    serializeUser');
+ //    	done(null, user);
+	// }
+
+	// function deserializeUser(user, done) {
+	// 	console.log('user deserializeUser');
+	//     usersDB
+	//         .findUserById(user._id)
+	//         .then(
+	//             function(user){
+	//                 done(null, user);
+	//             },
+	//             function(err){
+	//                 done(err, null);
+	//             }
+	//         );
+	// }
+
+
+
 };
+

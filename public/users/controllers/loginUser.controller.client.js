@@ -13,8 +13,12 @@
 			init();
 
 			$rootScope.logoutUser = function (){
-				$rootScope.loggedUser = null;
-				$location.url('/home');
+				userService
+					.logoutUser()
+					.then(function(ersponse){
+						$rootScope.loggedUser = null;
+						$location.url('/');
+					});
 			};
 
 			function loginSubmit(user){
@@ -22,9 +26,9 @@
 					model.error = 'Please check your eamil and password';
 					return;
 				}
-				userService.loginUser(user.email, user.password)
-					.then(function(response){
-						var foundUser = response.data;
+				userService
+					.loginUser(user.email, user.password)
+					.then(function(foundUser){
 						model.error = null;
 						if (foundUser === '0'){
 							model.error = 'Please check your eamil and password';
@@ -33,8 +37,10 @@
 							$rootScope.loggedUser = foundUser;
 							$location.url('/userProfile/'+foundUser._id);
 							return foundUser;
-						}
-						
+						}	
+					}, 
+					function(err){
+						return err;
 					});
 			}
 		}

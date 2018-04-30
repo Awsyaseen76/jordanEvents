@@ -8,7 +8,7 @@ module.exports = usersDB;
 usersDB.findUserByEmail = findUserByEmail;
 usersDB.addNewUser = addNewUser;
 usersDB.loginUser = loginUser;
-usersDB.findUserbyId = findUserbyId;
+usersDB.findUserById = findUserById;
 usersDB.getAllUsers = getAllUsers;
 usersDB.addEventToUserEventsList = addEventToUserEventsList;
 usersDB.removeRegisteredEvent = removeRegisteredEvent;
@@ -29,7 +29,7 @@ function loginUser(username, password){
 }
 
 
-function findUserbyId(userId){
+function findUserById(userId){
 	return usersDB
 			.findById(userId)
 			.populate('registeredEventsList')
@@ -43,7 +43,7 @@ function getAllUsers(){
 
 
 function addEventToUserEventsList(userId, eventId){
-	return findUserbyId(userId)
+	return findUserById(userId)
 		.then(function(user){
 			for(var i=0; i<user.registeredEventsList.length; i++){
 				if(user.registeredEventsList[i]._id == eventId){

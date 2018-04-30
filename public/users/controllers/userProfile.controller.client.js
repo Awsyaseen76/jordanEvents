@@ -16,7 +16,7 @@
 			model.removeRegisteredEvent = removeRegisteredEvent;
 
 			function getUserProfile(userId){
-				userService.findUserbyId(userId)
+				userService.findUserById(userId)
 					.then(function(response){
 						var userProfile = response.data;
 						if (userProfile === '0'){

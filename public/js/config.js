@@ -31,7 +31,10 @@
 			.when('/userProfile/:userId', {
 				templateUrl: 'users/templates/userProfile.view.client.html',
 				controller: 'userProfileController',
-				controllerAs: 'model'
+				controllerAs: 'model',
+				resolve: {
+					loggedUser: checkUserLogin
+				}
 			})
 			.when('/loginMaker', {
 				templateUrl: 'makers/templates/loginMaker.view.client.html',
@@ -46,7 +49,10 @@
 			.when('/makerProfile/:makerId', {
 				templateUrl: 'makers/templates/makerProfile.view.client.html',
 				controller: 'makerProfileController',
-				controllerAs: 'model'
+				controllerAs: 'model',
+				resolve: {
+					loggedMaker: checkMakerLogin
+				}
 			})
 			.when('/makerProfile/:makerId/eventsList', {
 				templateUrl: 'makers/templates/makerEventsList.view.client.html',
@@ -68,6 +74,42 @@
 			})
 			.when('/about', {
 				templateUrl: '../views/pages/about.view.client.html'
-			})
+			});
 	}
+	
+	// check the user if still logged in through the server cockies if the user logged in he is in the cockies based on that we can protect the url
+	function checkUserLogin(userService, $q, $location){
+		var deferred = $q.defer();
+		userService
+			.checkUserLogin()
+			.then(function(user){
+				if(user === '0'){
+					deferred.reject();
+					$location.url('/loginUser');
+				} else{
+					deferred.resolve(user);
+				}
+			});
+		return deferred.promise;
+	}
+
+
+	// same for the makerfunction checkUserLogin(userService, $q, $location){
+	function checkMakerLogin(makerService, $q, $location){
+		var deferred = $q.defer();
+		makerService
+			.checkMakerLogin()
+			.then(function(maker){
+				if(maker === '0'){
+					deferred.reject();
+					$location.url('/loginMaker');
+				} else{
+					deferred.resolve(maker);
+				}
+			});
+		return deferred.promise;
+	}
+
+
+
 })();
