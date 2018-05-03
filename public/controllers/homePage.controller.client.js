@@ -1,17 +1,12 @@
 (function(){
 	angular
 		.module('jordanEvents')
-		.controller('allEventsController', allEventsController);
+		.controller('homePageController', homePageController);
 
-	function allEventsController(eventsService, userService, makerService){
+	function homePageController(userService, makerService){
 		var model = this;
-		
-		function init(){
-			eventsService.getAllEvents()
-				.then(function(events){
-					model.eventsList = events;		
-				});
 
+		function init(){
 			userService
 					.checkUserLogin()
 					.then(function(result){
@@ -28,6 +23,8 @@
 						}
 					});
 		}
+
 		init();
+
 	}
 })();

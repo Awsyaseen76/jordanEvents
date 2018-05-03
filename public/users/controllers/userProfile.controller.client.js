@@ -3,11 +3,28 @@
 		.module('jordanEvents')
 		.controller('userProfileController', userProfileController);
 
-		function userProfileController(userService, $routeParams, eventsService, $location){
+		// inject the current logged in user (loggedUser) as a depedancies to use it here
+		function userProfileController(userService, makerService, $routeParams, eventsService, $location, loggedUser){
 			var model = this;
 			function init(){
-				var _userId = $routeParams.userId;
+				var _userId = loggedUser._id;
 				getUserProfile(_userId);
+
+				userService
+					.checkUserLogin()
+					.then(function(result){
+						if(result){
+							model.loggedUser = result;
+						}
+					});
+
+				makerService
+					.checkMakerLogin()
+					.then(function(result){
+						if(result){
+							model.loggedMaker = result;
+						}
+					});
 			}
 			init();
 

@@ -52,7 +52,6 @@
 			var url = '/api/maker/login';
 			return $http.post(url, {username: username, password: password})
 				.then(function(response) {
-					console.log(response);
 					if(response.data == '0'){
 						return '0';
 					}
@@ -80,7 +79,6 @@
 			return $http
 					.get(url)
 					.then(function(result){
-						console.log(result);
 						return result.data;
 					});
 		}

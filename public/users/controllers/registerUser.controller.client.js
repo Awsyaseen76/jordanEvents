@@ -3,10 +3,25 @@
 		.module('jordanEvents')
 		.controller('registerUserController', registerUserController);
 
-		function registerUserController(userService, $location, $rootScope){
+		function registerUserController(userService, makerService, $location, $rootScope){
 			var model = this;
 
 			function init(){
+				userService
+					.checkUserLogin()
+					.then(function(result){
+						if(result){
+							model.loggedUser = result;
+						}
+					});
+
+				makerService
+					.checkMakerLogin()
+					.then(function(result){
+						if(result){
+							model.loggedMaker = result;
+						}
+					});
 			}
 			init();	
 			model.registerUser = registerUser;
@@ -43,18 +58,26 @@
 						// 2. if the user email not exists (return 0) then add the user to the users in the server
 							if(response.data === '0'){
 								// return the added user object
-								return userService.addNewUser(user);
+								return userService
+											.addNewUser(user)
+											.then(function(response){
+												console.log('here');
+												$location.url('/userProfile');
+												return response;
+											});
 							} else {
 								model.error = 'This email is already registered';
+								return;
 							}
 						})
 						// the response will be the new added user.
-						.then(function(response){
-							var newUser = response.data;
-							$rootScope.loggedUser = newUser;
-							$location.url('/userProfile/'+newUser._id);
-							return;
-						});
+						// .then(function(response){
+						// 	console.log('reach here')
+						// 	// var newUser = response.data;
+						// 	// $rootScope.loggedUser = newUser;
+						// 	$location.url('/userProfile');
+						// 	return;
+						// });
 
 
 

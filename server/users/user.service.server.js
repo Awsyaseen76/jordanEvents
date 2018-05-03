@@ -6,6 +6,9 @@ module.exports = function(app) {
 
 var passport = require('passport');
 console.log('user step 1');
+
+var bcrypt   = require('bcrypt-nodejs');
+
 var LocalStrategy = require('passport-local').Strategy;
 console.log('user step 2');
 passport.use('localUser', new LocalStrategy(userStrategy));
@@ -66,13 +69,13 @@ console.log('user step 3');
 	function userStrategy(username, password, done) {
 		console.log('user step 4');
 		usersDB
-			.loginUser(username, password)
+			.findUserByEmail(username)
 			.then(
 				function(user){
 					console.log('user step 5');
 					if(!user){
 						return done(null, false);
-					} else {
+					} else if(user && bcrypt.compareSync(password, user.password)){
 						return done(null, user);
 					}
 				},
@@ -145,6 +148,7 @@ console.log('user step 3');
 
 	function addNewUser(req, res){
 		var newUser = req.body;
+		newUser.password = bcrypt.hashSync(newUser.password);
 		usersDB
 			.addNewUser(newUser)
 			.then(function(addedUser){
@@ -156,8 +160,6 @@ console.log('user step 3');
 			});
 		// newUser.userId = Date.now()+'';
 		// newUser.registeredEventsList = [];
-		
-
 		// users.push(newUser);
 		// res.send(newUser);
 	}

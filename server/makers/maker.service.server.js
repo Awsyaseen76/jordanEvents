@@ -4,10 +4,16 @@ module.exports = function(app) {
 
 var makersDB = require('./makers.model.server.js');
 var passport = require('passport');
+var bcrypt   = require('bcrypt-nodejs');
+
+
 console.log('maker step 1');
 var LocalStrategy = require('passport-local').Strategy;
 console.log('maker step 2');
 passport.use('localMaker', new LocalStrategy(makerStrategy));
+// add another one for the signup
+// passport.use('localMaker_signup', new LocalStrategy(makerStrategy_signup));
+
 console.log('maker step 3');
 
 
@@ -21,6 +27,7 @@ console.log('maker step 3');
 	app.get('/api/maker/', findMaker);
 	app.get('/api/maker/:makerEmail', findMaker);
 	app.post('/api/maker/login', passport.authenticate('localMaker'), loginMaker);
+	
 	app.post('/api/maker/', addNewMaker);
 	app.get('/api/checkMakerLogin', checkMakerLogin);
 	app.get('/api/logoutMaker', logoutMaker);
@@ -28,13 +35,13 @@ console.log('maker step 3');
 	function makerStrategy(username, password, done) {
 		console.log('maker step 4');
 		makersDB
-			.loginMaker(username, password)
+			.findMakerByEmail(username)
 			.then(
 				function(maker){
 					console.log('maker step 5');
 					if(!maker){
 						return done(null, false);
-					} else {
+					} else if(maker && bcrypt.compareSync(password, maker.password)){
 						return done(null, maker);
 					}
 				},
@@ -45,6 +52,31 @@ console.log('maker step 3');
 				}
 			);
 	}
+
+
+// ********* signup strategy *******
+// function makerStrategy_signup(username, password, done) {
+// 		console.log('maker signup step 4');
+// 		makersDB
+// 			.addNewMaker(username, password)
+// 			.then(
+// 				function(maker){
+// 					console.log('maker step 5');
+// 					if(!maker){
+// 						return done(null, false);
+// 					} else {
+// 						return done(null, maker);
+// 					}
+// 				},
+// 				function(err){
+// 					if(err){
+// 						return done(err);
+// 					}
+// 				}
+// 			);
+// 	}
+
+// **********************************
 
 
 	function logoutMaker(req, res){
@@ -117,6 +149,7 @@ console.log('maker step 3');
 
 	function addNewMaker(req, res){
 		var newMaker = req.body;
+		newMaker.password = bcrypt.hashSync(newMaker.password);
 		makersDB
 			.addNewMaker(newMaker)
 			.then(function (addedMaker){

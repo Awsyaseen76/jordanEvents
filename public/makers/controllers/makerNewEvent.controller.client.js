@@ -3,12 +3,27 @@
 		.module('jordanEvents')
 		.controller('makerNewEventController', makerNewEventController);
 
-		function makerNewEventController($routeParams, $location, eventsService){
+		function makerNewEventController($routeParams, $location, eventsService, loggedMaker, userService, makerService){
 			var model = this;
 			function init(){
+				userService
+					.checkUserLogin()
+					.then(function(result){
+						if(result){
+							model.loggedUser = result;
+						}
+					});
+
+				makerService
+					.checkMakerLogin()
+					.then(function(result){
+						if(result){
+							model.loggedMaker = result;
+						}
+					});
 			}
 			init();
-			var _makerId = $routeParams.makerId;
+			var _makerId = loggedMaker._id;
 			
 			model.createEvent = createEvent;
 			
@@ -21,7 +36,7 @@
 				newEvent.makerId = _makerId;
 				eventsService.addNewEvent(newEvent)
 					.then(function(addedEvent){
-						$location.url('/makerProfile/{{_makerId}}/eventsList');
+						$location.url('/makerProfile/eventsList');
 					});
 			}
 		}

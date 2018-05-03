@@ -69,7 +69,6 @@
 			}
 
 			function loginUser(username, password){
-				console.log(username, password);
 				var url = '/api/user/login';
 				return $http.post(url, {username: username, password: password})
 					.then(function(response) {
@@ -111,6 +110,7 @@
 				// }
 				// return null;
 			}
+
 
 			function addNewUser(user){
 

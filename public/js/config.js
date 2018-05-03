@@ -6,7 +6,10 @@
 	function configuration($routeProvider) {
 		$routeProvider
 			.when('/', {
-				templateUrl: '../views/pages/home.html'
+				templateUrl: '../views/pages/home.html',
+				controller: 'homePageController',
+				controllerAs: 'model'
+				// add a controller to use the logged user instead of $rootScope
 			})
 			.when('/allEvents', {
 				templateUrl: 'events/templates/allEvents.view.client.html',
@@ -28,7 +31,8 @@
 				controller: 'registerUserController',
 				controllerAs: 'model'
 			})
-			.when('/userProfile/:userId', {
+			// .when('/userProfile/:userId', {       //remove the :userId
+			.when('/userProfile', {
 				templateUrl: 'users/templates/userProfile.view.client.html',
 				controller: 'userProfileController',
 				controllerAs: 'model',
@@ -46,7 +50,7 @@
 				controller: 'makerRegisterController',
 				controllerAs: 'model'
 			})
-			.when('/makerProfile/:makerId', {
+			.when('/makerProfile', {
 				templateUrl: 'makers/templates/makerProfile.view.client.html',
 				controller: 'makerProfileController',
 				controllerAs: 'model',
@@ -54,26 +58,39 @@
 					loggedMaker: checkMakerLogin
 				}
 			})
-			.when('/makerProfile/:makerId/eventsList', {
+			.when('/makerProfile/eventsList', {
 				templateUrl: 'makers/templates/makerEventsList.view.client.html',
 				controller: 'makerEventsListController',
-				controllerAs: 'model'
+				controllerAs: 'model',
+				resolve: {
+					loggedMaker: checkMakerLogin
+				}
 			})
-			.when('/makerProfile/:makerId/newEvent', {
+			.when('/makerProfile/newEvent', {
 				templateUrl: 'makers/templates/makerNewEvent.view.client.html',
 				controller: 'makerNewEventController',
-				controllerAs: 'model'
+				controllerAs: 'model',
+				resolve: {
+					loggedMaker: checkMakerLogin
+				}
 			})
-			.when('/makerProfile/:makerId/editEvent', {
+			.when('/makerProfile/editEvent', {
 				templateUrl: 'makers/templates/makerEditEvent.view.client.html',
 				controller: 'makerEditEventController',
-				controllerAs: 'model'
+				controllerAs: 'model',
+				resolve: {
+					loggedMaker: checkMakerLogin
+				}
 			})
 			.when('/contact', {
-				templateUrl: '../views/pages/contact.view.client.html'
+				templateUrl: '../views/pages/contact.view.client.html',
+				controller: 'homePageController',
+				controllerAs: 'model'
 			})
 			.when('/about', {
-				templateUrl: '../views/pages/about.view.client.html'
+				templateUrl: '../views/pages/about.view.client.html',
+				controller: 'homePageController',
+				controllerAs: 'model'
 			});
 	}
 	

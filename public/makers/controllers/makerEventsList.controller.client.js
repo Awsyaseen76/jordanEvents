@@ -3,12 +3,12 @@
 		.module('jordanEvents')
 		.controller('makerEventsListController', makerEventsListController);
 
-	function makerEventsListController($rootScope, eventsService, $location) {
+	function makerEventsListController($rootScope, eventsService, $location, loggedMaker, userService, makerService) {
 		var model = this;
 
 		function init() {
-			var makerName = $rootScope.loggedMaker.name;
-			var loggedMakerId = $rootScope.loggedMaker._id;
+			var makerName = loggedMaker.name;
+			var loggedMakerId = loggedMaker._id;
 			model.makerName = makerName;
 			model.makerId = loggedMakerId;
 			eventsService.findEventsByMakerId(loggedMakerId)
@@ -16,6 +16,23 @@
 					model.eventsList = events;
 					// return model.eventsList;
 				});
+
+			userService
+					.checkUserLogin()
+					.then(function(result){
+						if(result){
+							model.loggedUser = result;
+						}
+					});
+
+			makerService
+					.checkMakerLogin()
+					.then(function(result){
+						if(result){
+							model.loggedMaker = result;
+						}
+					});
+
 		}
 		init();
 
@@ -25,7 +42,7 @@
 			//var makerId = $rootScope.loggedMaker._id;
 			eventsService.removeEvent(makerId, eventId)
 				.then(function(deleted){
-					var url = "/makerProfile/" + makerId;
+					var url = "/makerProfile";
 					$location.url(url);
 				});
 		}

@@ -54,7 +54,36 @@ Todolist:
 
 
 23/Apr/2018
-- [ ] encryption 
+- [x] adding passport to user and maker
+
+30/Apr/2018
+-[x] remove the user's id and maker's id from the browser url for more secure.
+
+03/May/2018
+-[x] encrypt the password for user and maker with salt and hash.
+
+
+
+
+
+
+
+
+
+******** future work todo: **********
+1. add the admin page to manage:
+	a. the registration of the makers.
+	b. confirm the publish of the event after added by the maker.
+	c. the payment for each user and to show the balance.
+
+2. add the paiment for each user managed by the admin.
+3. add the validity for each event and add filter to show just the valid events (add events validity for registration on database).
+4. rebuild the login system and the database to be just one table for user with multi type of login as user and as maker so the page loaded after succesful 	login will be either the normal user page and everythin go normal or the maker page who also do the previouse functions.
+5. redirect the registered user or maker direct to the profile not to the login page.
+
+
+
+
 
 
 

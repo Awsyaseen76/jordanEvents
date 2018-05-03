@@ -9,6 +9,9 @@
   "author": "AwsAhmed",
   "license": "ISC",
   "dependencies": {
+    "angular": "^1.6.10",
+    "angular-route": "^1.6.10",
+    "bcrypt-nodejs": "0.0.3",
     "body-parser": "^1.18.2",
     "cookie-parser": "^1.4.3",
     "dotenv": "^5.0.1",

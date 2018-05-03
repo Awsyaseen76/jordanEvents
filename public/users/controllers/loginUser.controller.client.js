@@ -3,12 +3,27 @@
 		.module('jordanEvents')
 		.controller('loginUserController', loginUserController);
 
-		function loginUserController($location, userService, $rootScope){
+		function loginUserController($location, userService, makerService, $rootScope){
 			var model = this;
 
 			model.loginSubmit = loginSubmit;
 
 			function init(){
+				userService
+					.checkUserLogin()
+					.then(function(result){
+						if(result){
+							model.loggedUser = result;
+						}
+					});
+
+				makerService
+					.checkMakerLogin()
+					.then(function(result){
+						if(result){
+							model.loggedMaker = result;
+						}
+					});
 			}
 			init();
 
@@ -34,9 +49,10 @@
 							model.error = 'Please check your eamil and password';
 							return;
 						} else {
-							$rootScope.loggedUser = foundUser;
-							$location.url('/userProfile/'+foundUser._id);
-							return foundUser;
+							// $rootScope.loggedUser = foundUser;
+							// $location.url('/userProfile/'+foundUser._id); // remove the user ID
+							$location.url('/userProfile');
+							return //foundUser;
 						}	
 					}, 
 					function(err){

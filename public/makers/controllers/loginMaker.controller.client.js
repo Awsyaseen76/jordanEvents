@@ -3,13 +3,29 @@
 		.module('jordanEvents')
 		.controller('loginMakerController', loginMakerController);
 
-	function loginMakerController(makerService, $location, $rootScope) {
+	function loginMakerController(makerService, userService, $location, $rootScope) {
 
 		var model = this;
 
 		model.loginMaker = loginMaker;
 
-		function init() {}
+		function init() {
+			userService
+					.checkUserLogin()
+					.then(function(result){
+						if(result){
+							model.loggedUser = result;
+						}
+					});
+
+			makerService
+					.checkMakerLogin()
+					.then(function(result){
+						if(result){
+							model.loggedMaker = result;
+						}
+					});
+		}
 		init();
 
 		$rootScope.logoutMaker = function (){
@@ -38,7 +54,7 @@
 						} else {
 							var makerId = matchedMaker._id;
 							$rootScope.loggedMaker = matchedMaker;
-							$location.url('/makerProfile/' + makerId);
+							$location.url('/makerProfile');
 						}	
 					},
 					// if error

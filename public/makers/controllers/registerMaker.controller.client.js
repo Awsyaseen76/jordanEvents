@@ -3,10 +3,26 @@
 		.module('jordanEvents')
 		.controller('makerRegisterController', makerRegisterController);
 
-	function makerRegisterController(makerService, $location, $rootScope) {
+	function makerRegisterController(makerService, userService, $location, $rootScope) {
 		var model = this;
 
-		function init() {}
+		function init() {
+			userService
+					.checkUserLogin()
+					.then(function(result){
+						if(result){
+							model.loggedUser = result;
+						}
+					});
+
+			makerService
+					.checkMakerLogin()
+					.then(function(result){
+						if(result){
+							model.loggedMaker = result;
+						}
+					});
+		}
 		init();
 		model.registerMaker = registerMaker;
 
@@ -30,7 +46,8 @@
 									var matchedMaker = result;
 									var makerId = matchedMaker._id;
 									$rootScope.loggedMaker = matchedMaker;
-									$location.url('/makerProfile/' + makerId);
+									// it is not going to makerProfile shoud be by adding the login functionality here also or find another solution
+									$location.url('/makerProfile');
 									return;
 								});
 						}

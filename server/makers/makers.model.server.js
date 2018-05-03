@@ -18,7 +18,6 @@ function addNewMaker(maker){
 }
 
 function loginMaker(username, password){
-
 	return makersDB.findOne({email: username, password: password});
 }
 
