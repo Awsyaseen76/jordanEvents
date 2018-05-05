@@ -5,6 +5,7 @@ module.exports = function(app) {
 var makersDB = require('./makers.model.server.js');
 var passport = require('passport');
 var bcrypt   = require('bcrypt-nodejs');
+var GoogleStrategy = require('passport-google-oauth').OAuth2Strategy;
 
 
 console.log('maker step 1');
@@ -30,7 +31,17 @@ console.log('maker step 3');
 	
 	app.post('/api/maker/', addNewMaker);
 	app.get('/api/checkMakerLogin', checkMakerLogin);
-	app.get('/api/logoutMaker', logoutMaker);
+	app.post('/api/logoutMaker', logoutMaker);
+
+	// login with google
+	app.get('/jordanEvents/auth/google', passport.authenticate('google', { scope : ['profile', 'email'] }));
+
+	app.get('/jordanEvents/auth/google/callback',
+    passport.authenticate('google', {
+        successRedirect: '/#!/makerProfile',
+        failureRedirect: '/#!/loginMaker'
+    }));
+
 
 	function makerStrategy(username, password, done) {
 		console.log('maker step 4');
@@ -52,6 +63,65 @@ console.log('maker step 3');
 				}
 			);
 	}
+
+
+
+
+
+
+	var googleConfig = {
+	    clientID     : process.env.GOOGLE_CLIENT_ID,
+	    clientSecret : process.env.GOOGLE_CLIENT_SECRET,
+	    callbackURL  : process.env.GOOGLE_CALLBACK_URL
+	};
+
+
+    passport.use(new GoogleStrategy(googleConfig, googleStrategy));
+
+
+    function googleStrategy(token, refreshToken, profile, done) {
+    makersDB
+        .findUserByGoogleId(profile.id)
+        .then(
+            function(maker) {
+                if(maker) {
+                    return done(null, maker);
+                } else {
+                    var email = profile.emails[0].value;
+                    var emailParts = email.split("@");
+                    var newGoogleUser = {
+                        username:  emailParts[0],
+                        firstName: profile.name.givenName,
+                        lastName:  profile.name.familyName,
+                        email:     email,
+                        google: {
+                            id:    profile.id,
+                            token: token
+                        }
+                    };
+                    return makersDB.addNewMaker(newGoogleUser);
+                }
+            },
+            function(err) {
+                if (err) { return done(err); }
+            }
+        )
+        .then(
+            function(maker){
+                return done(null, maker);
+            },
+            function(err){
+                if (err) { return done(err); }
+            }
+        );
+}
+
+
+
+
+
+
+
 
 
 // ********* signup strategy *******
@@ -80,6 +150,11 @@ console.log('maker step 3');
 
 
 	function logoutMaker(req, res){
+		req.session.destroy();
+  //       	req.logout();
+  //       	res.redirect('/');
+  //   	});
+		console.log(req.user);
 		req.logout();
 		res.sendStatus(200);
 	}

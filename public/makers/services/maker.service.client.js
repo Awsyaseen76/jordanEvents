@@ -18,8 +18,9 @@
 
 		function logoutMaker(){
 			return $http
-					.get('/api/logoutMaker')
+					.post('/api/logoutMaker')
 					.then(function(response){
+						console.log(response.data);
 						return response.data;
 					});
 		}

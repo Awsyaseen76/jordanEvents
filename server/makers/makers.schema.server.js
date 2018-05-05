@@ -4,9 +4,15 @@ var mongoose = require('mongoose');
 
 var makersSchema = mongoose.Schema({
 	userType: {type: String, default: 'maker'},
-	name: String,
+	userName: String,
+	firstName: String,
+	lastName: String,
 	email: String,
 	password: String,
+	google: {
+              id: String,
+              token: String
+            },
 	events: [{type: mongoose.Schema.Types.ObjectId, ref: 'eventsDB'}]
 }, {collection: 'makers'});
 

@@ -12,6 +12,11 @@ makersDB.findMakerById = findMakerById;
 makersDB.findMakerByEmail = findMakerByEmail;
 makersDB.addEventId = addEventId;
 makersDB.removeEventFromList = removeEventFromList;
+makersDB.findUserByGoogleId = findUserByGoogleId;
+
+function findUserByGoogleId(googleId){
+	return makersDB.findOne({'google.id' : googleId});
+}
 
 function addNewMaker(maker){
 	return makersDB.create(maker);
