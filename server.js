@@ -6,7 +6,7 @@ var bodyParser 	 = require('body-parser');
 var passport     = require('passport');
 var cookieParser = require('cookie-parser');
 var session      = require('express-session');
-var port = process.env.port || 3000;
+var port = process.env.PORT || 3000;
 
 // to add secret variables to the process.env through the .env file which it ignored from gitting to github
 require('dotenv').config();
