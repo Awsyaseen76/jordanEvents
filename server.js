@@ -40,5 +40,5 @@ require('./server/passport.js')(passport);
 
 
 app.listen(port, function() {
-	console.log('connected to localhost 3000');
+	console.log('connected to: '+port);
 });
