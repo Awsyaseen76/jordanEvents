@@ -12,4 +12,3 @@ if(process.env.MLAB_USERNAME) { // check if running remotely
 mongoose.connect(connectionString);
 
 
-// mongodb://<dbuser>:<dbpassword>@ds115340.mlab.com:15340/heroku_5qxvtgkh
