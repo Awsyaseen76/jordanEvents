@@ -6,7 +6,10 @@ if(process.env.MLAB_USERNAME) { // check if running remotely
         var username = process.env.MLAB_USERNAME; // get from environment
         var password = process.env.MLAB_PASSWORD;
         connectionString = 'mongodb://' + username + ':' + password;
-        connectionString += 'ds117010.mlab.com:17010/jordanevents'; // user yours
+        connectionString += '@ds115340.mlab.com:15340/heroku_5qxvtgkh'; // user yours
 }
 
 mongoose.connect(connectionString);
+
+
+// mongodb://<dbuser>:<dbpassword>@ds115340.mlab.com:15340/heroku_5qxvtgkh

@@ -63,7 +63,7 @@ Todolist:
 -[x] encrypt the password for user and maker with salt and hash.
 
 04/May/2018
--[] add google authentication.
+-[x] add google authentication.
 
 
 
