@@ -40,10 +40,10 @@
 	        <a class="nav-link" href="#!/about">About</a>
 	      </li>
 	    </ul>
-	    <form class="form-inline my-2 my-lg-0">
+	    <!-- <form class="form-inline my-2 my-lg-0">
 	      <input class="form-control mr-sm-2" type="text" placeholder="Search">
 	      <button class="btn btn-secondary my-2 my-sm-0" type="submit">Search</button>
-	    </form>
+	    </form> -->
 	  </div>
 	</nav>
 		
@@ -64,11 +64,52 @@
 
 
 <div class="container aws-margin10">
+	<div>
 	<h1>User Profile:</h1>
 	<h5 ng-show="model.error">{{model.error}}</h5>
-	<h4>Email: {{model.userProfile.email}}</h4>
-	<h4>Name: {{model.userProfile.name}}</h4>
-	<h4>UserId: {{model.userProfile._id}}</h4>
+	</div>
+
+	<div class="row">
+		
+		<!-- Profile image -->
+		<div class="col-sm-4">
+			<!-- <img ng-src="https://ingeniouspark.com/wp-content/uploads/2016/07/nobody_m.original.jpg" height="150px" width="100px"> -->
+			
+			<img ng-src="../../img/profileImages/{{model.userProfile.profileImage.filename}}" height="200" width="200" class="img-circle">
+			<!-- <img src="../../img/profileImages/profilePicture-1525782004582.jpg"> -->
+
+
+		</div>
+
+
+		<div class="col-sm-8">
+			<h4>Email: {{model.userProfile.email}}</h4>
+			<h4>Name: {{model.userProfile.name}}</h4>
+			<h4>UserId: {{model.userProfile._id}}</h4>
+			<h4>profilePicture: {{model.userProfile.profileImage.path}}</h4>
+			<br>
+			<br>
+			<h5>image upload</h5>
+			<hr>
+			<p>Note: The uploaded picture should be less than 1 mg and with the following extension (jpeg, jpg, png, gif)</p>
+
+			<br>
+			{{model.userProfile.profileImage.size > 1000000}}
+			<br>
+			<form action="/api/userProfile/upload" method="POST" enctype="multipart/form-data" class="col-sm-6">
+				<input type="file" name="profilePicture" class="form-control">
+				<!-- <input type="text" name="userId" value="{{model.userProfile._id}}" style="display: none;"> -->
+				<input type="submit" name="uploadImage" class="form-control" >
+			</form>
+			<div ng-show="model.msg !== 'undefined'">
+				{{model.msg}}
+			</div>
+		</div>
+
+	</div>
+
+	<br>
+	<hr>
 	<h4>Registered Events:</h4>
 	<hr>
 	<div class="container">

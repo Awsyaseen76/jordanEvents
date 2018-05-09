@@ -31,6 +31,7 @@
 			
 			model.getUserProfile = getUserProfile;
 			model.removeRegisteredEvent = removeRegisteredEvent;
+			
 
 			function getUserProfile(userId){
 				userService.findUserById(userId)

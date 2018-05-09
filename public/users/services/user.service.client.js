@@ -16,6 +16,8 @@
 			this.removeRegisteredEvent = removeRegisteredEvent;
 			this.checkUserLogin = checkUserLogin;
 			this.logoutUser = logoutUser;
+			this.getAllUsers = getAllUsers;
+			
 
 
 			// var users = [
@@ -130,6 +132,19 @@
 				// } else {
 				// 	return null;
 				// }
+			}
+
+			function getAllUsers(){
+				return $http
+						.get('/api/getAllUsers')
+						.then(function(response){
+							if(response.data){
+								return response.data;
+							}
+						},
+						function(err){
+							return err;
+						});
 			}
 		}
 })();

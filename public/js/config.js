@@ -82,6 +82,14 @@
 					loggedMaker: checkMakerLogin
 				}
 			})
+			.when('/admin', {
+				templateUrl: 'admin/templates/adminPage.view.client.html',
+				controller: 'adminController',
+				controllerAs: 'model',
+				resolve: {
+					loggedUser: checkUserLogin
+				}
+			})
 			.when('/contact', {
 				templateUrl: '../views/pages/contact.view.client.html',
 				controller: 'homePageController',

@@ -65,8 +65,14 @@ Todolist:
 04/May/2018
 -[x] add google authentication.
 
+06/May/2018
+-[x] deploy on heroku and connect the database via mLab as addons of heroku.
 
-
+07/May/2018
+-[ ] add profile image.
+-[ ] rebuild the database to be just one collection for users with multi tags [user, maker, admin, superAdmin]. 
+-[ ] rebuild the login system to be just one login page if the tag is user go to user maker admin profile respectfuly. 
+-[ ] the admin decided if the user is a maker by add a tag maker to the record.
 
 
 
@@ -77,9 +83,9 @@ Todolist:
 	b. confirm the publish of the event after added by the maker.
 	c. the payment for each user and to show the balance.
 
-2. add the paiment for each user managed by the admin.
+2. add the payment for each user managed by the admin.
 3. add the validity for each event and add filter to show just the valid events (add events validity for registration on database).
-4. rebuild the login system and the database to be just one table for user with multi type of login as user and as maker so the page loaded after succesful 	login will be either the normal user page and everythin go normal or the maker page who also do the previouse functions.
+4. 
 5. redirect the registered user or maker direct to the profile not to the login page.
 
 

@@ -7,6 +7,41 @@ module.exports = function(app) {
 var passport = require('passport');
 console.log('user step 1');
 
+// for image upload
+	var multer = require('multer');
+	var path = require('path');
+	var fs = require('fs');
+	
+	// Set Storage Engine
+	var storage = multer.diskStorage({
+		destination: './public/img/profileImages',
+		filename: function(req, file, cb){
+			// cb(null, file.fieldname + '-' + Date.now() + path.extname(file.originalname));
+			cb(null, req.user._id + path.extname(file.originalname));
+		}
+	});
+
+	// Init Upload
+	var upload = multer({
+		storage: storage,
+		limits: {fileSize: 1000000},
+		fileFilter: function(req, file, cb){
+			checkFileType(file, cb);
+		}
+	});//.single('profilePicture');
+
+function checkFileType(file, cb){
+	// Allowed extension
+	var filetypes = /jpeg|jpg|png|gif/;
+	var extname = filetypes.test(path.extname(file.originalname).toLowerCase());
+	var mimetype = filetypes.test(file.mimetype);
+	if(extname && mimetype){
+		return cb(null, true);
+	} else {
+		return cb('Only (jpeg jpg png gif) images allowed');
+	}
+}
+
 var bcrypt   = require('bcrypt-nodejs');
 
 var LocalStrategy = require('passport-local').Strategy;
@@ -15,26 +50,8 @@ passport.use('localUser', new LocalStrategy(userStrategy));
 console.log('user step 3');
 // put the user object in the cookies and then compare the logged with the cookies via deserializeUser
 
+// var imageUploader = upload.single('profilePicture');
 
-	// var users = [{
-	// 	'userId': '111',
-	// 	'email': 'user1@email.com',
-	// 	'password': '1',
-	// 	'name': 'User 1',
-	// 	'registeredEventsList': []
-	// }, {
-	// 	'userId': '222',
-	// 	'email': 'user2@email.com',
-	// 	'password': '2',
-	// 	'name': 'User 2',
-	// 	'registeredEventsList': []
-	// }, {
-	// 	'userId': '333',
-	// 	'email': 'user3@email.com',
-	// 	'password': '3',
-	// 	'name': 'User 3',
-	// 	'registeredEventsList': []
-	// }, ];
 
 	// http handlers
 	app.get('/api/checkUserEmail/:userEmail', findUserByEmail);
@@ -46,10 +63,32 @@ console.log('user step 3');
 	app.delete('/api/removeEventFromUser', removeRegisteredEvent);
 	app.get('/api/checkUserLogin', checkUserLogin);
 	app.get('/api/logoutUser', logoutUser);
+	app.post('/api/userProfile/upload', upload.single('profilePicture'), uploadImage);
 
 
 // passport.serializeUser(serializeUser);
 // passport.deserializeUser(deserializeUser);
+
+	function uploadImage(req, res){
+			var profileImage = req.file;
+			
+			// if there is no file uploaded throw an error
+			// if(profileImage == undefined){
+			// 	res.send(err)
+			// }
+
+			// add the file data to user database
+			usersDB
+				.addProfileImage(req.user._id, profileImage)
+				.then(function(user){
+					// console.log(user);
+				});
+			res.redirect('/#!/userProfile');
+	}
+
+
+
+
 
 
 
@@ -119,8 +158,8 @@ console.log('user step 3');
 	function getAllUsers(req, res){
 		usersDB
 			.getAllUsers()
-			.then(function(users){
-				res.send(users);
+			.then(function(response){
+				res.send(response);
 			});
 	}
 

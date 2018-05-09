@@ -4,6 +4,7 @@ var usersSchema = mongoose.Schema({
 	name: String,
 	email: String,
 	password: String,
+	profileImage: {},	
 	registeredEventsList: [{type: mongoose.Schema.Types.ObjectId, ref:'eventsDB'}]
 }, {collection: 'users'});
 

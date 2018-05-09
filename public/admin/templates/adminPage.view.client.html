@@ -1,0 +1,36 @@
+<div class="container aws-margin10">
+	<h1>Admin Section</h1>
+<!-- 	<ul ng-repeat="user in model.users">
+		<li>{{user.email}}</li>
+	</ul> -->
+
+
+
+
+	<div class="row">
+		<div class="col-4"> <h4>Name</h4> </div>
+		<div class="col-3"> <h4>Email</h4> </div>
+		<div class="col-3"> <h4>User type</h4> </div>
+		<div class="col-1"> <h4>details</h4> </div>
+		<div class="col-1"> <h4>Remove</h4> </div>
+	</div>	
+	<div class="row" ng-repeat="user in model.users">
+		<div class="col-4"> <h4>{{user.name}}</h4> </div>
+		<div class="col-3"> <h4>{{user.email}}</h4> </div>
+		<div class="col-3"> <h4>{{user.userType}}</h4> </div>
+
+
+
+
+		<div class="col-1"> 
+			<h5>
+				<a href="#">
+					<span class="glyphicon glyphicon-edit" aria-hidden="true"></span>
+				</a>
+			</h5>
+		</div>
+		<!-- <div class="col-1" ng-click="model.removeEvent(event.makerId, event._id)">  -->
+			<div class="col-1"><h5><a href="#" ><span class="glyphicon glyphicon-remove" aria-hidden="true"></span></a></h5> </div>
+	</div>
+
+</div>

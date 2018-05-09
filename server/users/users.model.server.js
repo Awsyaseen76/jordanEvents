@@ -12,6 +12,16 @@ usersDB.findUserById = findUserById;
 usersDB.getAllUsers = getAllUsers;
 usersDB.addEventToUserEventsList = addEventToUserEventsList;
 usersDB.removeRegisteredEvent = removeRegisteredEvent;
+usersDB.addProfileImage = addProfileImage;
+
+function addProfileImage(userId, profileImage){
+	return usersDB
+				.findUserById(userId)
+				.then(function(user){
+					user.profileImage = profileImage;
+					return user.save();
+				});
+}
 
 
 function findUserByEmail(userEmail){
