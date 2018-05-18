@@ -1,6 +1,6 @@
 var mongoose = require('mongoose');
 
-var connectionString = 'mongodb://localhost/jordaneventsemifinal'; // for local
+// var connectionString = 'mongodb://localhost/jordaneventsemifinal'; // for local
 
 // check if running remotely
 if(process.env.MLAB_USERNAME) { 
