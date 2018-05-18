@@ -25,7 +25,6 @@
 				.then(function (users){
 					if(users){
 						model.users = users.data;
-						console.log(users.data);
 					}
 				});
 		}
