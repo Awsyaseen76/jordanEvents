@@ -39,5 +39,5 @@ require('./server/passport.js')(passport);
 
 
 app.listen(port, function() {
-	console.log('temp jordan events connected to: '+port);
+	console.log('jordan events connected to: '+port);
 });
