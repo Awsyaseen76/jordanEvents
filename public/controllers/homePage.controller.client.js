@@ -3,28 +3,47 @@
 		.module('jordanEvents')
 		.controller('homePageController', homePageController);
 
-	function homePageController(userService, makerService){
+	function homePageController(userService, $location, eventsService, $route){
 		var model = this;
-
 		function init(){
+			// model.loggedUser = null;
 			userService
-					.checkUserLogin()
-					.then(function(result){
-						if(result){
-							model.loggedUser = result;
-						}
-					});
+				.checkUserLogin()
+				.then(function(result){
+					if(result){
+						model.loggedUser = result;
+						return;
+					}else{
+						model.loggedUser = null;
+						return;
+					}
+				});
 
-			makerService
-					.checkMakerLogin()
-					.then(function(result){
-						if(result){
-							model.loggedMaker = result;
-						}
-					});
+			eventsService
+				.getAllEvents()
+				.then(function(events){
+					model.eventsList = events;		
+				});
+
+			eventsService
+				.findEventByEventId('5afd5cef4fc8ca045730b164')
+				.then(function(foundedEvent){
+					model.specialEvent = foundedEvent;
+				});
+		}
+		init();
+
+		model.logout = logout;
+
+		function logout(){
+			userService
+				.logout()
+				.then(function(){
+					$location.url('/');
+					$route.reload();
+				});
 		}
 
-		init();
 
 	}
 })();

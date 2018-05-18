@@ -1,0 +1,155 @@
+<!-- navbar -->
+<!-- 	<div class="sticky-nav-top">
+		<nav class="navbar navbar-dark bg-primary">
+		<nav class="navbar navbar-expand-sm navbar-dark bg-primary">
+	  <a class="navbar-brand text-warning" href="#"><img src="../../img/logo/wecan.png" class="menu-logo"></a>
+	  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarColor01" aria-controls="navbarColor01" aria-expanded="false" aria-label="Toggle navigation">
+	    <span class="navbar-toggler-icon"></span>
+	  </button>
+	  <div class="collapse navbar-collapse" id="navbarColor01">
+	    <ul class="navbar-nav mr-auto">
+	      <li class="nav-item active">
+	        <a class="nav-link" href="/">Home <span class="sr-only">(current)</span></a>
+	      </li>
+	      <li class="nav-item">
+	        <a class="nav-link" href="#!/allEvents">Events</a>
+	      </li>
+	      <li class="nav-item">
+	        <a class="nav-link" href="#!/login" ng-show="!model.loggedUser">Login</a>
+	      </li>
+	      <li class="nav-item">
+	        <a class="nav-link" href="" ng-click="model.logout()" ng-show="model.loggedUser">Logout</a>
+	      </li>
+	      <li class="nav-item">
+	        <a class="nav-link text-warning" href="#!/profile" ng-show="model.loggedUser">Profile</a>
+	      </li>
+	      <li class="nav-item">
+	        <a class="nav-link" href="#!/contact">Contact</a>
+	      </li>
+	      <li class="nav-item">
+	        <a class="nav-link" href="#!/about">About</a>
+	      </li>
+	    </ul>
+	  </div>
+	</nav>
+	</div> -->
+<!--  end of the nav bar -->
+
+
+
+
+<!-- Navigation -->
+    <nav class="navbar fixed-top navbar-expand-lg navbar-dark bg-dark fixed-top">
+      <div class="container">
+        <a class="navbar-brand" href="index.html"><img class="menu-logo" src="./img/logo/joeLogo.png"> </a>
+        <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarResponsive">
+          <ul class="navbar-nav ml-auto">
+            <li class="nav-item">
+              <a class="nav-link" href="#!/">Home</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#!/allEvents">Events</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#!/login" ng-show="!model.loggedUser">Login</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="" ng-click="model.logout()" ng-show="model.loggedUser">Logout</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link text-warning" href="#!/profile" ng-show="model.loggedUser">Profile</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#!/about">About</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#!/contact">Contact</a>
+            </li>
+            
+           
+            
+          </ul>
+        </div>
+      </div>
+    </nav>
+<!-- /Navigation -->
+
+
+
+
+
+
+
+<div class="container aws-margin10">
+	<h1>Edit Event</h1>
+	<div class="row">
+		<div class="col-3"  style="overflow-y: scroll; height:400px;" >
+			<!-- Left side -->
+			<h3>Events List</h3>
+			<hr>
+			<div class="row">
+				<div class="col-10"> <h5>Event Name</h5> </div>
+				<div class="col-2"> 
+					<h5>Edit</h5>
+				</div>
+			</div>
+			<div class="row" ng-repeat="event in model.eventsList">
+				<div class="col-10"> <h5>{{event.name}}</h5> </div>
+				<div class="col-2" ng-click="model.selectEvent(event._id)"> <h5><span class="glyphicon glyphicon-edit" aria-hidden="true"></span></h5> </div>	
+			</div>
+
+		</div>
+		<div class="col-1"></div>
+		<div class="col-8">
+			<!-- Right side -->
+			<h1>Edit Event</h1>
+
+			<div class="form-group">
+				<form>
+					<fieldset>
+				    <legend>Edit Event:</legend>
+				    <!-- <h1>{{model.foundEvent.name}}</h1>
+				    <h1>{{model.foundEvent.category}}</h1>
+				    <h1>{{model.foundEvent.subcategory}}</h1>
+				    <h1>{{model.foundEvent.details}}</h1>
+ -->
+
+					<div class="form-group">
+						<label for="eventName">Event Name:</label>
+						<input class="form-control" type="text" name="eventName" id="eventName" ng-model="model.selectedEvent.name">
+				    </div>
+
+
+				    <div class="form-group">
+						<label for="category">Category:</label>
+						<input class="form-control" type="text" name="category" id="category" ng-model="model.selectedEvent.category">
+					</div>
+
+					<div class="form-group">
+						<label for="subcategory">Sub-Category:</label>
+						<input class="form-control" type="text" name="subcategory" id="subcategory" ng-model="model.selectedEvent.subcategory">
+					</div>
+
+					<div class="form-group">
+						<label for="details">Details:</label>
+						<textarea class="form-control" rows="4" cols="50" name="details" id="details" ng-model="model.selectedEvent.details"></textarea>
+					</div>
+
+					<button type="button" name="save" class="btn btn-primary" ng-click="model.updateEvent(model.selectedEvent)">Update</button>
+
+					</fieldset>
+
+				</form>
+			</div>
+		</div>
+	</div>
+	
+
+	
+	<br>
+	<hr>
+	
+</div>

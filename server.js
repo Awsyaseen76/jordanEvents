@@ -30,8 +30,7 @@ app.use(passport.initialize());
 app.use(passport.session());
 
 
-require('./server/users/user.service.server')(app);
-require('./server/makers/maker.service.server')(app);
+require('./server/AllUsers/users.service.server')(app);
 require('./server/events/event.service.server')(app);
 require('./server/databse.js');
 
@@ -40,5 +39,5 @@ require('./server/passport.js')(passport);
 
 
 app.listen(port, function() {
-	console.log('connected to: '+port);
+	console.log('temp jordan events connected to: '+port);
 });

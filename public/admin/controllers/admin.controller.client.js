@@ -3,55 +3,53 @@
 		.module('jordanEvents')
 		.controller('adminController', adminController);
 
-	function adminController($routeParams, makerService, userService, $location) {
+	function adminController(userService, eventsService, loggedAdmin, $location) {
 		var model = this;
 
 		function init() {
-			// var _makerId = loggedMaker._id;
-			userService
-				.checkUserLogin()
-				.then(function(result){
-					if(result){
-						userService
-							.getAllUsers()
-							.then(function(users){
-								model.users = users;
-								$location.url('/admin');
-								return;
-							}, 
-							function(err){
-								return err;
-							});
-						return result;
-					}
-				},
-				function(err){
-					return err;
-				});
-
-
-			// makerService
-			// 	.findMakerById(_makerId)
-			// 	.then(function (makerProfile){
-			// 		model.makerProfile = makerProfile;
-			// 		if (model.makerProfile === 'error') {
-			// 			model.error = 'Please login with your email and password';
-			// 			return;
-			// 		} else {
-			// 			return model.makerProfile;
-			// 		}
-			// 	});
-			
-
-			// makerService
-			// 		.checkMakerLogin()
-			// 		.then(function(result){
-			// 			if(result){
-			// 				model.loggedMaker = result;
-			// 			}
-			// 		});
+			model.loggedAdmin = loggedAdmin;
+			model.adminPage = loggedAdmin;
+			model.users = null;
+			model.events = null;
 		}
 		init();
+
+		model.logout = logout;
+		model.getAllUsers = getAllUsers;
+		model.getAllEvents = getAllEvents;
+
+		function getAllUsers(){
+			model.events = null;
+			return userService
+				.getAllUsers()
+				.then(function (users){
+					if(users){
+						model.users = users.data;
+						console.log(users.data);
+					}
+				});
+		}
+
+		function getAllEvents(){
+			model.users = null;
+			eventsService
+					.getAllEvents()
+					.then(function(events){
+						if(events){
+							model.events = events;	
+						}
+					});
+		}
+
+
+
+		function logout(){
+			userService
+				.logout()
+				.then(function(){
+					$location.url('/');
+				});
+		}
 
 	}
 })();

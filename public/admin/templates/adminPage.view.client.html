@@ -1,36 +1,107 @@
+
+
+
+<!-- Navigation -->
+    <nav class="navbar fixed-top navbar-expand-lg navbar-dark bg-dark fixed-top">
+      <div class="container">
+        <a class="navbar-brand" href="index.html"><img class="menu-logo" src="./img/logo/joeLogo.png"> </a>
+        <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarResponsive">
+          <ul class="navbar-nav ml-auto">
+            <li class="nav-item">
+              <a class="nav-link" href="#!/">Home</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#!/allEvents">Events</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#!/login" ng-show="!model.loggedAdmin">Login</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="" ng-click="model.logout()" ng-show="model.loggedAdmin">Logout</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link text-warning" href="#!/profile" ng-show="model.loggedAdmin">Profile</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#!/about">About</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#!/contact">Contact</a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+<!-- /Navigation -->
+
+
+
 <div class="container aws-margin10">
-	<h1>Admin Section</h1>
-<!-- 	<ul ng-repeat="user in model.users">
-		<li>{{user.email}}</li>
-	</ul> -->
-
-
-
-
-	<div class="row">
-		<div class="col-4"> <h4>Name</h4> </div>
-		<div class="col-3"> <h4>Email</h4> </div>
-		<div class="col-3"> <h4>User type</h4> </div>
-		<div class="col-1"> <h4>details</h4> </div>
-		<div class="col-1"> <h4>Remove</h4> </div>
-	</div>	
-	<div class="row" ng-repeat="user in model.users">
-		<div class="col-4"> <h4>{{user.name}}</h4> </div>
-		<div class="col-3"> <h4>{{user.email}}</h4> </div>
-		<div class="col-3"> <h4>{{user.userType}}</h4> </div>
-
-
-
-
-		<div class="col-1"> 
-			<h5>
-				<a href="#">
-					<span class="glyphicon glyphicon-edit" aria-hidden="true"></span>
-				</a>
-			</h5>
-		</div>
-		<!-- <div class="col-1" ng-click="model.removeEvent(event.makerId, event._id)">  -->
-			<div class="col-1"><h5><a href="#" ><span class="glyphicon glyphicon-remove" aria-hidden="true"></span></a></h5> </div>
-	</div>
-
+	<h1>Admin Page</h1>
+	<br>
+	<a href="" ng-click="model.getAllUsers()" class="btn btn-warning"> list of users</a>
+	<a href="" ng-click="model.getAllEvents()" class="btn btn-primary"> list of events</a>
 </div>
+
+<br>
+<br>
+
+<!-- All Users -->
+<div ng-show="model.users" >
+	<table class="table table-responsive-sm table-hover">
+		<thead class="table-primary">
+			<tr>
+				<th>Name</th>
+				<th>Email</th>
+				<th>Father Phone</th>
+				<th>Mother Phone</th>
+				<th>Registered events</th>
+			</tr>
+		</thead>
+		<tbody >
+			<tr ng-repeat="user in model.users">
+				<td>{{user.name.firstName}} {{user.name.middleName}} {{user.name.lastName}}</td>
+				<td>{{user.email}}</td>
+				<td>{{user.contact.father.phone}}</td>
+				<td>{{user.contact.mother.phone}}</td>
+				<td>
+					<ul ng-repeat="event in user.registeredEventsList">
+						<li>{{event.name}}</li>
+					</ul>
+				</td>
+			</tr>
+		</tbody>
+	</table>
+</div>
+<!-- / All Users -->
+
+
+<!-- All Events -->
+<div ng-show="model.events" >
+	<table class="table table-responsive-sm table-hover">
+		<thead class="table-primary">
+			<tr>
+				<th>Name</th>
+				<th>Category</th>
+				<th>Maker Name</th>
+				<th>Start Date</th>
+				<th>End Date</th>
+				<th>Approved</th>
+			</tr>
+		</thead>
+		<tbody >
+			<tr ng-repeat="event in model.events">
+				<td>{{event.name}}</td>
+				<td>{{event.category}}</td>
+				<td>{{event.makerId.name.firstName}}</td>
+				<td>{{event.startingDate | date}}</td>
+				<td>{{event.expiryDate | date}}</td>
+				<td>{{event.approved}}</td>
+			</tr>
+		</tbody>
+	</table>
+</div>
+<!-- / All Events -->

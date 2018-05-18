@@ -79,6 +79,32 @@ Todolist:
 
 
 
+changing the database and the logic:
+
+1. Register [x] register template
+			[x] registerController
+			[x] user service client
+			[x] user service server
+			[x] user model
+			[x] user schema
+			[x] passport
+			[x] server
+			[x] database
+
+check the barcode reader if it doable
+
+
+
+
+
+
+
+
+
+
+
+
+
 ******** future work todo: **********
 1. add the admin page to manage:
 	a. the registration of the makers.

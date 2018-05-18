@@ -6,8 +6,20 @@ var eventsSchema = mongoose.Schema({
 			subcategory: String,
 			details: String,
 			created: {type: Date, default: Date.now()},
-			makerId: {type: mongoose.Schema.Types.ObjectId, ref: 'makersDB'}
-			// users:[{type: mongoose.Schema.Types.ObjectId, ref: 'usersDB'}]
+			makerId: {type: mongoose.Schema.Types.ObjectId, ref: 'usersDB'},
+			startingDate: Date,
+			expiryDate: Date,
+			images:{
+				img750x450: {
+					type: String,
+					default: "http://placehold.it/750x450",
+				},
+				img1200x300: {
+					type: String,
+					default: "http://placehold.it/1200x300"
+				}
+			},
+			approved: Boolean
 }, {collection: 'events'});
 
 module.exports = eventsSchema;

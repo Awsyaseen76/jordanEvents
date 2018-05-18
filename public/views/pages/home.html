@@ -1,103 +1,154 @@
 
-
-<!-- navbar -->
-<div class="sticky-nav-top" >
-	<nav class="navbar navbar-expand-lg navbar-dark bg-primary">
-	  <a class="navbar-brand text-warning" href="#">Jordan Events</a>
-	  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarColor01" aria-controls="navbarColor01" aria-expanded="false" aria-label="Toggle navigation">
-	    <span class="navbar-toggler-icon"></span>
-	  </button>
-
-	  <div class="collapse navbar-collapse" id="navbarColor01">
-	    <ul class="navbar-nav mr-auto">
-	      <li class="nav-item active">
-	        <a class="nav-link" href="/">Home <span class="sr-only">(current)</span></a>
-	      </li>
-	      <li class="nav-item">
-	        <a class="nav-link" href="#!/allEvents">Events</a>
-	      </li>
-	      <li class="nav-item">
-	        <a class="nav-link" href="#!/loginUser" ng-show="model.loggedUser.userType !== 'user'">Login User</a>
-	      </li>
-	      <li class="nav-item">
-	        <a class="nav-link" href="#!/loginMaker" ng-show="model.loggedMaker.userType !== 'maker'">Login Maker</a>
-	      </li>
-	      <li class="nav-item">
-	        <a class="nav-link" href="#" ng-click="logoutUser()" ng-show="model.loggedUser.userType === 'user'">Logout User</a>
-	      </li>
-	      <li class="nav-item">
-	        <a class="nav-link" ng-click="logoutMaker()" href="#" ng-show="model.loggedMaker.userType === 'maker'">Logout Maker</a>
-	      </li>
-	      <li class="nav-item">
-	        <a class="nav-link" href="#!/userProfile" ng-show="model.loggedUser.userType === 'user'">User Profile</a>
-	      </li>
-	      <li class="nav-item">
-	        <a class="nav-link" href="#!/makerProfile" ng-show="model.loggedMaker.userType === 'maker'">Maker Profile</a>
-	      </li>
-	      <li class="nav-item">
-	        <a class="nav-link" href="#!/contact">Contact</a>
-	      </li>
-	      <li class="nav-item">
-	        <a class="nav-link" href="#!/about">About</a>
-	      </li>
-	    </ul>
-	    <!-- <form class="form-inline my-2 my-lg-0">
-	      <input class="form-control mr-sm-2" type="text" placeholder="Search">
-	      <button class="btn btn-secondary my-2 my-sm-0" type="submit">Search</button>
-	    </form> -->
-	  </div>
-	</nav>
-	
-	<!-- <div>
-		maker:<h5> {{model.loggedMaker.userType === 'maker'}}</h5>
-		user: <h5>{{model.loggedUser.userType === 'user'}}</h5>
-	</div> -->
-</div>
+<!-- Navigation -->
+    <nav class="navbar fixed-top navbar-expand-lg navbar-dark bg-dark fixed-top">
+      <div class="container">
+        <a class="navbar-brand" href="index.html"><img class="menu-logo" src="./img/logo/joeLogo.png"> </a>
+        <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarResponsive">
+          <ul class="navbar-nav ml-auto">
+            <li class="nav-item">
+              <a class="nav-link text-warning" href="about.html">Home</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#!/allEvents">Events</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#!/login" ng-show="!model.loggedUser">Login</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="" ng-click="model.logout()" ng-show="model.loggedUser">Logout</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#!/profile" ng-show="model.loggedUser">Profile</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#!/about">About</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#!/contact">Contact</a>
+            </li>
+            
+           
+            
+          </ul>
+        </div>
+      </div>
+    </nav>
+<!-- /Navigation -->
 
 
+<!-- carousel -->
+    <div>
+    <header>
+      <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
+        <ol class="carousel-indicators">
+          <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
+          <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
+          <li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
+        </ol>
+        <div class="carousel-inner" role="listbox">
+          <div class="carousel-item active" style="background-image: url('http://placehold.it/1900x1080')">
+            <div class="carousel-caption d-none d-md-block">
+              <h3>First Slide</h3>
+              <p>This is a description for the first slide.</p>
+            </div>
+          </div>
+          <div class="carousel-item" style="background-image: url('http://placehold.it/1900x1080')">
+            <div class="carousel-caption d-none d-md-block">
+              <h3>Second Slide</h3>
+              <p>This is a description for the second slide.</p>
+            </div>
+          </div>
+          <div class="carousel-item" style="background-image: url('http://placehold.it/1900x1080')">
+            <div class="carousel-caption d-none d-md-block">
+              <h3>Third Slide</h3>
+              <p>This is a description for the third slide.</p>
+            </div>
+          </div>
+        </div>
+        <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
+          <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+          <span class="sr-only">Previous</span>
+        </a>
+        <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
+          <span class="carousel-control-next-icon" aria-hidden="true"></span>
+          <span class="sr-only">Next</span>
+        </a>
+      </div>
+    </header>
+    </div>
+<!-- /carousel -->
 
 
 
-<!--  end of the nav bar -->
+
+<!-- Page Content -->
+    <div class="container">
+
+      <br><br>
+      <!-- Special event -->
+      <div class="row" ng-show="model.specialEvent">
+        <div class="col-lg-6">
+          <img class="img-fluid rounded mb-4" ng-src="{{model.specialEvent.images.img750x450}}" alt="">
+        </div>
+        <div class="col-lg-6">
+          <h2>Special event...</h2>
+          <h2>{{model.specialEvent.name}}</h2>
+          <p>{{model.specialEvent.details}}</p>
+        </div>
+      </div>
+      <!-- /Special event -->
+    
+    <br><br><br>
+
+      <!-- Available events -->
+      <h2>Available events</h2>
+      <div class="row">
+        <div class="col-lg-4 mb-4" ng-repeat="event in model.eventsList">
+          <div class="card h-100 text-center">
+            <img class="card-img-top" ng-src="{{event.images.img750x450}}" alt="{{event.name}}">
+            <div class="card-body">
+              <h4 class="card-title">{{event.name}}</h4>
+              <h6 class="card-subtitle mb-2 text-muted">{{event.category}}</h6>
+              <p class="card-text">from: {{event.startingDate | date}}</p>
+              <p class="card-text">to: {{event.expiryDate | date}}</p>
+            </div>
+            <div class="card-footer">
+              <a href="#!/allEvents/{{event._id}}">More details...</a>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- /Available Events -->
+
+      <!-- Partners -->
+      <h2>Our Partners</h2>
+      <div class="row">
+        <div class="col-lg-2 col-sm-4 mb-4">
+          <img class="img-fluid" src="http://placehold.it/500x300" alt="">
+        </div>
+        <div class="col-lg-2 col-sm-4 mb-4">
+          <img class="img-fluid" src="http://placehold.it/500x300" alt="">
+        </div>
+        <div class="col-lg-2 col-sm-4 mb-4">
+          <img class="img-fluid" src="http://placehold.it/500x300" alt="">
+        </div>
+        <div class="col-lg-2 col-sm-4 mb-4">
+          <img class="img-fluid" src="http://placehold.it/500x300" alt="">
+        </div>
+        <div class="col-lg-2 col-sm-4 mb-4">
+          <img class="img-fluid" src="http://placehold.it/500x300" alt="">
+        </div>
+        <div class="col-lg-2 col-sm-4 mb-4">
+          <img class="img-fluid" src="http://placehold.it/500x300" alt="">
+        </div>
+      </div>
+      <!-- / Partners -->
+
+    </div>
+    <!-- /.container -->
 
 
 
-<div class="container aws-margin10">
-	
-	<h1> Welcome to Jordan Events....</h1>
-
-	<div class="row">
-		<div class="col-lg-4 col-xs-10 aws-margin0">
-			<div class="card border-success mb-3" style="max-width: 20rem;">
-			  <div class="card-header">Show Events</div>
-			  <div class="card-body">
-			    <h4 class="card-title">Available events</h4>
-			    <p class="card-text">Navigate to the current available events, then you can login or subsicribe to participate to a particular event.</p>
-			    <a href="#!/allEvents" class="btn btn-success">Surf events</a>
-
-			  </div>
-			</div>
-		</div>
-		<div class="col-lg-4 col-xs-10 aws-margin0">
-			<div class="card border-warning mb-3" style="max-width: 20rem;">
-			  <div class="card-header">Login / register</div>
-			  <div class="card-body">
-			    <h4 class="card-title">To participate</h4>
-			    <p class="card-text">Login or register to participate to the available events directly.</p>
-			    <a href="#!/loginUser" class="btn btn-warning">Login as User</a>
-			  </div>
-			</div>
-		</div>
-		<div class="col-lg-4 col-xs-10 aws-margin0">
-			<div class="card border-info mb-3" style="max-width: 20rem;">
-			  <div class="card-header">For makers</div>
-			  <div class="card-body">
-			    <h4 class="card-title">Login as makers</h4>
-			    <p class="card-text">Login as event maker then you can manage an existing event or create new one.</p>
-			    <a href="#!/loginMaker" class="btn btn-info">Login as Maker</a>
-			  </div>
-			</div>
-		</div>
-	</div>
-	
-</div>

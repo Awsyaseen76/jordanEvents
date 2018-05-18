@@ -7,16 +7,25 @@
 	<!-- <script type="text/javascript" src="./experements/collapsableMenu/navbarScript.js"></script> -->
 
 
+	<!-- Bootstrap core CSS -->
+    <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+	
 
-	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+	<!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"> -->
 	<!-- Sketchy Theme -->
-	<link href="https://maxcdn.bootstrapcdn.com/bootswatch/4.0.0/sketchy/bootstrap.min.css" rel="stylesheet" integrity="sha384-QAdi7HQouHzrMcg66qFdsKV2BCFW/iVhCRvooAkqS4d5rXV8Hlu+X8MY3ao03fgn" crossorigin="anonymous">
+	<!-- <link href="https://maxcdn.bootstrapcdn.com/bootswatch/4.0.0/sketchy/bootstrap.min.css" rel="stylesheet" integrity="sha384-QAdi7HQouHzrMcg66qFdsKV2BCFW/iVhCRvooAkqS4d5rXV8Hlu+X8MY3ao03fgn" crossorigin="anonymous">
+	 --><!-- modern business template -->
+    <link href="css/modern-business.css" rel="stylesheet">
+
 	<!-- jQuery -->
 	<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
 	<!-- Popper -->
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+	
 	<!-- Bootstrap -->
-	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+    <link href="./vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+	<!-- <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script> -->
+	
 	<!-- Local css -->
 	<link rel="stylesheet" type="text/css" href="css/style.css">
 	<!-- font awesom used for login with google -->
@@ -30,7 +39,29 @@
 
 	<script type="text/javascript" src="js/app.js"></script>
 	<script type="text/javascript" src="js/config.js"></script>
-	<script type="text/javascript" src="makers/controllers/loginMaker.controller.client.js"></script>
+	
+	
+	<script type="text/javascript" src="AllUsers/controllers/login.controller.client.js"></script>
+	<script type="text/javascript" src="AllUsers/controllers/register.controller.client.js"></script>
+	<script type="text/javascript" src="AllUsers/services/user.service.client.js"></script>
+	<script type="text/javascript" src="AllUsers/controllers/userProfile.controller.client.js"></script>
+	<script type="text/javascript" src="AllUsers/controllers/makerProfile.controller.client.js"></script>
+	<script type="text/javascript" src="AllUsers/controllers/makerNewEvent.controller.client.js"></script>
+	<script type="text/javascript" src="AllUsers/controllers/makerEventsList.controller.client.js"></script>
+	<script type="text/javascript" src="AllUsers/controllers/makerEditEvent.controller.client.js"></script>
+	<script type="text/javascript" src="admin/controllers/admin.controller.client.js"></script>
+
+
+	<script type="text/javascript" src="controllers/homePage.controller.client.js"></script>
+	
+	<script type="text/javascript" src="events/controllers/allEvents.controller.client.js"></script>
+	<script type="text/javascript" src="events/controllers/eventDetails.controller.client.js""></script>
+	<script type="text/javascript" src="events/services/events.service.client.js"></script>
+	
+
+
+
+	<!-- <script type="text/javascript" src="makers/controllers/loginMaker.controller.client.js"></script>
 	<script type="text/javascript" src="makers/controllers/registerMaker.controller.client.js"></script>
 	<script type="text/javascript" src="makers/controllers/makerProfile.controller.client.js"></script>
 	<script type="text/javascript" src="makers/controllers/makerEventsList.controller.client.js"></script>
@@ -40,26 +71,33 @@
 	<script type="text/javascript" src="users/controllers/registerUser.controller.client.js"></script>
 	<script type="text/javascript" src="users/controllers/userProfile.controller.client.js"></script>
 	<script type="text/javascript" src="users/services/user.service.client.js"></script>
-	<script type="text/javascript" src="events/controllers/allEvents.controller.client.js"></script>
-	<script type="text/javascript" src="events/controllers/eventDetails.controller.client.js""></script>
-	<script type="text/javascript" src="events/services/events.service.client.js"></script>
 	<script type="text/javascript" src="makers/services/maker.service.client.js"></script>
-	<script type="text/javascript" src="controllers/homePage.controller.client.js"></script>
-	<script type="text/javascript" src="admin/controllers/admin.controller.client.js"></script>
-
+ -->
 
 
 </head>
 <body ng-app="jordanEvents">
-	
-	<!-- <div ng-controller="homePageController as model"> -->
-	
-
-
-
-	<!-- //////////////////////////////////////////////////////////////////////////////////////// -->
 
 	<div ng-view></div>
+
+
+	<br><br>
+<!-- Footer -->
+    <footer class="py-2 bg-dark fixed-bottom">
+      <div class="container">
+        <p class="m-0 text-center text-white">Copyright &copy; Jordan Events 2018</p>
+      </div>
+      <!-- /.container -->
+    </footer>
+
+
+
+
+
+    <!-- Bootstrap core JavaScript -->
+    <script src="./vendor/jquery/jquery.min.js"></script>
+    <script src="./vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+
 
 </body>
 </html>

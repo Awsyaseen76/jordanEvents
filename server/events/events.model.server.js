@@ -1,7 +1,7 @@
 var mongoose = require('mongoose');
 var eventsSchema = require('./events.schema.server.js');
 
-var makersDB = require('../makers/makers.model.server.js');
+var usersDB = require('../AllUsers/users.model.server.js');
 
 var eventsDB = mongoose.model('eventsDB', eventsSchema);
 
@@ -24,7 +24,10 @@ function findEventsByMakerId(makerId){
 }
 
 function getAllEvents(){
-	return eventsDB.find();
+	return eventsDB
+				.find()
+				.populate('makerId')
+				.exec();
 }
 
 function addNewEvent(makerId, event){
@@ -33,7 +36,7 @@ function addNewEvent(makerId, event){
 				.create(event)
 				.then(function(addedEvent){
 					eventTemp = addedEvent;
-					return makersDB.addEventId(makerId, addedEvent._id);
+					return usersDB.addEventId(makerId, addedEvent._id);
 				})
 				.then(function(maker){
 					return eventTemp;
@@ -48,7 +51,7 @@ function removeEvent(makerId, eventId){
 	return eventsDB
 				.remove({_id: eventId})
 				.then(function(status){
-					return makersDB.removeEventFromList(makerId, eventId);
+					return usersDB.removeEventFromList(makerId, eventId);
 				})
 				.then(function(removedEvent){
 					return removedEvent;

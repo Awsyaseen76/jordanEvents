@@ -1,8 +1,7 @@
 <!-- navbar -->
-	<div class="sticky-nav-top">
-		<!-- <nav class="navbar navbar-dark bg-primary"> -->
+	<!-- <div class="sticky-nav-top">
 		<nav class="navbar navbar-expand-sm navbar-dark bg-primary">
-	  <a class="navbar-brand text-warning" href="#">Jordan Events</a>
+	  <a class="navbar-brand text-warning" href="#"><img src="../../img/logo/wecan.png" class="menu-logo"></a>
 	  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarColor01" aria-controls="navbarColor01" aria-expanded="false" aria-label="Toggle navigation">
 	    <span class="navbar-toggler-icon"></span>
 	  </button>
@@ -13,25 +12,16 @@
 	        <a class="nav-link" href="/">Home <span class="sr-only">(current)</span></a>
 	      </li>
 	      <li class="nav-item">
-	        <a class="nav-link" href="#!/allEvents">Events</a>
+	        <a class="nav-link text-warning" href="#!/allEvents">Events</a>
 	      </li>
 	      <li class="nav-item">
-	        <a class="nav-link" href="#!/loginUser" ng-show="model.loggedUser.userType !== 'user'">Login User</a>
+	        <a class="nav-link" href="#!/login" ng-show="!model.loggedUser">Login</a>
 	      </li>
 	      <li class="nav-item">
-	        <a class="nav-link" href="#!/loginMaker" ng-show="model.loggedMaker.userType !== 'maker'">Login Maker</a>
+	        <a class="nav-link" href="" ng-click="model.logout()" ng-show="model.loggedUser">Logout</a>
 	      </li>
 	      <li class="nav-item">
-	        <a class="nav-link" href="#" ng-click="logoutUser()" ng-show="model.loggedUser.userType === 'user'">Logout User</a>
-	      </li>
-	      <li class="nav-item">
-	        <a class="nav-link" ng-click="logoutMaker()" href="#" ng-show="model.loggedMaker.userType === 'maker'">Logout Maker</a>
-	      </li>
-	      <li class="nav-item">
-	        <a class="nav-link" href="#!/userProfile" ng-show="model.loggedUser.userType === 'user'">User Profile</a>
-	      </li>
-	      <li class="nav-item">
-	        <a class="nav-link" href="#!/makerProfile" ng-show="model.loggedMaker.userType === 'maker'">Maker Profile</a>
+	        <a class="nav-link" href="#!/profile" ng-show="model.loggedUser">Profile</a>
 	      </li>
 	      <li class="nav-item">
 	        <a class="nav-link" href="#!/contact">Contact</a>
@@ -40,40 +30,81 @@
 	        <a class="nav-link" href="#!/about">About</a>
 	      </li>
 	    </ul>
-	    <!-- <form class="form-inline my-2 my-lg-0">
-	      <input class="form-control mr-sm-2" type="text" placeholder="Search">
-	      <button class="btn btn-secondary my-2 my-sm-0" type="submit">Search</button>
-	    </form> -->
 	  </div>
 	</nav>
 		
-		<div>
-			<h1>{{model.loggedUser}}</h1>
-		</div>
-	</div>
-	</div>
-
-
-
+	</div> -->
 <!--  end of the nav bar -->
 
 
+<!-- Navigation -->
+    <nav class="navbar fixed-top navbar-expand-lg navbar-dark bg-dark fixed-top">
+      <div class="container">
+        <a class="navbar-brand" href="index.html"><img class="menu-logo" src="./img/logo/joeLogo.png"> </a>
+        <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarResponsive">
+          <ul class="navbar-nav ml-auto">
+            <li class="nav-item">
+              <a class="nav-link" href="#!/">Home</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link text-warning" href="#!/allEvents">Events</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#!/login" ng-show="!model.loggedUser">Login</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="" ng-click="model.logout()" ng-show="model.loggedUser">Logout</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#!/profile" ng-show="model.loggedUser">Profile</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#!/about">About</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#!/contact">Contact</a>
+            </li>
+            
+           
+            
+          </ul>
+        </div>
+      </div>
+    </nav>
+<!-- /Navigation -->
+
+
+
+
+
+
+
+
+
 <div class="container aws-margin10">
-	<h1 class="text-danger">Event details</h1>
+	<h1 class="text-danger">Event details:</h1>
 	<hr>
 
 	<div class="alert alert-danger" role="alert" ng-show="model.error1">
   		<p>{{model.error1}}</p>
-  		<a href="#!/loginUser" class="alert-link">Login / Register</a>
+  		<a href="#!/login" class="alert-link">Login / Register</a>
 	</div>
 	<div class="alert alert-danger" role="alert" ng-show="model.error2">
   		<p>{{model.error2}}</p>
 	</div>
+	
 
+	<!-- Event Image -->
+    <img class="img-fluid rounded mb-4" ng-src="{{model.eventDetails.images.img1200x300}}" alt="">
 	<h3>Event Name: {{model.eventDetails.name}}</h3>
 	<h3>Event Category: {{model.eventDetails.category}}</h3>
 	<h3>Event Sub-Category: {{model.eventDetails.subcategory}}</h3>
 	<h3>Event Details: {{model.eventDetails.details}}</h3>
+	<h3>Event Details: {{model.eventDetails.startingDate | date}}</h3>
+	<h3>Event Details: {{model.eventDetails.expiryDate | date}}</h3>
 	<br>
 
 	<a href="" class="btn btn-lg btn-success" ng-click="model.eventRegistration(model.eventDetails)">Register</a>

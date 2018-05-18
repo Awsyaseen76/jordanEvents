@@ -3,7 +3,7 @@
 		.module('jordanEvents')
 		.controller('allEventsController', allEventsController);
 
-	function allEventsController(eventsService, userService, makerService){
+	function allEventsController(eventsService, userService, $location){
 		var model = this;
 		
 		function init(){
@@ -19,15 +19,18 @@
 							model.loggedUser = result;
 						}
 					});
-
-			makerService
-					.checkMakerLogin()
-					.then(function(result){
-						if(result){
-							model.loggedMaker = result;
-						}
-					});
 		}
 		init();
+
+		model.logout = logout;
+
+		function logout(){
+			userService
+				.logout()
+				.then(function(){
+					$location.url('/');
+				});
+		}
+
 	}
 })();

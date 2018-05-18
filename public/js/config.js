@@ -5,91 +5,120 @@
 
 	function configuration($routeProvider) {
 		$routeProvider
+			//ok
 			.when('/', {
 				templateUrl: '../views/pages/home.html',
 				controller: 'homePageController',
 				controllerAs: 'model'
 				// add a controller to use the logged user instead of $rootScope
 			})
+			//ok
 			.when('/allEvents', {
 				templateUrl: 'events/templates/allEvents.view.client.html',
 				controller: 'allEventsController',
 				controllerAs: 'model'
 			})
+
+			.when('/login', {
+				templateUrl: 'AllUsers/templates/login.view.client.html',
+				controller: 'loginController',
+				controllerAs: 'model'
+			})
+			
+			.when('/register', {
+				templateUrl: 'AllUsers/templates/register.view.client.html',
+				controller: 'registerController',
+				controllerAs: 'model'
+			})
+
+			.when('/profile', {
+				resolve: {
+					loggedUser: checkUserType
+				}
+			})
+			
+			.when('/userProfile', {
+				templateUrl: 'AllUsers/templates/userProfile.view.client.html',
+				controller: 'userProfileController',
+				controllerAs: 'model',
+				resolve: {
+					loggedUser: isUser
+				}
+			})
+			
+			.when('/makerProfile', {
+				templateUrl: 'AllUsers/templates/makerProfile.view.client.html',
+				controller: 'makerProfileController',
+				controllerAs: 'model',
+				resolve: {
+					loggedMaker: isMaker
+				}
+			})
+
+			.when('/adminPage', {
+				templateUrl: 'admin/templates/adminPage.view.client.html',
+				controller: 'adminController',
+				controllerAs: 'model',
+				resolve: {
+					loggedAdmin: isAdmin
+				}
+
+			})
+			
 			.when('/allEvents/:eventId',{
 				templateUrl: 'events/templates/eventDetails.view.client.html',
 				controller: 'eventDetailsController',
 				controllerAs: 'model'
 			})
-			.when('/loginUser', {
-				templateUrl: 'users/templates/loginUser.view.client.html',
-				controller: 'loginUserController',
-				controllerAs: 'model'
-			})
-			.when('/registerUser', {
-				templateUrl: 'users/templates/registerUser.view.client.html',
-				controller: 'registerUserController',
-				controllerAs: 'model'
-			})
-			// .when('/userProfile/:userId', {       //remove the :userId
-			.when('/userProfile', {
-				templateUrl: 'users/templates/userProfile.view.client.html',
-				controller: 'userProfileController',
-				controllerAs: 'model',
-				resolve: {
-					loggedUser: checkUserLogin
-				}
-			})
-			.when('/loginMaker', {
-				templateUrl: 'makers/templates/loginMaker.view.client.html',
-				controller: 'loginMakerController',
-				controllerAs: 'model'
-			})
-			.when('/registerMaker', {
-				templateUrl: 'makers/templates/registerMaker.view.cliet.html',
-				controller: 'makerRegisterController',
-				controllerAs: 'model'
-			})
-			.when('/makerProfile', {
-				templateUrl: 'makers/templates/makerProfile.view.client.html',
-				controller: 'makerProfileController',
-				controllerAs: 'model',
-				resolve: {
-					loggedMaker: checkMakerLogin
-				}
-			})
+			
+			// .when('/loginMaker', {
+			// 	templateUrl: 'makers/templates/loginMaker.view.client.html',
+			// 	controller: 'loginMakerController',
+			// 	controllerAs: 'model'
+			// })
+			// .when('/registerMaker', {
+			// 	templateUrl: 'makers/templates/registerMaker.view.cliet.html',
+			// 	controller: 'makerRegisterController',
+			// 	controllerAs: 'model'
+			// })
+
+
 			.when('/makerProfile/eventsList', {
-				templateUrl: 'makers/templates/makerEventsList.view.client.html',
-				controller: 'makerEventsListController',
+				templateUrl:  'AllUsers/templates/makerEventsList.view.client.html',
+				controller:   'makerEventsListController',
 				controllerAs: 'model',
 				resolve: {
-					loggedMaker: checkMakerLogin
+					loggedMaker: isMaker
 				}
 			})
+
+
+
+
 			.when('/makerProfile/newEvent', {
-				templateUrl: 'makers/templates/makerNewEvent.view.client.html',
+				templateUrl: 'AllUsers/templates/makerNewEvent.view.client.html',
 				controller: 'makerNewEventController',
 				controllerAs: 'model',
 				resolve: {
-					loggedMaker: checkMakerLogin
+					loggedMaker: isMaker
 				}
 			})
 			.when('/makerProfile/editEvent', {
-				templateUrl: 'makers/templates/makerEditEvent.view.client.html',
+				templateUrl: 'AllUsers/templates/makerEditEvent.view.client.html',
 				controller: 'makerEditEventController',
 				controllerAs: 'model',
 				resolve: {
-					loggedMaker: checkMakerLogin
+					loggedMaker: isMaker
 				}
 			})
-			.when('/admin', {
-				templateUrl: 'admin/templates/adminPage.view.client.html',
-				controller: 'adminController',
-				controllerAs: 'model',
-				resolve: {
-					loggedUser: checkUserLogin
-				}
-			})
+			// .when('/admin', {
+			// 	templateUrl: 'admin/templates/adminPage.view.client.html',
+			// 	controller: 'adminController',
+			// 	controllerAs: 'model',
+			// 	resolve: {
+			// 		loggedUser: checkUserLogin
+			// 	}
+			// })
 			.when('/contact', {
 				templateUrl: '../views/pages/contact.view.client.html',
 				controller: 'homePageController',
@@ -103,14 +132,14 @@
 	}
 	
 	// check the user if still logged in through the server cockies if the user logged in he is in the cockies based on that we can protect the url
-	function checkUserLogin(userService, $q, $location){
+	function isUser(userService, $q, $location){
 		var deferred = $q.defer();
 		userService
 			.checkUserLogin()
 			.then(function(user){
-				if(user === '0'){
+				if(user === null){
 					deferred.reject();
-					$location.url('/loginUser');
+					$location.url('/login');
 				} else{
 					deferred.resolve(user);
 				}
@@ -118,16 +147,14 @@
 		return deferred.promise;
 	}
 
-
-	// same for the makerfunction checkUserLogin(userService, $q, $location){
-	function checkMakerLogin(makerService, $q, $location){
+	function isMaker(userService, $q, $location){
 		var deferred = $q.defer();
-		makerService
-			.checkMakerLogin()
+		userService
+			.isMaker()
 			.then(function(maker){
-				if(maker === '0'){
+				if(maker === null){
 					deferred.reject();
-					$location.url('/loginMaker');
+					$location.url('/login');
 				} else{
 					deferred.resolve(maker);
 				}
@@ -135,6 +162,41 @@
 		return deferred.promise;
 	}
 
+	function isAdmin(userService, $q, $location){
+		var deferred = $q.defer();
+		userService
+			.isAdmin()
+			.then(function(admin){
+				if(admin === null){
+					deferred.reject();
+					$location.url('/');
+				}else{
+					deferred.resolve(admin);
+				}
+			});
+			return deferred.promise;
+	}
+
+	function checkUserType(userService, $q, $location){
+		var deferred = $q.defer();
+		userService
+			.checkUserLogin()
+			.then(function(user){
+				if(user.userType === 'user'){
+					deferred.resolve(user);
+					$location.url('/userProfile');
+					return deferred.promise;
+				} else if(user.userType === 'maker'){
+					deferred.resolve(user);
+					$location.url('/makerProfile');
+					return deferred.promise;
+				}else if(user.userType === 'admin'){
+					deferred.resolve(user);
+					$location.url('/adminPage');
+					return deferred.promise;
+				}
+			});
+	}
 
 
 })();
