@@ -15,6 +15,14 @@
 		this.addNewEvent = addNewEvent;
 		this.updateEvent = updateEvent;
 		this.removeEvent = removeEvent;
+		this.updateEventByAdmin = updateEventByAdmin;
+
+		function updateEventByAdmin(event){
+			return $http.put('/api/admin/updateEventByAdmin/'+event._id, event)
+				.then(function(response){
+					return response.data;
+				});
+		}
 
 
 		function getAllEvents(){

@@ -1,41 +1,3 @@
-<!-- navbar -->
-<!-- 	<div class="sticky-nav-top">
-		<nav class="navbar navbar-expand-sm navbar-dark bg-primary">
-	  <a class="navbar-brand text-warning" href="#"><img src="../../img/logo/wecan.png" class="menu-logo"></a>
-	  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarColor01" aria-controls="navbarColor01" aria-expanded="false" aria-label="Toggle navigation">
-	    <span class="navbar-toggler-icon"></span>
-	  </button>
-
-	  <div class="collapse navbar-collapse" id="navbarColor01">
-	    <ul class="navbar-nav mr-auto">
-	      <li class="nav-item active">
-	        <a class="nav-link" href="/">Home <span class="sr-only">(current)</span></a>
-	      </li>
-	      <li class="nav-item">
-	        <a class="nav-link text-warning" href="#!/allEvents">Events</a>
-	      </li>
-	      <li class="nav-item">
-	        <a class="nav-link" href="#!/login" ng-show="!model.loggedUser">Login</a>
-	      </li>
-	      <li class="nav-item">
-	        <a class="nav-link" href="" ng-click="model.logout()" ng-show="model.loggedUser">Logout</a>
-	      </li>
-	      <li class="nav-item">
-	        <a class="nav-link" href="#!/profile" ng-show="model.loggedUser">Profile</a>
-	      </li>
-	      <li class="nav-item">
-	        <a class="nav-link" href="#!/contact">Contact</a>
-	      </li>
-	      <li class="nav-item">
-	        <a class="nav-link" href="#!/about">About</a>
-	      </li>
-	    </ul>
-	  </div>
-	</nav>
-		
-	</div> -->
-<!--  end of the nav bar -->
-
 
 
 <!-- Navigation -->
@@ -85,17 +47,19 @@
 
 
 <div class="container aws-margin10">
-	<h1>All available events</h1>
+	<label>Filter by name: <input type="text" name="searchByName" ng-model="searchByName"> </label>
+  <h1>All available events</h1>
 	<hr class="my-3">
 	<div class="container">
 		<div class="row">
-			<div class="card border-success col-xl-4 aws-margin0" ng-repeat='event in model.eventsList | orderBy:"-created"' style="max-width: 20rem;">
+			<!-- <div class="card border-success col-xl-4 aws-margin0" ng-repeat='event in model.eventsList | orderBy:"-startingDate"' style="max-width: 20rem;"> -->
+			<div class="card border-success col-xl-4 aws-margin0" ng-repeat="event in model.eventsList | orderBy:'startingDate' | filter:{approved: true} | filter:searchByName" ng-show="model.dateCompare(event.startingDate)" style="max-width: 20rem;">
 			  <div class="card-header text-danger"><h3>{{event.name}}</h3></div>
 			  <div class="card-body">
 			    <h5 class="card-title">Category: {{event.category}}</h5>
 			    <h5 class="card-title">Sub-Category: {{event.subcategory}}</h5>
 			    <p class="card-text">Starting Date: {{event.startingDate | date}}</p>
-			    <p class="card-text">End Date: {{event.expiryDate}}</p>
+			    <p class="card-text">End Date: {{event.expiryDate | date}}</p>
 			    <a href="#!/allEvents/{{event._id}}" class=" btn btn-default pull-right">More details...</a>
 			  </div>
 			</div>

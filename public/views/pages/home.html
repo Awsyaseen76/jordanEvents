@@ -9,7 +9,7 @@
         <div class="collapse navbar-collapse" id="navbarResponsive">
           <ul class="navbar-nav ml-auto">
             <li class="nav-item">
-              <a class="nav-link text-warning" href="about.html">Home</a>
+              <a class="nav-link text-warning" href="#!/">Home</a>
             </li>
             <li class="nav-item">
               <a class="nav-link" href="#!/allEvents">Events</a>
@@ -29,9 +29,6 @@
             <li class="nav-item">
               <a class="nav-link" href="#!/contact">Contact</a>
             </li>
-            
-           
-            
           </ul>
         </div>
       </div>
@@ -89,7 +86,7 @@
 
       <br><br>
       <!-- Special event -->
-      <div class="row" ng-show="model.specialEvent">
+      <div class="row" ng-show="model.specialEvent && model.dateCompare(model.specialEvent.startingDate)">
         <div class="col-lg-6">
           <img class="img-fluid rounded mb-4" ng-src="{{model.specialEvent.images.img750x450}}" alt="">
         </div>
@@ -97,6 +94,7 @@
           <h2>Special event...</h2>
           <h2>{{model.specialEvent.name}}</h2>
           <p>{{model.specialEvent.details}}</p>
+          <a href="#!/allEvents/{{model.specialEvent._id}}">More details...</a>
         </div>
       </div>
       <!-- /Special event -->
@@ -106,7 +104,7 @@
       <!-- Available events -->
       <h2>Available events</h2>
       <div class="row">
-        <div class="col-lg-4 mb-4" ng-repeat="event in model.eventsList">
+        <div class="col-lg-4 mb-4" ng-repeat="event in model.eventsList | filter:{approved: true}" ng-show="model.dateCompare(event.startingDate)">
           <div class="card h-100 text-center">
             <img class="card-img-top" ng-src="{{event.images.img750x450}}" alt="{{event.name}}">
             <div class="card-body">

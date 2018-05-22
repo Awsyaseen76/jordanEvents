@@ -17,6 +17,7 @@
 		model.logout = logout;
 		model.getAllUsers = getAllUsers;
 		model.getAllEvents = getAllEvents;
+		model.updateEventByAdmin = updateEventByAdmin;
 
 		function getAllUsers(){
 			model.events = null;
@@ -38,6 +39,12 @@
 							model.events = events;	
 						}
 					});
+		}
+
+		function updateEventByAdmin(event){
+			eventsService
+					.updateEventByAdmin(event)
+					.then(getAllEvents);
 		}
 
 

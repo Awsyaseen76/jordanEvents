@@ -22,18 +22,31 @@
 			eventsService
 				.getAllEvents()
 				.then(function(events){
-					model.eventsList = events;		
+					model.eventsList = events;
+					if(events){
+						for(var event in events){
+							if(events[event].special){
+								model.specialEvent = events[event];
+								return;
+							}
+						}
+					}		
 				});
 
-			eventsService
-				.findEventByEventId('5afd5cef4fc8ca045730b164')
-				.then(function(foundedEvent){
-					model.specialEvent = foundedEvent;
-				});
+			// eventsService
+			// 	.findEventByEventId('5afd5cef4fc8ca045730b164')
+			// 	.then(function(foundedEvent){
+			// 		model.specialEvent = foundedEvent;
+			// 	});
 		}
 		init();
 
 		model.logout = logout;
+		model.dateCompare = dateCompare; 
+
+		function dateCompare(startingDate) {
+    		return startingDate > (new Date()).toISOString();
+   		}
 
 		function logout(){
 			userService

@@ -19,7 +19,8 @@ var eventsSchema = mongoose.Schema({
 					default: "http://placehold.it/1200x300"
 				}
 			},
-			approved: Boolean
+			approved: Boolean,
+			special: Boolean
 }, {collection: 'events'});
 
 module.exports = eventsSchema;

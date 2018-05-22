@@ -56,20 +56,24 @@
 			<tr>
 				<th>Name</th>
 				<th>Email</th>
-				<th>Father Phone</th>
-				<th>Mother Phone</th>
-				<th>Registered events</th>
+				<th>User Type</th>
+				<th>Maker events</th>
+				<th>User Registered events</th>
 			</tr>
 		</thead>
 		<tbody >
 			<tr ng-repeat="user in model.users">
 				<td>{{user.name.firstName}} {{user.name.middleName}} {{user.name.lastName}}</td>
 				<td>{{user.email}}</td>
-				<td>{{user.contact.father.phone}}</td>
-				<td>{{user.contact.mother.phone}}</td>
+				<td>{{user.userType}}</td>
 				<td>
-					<ul ng-repeat="event in user.registeredEventsList">
+					<ul ng-repeat="event in user.events">
 						<li>{{event.name}}</li>
+					</ul>
+				</td>
+				<td>
+					<ul ng-repeat="rEvent in user.registeredEventsList">
+						<li>{{rEvent.name}}</li>
 					</ul>
 				</td>
 			</tr>
@@ -90,6 +94,8 @@
 				<th>Start Date</th>
 				<th>End Date</th>
 				<th>Approved</th>
+				<th>Special</th>
+				<th>Update</th>
 			</tr>
 		</thead>
 		<tbody >
@@ -99,7 +105,9 @@
 				<td>{{event.makerId.name.firstName}}</td>
 				<td>{{event.startingDate | date}}</td>
 				<td>{{event.expiryDate | date}}</td>
-				<td>{{event.approved}}</td>
+				<td> <input ng-model="event.approved" type="checkbox" name="approved"></td>
+				<td> <input ng-model="event.special" type="checkbox" name="special"></td>
+				<td> <a class="btn btn-primary" href="" ng-click="model.updateEventByAdmin(event)">Update</a> </td>
 			</tr>
 		</tbody>
 	</table>

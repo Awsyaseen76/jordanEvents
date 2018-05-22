@@ -13,8 +13,28 @@ module.exports = function(app) {
 	app.post('/api/event/', addNewEvent);
 	app.put('/api/event/', updateEvent);
 	app.delete('/api/event/', removeEvent);
+	app.put('/api/admin/updateEventByAdmin/:eventId', checkAdmin, updateEventByAdmin);
 
 
+	function checkAdmin(req, res, next){
+		if(req.user && req.user.userType === "admin"){
+			next();
+		}else{
+			res.sendStatus(401);
+		}
+	}
+
+
+	function updateEventByAdmin(req, res){
+		var eventId = req.params.eventId;
+		var updatedEvent = req.body;
+		eventsDB
+			.updateEventByAdmin(eventId, updatedEvent)
+			.then(function(status){
+				res.send(status);
+				return;
+			});
+	}
 
 	// function findEvent(req, res){
 	// 	if(req.query.eventId){

@@ -13,6 +13,7 @@ eventsDB.getAllEvents = getAllEvents;
 eventsDB.addNewEvent = addNewEvent;
 eventsDB.updateEvent = updateEvent;
 eventsDB.removeEvent = removeEvent;
+eventsDB.updateEventByAdmin = updateEventByAdmin;
 
 
 function findEventByEventId(eventId){
@@ -42,6 +43,12 @@ function addNewEvent(makerId, event){
 					return eventTemp;
 				});
 }
+
+
+function updateEventByAdmin(eventId, updatedEvent){
+	return eventsDB.update({_id: eventId}, {$set: updatedEvent});
+}
+
 
 function updateEvent(eventId, updatedEvent){
 	return eventsDB.update({_id: eventId}, {$set: updatedEvent});
