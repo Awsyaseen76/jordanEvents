@@ -25,8 +25,12 @@ function findEventsByMakerId(makerId){
 }
 
 function getAllEvents(){
+	var today = (new Date()).toISOString();
 	return eventsDB
-				.find()
+				.find({
+					startingDate: {$gt: today}
+				})
+				.sort('startingDate')
 				.populate('makerId')
 				.exec();
 }

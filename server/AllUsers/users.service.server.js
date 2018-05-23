@@ -6,6 +6,16 @@ var usersDB = require('./users.model.server.js');
 var passport = require('passport');
 var bcrypt   = require('bcrypt-nodejs');
 var GoogleStrategy = require('passport-google-oauth').OAuth2Strategy;
+var nodemailer = require('nodemailer');
+
+
+var transporter = nodemailer.createTransport({
+	service: 'gmail',
+	auth: {
+		user: process.env.GMAIL_ACCOUNT,
+		pass: process.env.GMAILPASS
+	}
+});
 
 
 console.log('step 1');
@@ -232,6 +242,21 @@ console.log('step 3');
 					if(err){
 						return err;
 					}else{
+						var mailOptions = {
+						from: 'jordanevents2018@gmail.com',
+						to: addedUser.email,
+						subject: 'Registration complete',
+						html: '<h3>Your registration completed successfully!</h3><p>You can now enjoy with our services...</p><h5>Jordan Events Team</h5>'
+						};
+
+						transporter.sendMail(mailOptions, function(error, info){
+							if (error) {
+								console.log(error);
+							} else {
+								console.log('Email sent: ' + info.response);
+							}
+						});
+
 						res.json(addedUser);
 					}
 				});

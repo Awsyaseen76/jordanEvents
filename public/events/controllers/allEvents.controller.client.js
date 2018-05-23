@@ -7,7 +7,8 @@
 		var model = this;
 		
 		function init(){
-			eventsService.getAllEvents()
+			eventsService
+				.getAllEvents()
 				.then(function(events){
 					model.eventsList = events;		
 				});
@@ -23,11 +24,6 @@
 		init();
 
 		model.logout = logout;
-		model.dateCompare = dateCompare; 
-
-		function dateCompare(startingDate) {
-    		return startingDate > (new Date()).toISOString();
-   		}
 
 		function logout(){
 			userService

@@ -44,7 +44,7 @@
 
 
 
-
+<!-- ng-show="model.dateCompare(event.startingDate)" -->
 
 <div class="container aws-margin10">
 	<label>Filter by name: <input type="text" name="searchByName" ng-model="searchByName"> </label>
@@ -53,7 +53,7 @@
 	<div class="container">
 		<div class="row">
 			<!-- <div class="card border-success col-xl-4 aws-margin0" ng-repeat='event in model.eventsList | orderBy:"-startingDate"' style="max-width: 20rem;"> -->
-			<div class="card border-success col-xl-4 aws-margin0" ng-repeat="event in model.eventsList | orderBy:'startingDate' | filter:{approved: true} | filter:searchByName" ng-show="model.dateCompare(event.startingDate)" style="max-width: 20rem;">
+			<div class="card border-success col-xl-4 aws-margin0" ng-repeat="event in model.eventsList | filter:{approved: true} | filter:searchByName" style="max-width: 20rem;">
 			  <div class="card-header text-danger"><h3>{{event.name}}</h3></div>
 			  <div class="card-body">
 			    <h5 class="card-title">Category: {{event.category}}</h5>

@@ -86,7 +86,7 @@
 
       <br><br>
       <!-- Special event -->
-      <div class="row" ng-show="model.specialEvent && model.dateCompare(model.specialEvent.startingDate)">
+      <div class="row" ng-show="model.specialEvent">
         <div class="col-lg-6">
           <img class="img-fluid rounded mb-4" ng-src="{{model.specialEvent.images.img750x450}}" alt="">
         </div>
@@ -104,7 +104,7 @@
       <!-- Available events -->
       <h2>Available events</h2>
       <div class="row">
-        <div class="col-lg-4 mb-4" ng-repeat="event in model.eventsList | filter:{approved: true}" ng-show="model.dateCompare(event.startingDate)">
+        <div class="col-lg-4 mb-4" ng-repeat="event in model.eventsList | filter:{approved: true}">
           <div class="card h-100 text-center">
             <img class="card-img-top" ng-src="{{event.images.img750x450}}" alt="{{event.name}}">
             <div class="card-body">

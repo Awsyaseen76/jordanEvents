@@ -85,6 +85,7 @@ module.exports = function(app) {
 		eventsDB
 			.getAllEvents()
 			.then(function(result){
+				console.log(result);
 				res.send(result);
 				return;
 			});
