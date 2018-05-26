@@ -7,15 +7,40 @@ var passport = require('passport');
 var bcrypt   = require('bcrypt-nodejs');
 var GoogleStrategy = require('passport-google-oauth').OAuth2Strategy;
 var nodemailer = require('nodemailer');
+var path = require('path');
 
 
 var transporter = nodemailer.createTransport({
-	service: 'gmail',
+	// host: 'mail.gmail.com',
+	// port: 587,
+	// secure: false,
+	service: 'Gmail',
 	auth: {
+		// type: 'OAuth2',
 		user: process.env.GMAIL_ACCOUNT,
-		pass: process.env.GMAILPASS
-	}
+		pass: process.env.GMAIL_PASS
+	},
+
+
+	// tls: {
+	// 	rejectUnauthorized: false 
+	// }
 });
+
+
+
+// transporter.set('oauth2_provision_cb', function (user, renew, callback){
+//     var accessToken = userTokens[user];
+//     if(!accessToken){
+//         return callback(new Error('Unknown user'));
+//     }else{
+//         return callback(null, accessToken);
+//     }
+// });
+
+
+
+
 
 
 console.log('step 1');
@@ -55,6 +80,7 @@ console.log('step 3');
         successRedirect: '/#!/profile',
         failureRedirect: '/#!/loginUser'
     }));
+
 
 
 	function userStrategy(username, password, done) {
@@ -243,11 +269,36 @@ console.log('step 3');
 						return err;
 					}else{
 						var mailOptions = {
-						from: 'jordanevents2018@gmail.com',
-						to: addedUser.email,
-						subject: 'Registration complete',
-						html: '<h3>Your registration completed successfully!</h3><p>You can now enjoy with our services...</p><h5>Jordan Events Team</h5>'
-						};
+							from: 'jordanevents2018@gmail.com',
+							to: addedUser.email,
+							subject: 'Registration complete',
+							html: 
+								'<div align="center" style="background-color: beige">'+
+										'<br><br>'+
+										'<img src="cid:jordanEventsLogo001" style="width: 200px; height: 200px;"/>'+
+										'<br>'+
+										'<h1 style="color: indianred; font-size: 6em;">Welcome '+ addedUser.name.firstName + '!'+'</h1>'+
+										'<h3 style="font-size: 3em;" >Your registration has been completed...</h3>'+
+										'<br>'+
+										'<p style="font-size: 2em;">You can now enjouy our services by logging in to <a href="http://jordanevents.herokuapp.com">our site</a> and register for deferents activities</p>'+
+										'<br>'+
+										'<h3 style="font-size: 3em;">Jordan Events Team</h3>'+
+										'<br><br><br><br><br>'+
+								'</div>',
+								
+								attachments: [{
+						        	filename: 'jordanEvents.jpg',
+						        	path: __dirname+'/jordanEvents.jpg',
+						        	cid: 'jordanEventsLogo001' 
+						    	}]
+							
+							};
+
+
+
+
+						    
+
 
 						transporter.sendMail(mailOptions, function(error, info){
 							if (error) {

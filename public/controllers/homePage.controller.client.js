@@ -42,6 +42,15 @@
 		init();
 
 		model.logout = logout;
+		model.sendmail = sendmail;
+
+		function sendmail(){
+			userService
+				.testMail()
+				.then(function(){
+					console.log('Mail Sent..........');
+				});
+		}
 
 		function logout(){
 			userService
