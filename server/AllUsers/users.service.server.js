@@ -1,7 +1,6 @@
 module.exports = function(app) {
 
 
-
 var usersDB = require('./users.model.server.js');
 var passport = require('passport');
 var bcrypt   = require('bcrypt-nodejs');
@@ -9,34 +8,51 @@ var GoogleStrategy = require('passport-google-oauth').OAuth2Strategy;
 var nodemailer = require('nodemailer');
 var path = require('path');
 
+// for image upload
+	var multer = require('multer');
+	var fs = require('fs');
+	
+	// Set Storage Engine
+	var storage = multer.diskStorage({
+		destination: (__dirname + '/../../public/img/profileImages'),
+		filename: function(req, file, cb){
+			cb(null, req.user._id + path.extname(file.originalname));
+		}
+	});
 
+	// Init Upload
+	var upload = multer({
+		storage: storage,
+		limits: {fileSize: 1000000},
+		fileFilter: function(req, file, cb){
+			checkFileType(file, cb);
+		}
+	});//.single('profilePicture');
+
+function checkFileType(file, cb){
+	// Allowed extension
+	var filetypes = /jpeg|jpg|png|gif/;
+	var extname = filetypes.test(path.extname(file.originalname).toLowerCase());
+	var mimetype = filetypes.test(file.mimetype);
+	if(extname && mimetype){
+		return cb(null, true);
+	} else {
+		return cb('Only (jpeg jpg png gif) images allowed');
+	}
+}
+
+
+
+// for sending email upon registration
 var transporter = nodemailer.createTransport({
-	// host: 'mail.gmail.com',
-	// port: 587,
-	// secure: false,
 	service: 'Gmail',
 	auth: {
-		// type: 'OAuth2',
 		user: process.env.GMAIL_ACCOUNT,
 		pass: process.env.GMAIL_PASS
 	},
-
-
-	// tls: {
-	// 	rejectUnauthorized: false 
-	// }
 });
 
 
-
-// transporter.set('oauth2_provision_cb', function (user, renew, callback){
-//     var accessToken = userTokens[user];
-//     if(!accessToken){
-//         return callback(new Error('Unknown user'));
-//     }else{
-//         return callback(null, accessToken);
-//     }
-// });
 
 
 
@@ -80,6 +96,29 @@ console.log('step 3');
         successRedirect: '/#!/profile',
         failureRedirect: '/#!/loginUser'
     }));
+
+	// upload profile picture
+	app.post('/api/userProfile/uploadProfilePic', upload.single('profilePicture'), uploadImage);
+
+	function uploadImage(req, res){
+			var profileImage = req.file;
+			console.log(profileImage.path);
+			// if there is no file uploaded throw an error
+			if(profileImage == undefined){
+				res.send(err);
+				return;
+			}
+
+			// add the file data to user database
+			usersDB
+				.addProfileImage(req.user._id, profileImage)
+				.then(function(user){
+					// console.log(user);
+				});
+			res.redirect('/#!/userProfile');
+	}
+
+
 
 
 

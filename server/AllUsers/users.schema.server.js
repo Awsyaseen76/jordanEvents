@@ -15,8 +15,8 @@ var usersSchema = mongoose.Schema({
 	},
 	email: String,
 	profileImage: {
-		type: String,
-		default: "/img/profileImages/avatar.png"
+		type: {},
+		default: {filename: "/img/profileImages/avatar.png"}
 	},
 	events: [{type: mongoose.Schema.Types.ObjectId, ref: 'eventsDB'}],
 	registeredEventsList: [{type: mongoose.Schema.Types.ObjectId, ref:'eventsDB'}],

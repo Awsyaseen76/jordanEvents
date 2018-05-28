@@ -15,6 +15,19 @@ usersDB.removeEventFromList = removeEventFromList;
 usersDB.findUserByGoogleId = findUserByGoogleId;
 usersDB.addEventToUserEventsList = addEventToUserEventsList;
 usersDB.removeRegisteredEvent = removeRegisteredEvent;
+usersDB.addProfileImage = addProfileImage;
+
+
+function addProfileImage(userId, profileImage){
+	return usersDB
+				.findUserById(userId)
+				.then(function(user){
+					user.profileImage = profileImage;
+					return user.save();
+				});
+}
+
+
 
 function findUserByGoogleId(googleId){
 	return usersDB.findOne({'google.id' : googleId});

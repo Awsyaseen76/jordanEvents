@@ -42,7 +42,29 @@
 
 <div class="container aws-margin10">
 	<div class="jumbotron" >
-		<img class="mx-auto d-block profile-img"  ng-src="{{model.userProfile.profileImage}}" >
+		<!-- static picture -->
+		<!-- <img class="mx-auto d-block profile-img"  ng-src="{{model.userProfile.profileImage}}" > -->
+		
+		<!-- uploaded image by user -->
+		<img ng-src="../../img/profileImages/{{model.userProfile.profileImage.filename}}" class="mx-auto d-block profile-img">
+
+		<h5>Update profile image: </h5>
+		<p>Note: The uploaded picture should be less than 1 mg and with the following extension (jpeg, jpg, png, gif)</p>
+		<div class="alert alert-danger" role="alert" ng-show="model.userProfile.profileImage.size > 1000000">
+  			The uploaded picture should be less than 1MB.
+		</div>
+
+		<form action="/api/userProfile/uploadProfilePic" method="POST" enctype="multipart/form-data" class="col-sm-6">
+			<input type="file" name="profilePicture" class="form-control">
+			<input type="submit" name="uploadImage" class="form-control" >
+		</form>
+
+
+
+		<br>
+		<hr>
+
+
 		<h1 class="display-3">Profile details:</h1>
 		<hr class="my-4">
 
@@ -105,32 +127,3 @@
 
 
 
-
-
-
-<!-- <div class="container aws-margin10">	
-	<div>
-		<h3 class="text-danger">User Profile:</h3>
-		<hr>
-		<h5>Name: {{model.userProfile.firstName}} {{model.userProfile.lastName}}</h5>
-		<h5>Email: {{model.userProfile.email}}</h5>
-		<h5>Id: {{model.userProfile._id}}</h5>
-	</div>
-	<br>
-	<hr>
-	<h4>Registered Events:</h4>
-	<hr>
-	<div class="container">
-		<div class="row">
-			<div class="card border-success col-xl-4 aws-margin10" ng-repeat='event in model.userProfile.registeredEventsList' style="max-width: 20rem;">
-			  <div class="card-header text-danger"><h3>{{event.name}}</h3></div>
-			  <div class="card-body">
-			    <h5 class="card-title">Category: {{event.category}}</h5>
-			    <h5 class="card-title">Sub-Category: {{event.subcategory}}</h5>
-			    <p class="card-text">Details: {{event.details}}</p>
-			    <a href="" ng-click="model.removeRegisteredEvent(event._id)" class=" btn btn-default pull-right">Remove...</a>
-			  </div>
-			</div>
-		</div>
-	</div>
-</div>

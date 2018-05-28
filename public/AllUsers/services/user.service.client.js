@@ -16,11 +16,6 @@
 		this.addEventToUserEventsList = addEventToUserEventsList;
 		this.removeRegisteredEvent = removeRegisteredEvent;
 		this.getAllUsers = getAllUsers;
-		this.testMail = testMail;
-
-		function testMail(){
-			return $http.post('/api/testMail');
-		}
 
 
 		function init() {}
