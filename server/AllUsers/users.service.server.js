@@ -8,21 +8,72 @@ var GoogleStrategy = require('passport-google-oauth').OAuth2Strategy;
 var nodemailer = require('nodemailer');
 var path = require('path');
 
+
+var aws = require('aws-sdk');
+var multerS3 = require('multer-s3');
+
+
+
+
+aws.config.update({
+    secretAccessKey: process.env.AWSSecretKey,
+    accessKeyId: process.env.AWSAccessKeyId,
+    region: 'us-east-1'
+});
+
+var s3 = new aws.S3();
+
+
+
+
+
 // for image upload
 	var multer = require('multer');
 	var fs = require('fs');
 	
-	// Set Storage Engine
-	var storage = multer.diskStorage({
-		destination: (__dirname + '/../../public/img/profileImages'),
-		filename: function(req, file, cb){
-			cb(null, req.user._id + path.extname(file.originalname));
-		}
-	});
+	// Set Local Storage Engine
+	// var storage = multer.diskStorage({
+	// 	destination: (__dirname + '/../../public/img/profileImages'),
+	// 	filename: function(req, file, cb){
+	// 		cb(null, req.user._id + path.extname(file.originalname));
+	// 	}
+	// });
+
+
+
+
+
 
 	// Init Upload
 	var upload = multer({
-		storage: storage,
+		// storage: storage,
+		storage: multerS3({
+        s3: s3,
+        bucket: 'jordanevents',
+        key: function (req, file, cb) {
+            // console.log(file);
+            // cb(null, file.originalname); //use Date.now() for unique file keys
+            
+            // -----------------------------
+            // remove old image before upload new one
+            var params = {
+  					Bucket: "jordanevents", 
+  					Key: req.user.profileImage.key
+ 				};
+			s3.deleteObject(params, function(err, data) {
+		   		if (err) console.log(err, err.stack); // an error occurred
+		   		else     console.log(data);           // successful response
+		   
+ 			});
+            // -----------------------------
+
+
+
+
+            var filelocation = 'profilepictures/'+req.user._id +'.'+ file.originalname.split('.')[1]; 
+            cb(null, filelocation); //use Date.now() for unique file keys
+        	}
+    	}),
 		limits: {fileSize: 1000000},
 		fileFilter: function(req, file, cb){
 			checkFileType(file, cb);
@@ -102,10 +153,14 @@ console.log('step 3');
 
 	function uploadImage(req, res){
 			var profileImage = req.file;
-			console.log(profileImage.path);
+			// console.log(profileImage);
+
 			// if there is no file uploaded throw an error
 			if(profileImage == undefined){
-				res.send(err);
+				res.send('No file selected');
+				return;
+			}else if (profileImage.size > 1000000){
+				res.send('Image size is greater than 1MB');
 				return;
 			}
 
