@@ -7,6 +7,7 @@
 		var model = this;
 
 		function init(){
+			model.loggedMaker = loggedMaker;
 			eventsService
 				.findEventsByMakerId(loggedMaker._id)
 				.then(function(events){

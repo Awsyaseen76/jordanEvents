@@ -16,6 +16,45 @@ usersDB.findUserByGoogleId = findUserByGoogleId;
 usersDB.addEventToUserEventsList = addEventToUserEventsList;
 usersDB.removeRegisteredEvent = removeRegisteredEvent;
 usersDB.addProfileImage = addProfileImage;
+usersDB.addTokenToUser = addTokenToUser;
+usersDB.findUserByToken = findUserByToken;
+usersDB.resetPassword = resetPassword;
+
+function resetPassword(user, newPassword){
+	return usersDB
+			.findById(user._id)
+			.then(function(user){
+				user.password = newPassword;
+				user.resetPasswordToken = undefined;
+				user.resetPasswordExpires = undefined;
+				return user.save();
+			});
+}
+
+function findUserByToken(token){
+	return usersDB
+		.findOne({resetPasswordToken: token, resetPasswordExpires: {$gt: Date.now()}})
+		.then(function(user){
+			return user;
+		}, function(err){
+			console.log(err);
+			return err;
+		});
+}
+
+
+function addTokenToUser(userEmail, token){
+	return usersDB
+			.findUserByEmail(userEmail)
+			.then(function(user){
+				user.resetPasswordToken = token;
+        		user.resetPasswordExpires = Date.now() + 3600000; // 1 hour
+        		return user.save();
+		}, function(err){
+			console.log(err);
+		});
+}
+		
 
 
 function addProfileImage(userId, profileImage){

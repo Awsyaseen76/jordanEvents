@@ -16,10 +16,22 @@
 		this.addEventToUserEventsList = addEventToUserEventsList;
 		this.removeRegisteredEvent = removeRegisteredEvent;
 		this.getAllUsers = getAllUsers;
+		this.forgetPassword = forgetPassword;
+		this.resetPassword = resetPassword;
 
 
 		function init() {}
 		init();
+
+		function forgetPassword(email){
+			var url = '/api/forgetPassword/'+email;
+			return $http.post(url);
+		}
+
+		function resetPassword(token, password){
+			var url = '/api/resetPassword/'+token;
+			return $http.post(url, {password: password});
+		}
 
 
 		function getAllUsers(){
@@ -47,7 +59,7 @@
 
 
 		function findUserById(userId) {
-			var url = '/api/user/?userId=' + userId;
+			var url = '/api/user/findUserById/' + userId;
 			return $http.get(url)
 				.then(function(response) {
 					var userProfile = response.data;
@@ -55,15 +67,15 @@
 				});
 		}
 
-		function findUserByEmail(user) {
-			var url = '/api/user/' + user.email;
+		function findUserByEmail(email) {
+			var url = '/api/user/findUserByEmail/'+email;
 			return $http.get(url)
 				.then(function(response) {
 					var result = response.data;
 					if(result.email){
 						return ('email already exist');
 					} else{
-						return ('ready');
+						return result;
 					}
 				});
 		}

@@ -37,7 +37,7 @@
 			if (user.password === password2) {
 				model.error = null;
 				return userService
-					.findUserByEmail(user)
+					.findUserByEmail(user.email)
 					.then(function(result){
 						if(result === 'email already exist'){
 							model.error = 'email already exist';

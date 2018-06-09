@@ -48,7 +48,9 @@ var usersSchema = mongoose.Schema({
     },
     address: String,
     payments: [Number],
-    notes: String
+    notes: String,
+    resetPasswordToken: String,
+ 	resetPasswordExpires: Date
 }, {collection: 'users'});
 
 

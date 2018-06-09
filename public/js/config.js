@@ -31,6 +31,17 @@
 				controllerAs: 'model'
 			})
 
+			.when('/forgetPassword', {
+				templateUrl: 'AllUsers/templates/forgetPassword.view.client.html',
+				controller: 'forgetPasswordController',
+				controllerAs: 'model'	
+			})
+			.when('/resetPassword/:token', {
+				templateUrl: 'AllUsers/templates/resetPassword.view.client.html',
+				controller: 'resetPasswordController',
+				controllerAs: 'model'	
+			})
+
 			.when('/profile', {
 				resolve: {
 					loggedUser: checkUserType

@@ -54,13 +54,13 @@
               <a class="nav-link" href="#!/allEvents">Events</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="#!/login" ng-show="!model.loggedUser">Login</a>
+              <a class="nav-link" href="#!/login" ng-show="!model.loggedMaker">Login</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="" ng-click="model.logout()" ng-show="model.loggedUser">Logout</a>
+              <a class="nav-link" href="" ng-click="model.logout()" ng-show="model.loggedMaker">Logout</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link text-warning" href="#!/profile" ng-show="model.loggedUser">Profile</a>
+              <a class="nav-link text-warning" href="#!/profile" ng-show="model.loggedMaker">Profile</a>
             </li>
             <li class="nav-item">
               <a class="nav-link" href="#!/about">About</a>
@@ -79,38 +79,38 @@
 
 
 
-
-
-
-
 <div class="container aws-margin10">
 	<h1>Edit Event</h1>
+			<hr>
+
 	<div class="row">
 		<div class="col-3"  style="overflow-y: scroll; height:400px;" >
 			<!-- Left side -->
 			<h3>Events List</h3>
 			<hr>
-			<div class="row">
-				<div class="col-10"> <h5>Event Name</h5> </div>
-				<div class="col-2"> 
-					<h5>Edit</h5>
-				</div>
-			</div>
+			
 			<div class="row" ng-repeat="event in model.eventsList">
-				<div class="col-10"> <h5>{{event.name}}</h5> </div>
-				<div class="col-2" ng-click="model.selectEvent(event._id)"> <h5><span class="glyphicon glyphicon-edit" aria-hidden="true"></span></h5> </div>	
+				<div class="col-12" ng-click="model.selectEvent(event._id)"> 
+					<h5>{{event.name}}
+						<span><i class="fa fa-pencil-square-o pull-right" aria-hidden="true" ></i></span>
+					</h5>
+					
+
+
+				</div>
+				<!-- <div class="col-2" ng-click="model.selectEvent(event._id)"> <h5><span class="glyphicon glyphicon-edit" aria-hidden="true"></span></h5> </div>	 -->
 			</div>
 
 		</div>
 		<div class="col-1"></div>
 		<div class="col-8">
 			<!-- Right side -->
-			<h1>Edit Event</h1>
 
 			<div class="form-group">
 				<form>
 					<fieldset>
-				    <legend>Edit Event:</legend>
+				    
+				    <p><i class="fa fa-angle-double-left" aria-hidden="true" style="font-size: 150%;"></i> Select event from the list on the left to edit:</p>
 				    <!-- <h1>{{model.foundEvent.name}}</h1>
 				    <h1>{{model.foundEvent.category}}</h1>
 				    <h1>{{model.foundEvent.subcategory}}</h1>
@@ -127,6 +127,17 @@
 						<label for="category">Category:</label>
 						<input class="form-control" type="text" name="category" id="category" ng-model="model.selectedEvent.category">
 					</div>
+
+					<div class="form-group">
+						<label for="category">Start date:</label>
+						<input class="form-control" type="text" name="category" id="category" ng-model="model.selectedEvent.startingDate">
+					</div>
+
+					<div class="form-group">
+						<label for="category">End date:</label>
+						<input class="form-control" type="text" name="category" id="category" ng-model="model.selectedEvent.expiryDate">
+					</div>
+
 
 					<div class="form-group">
 						<label for="subcategory">Sub-Category:</label>

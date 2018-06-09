@@ -93,8 +93,8 @@
         </div>
         <div class="col-lg-6">
           <h2>Special event...</h2>
-          <h2>{{model.specialEvent.name}}</h2>
-          <p>{{model.specialEvent.details}}</p>
+          <h2 ng-cloak>{{model.specialEvent.name}}</h2>
+          <p ng-cloak>{{model.specialEvent.details}}</p>
           <a href="#!/allEvents/{{model.specialEvent._id}}">More details...</a>
         </div>
       </div>
@@ -109,10 +109,10 @@
           <div class="card h-100 text-center">
             <img class="card-img-top" ng-src="{{event.images.img750x450}}" alt="{{event.name}}">
             <div class="card-body">
-              <h4 class="card-title">{{event.name}}</h4>
-              <h6 class="card-subtitle mb-2 text-muted">{{event.category}}</h6>
-              <p class="card-text">from: {{event.startingDate | date}}</p>
-              <p class="card-text">to: {{event.expiryDate | date}}</p>
+              <h4 class="card-title" ng-cloak>{{event.name}}</h4>
+              <h6 class="card-subtitle mb-2 text-muted" ng-cloak>{{event.category}}</h6>
+              <p class="card-text" ng-cloak>from: {{event.startingDate | date}}</p>
+              <p class="card-text" ng-cloak>to: {{event.expiryDate | date}}</p>
             </div>
             <div class="card-footer">
               <a href="#!/allEvents/{{event._id}}">More details...</a>
