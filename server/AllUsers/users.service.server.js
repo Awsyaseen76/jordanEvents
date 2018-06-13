@@ -126,6 +126,7 @@ passport.authenticate('google', {
 app.post('/api/userProfile/uploadProfilePic', upload.single('profilePicture'), uploadImage);
 app.post('/api/forgetPassword/:email', forgetPassword);
 app.post('/api/resetPassword/:token', checkToken, resetPassword);
+app.put('/api/user/updateProfile', updateProfile);
 
 // ---------------------------------- /APIs requests ----------------------------------
 
@@ -133,6 +134,16 @@ app.post('/api/resetPassword/:token', checkToken, resetPassword);
 
 
 // ------------------------------ Functions ------------------------------
+
+function updateProfile(req, res){
+	var updatedProfile = req.body;
+	usersDB
+		.updateProfile(updatedProfile)
+		.then(function(result){
+			console.log(result);
+			res.send(result);
+		})
+}
 
 // Do the action here
 function checkToken(req, res, next){

@@ -48,14 +48,17 @@
 		<!-- uploaded image by user -->
 		<!-- <img ng-src="../../img/profileImages/{{model.userProfile.profileImage.filename}}" class="mx-auto d-block profile-img"> -->
 		<img ng-src="{{model.userProfile.profileImage.location}}" class="mx-auto d-block profile-img">
+		
+		<a class="btn btn-warning" href="#!/updateUserProfile">Update profile</a>
 
-		<h5>Update profile image: </h5>
+
+		<!-- <h5>Update profile image: </h5>
 		<p>Note: The uploaded picture should be less than 1 mg and with the following extension (jpeg, jpg, png, gif)</p>
 		<div class="alert alert-danger" role="alert" ng-show="model.userProfile.profileImage.size > 1000000">
   			The uploaded picture should be less than 1MB.
-		</div>
+		</div> -->
 
-		<form action="/api/userProfile/uploadProfilePic" method="POST" enctype="multipart/form-data" class="col-sm-6">
+		<!-- <form action="/api/userProfile/uploadProfilePic" method="POST" enctype="multipart/form-data" class="col-sm-6">
 			<input type="file" name="profilePicture" id="profilePicture" class="form-control" onchange="ValidateSize(this)">
 			<script type="text/javascript">
 				function ValidateSize(file) {
@@ -71,7 +74,7 @@
     			}
 			</script>
 			<input type="submit" name="uploadImage" class="form-control" >
-		</form>
+		</form> -->
 
 
 

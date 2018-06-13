@@ -72,10 +72,12 @@ Todolist:
 -[x] add profile image.
 
 09/May/2018
--[ ] rebuild the database to be just one collection for users with multi tags [user, maker, admin, superAdmin]. 
--[ ] rebuild the login system to be just one login page if the tag is user go to user maker admin profile respectfuly. 
--[ ] the admin decided if the user is a maker by add a tag maker to the record.
+-[x] rebuild the database to be just one collection for users with multi tags [user, maker, admin, superAdmin]. 
+-[x] rebuild the login system to be just one login page if the tag is user go to user maker admin profile respectfuly. 
+-[x] the admin decided if the user is a maker by add a tag maker to the record.
 
+-[x] add the validity for each event and add filter to show just the valid events (add events validity for registration on database). 
+-[x] redirect the registered user or maker direct to the profile not to the login page.
 
 
 
@@ -91,17 +93,6 @@ changing the database and the logic:
 			[x] server
 			[x] database
 
-check the barcode reader if it doable
-
-
-
-
-
-
-
-
-
-
 
 
 
@@ -112,8 +103,8 @@ check the barcode reader if it doable
 	c. the payment for each user and to show the balance.
 
 2. add the payment for each user managed by the admin.
-3. add the validity for each event and add filter to show just the valid events (add events validity for registration on database). 
-4. redirect the registered user or maker direct to the profile not to the login page.
+
+5. check the barcode reader if it doable
 
 
 

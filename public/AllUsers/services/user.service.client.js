@@ -18,10 +18,17 @@
 		this.getAllUsers = getAllUsers;
 		this.forgetPassword = forgetPassword;
 		this.resetPassword = resetPassword;
+		this.updateProfile = updateProfile;
 
 
 		function init() {}
 		init();
+
+
+		function updateProfile(updatedProfile){
+			var url = '/api/user/updateProfile'
+			return $http.put(url, updatedProfile);
+		}
 
 		function forgetPassword(email){
 			var url = '/api/forgetPassword/'+email;

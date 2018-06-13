@@ -57,6 +57,15 @@
 				}
 			})
 			
+			.when('/updateUserProfile', {
+				templateUrl:'AllUsers/templates/editUserProfile.view.client.html',
+				controller: 'updateUserProfile',
+				controllerAs: 'model',
+				resolve:{
+					loggedUser: isUser
+				}
+			})
+
 			.when('/makerProfile', {
 				templateUrl: 'AllUsers/templates/makerProfile.view.client.html',
 				controller: 'makerProfileController',

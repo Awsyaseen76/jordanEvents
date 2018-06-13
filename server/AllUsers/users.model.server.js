@@ -19,6 +19,15 @@ usersDB.addProfileImage = addProfileImage;
 usersDB.addTokenToUser = addTokenToUser;
 usersDB.findUserByToken = findUserByToken;
 usersDB.resetPassword = resetPassword;
+usersDB.updateProfile = updateProfile;
+
+function updateProfile(updatedProfile){
+	return usersDB
+			.findByIdAndUpdate(updatedProfile._id, updatedProfile)
+			.then(function(result){
+				return result;
+			})
+}
 
 function resetPassword(user, newPassword){
 	return usersDB
