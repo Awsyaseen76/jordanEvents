@@ -44,7 +44,9 @@ var usersSchema = mongoose.Schema({
 	    emergency:{
 	    	name: String,
 	    	phone: String
-	    }
+	    },
+	    phone1: String,
+	    phone2: String
     },
     address: String,
     payments: [Number],

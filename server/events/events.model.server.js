@@ -14,6 +14,17 @@ eventsDB.addNewEvent = addNewEvent;
 eventsDB.updateEvent = updateEvent;
 eventsDB.removeEvent = removeEvent;
 eventsDB.updateEventByAdmin = updateEventByAdmin;
+eventsDB.addMemberToEvent = addMemberToEvent;
+
+
+function addMemberToEvent(eventId, userId){
+	return eventsDB
+			.findById(eventId)
+			.then(function(event){
+				event.registeredMembers.push(userId);
+				return event.save();
+			})
+}
 
 
 function findEventByEventId(eventId){
@@ -21,7 +32,11 @@ function findEventByEventId(eventId){
 }
 
 function findEventsByMakerId(makerId){
-	return eventsDB.find({makerId: makerId});
+	return eventsDB
+				.find({makerId: makerId})
+				.sort('startingDate')
+				.populate('registeredMembers')
+				.exec();
 }
 
 function getAllEvents(){

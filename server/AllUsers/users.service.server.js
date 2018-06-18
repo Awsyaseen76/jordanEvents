@@ -2,6 +2,7 @@ module.exports = function(app) {
 
 
 var usersDB 		= require('./users.model.server.js');
+var eventsDB 		= require('../events/events.model.server.js');
 var passport 		= require('passport');
 var bcrypt   		= require('bcrypt-nodejs');
 var GoogleStrategy 	= require('passport-google-oauth').OAuth2Strategy;
@@ -549,8 +550,13 @@ function addEventToUserEventsList(req, res){
 	var event = req.body;
 	usersDB
 		.addEventToUserEventsList(userId, event._id)
-		.then(function(result){
-			res.send(result);
+		.then(function(user){
+			eventsDB
+				.addMemberToEvent(event._id, userId)
+				.then(function (result){
+					console.log(result)
+				})
+			res.send(user);
 		});
 }
 

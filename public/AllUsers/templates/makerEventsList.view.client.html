@@ -84,7 +84,53 @@
 
 
 <div class="container aws-margin10">
-	<ng-include 
+<!-- 	<ng-include 
 		src="'../../views/htmlComponents/eventsListComponent/makerEventsList-component.view.client.html'">
-	</ng-include>
+	</ng-include> -->
+
+	<h2 ng-cloak>Event Maker Name: {{model.loggedMaker.name.firstName}} {{model.loggedMaker.name.middleName}} {{model.loggedMaker.name.lastName}}</h2>
+	<h4>Events List: </h4>
+
+	<table id="t01">
+	  <tr>
+	    <th>Name</th>
+	    <th>Category</th> 
+	    <th>Sub-Category</th>
+	    <th>Created</th>
+	    <th>Members</th>
+	    <th>Edit</th>
+	    <th>Remove</th>
+
+
+	  </tr>
+	  <tr ng-repeat="event in model.eventsList">
+	    <td>{{event.name}}</td>
+	    <td>{{event.category}}</td>
+	    <td>{{event.subcategory}}</td>
+	    <td>{{event.created | date}}</td>
+	    <td>{{event.registeredMembers.length}}</td>
+	    <td><a href="#!/makerProfile/editEvent"><span class="fa fa-pencil-square-o" aria-hidden="true"></span></a></td>
+	    <td><a href="" ><span class="fa fa-trash-o" aria-hidden="true"></span></a></td>
+	  </tr>
+	</table>
+
+	<!-- <div class="row">
+		<div class="col-3"> <h5>Name</h5> </div>
+		<div class="col-2"> <h5>Category</h5> </div>
+		<div class="col-2"> <h5>Sub-Category</h5> </div>
+		<div class="col-2"> <h5>Created</h5> </div>
+		<div class="col-1"> <h5>Edit</h5> </div>
+		<div class="col-1"> <h5>Remove</h5> </div>
+	</div>
+	<hr>	
+	<div class="row" ng-repeat="event in model.eventsList">
+		<div class="col-3"> <h5 ng-cloak>{{event.name}}</h5> </div>
+		<div class="col-2"> <h5 ng-cloak>{{event.category}}</h5> </div>
+		<div class="col-2"> <h5 ng-cloak>{{event.subcategory}}</h5> </div>
+		<div class="col-2"> <h5 ng-cloak>{{event.created | date}}</h5> </div>
+		<div class="col-1"> <h5><a href="#!/makerProfile/editEvent"><span class="fa fa-pencil-square-o" aria-hidden="true"></span></a></h5></div>
+		<div class="col-1" ng-click="model.removeEvent(event.makerId, event._id)"> <h5><a href="" ><span class="fa fa-trash-o" aria-hidden="true"></span></a></h5> </div>
+
+	</div> -->
+
 </div>

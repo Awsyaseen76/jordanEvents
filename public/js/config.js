@@ -75,6 +75,15 @@
 				}
 			})
 
+			.when('/updateMakerProfile', {
+				templateUrl:'AllUsers/templates/editMakerProfile.view.client.html',
+				controller: 'makerProfileController',
+				controllerAs: 'model',
+				resolve:{
+					loggedMaker: isMaker
+				}
+			})
+
 			.when('/adminPage', {
 				templateUrl: 'admin/templates/adminPage.view.client.html',
 				controller: 'adminController',

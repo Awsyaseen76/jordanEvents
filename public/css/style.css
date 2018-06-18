@@ -74,6 +74,44 @@ body {
   margin-bottom: 30px;
 }
 
+
+
+
+
+
+/* table style*/
+table {
+    width:100%;
+}
+/*table, th, td {
+    border: 1px solid black;
+    border-collapse: collapse;
+}*/
+th, td {
+    padding: 5px;
+    text-align: left;
+}
+table#t01 tr:nth-child(even) {
+    background-color: #9cf;
+}
+table#t01 tr:nth-child(odd) {
+   background-color: #fff;
+}
+table#t01 th {
+    background-color: #036;
+    color: white;
+}
+/* /table style*/
+
+
+
+
+
+
+
+
+
+
 /* navbar menu */
 /** {box-sizing: border-box;}*/
 

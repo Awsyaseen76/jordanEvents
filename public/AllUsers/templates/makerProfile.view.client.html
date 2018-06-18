@@ -49,9 +49,14 @@
 	<div>
 		<h3 class="text-danger">Maker Profile:</h3>
 		<hr>
-		<h5>Name: {{model.makerProfile.firstName}} {{model.makerProfile.lastName}}</h5>
+		<h5>Name: {{model.makerProfile.name.firstName}} {{model.makerProfile.name.middleName}} {{model.makerProfile.name.lastName}}</h5>
 		<h5>Email: {{model.makerProfile.email}}</h5>
-		<h5>Id: {{model.makerProfile._id}}</h5>
+		<h5>Phone 1: {{model.makerProfile.contact.phone1}}</h5>
+    <h5>Phone 2: {{model.makerProfile.contact.phone2}}</h5>
+    <h5>Emergency Contact Name: {{model.makerProfile.contact.emergency.name}}</h5>
+    <h5>Emergency Phone number: {{model.makerProfile.contact.emergency.phone}}</h5>
+    <h5>Notes: {{model.makerProfile.notes}}</h5>
+
 	</div>
 	<br>
 	<div>
@@ -60,6 +65,7 @@
 		<a class="btn btn-primary" href="#!/makerProfile/newEvent">New Event</a>
 		<a class="btn btn-primary" href="#!/makerProfile/editEvent">Edit Event</a>
 		<a class="btn btn-primary" href="#!/makerProfile/eventsList">Events List</a>
+    <a href="#!/updateMakerProfile" class="btn btn-warning">Edit profile</a>
 
 	</div>
 	<br>

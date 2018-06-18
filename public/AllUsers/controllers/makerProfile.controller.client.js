@@ -5,6 +5,8 @@
 
 	function makerProfileController(userService, loggedMaker, $location) {
 		var model = this;
+		model.logout = logout;
+		model.updateMakerProfile = updateMakerProfile;
 
 		function init() {
 			model.loggedMaker = loggedMaker;
@@ -12,8 +14,16 @@
 		}
 		init();
 
-		model.logout = logout;
-
+		function updateMakerProfile(updatedMakerProfile){
+			console.log(updatedMakerProfile);
+			userService
+				.updateProfile(updatedMakerProfile)
+				.then(function(result){
+					console.log(result.data);
+					console.log('Profile Updated');
+					$location.url('/profile')
+				})
+		}
 
 		function logout(){
 			userService

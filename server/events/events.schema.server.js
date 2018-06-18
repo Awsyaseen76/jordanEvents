@@ -20,7 +20,8 @@ var eventsSchema = mongoose.Schema({
 				}
 			},
 			approved: Boolean,
-			special: Boolean
+			special: Boolean,
+			registeredMembers: [{type: mongoose.Schema.Types.ObjectId, ref: 'usersDB'}]
 }, {collection: 'events'});
 
 module.exports = eventsSchema;

@@ -12,12 +12,15 @@
 			// var loggedMakerId = loggedMaker._id;
 			// model.makerName = makerName;
 			// model.makerId = loggedMakerId;
-			eventsService.findEventsByMakerId(loggedMaker._id)
+			eventsService
+				.findEventsByMakerId(loggedMaker._id)
 				.then(function(events){
 					model.eventsList = events;
+					console.log(events)
 					// return model.eventsList;
 				});
 
+			
 			// userService
 			// 		.checkUserLogin()
 			// 		.then(function(result){
@@ -31,6 +34,11 @@
 
 		model.removeEvent = removeEvent;
 		model.logout = logout;
+		model.findUserByEventId = findUserByEventId
+
+		function findUserByEventId(eventId){
+			console.log(eventId);
+		}
 
 		function logout(){
 			userService
