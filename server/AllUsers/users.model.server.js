@@ -20,6 +20,50 @@ usersDB.addTokenToUser = addTokenToUser;
 usersDB.findUserByToken = findUserByToken;
 usersDB.resetPassword = resetPassword;
 usersDB.updateProfile = updateProfile;
+usersDB.makePayment = makePayment;
+
+function makePayment(payment){
+	return usersDB
+				.findById(payment.userId)
+				.then(function (user){
+					user.payments.push(
+								{eventId: payment.eventId,
+								 paymentDate: payment.dateOfpayment,
+								 paymentAmount: JSON.parse(payment.amount)});
+					return user.save();
+				});
+				// 	if(user.totalOfPayments.length === 0){
+				// 		user.totalOfPayments.push({
+				// 			eventId: payment.eventId,
+				// 			totalAmount: JSON.parse(payment.amount)
+				// 		});
+				// 		return user.save();
+				// 	}
+				// 	for(var i in user.totalOfPayments){
+				// 		console.log(user.totalOfPayments[i].eventId === payment.eventId);
+				// 		if(user.totalOfPayments[i].eventId === payment.eventId){
+				// 			var totalPayment = user.totalOfPayments[i].totalAmount + JSON.parse(payment.amount);
+				// 			console.log(totalPayment);
+				// 			user.set({
+				// 				totalOfPayments[i].eventId: payment.eventId,
+				// 				totalOfPayments[i].totalAmount: totalPayment
+											
+				// 			});
+				// 			// user.totalOfPayments[i].totalAmount = JSON.parse(payment.amount)
+				// 			console.log(user.totalOfPayments[i].totalAmount)
+				// 			return user.save();
+				// 		}
+				// 	}
+				// 	console.log('im here');
+				// 	user.totalOfPayments.push({
+				// 		eventId: payment.eventId,
+				// 		totalAmount: JSON.parse(payment.amount)
+				// 	})	
+				// 	return user.save();
+				// })
+}
+
+
 
 function updateProfile(updatedProfile){
 	return usersDB

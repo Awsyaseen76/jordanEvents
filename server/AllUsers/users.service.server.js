@@ -128,6 +128,7 @@ app.post('/api/userProfile/uploadProfilePic', upload.single('profilePicture'), u
 app.post('/api/forgetPassword/:email', forgetPassword);
 app.post('/api/resetPassword/:token', checkToken, resetPassword);
 app.put('/api/user/updateProfile', updateProfile);
+app.post('/api/maker/makePayment', makePayment);
 
 // ---------------------------------- /APIs requests ----------------------------------
 
@@ -135,6 +136,16 @@ app.put('/api/user/updateProfile', updateProfile);
 
 
 // ------------------------------ Functions ------------------------------
+
+function makePayment(req, res){
+	var payment = req.body;
+	usersDB
+		.makePayment(payment)
+		.then(function(result){
+			res.send(result);
+		})
+}
+
 
 function updateProfile(req, res){
 	var updatedProfile = req.body;

@@ -28,7 +28,10 @@ function addMemberToEvent(eventId, userId){
 
 
 function findEventByEventId(eventId){
-	return eventsDB.findById(eventId);
+	return eventsDB
+				.findById(eventId)
+				.populate('registeredMembers')
+				.exec();
 }
 
 function findEventsByMakerId(makerId){

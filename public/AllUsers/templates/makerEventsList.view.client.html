@@ -99,7 +99,8 @@
 	    <th>Created</th>
 	    <th>Members</th>
 	    <th>Edit</th>
-	    <th>Remove</th>
+	    <!-- <th>Remove</th> -->
+	    <th>Details</th>
 
 
 	  </tr>
@@ -110,7 +111,8 @@
 	    <td>{{event.created | date}}</td>
 	    <td>{{event.registeredMembers.length}}</td>
 	    <td><a href="#!/makerProfile/editEvent"><span class="fa fa-pencil-square-o" aria-hidden="true"></span></a></td>
-	    <td><a href="" ><span class="fa fa-trash-o" aria-hidden="true"></span></a></td>
+	    <!-- <td><a href="" ><span class="fa fa-trash-o" aria-hidden="true"></span></a></td> -->
+	    <td><a href="#!/makerProfile/makerEventDetails/{{event._id}}" class=" btn btn-default pull-right">More...</a></td>
 	  </tr>
 	</table>
 

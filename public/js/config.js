@@ -122,8 +122,6 @@
 			})
 
 
-
-
 			.when('/makerProfile/newEvent', {
 				templateUrl: 'AllUsers/templates/makerNewEvent.view.client.html',
 				controller: 'makerNewEventController',
@@ -132,6 +130,7 @@
 					loggedMaker: isMaker
 				}
 			})
+
 			.when('/makerProfile/editEvent', {
 				templateUrl: 'AllUsers/templates/makerEditEvent.view.client.html',
 				controller: 'makerEditEventController',
@@ -140,6 +139,17 @@
 					loggedMaker: isMaker
 				}
 			})
+
+
+			.when('/makerProfile/makerEventDetails/:eventId', {
+				templateUrl: 'events/templates/makerEventDetails.view.client.html',
+				controller: 'makerEventDetails',
+				controllerAs: 'model',
+				resolve: {
+					loggedMaker: isMaker
+				}
+			})
+
 			// .when('/admin', {
 			// 	templateUrl: 'admin/templates/adminPage.view.client.html',
 			// 	controller: 'adminController',

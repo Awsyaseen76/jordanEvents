@@ -49,7 +49,8 @@ var usersSchema = mongoose.Schema({
 	    phone2: String
     },
     address: String,
-    payments: [Number],
+    payments: [],
+    // totalOfPayments: [],
     notes: String,
     resetPasswordToken: String,
  	resetPasswordExpires: Date

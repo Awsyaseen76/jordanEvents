@@ -19,11 +19,17 @@
 		this.forgetPassword = forgetPassword;
 		this.resetPassword = resetPassword;
 		this.updateProfile = updateProfile;
+		this.makePayment = makePayment;
 
 
 		function init() {}
 		init();
 
+		function makePayment(payment){
+			var url = '/api/maker/makePayment'
+			return $http.post(url, payment)
+			// console.log(payment);
+		}
 
 		function updateProfile(updatedProfile){
 			var url = '/api/user/updateProfile'
