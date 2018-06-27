@@ -9,6 +9,7 @@ var eventsSchema = mongoose.Schema({
 			makerId: {type: mongoose.Schema.Types.ObjectId, ref: 'usersDB'},
 			startingDate: Date,
 			expiryDate: Date,
+			price: Number,
 			images:{
 				img750x450: {
 					type: String,

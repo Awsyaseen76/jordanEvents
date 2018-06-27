@@ -41,7 +41,37 @@
 <!--  -->
 
 <div class="container aws-margin10">
+			
 	<div class="jumbotron" >
+		<img ng-src="{{model.userProfile.profileImage.location}}" class="mx-auto d-block profile-img">
+		
+
+		<!-- <h5>Update profile image: </h5>
+		<p>Note: The uploaded picture should be less than 1 mg and with the following extension (jpeg, jpg, png, gif)</p>
+		<div class="alert alert-danger" role="alert" ng-show="model.userProfile.profileImage.size > 1000000">
+  			The uploaded picture should be less than 1MB.
+		</div> -->
+
+		<form action="/api/userProfile/uploadProfilePic" method="POST" enctype="multipart/form-data" class="col-sm-6">
+			<input type="file" name="profilePicture" id="profilePicture" class="form-control" onchange="ValidateSize(this)">
+			<script type="text/javascript">
+				function ValidateSize(file) {
+	        		var FileSize = file.files[0].size / 1024 / 1024; // in MB
+	        		if (FileSize > 1) {
+	            		alert('File size exceeds 1 MB');
+	            		return false;
+	        		} 
+	        		// else {
+	        		// 	alert(file.files[0].size);
+	        		// 	return true;
+	        		// }
+    			}
+			</script>
+			<input type="submit" name="uploadImage" class="form-control" >
+		</form>
+
+
+
 	  <h1 class="display-3">Update profile:</h1>
 	  <hr class="my-4">
 		<form>

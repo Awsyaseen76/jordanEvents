@@ -70,18 +70,50 @@
     <thead>
       <th>Name</th>
       <th>Email</th>
+      <th>Total of payments</th>
+      <th>Balance</th>
       <th>Payments</th>
     </thead>
     <tr ng-repeat="user in model.eventDetails.registeredMembers">
       <td>{{user.name.firstName}} {{user.name.middleName}} {{user.name.lastName}}</td>
       <td>{{user.email}}</td>
       <td>
+        {{model.getTotals(user).total}}
+      </td>
+      <td>{{model.getTotals(user).balance}}</td>
+      <td></td>
+      <td>
         <form>
-          <input type="text" name="eventId" ng-model="model.eventDetails._id">
+          <!-- <input type="text" name="eventId" ng-model="model.eventDetails._id"> -->
           <input type="date" name="dateOfpayment" ng-model="payment.dateOfpayment">
           <input type="text" name="amount" ng-model="payment.amount">
           <input type="submit" name="makePayment" ng-click="model.makePayment(user._id, model.eventDetails._id, payment)">
         </form>
+        <!-- modal -->
+          <button type="button" class="btn btn-info" data-toggle="modal" data-target="#paymentsModal">Open Modal</button>
+
+          <div class="modal fade" id="paymentsModal" role="dialog">
+            <div class="modal-dialog">
+            
+              <!-- Modal content-->
+              <div class="modal-content">
+                <div class="modal-header">
+                  <button type="button" class="close" data-dismiss="modal">&times;</button>
+                  <h4 class="modal-title">Modal Header</h4>
+                </div>
+                <div class="modal-body">
+                  <p>Some text in the modal.</p>
+                </div>
+                <div class="modal-footer">
+                  <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                </div>
+              </div>
+              
+            </div>
+          </div>
+
+        <!-- end of modal -->
+
       </td>
     </tr>
   </table>

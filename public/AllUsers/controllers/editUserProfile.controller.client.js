@@ -15,6 +15,7 @@
 		model.logout = logout;
 		model.removeRegisteredEvent = removeRegisteredEvent;
 		model.updateProfile = updateProfile;
+		// model.DOB = new Date(loggedUser.DOB);
 
 		function updateProfile(updatedUserProfile){
 			userService
