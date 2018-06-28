@@ -3,7 +3,7 @@
 		.module('jordanEvents')
 		.controller('makerEventDetails', makerEventDetails);
 
-		function makerEventDetails($routeParams, eventsService, userService, $location){
+		function makerEventDetails($routeParams, eventsService, userService, $location, $route){
 			var model = this;
 
 
@@ -108,6 +108,7 @@
 					.then(function(result){
 						console.log(result.data);
 					})
+				$route.reload()
 			}
 
 			function logout(){

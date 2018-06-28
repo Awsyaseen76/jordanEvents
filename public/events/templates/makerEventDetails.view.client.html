@@ -69,19 +69,18 @@
   <table>
     <thead>
       <th>Name</th>
-      <th>Email</th>
-      <th>Total of payments</th>
-      <th>Balance</th>
+      <!-- <th>Email</th> -->
       <th>Payments</th>
+      <th>Balance</th>
+      <th>Make a payment</th>
     </thead>
     <tr ng-repeat="user in model.eventDetails.registeredMembers">
-      <td>{{user.name.firstName}} {{user.name.middleName}} {{user.name.lastName}}</td>
-      <td>{{user.email}}</td>
+      <td>{{user.name.firstName}} {{user.name.lastName}}</td>
+      <!-- <td>{{user.email}}</td> -->
       <td>
         {{model.getTotals(user).total}}
       </td>
       <td>{{model.getTotals(user).balance}}</td>
-      <td></td>
       <td>
         <form>
           <!-- <input type="text" name="eventId" ng-model="model.eventDetails._id"> -->
@@ -90,19 +89,30 @@
           <input type="submit" name="makePayment" ng-click="model.makePayment(user._id, model.eventDetails._id, payment)">
         </form>
         <!-- modal -->
-          <button type="button" class="btn btn-info" data-toggle="modal" data-target="#paymentsModal">Open Modal</button>
+          <button type="button" class="btn btn-info" data-toggle="modal" data-target="#paymentsModal-{{$index}}">Payments details</button>
 
-          <div class="modal fade" id="paymentsModal" role="dialog">
+          <div class="modal fade" id="paymentsModal-{{$index}}" role="dialog">
             <div class="modal-dialog">
             
               <!-- Modal content-->
               <div class="modal-content">
                 <div class="modal-header">
-                  <button type="button" class="close" data-dismiss="modal">&times;</button>
-                  <h4 class="modal-title">Modal Header</h4>
+                  <!-- <button type="button" class="close" data-dismiss="modal">&times;</button> -->
+                  <h5 class="modal-title">Payments details</h5>
                 </div>
                 <div class="modal-body">
-                  <p>Some text in the modal.</p>
+                  <table>
+                    <thead>
+                      <th>Amount</th>
+                      <th>Date</th>
+                    </thead>
+                    <tr ng-repeat="payment in user.payments">
+                      <td>{{payment.paymentAmount}}</td>
+                      <td>{{payment.paymentDate | date}}</td>
+                    </tr>
+                  </table>
+                  <h5><b>Total payments:</b> {{model.getTotals(user).total | currency:"JOD "}}</h5>
+                  <h5><b>Balance:</b> {{model.getTotals(user).balance | currency:"JOD "}}</h5>
                 </div>
                 <div class="modal-footer">
                   <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
