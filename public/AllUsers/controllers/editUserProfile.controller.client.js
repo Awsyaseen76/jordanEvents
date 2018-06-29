@@ -24,6 +24,7 @@
 					console.log(result.data);
 					console.log('Profile Updated');
 				})
+				$location.url('/profile');
 		}
 
 		function ValidateSize(file) {
