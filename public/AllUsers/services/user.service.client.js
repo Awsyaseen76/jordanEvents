@@ -20,14 +20,20 @@
 		this.resetPassword = resetPassword;
 		this.updateProfile = updateProfile;
 		this.makePayment = makePayment;
+		this.confirmAttendance = confirmAttendance;
 
 
 		function init() {}
 		init();
 
+		function confirmAttendance(totalAttended){
+			var url = '/api/maker/confirmAttendance';
+			return $http.put(url, totalAttended);
+		}
+
 		function makePayment(payment){
-			var url = '/api/maker/makePayment'
-			return $http.post(url, payment)
+			var url = '/api/maker/makePayment';
+			return $http.post(url, payment);
 			// console.log(payment);
 		}
 

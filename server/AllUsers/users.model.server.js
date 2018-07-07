@@ -21,6 +21,39 @@ usersDB.findUserByToken = findUserByToken;
 usersDB.resetPassword = resetPassword;
 usersDB.updateProfile = updateProfile;
 usersDB.makePayment = makePayment;
+usersDB.confirmAttendance = confirmAttendance;
+
+
+function confirmAttendance(totalAttended){
+	return usersDB
+		.findById(totalAttended.userId)
+		.then(function(user){
+			user.attendedEvents.push(totalAttended)
+			return user.save();
+		});
+	// var result = [];
+	// return (function(){
+	// 	for(var i in totalAttended){
+	// 		usersDB
+	// 			.findOneAndUpdate(
+	// 				   { _id:  totalAttended[i].userId}, 
+	// 				   { $push: { attendedEvents: totalAttended[i]  } },
+	// 				  function (error, success) {
+	// 				        if (error) {
+	// 				            result = error;
+	// 				            return result;
+	// 				        } else {
+	// 				            result.push('success');
+	// 				            if(i == totalAttended.length-1){
+	// 				            	console.log('successfullllllllllllly');
+	// 				            	return result;
+	// 				            }
+	// 				        }
+	// 				    });
+	// 	}
+	// })();
+}
+
 
 function makePayment(payment){
 	return usersDB

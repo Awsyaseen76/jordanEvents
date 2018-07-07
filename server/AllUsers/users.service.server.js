@@ -129,6 +129,7 @@ app.post('/api/forgetPassword/:email', forgetPassword);
 app.post('/api/resetPassword/:token', checkToken, resetPassword);
 app.put('/api/user/updateProfile', updateProfile);
 app.post('/api/maker/makePayment', makePayment);
+app.put('/api/maker/confirmAttendance', confirmAttendance);
 
 // ---------------------------------- /APIs requests ----------------------------------
 
@@ -137,13 +138,69 @@ app.post('/api/maker/makePayment', makePayment);
 
 // ------------------------------ Functions ------------------------------
 
+function confirmAttendance(req, res){
+
+
+	var totalAttended = req.body;
+	var totalResult = [];
+
+	function asyncLoop(i, cb) {
+	    if (i < totalAttended.length) {
+	    	usersDB
+				.confirmAttendance(totalAttended[i])
+				.then(function(result){
+					totalResult.push(result);
+					asyncLoop(i+1, cb);
+				});
+	    } else {
+	        cb();
+	    }
+	}
+	asyncLoop(0, function() {
+	    res.send(totalResult);
+	});
+
+
+
+
+
+
+
+	// var totalAttended = req.body;
+	// var totalResult = [];
+	// for(var i in totalAttended){
+	// 	console.log('i is: ',i);
+	// 	usersDB
+	// 		.confirmAttendance(totalAttended[i])
+	// 		.then(function(result){
+	// 			// console.log(result);
+	// 			totalResult.push(result);
+	// 			console.log(JSON.parse(i));
+	// 			if(JSON.parse(i) === totalAttended.length-1){
+	// 				console.log('Aws Yaseen Ahmed');
+	// 				// console.log(totalResult[0]);
+	// 				res.send(totalResult);
+	// 			}
+	// 		});		
+
+	// }
+
+	// usersDB
+	// 	.confirmAttendance(totalAttended)
+	// 	.then(function(result){
+	// 		// console.log(result);
+	// 		res.send(result);
+	// 	});
+}
+
+
 function makePayment(req, res){
 	var payment = req.body;
 	usersDB
 		.makePayment(payment)
 		.then(function(result){
 			res.send(result);
-		})
+		});
 }
 
 

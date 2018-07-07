@@ -84,6 +84,16 @@
 				}
 			})
 
+			.when('/makerProfile/countAttendance',{
+				templateUrl: 'AllUsers/templates/countAttendance.view.client.html',
+				controller: 'makerProfileController',
+				controllerAs: 'model',
+				resolve:{
+					loggedMaker: isMaker
+				}
+			})
+
+
 			.when('/adminPage', {
 				templateUrl: 'admin/templates/adminPage.view.client.html',
 				controller: 'adminController',

@@ -66,30 +66,59 @@
 	<h3>End date: </h3>
 	<p>{{model.eventDetails.expiryDate | date}}</p>
   <h3>Members:</h3>
+  <!-- <a href="#!/makerProfile/countAttendance" class="btn btn-success">Count Attendances</a> -->
   <table>
     <thead>
       <th>Name</th>
-      <!-- <th>Email</th> -->
       <th>Payments</th>
       <th>Balance</th>
       <th>Make a payment</th>
+      <th>Payments details</th>
+      <th>Attendance</th>
     </thead>
     <tr ng-repeat="user in model.eventDetails.registeredMembers">
       <td>{{user.name.firstName}} {{user.name.lastName}}</td>
-      <!-- <td>{{user.email}}</td> -->
       <td>
-        {{model.getTotals(user).total}}
+        {{model.getTotals(user, model.eventDetails._id).eventId.total}}
       </td>
-      <td>{{model.getTotals(user).balance}}</td>
       <td>
-        <form>
-          <!-- <input type="text" name="eventId" ng-model="model.eventDetails._id"> -->
-          <input type="date" name="dateOfpayment" ng-model="payment.dateOfpayment">
-          <input type="text" name="amount" ng-model="payment.amount">
-          <input type="submit" name="makePayment" ng-click="model.makePayment(user._id, model.eventDetails._id, payment)">
-        </form>
-        <!-- modal -->
-          <button type="button" class="btn btn-info" data-toggle="modal" data-target="#paymentsModal-{{$index}}">Payments details</button>
+        {{model.getTotals(user, model.eventDetails._id).eventId.balance}}
+      </td>
+      <td>
+    
+    <!-- Make a payment Modal -->
+          <button type="button" class="btn btn-info" data-toggle="modal" data-target="#makePaymentModal-{{$index}}">Pay</button>
+
+          <div class="modal fade" id="makePaymentModal-{{$index}}" role="dialog">
+            <div class="modal-dialog">
+            
+              <!-- Modal content-->
+              <div class="modal-content">
+                <div class="modal-header">
+                  <!-- <button type="button" class="close" data-dismiss="modal">&times;</button> -->
+                  <h5 class="modal-title">Make a payment</h5>
+                </div>
+                <div class="modal-body">
+                  <form>
+                    <input type="date" name="dateOfpayment" ng-model="payment.dateOfpayment">
+                    <input type="text" name="amount" ng-model="payment.amount">
+                    <input type="submit" name="makePayment" ng-click="model.makePayment(user._id, model.eventDetails._id, payment)" data-dismiss="modal">
+                  </form>
+                </div>
+                <div class="modal-footer">
+                  <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                </div>
+              </div>
+              
+            </div>
+          </div>
+      </td>
+    <!-- end of Make a payment modal -->
+
+
+    <!-- Payment Details modal -->
+      <td>
+          <button type="button" class="btn btn-info" data-toggle="modal" data-target="#paymentsModal-{{$index}}">Deatils</button>
 
           <div class="modal fade" id="paymentsModal-{{$index}}" role="dialog">
             <div class="modal-dialog">
@@ -106,13 +135,13 @@
                       <th>Amount</th>
                       <th>Date</th>
                     </thead>
-                    <tr ng-repeat="payment in user.payments">
+                    <tr ng-repeat="payment in user.payments | filter: model.eventDetails._id">
                       <td>{{payment.paymentAmount}}</td>
                       <td>{{payment.paymentDate | date}}</td>
                     </tr>
                   </table>
-                  <h5><b>Total payments:</b> {{model.getTotals(user).total | currency:"JOD "}}</h5>
-                  <h5><b>Balance:</b> {{model.getTotals(user).balance | currency:"JOD "}}</h5>
+                  <h5><b>Total payments:</b> {{model.getTotals(user, model.eventDetails._id).eventId.total | currency:"JOD "}}</h5>
+                  <h5><b>Balance:</b> {{model.getTotals(user, model.eventDetails._id).eventId.balance | currency:"JOD "}}</h5>
                 </div>
                 <div class="modal-footer">
                   <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
@@ -121,16 +150,74 @@
               
             </div>
           </div>
-
-        <!-- end of modal -->
-
       </td>
+    <!-- end of payments details modal -->
+
+    <td>
+      <!-- <button type="button" class="btn btn-info" ng-click="model.makeAttendance(user._id, model.eventDetails._id)">Attend</button> -->
+      
+      <label class="switch">
+        <input type="checkbox" ng-model="model.attend[user._id]">
+        <span class="slider round"></span>
+      </label>
+
+
+
+    </td>
+    </tr>
+
+    <!-- footer -->
+    <tr>
+      <td>{{model.eventDetails.registeredMembers.length}}</td>
+      <td>{{model.grandTotalPayments}}</td>
+      <td>{{ model.grandTotalPayments - model.eventDetails.registeredMembers.length * model.eventDetails.price}}</td>
+      <td></td>
+      <td></td>
+      <!-- <td><button class="btn btn-success" ng-click="model.makeAttendance(user._id, model.eventDetails._id)">Attendance</button> </td> -->
+      
+      <!-- Attendance Modal -->
+      <td><button class="btn btn-success" ng-click="model.countAttendance(model.attend)" data-toggle="modal" data-target="#makeAttendanceModal">Attendance</button> </td>
+
+
+      <div class="modal fade" id="makeAttendanceModal" role="dialog">
+            <div class="modal-dialog">
+            
+              <!-- Modal content-->
+              <div class="modal-content">
+                <div class="modal-header">
+                  <!-- <button type="button" class="close" data-dismiss="modal">&times;</button> -->
+                  <h5 class="modal-title">Calculate Attendance</h5>
+                </div>
+                <div class="modal-body">
+                  <!-- <form>
+                    <input type="date" name="dateOfpayment" ng-model="payment.dateOfpayment">
+                    <input type="text" name="amount" ng-model="payment.amount">
+                    <input type="submit" name="makePayment" ng-click="model.makePayment(user._id, model.eventDetails._id, payment)" data-dismiss="modal">
+                  </form> -->
+                  <h5>Registered members: {{model.eventDetails.registeredMembers.length}}</h5>
+                  <h5>Attended members: {{model.attendedM}}</h5>
+                  <h5>Missed members: {{model.eventDetails.registeredMembers.length - model.attendedM}}</h5>
+
+                </div>
+                <div class="modal-footer">
+                  <button type="button" class="btn btn-default" ng-click="model.confirmAttendance(model.attendanceArray)" data-dismiss="modal">Confirm</button>
+                </div>
+              </div>
+              
+            </div>
+          </div>
+          <!-- end of Attendance Modal -->
+
+
     </tr>
   </table>
-  <!-- <p ng-repeat="user in model.eventDetails.registeredMembers"></p> -->
+
+
+{{model.attendanceArray}}
+  
 	<br>
 
-	<!-- <a href="" class="btn btn-lg btn-success" ng-click="model.eventRegistration(model.eventDetails)">Register</a> -->
+	
 	<a href="#!/makerProfile" class="btn btn-lg btn-danger">Cancel</a>
 
 </div>
