@@ -28,9 +28,70 @@ function confirmAttendance(totalAttended){
 	return usersDB
 		.findById(totalAttended.userId)
 		.then(function(user){
-			user.attendedEvents.push(totalAttended)
+			user.attendedEvents.push({eventId: totalAttended.eventId, 
+									  date: totalAttended.date, 
+									  attended: totalAttended.attended
+									});
 			return user.save();
 		});
+
+
+
+
+
+	// var results = [];
+	// return usersDB
+	// 	.findById(totalAttended.userId)
+	// 	.then(function(user){
+	// 		function asyncLoop(i, cb) {
+	// 		    if (i < user.attendedEvents.length) {
+	// 		    	if(user.attendedEvents[i].eventId === totalAttended.eventId){
+	// 		    		user.attendedEvents[i].dates.push({date: totalAttended.date, attended: totalAttended.attended});
+	// 					results.push(user.save());
+	// 					return results;
+	// 		    	}
+	// 				asyncLoop(i+1, cb);
+	// 		    } else {
+	// 		    	user.attendedEvents.push(
+	// 									{eventId: totalAttended.eventId, 
+	// 									 dates: [
+	// 									 		{date: totalAttended.date, attended: totalAttended.attended}
+	// 									 		]
+	// 									});
+	// 				results.push(user.save());
+	// 		        cb();
+	// 		    }
+	// 		}
+	// 		asyncLoop(0, function(){
+	// 		    return results;
+	// 		});
+	// 	});
+
+
+
+
+
+
+		// 	for(var i in user.attendedEvents){
+		// 		if(user.attendedEvents[i].eventId === totalAttended.eventId &&
+		// 			user._id.toString() === totalAttended.userId){
+		// 			user.attendedEvents[i].dates.push({date: totalAttended.date, attended: totalAttended.attended});
+		// 			return user.save();
+		// 		}
+		// 	}
+		// 	if(user._id.toString() === totalAttended.userId){
+		// 		user.attendedEvents.push(
+		// 								{eventId: totalAttended.eventId, 
+		// 								 dates: [
+		// 								 		{date: totalAttended.date, attended: totalAttended.attended}
+		// 								 		]
+		// 								});
+		// 		return user.save();
+		// 	}
+
+		// 	// user.attendedEvents.push({eventId: totalAttended.eventId, date: totalAttended.date, attended: totalAttended.attended})
+		// 	// return user.save();
+		// });
 	// var result = [];
 	// return (function(){
 	// 	for(var i in totalAttended){

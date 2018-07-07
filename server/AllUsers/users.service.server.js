@@ -139,8 +139,7 @@ app.put('/api/maker/confirmAttendance', confirmAttendance);
 // ------------------------------ Functions ------------------------------
 
 function confirmAttendance(req, res){
-
-
+	
 	var totalAttended = req.body;
 	var totalResult = [];
 
