@@ -3,7 +3,7 @@
 		.module('jordanEvents')
 		.controller('makerEventDetails', makerEventDetails);
 
-		function makerEventDetails($routeParams, eventsService, userService, $location, $route){
+		function makerEventDetails($routeParams, eventsService, userService, $location, $route, loggedMaker){
 			
 			var model = this;
 			model.logout = logout;
@@ -16,6 +16,7 @@
 
 
 			function init(){
+				model.loggedMaker = loggedMaker;
 				model.error2 = null;
 				model.grandTotalPayments = 0;
 				var eventId = $routeParams.eventId;
@@ -34,13 +35,13 @@
 					});
 
 				// check if there any user has already logged in to use it instead of the $rootScope
-				userService
-					.checkUserLogin()
-					.then(function(user){
-						if(user){
-							model.loggedUser = user;
-						}
-					});
+				// userService
+				// 	.checkUserLogin()
+				// 	.then(function(user){
+				// 		if(user){
+				// 			model.loggedUser = user;
+				// 		}
+				// 	});
 				
 			}
 			init();

@@ -52,6 +52,7 @@
 		<a class="btn btn-warning" href="#!/updateUserProfile">Update profile</a>
 
 
+
 		<!-- <h5>Update profile image: </h5>
 		<p>Note: The uploaded picture should be less than 1 mg and with the following extension (jpeg, jpg, png, gif)</p>
 		<div class="alert alert-danger" role="alert" ng-show="model.userProfile.profileImage.size > 1000000">
@@ -129,9 +130,14 @@
 							<div class="card border-success col-xl-4 aws-margin10" ng-repeat='event in model.userProfile.registeredEventsList' style="max-width: 20rem;">
 							  <div class="card-header text-danger"><h3>{{event.name}}</h3></div>
 							  <div class="card-body">
-							    <h5 class="card-title">Category: {{event.category}}</h5>
-							    <h5 class="card-title">Sub-Category: {{event.subcategory}}</h5>
-							    <p class="card-text">Details: {{event.details}}</p>
+							    <p class="card-title"><b>Category: </b>{{event.category}}</p>
+							    <p class="card-title"><b>Starting date: </b>{{event.startingDate | date}}</p>
+							    <p class="card-title"><b>Ending date: </b>{{event.expiryDate | date}}</p>
+							    <p class="card-title"><b>Payments: </b>{{model.totalPayments(event._id, event.price).totals | currency:"JOD "}}</p>
+							    <p class="card-title"><b>Balance: </b>{{model.totalPayments(event._id, event.price).balance | currency:"JOD "}}</p>
+							    <p class="card-title"><b>Attended Days: </b>{{model.attendedDays(event._id).attended}}</p>
+							    <p class="card-title"><b>Missed Days: </b>{{model.attendedDays(event._id).missed}}</p>
+							    
 							    <!-- <a href="" ng-click="model.removeRegisteredEvent(event._id)" class=" btn btn-default pull-right">Remove...</a> -->
 							  </div>
 							</div>

@@ -32,9 +32,36 @@
 
 		model.logout = logout;
 		model.removeRegisteredEvent = removeRegisteredEvent;
+		model.totalPayments = totalPayments;
+		model.attendedDays = attendedDays;
+
+		function attendedDays(eventId){
+			var attended = 0;
+			var missed = 0;
+			for(var i in loggedUser.attendedEvents){
+				if(eventId === loggedUser.attendedEvents[i].eventId && loggedUser.attendedEvents[i].attended===true){
+					attended+=1;
+				} else if(eventId === loggedUser.attendedEvents[i].eventId && loggedUser.attendedEvents[i].attended===false){
+					missed+=1;
+				}
+			}
+			return {attended: attended, missed: missed};
+		}
 	
 
 
+		function totalPayments(eventId, eventPrice){
+			var totals = 0;
+			var balance = 0;
+			for(var i in loggedUser.payments){
+				console.log(eventId , loggedUser.payments[i].eventId);
+				if(eventId === loggedUser.payments[i].eventId){
+					totals+= JSON.parse(loggedUser.payments[i].paymentAmount)
+				}
+			}
+			balance = totals - eventPrice
+			return {totals: totals, balance: balance};
+		}
 
 		function ValidateSize(file) {
 	        		var FileSize = file.files[0].size / 1024 / 1024; // in MB
