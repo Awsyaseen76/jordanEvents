@@ -1,9 +1,10 @@
+// var balance = [];
 var _ = require('underscore');
 
 var temp = [{a:'1212', b:10}, {a:'2222', b:10}, {a:'3333', b:100}, {a:'1212', b:100}, {a:'2222', b:10}, {a:'4444', b:100}];
-// var balance = [];
 
 var balance = _.indexBy(temp, 'a');
+console.log(balance)
 // console.log(balance);
 // for(var z in balance){
 // 	balance[z].b=0;
@@ -17,7 +18,6 @@ var balance = _.indexBy(temp, 'a');
 // 		}
 // 	}
 // }
-console.log(balance)
 
 
 // var numbers = [1, 2, 5, -3];

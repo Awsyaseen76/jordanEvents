@@ -82,11 +82,10 @@
 
 
 
-
-<div class="container aws-margin10">
+<!-- new event main -->
+<div class="container aws-margin10" ng-show="model.newEventMain">
 	<div class="row">
-		<div class="col-3"  style="overflow-y: scroll; height:400px;" >
-			<!-- Left side -->
+		<!-- <div class="col-3"  style="overflow-y: scroll; height:400px;" >
 			<h3>Events List</h3>
 			<hr>
 			<div class="row">
@@ -103,9 +102,8 @@
 				<div class="col-2"> <p><a href="#!/makerProfile/editEvent"><span class="fa fa-pencil-square-o" aria-hidden="true"></span></a></p> </div>	
 			</div>
 		</div>
-		<div class="col-1"></div>
-		<div class="col-8">
-			<!-- Right side -->
+		<div class="col-1"></div> -->
+		<div class="col-12">
 			<h1>New Event</h1>
 
 			<div class="form-group">
@@ -144,6 +142,28 @@
 						<input type="date" class="form-control" rows="4" cols="50" name="expiryDate" id="expiryDate" ng-model="newEvent.expiryDate">
 					</div>
 
+					<div>
+						<div class="weekDays-selector">
+						  <input type="checkbox" id="weekday-sat" class="weekday" ng-model="daysOfWeek.Sat"/>
+						  <label for="weekday-sat">Sat</label>
+						  <input type="checkbox" id="weekday-sun" class="weekday" ng-model="daysOfWeek.Sun"/>
+						  <label for="weekday-sun">Sun</label>
+						  <input type="checkbox" id="weekday-mon" class="weekday" ng-model="daysOfWeek.Mon"/>
+						  <label for="weekday-mon">Mon</label>
+						  <input type="checkbox" id="weekday-tue" class="weekday" ng-model="daysOfWeek.Tue"/>
+						  <label for="weekday-tue">Tue</label>
+						  <input type="checkbox" id="weekday-wed" class="weekday" ng-model="daysOfWeek.Wed"/>
+						  <label for="weekday-wed">Wed</label>
+						  <input type="checkbox" id="weekday-thu" class="weekday" ng-model="daysOfWeek.Thu"/>
+						  <label for="weekday-thu">Thi</label>
+						  <input type="checkbox" id="weekday-fri" class="weekday" ng-model="daysOfWeek.Fri"/>
+						  <label for="weekday-fri">Fri</label>
+						</div>
+					</div>
+
+
+
+
 					<div class="form-group">
 						<label for="price">Price:</label>
 						<input type="text" class="form-control" rows="4" cols="50" name="price" id="price" ng-model="newEvent.price">
@@ -161,7 +181,9 @@
 					</div>
 
 
-					<button type="button" name="create" class="btn btn-primary" ng-click="model.createEvent(newEvent)">Create</button>
+					<!-- <button type="button" name="create" class="btn btn-primary" ng-click="model.createEvent(newEvent)">Create</button> -->
+					<button type="button" name="createEvent" class="btn btn-primary" ng-click="model.createEventDetails(newEvent, daysOfWeek)">Create Details</button>
+
 
 					</fieldset>
 
@@ -169,10 +191,37 @@
 			</div>
 		</div>
 	</div>
-	
 
-	
-	<br>
-	<hr>
-	
 </div>
+
+
+<!--  Program Details -->
+<div class="container aws-margin10" ng-show="model.newEventProgramDetails">
+	<div class="row">
+		<div class="col-12">
+			<h1>Program Details Day By Day</h1>
+			<div class="form-group">
+				<form>
+					<fieldset>
+						<legend>Program Details:</legend>
+						<div>
+							<div style="margin-left: 50px;" class="form-group" ng-repeat="day in model.newEvent.eventDays">
+								<label style="background-color: lightgreen;"><b>Day: </b>{{day}}</label>
+								<input type="text" class="form-control" placeholder="program Title" ng-model="model.newEvent.programDailyDetails[day].title" style="margin-bottom: 3px;">
+								<textarea class="form-control" style="border-left: 5px; border-style: solid; border-left-color: red; margin-bottom: 3px;" rows="4" cols="50" ng-model="model.newEvent.programDailyDetails[day].details">Program details</textarea>
+								<input type="text" class="form-control" placeholder="link for video" ng-model="model.newEvent.programDailyDetails[day].videoLink">
+								<br>
+							</div>
+						</div>
+						<button type="button" name="createDetails" class="btn btn-primary" ng-click="model.createEvent(model.newEvent)">Create</button>
+					</fieldset>
+				</form>
+			</div>
+		</div>
+	</div>
+</div>
+
+		
+
+
+
