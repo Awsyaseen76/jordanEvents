@@ -30,6 +30,7 @@
 		model.selectEvent = selectEvent;
 		model.logout = logout;
 		model.updateMainEventDetails = updateMainEventDetails;
+		model.cancelUpdate = cancelUpdate;
 
 
 		function updateMainEventDetails(updatedEvent, daysOfWeek){
@@ -118,24 +119,30 @@
 
 		function updateEvent(updatedEvent){
 			console.log(updatedEvent);
-			// var eventId = model.selectedEvent._id;
-			// eventsService.updateEvent(newEvent, eventId)
-			// 	.then(function(updatedEvent){
-			// 		var url = "/makerProfile";
-			// 		$location.url(url);
-			// 	});
+			var eventId = model.selectedEvent._id;
+			eventsService
+				.updateEvent(updatedEvent, eventId)
+				.then(function(finalEvent){
+					var url = "/makerProfile";
+					$location.url(url);
+				});
 		}
 
 		function selectEvent(eventId){
 			eventsService.findEventByEventId(eventId)
 				.then(function(event){
-					// model.foundEvent = event;
 					event.startingDate = new Date(event.startingDate);
 					event.expiryDate = new Date(event.expiryDate);
 					model.selectedEvent = event;
 				});
-			// return model.foundEvent;
 		}
+
+
+		function cancelUpdate(){
+			var url = "/makerProfile";
+			$location.url(url);
+		}
+
 
 		function logout(){
 			userService

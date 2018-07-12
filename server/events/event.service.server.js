@@ -129,6 +129,9 @@ module.exports = function(app) {
 	function updateEvent(req, res){
 		var eventId = req.query.eventId;
 		var updatedEvent = req.body;
+		// request the admin to approve the amendments
+		updatedEvent.approved = false;
+		updatedEvent.special = false;
 		eventsDB
 			.updateEvent(eventId, updatedEvent)
 			.then(function(status){
