@@ -81,9 +81,8 @@ Todolist:
 
 
 
-changing the database and the logic:
-
-1. Register [x] register template
+- [x] changing the database and the logic:
+   Register [x] register template
 			[x] registerController
 			[x] user service client
 			[x] user service server
@@ -94,17 +93,65 @@ changing the database and the logic:
 			[x] database
 
 
+[x] add the admin page to manage:
+	[x] a. the registration of the makers.
+	[x] b. confirm the publish of the event after added by the maker.
+	
+ -[x] the maker can make payment for each user and to show the balance.
+
+ -[x] add the payment for each user managed by the maker.
+
+ -[x] filter events by the starting date greater than today still not expired
+ -[x] now we send email to user directly after register with image logo
+ -[x] upload profile image with multer to folder
+ -[x] upload / display profile image to/from AWS S3 bucket
+ -[x] reset password with email confirmation
+ -[x] The ability of update user profile
+ -[x] add member to event then count on the makers events list
+ -[x] maker can add payments for user event
+ -[x] readd the ability of updating uploading profile image
+ -[x] calculate payment details on maker view for each member
+ -[x] add statement of account for each event on maker view
+ -[x] fix the location after update profile and add price to new event
+ -[x] maker can do payments and list payments details and take members attendance
+ -[x] show payments and attended details on user profile
+ -[x] create event details day by day calculating the days of the programs based on the days per week
+
+12/July/2018
+ -[x] when maker update the event details he can also change the dates of the event.
+ -[x] maker can change the days per week.
+ -[x] copy the program details for old days and put them in the new days.
 
 
-******** future work todo: **********
-1. add the admin page to manage:
-	a. the registration of the makers.
-	b. confirm the publish of the event after added by the maker.
-	c. the payment for each user and to show the balance.
 
-2. add the payment for each user managed by the admin.
 
-5. check the barcode reader if it doable
+
+
+
+
+
+Todo list:
+-------------
+
+-[] check the barcode reader if it doable.
+
+-[] Admin controll user type (to create the maker).
+
+-[] add controll to maker to decide taking the member special discount (when make the payment and the balance --> check if there is a discount code putted by the maker on the members list).
+
+-[] count registered members just if they hav a tag 'paid' which it released when make a payment.
+
+-[] create a list of members they registered online removed from the list after pay and registered them on the event registered members.
+
+-[] recheck if the password not correct when login what happend?
+
+-[] work on the carousel why it is not working automatically?
+
+-[] work on the problem of still access event details by maker although maker signed out?
+
+-[] show the upcomming event details from the (event details day by day) for registered members on their profile.
+
+-[] when maker update event request approval from the admin.
 
 
 

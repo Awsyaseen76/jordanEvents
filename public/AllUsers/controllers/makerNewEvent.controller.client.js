@@ -22,8 +22,8 @@
 
 			function createEventDetails(newEvent, daysOfWeek){
 				// create dates based on start-end dates and the days of the weeks
-				var start = newEvent.startingDate;
-				var end = newEvent.expiryDate;
+				var start = new Date(newEvent.startingDate);
+				var end = new Date(newEvent.expiryDate);
 				var days = [];
 				var eventDays = [];
 				for(var i in daysOfWeek){
@@ -61,7 +61,7 @@
 						if(start.getDay() === days[j]){
 							eventDays.push(start.toDateString());
 							break inner;
-						}	
+						}
 					}
 				}
 				// console.log(eventDays);

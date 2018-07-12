@@ -85,24 +85,7 @@
 <!-- new event main -->
 <div class="container aws-margin10" ng-show="model.newEventMain">
 	<div class="row">
-		<!-- <div class="col-3"  style="overflow-y: scroll; height:400px;" >
-			<h3>Events List</h3>
-			<hr>
-			<div class="row">
-				<div class="col-9"> 
-					<p>Name</p> 
-				</div>
 
-				<div class="col-3"> 
-					<p>Edit</p>
-				</div>
-			</div>
-			<div class="row" ng-repeat="event in model.eventsList">
-				<div class="col-10"> <p>{{event.name}}</p> </div>
-				<div class="col-2"> <p><a href="#!/makerProfile/editEvent"><span class="fa fa-pencil-square-o" aria-hidden="true"></span></a></p> </div>	
-			</div>
-		</div>
-		<div class="col-1"></div> -->
 		<div class="col-12">
 			<h1>New Event</h1>
 
@@ -161,9 +144,6 @@
 						</div>
 					</div>
 
-
-
-
 					<div class="form-group">
 						<label for="price">Price:</label>
 						<input type="text" class="form-control" rows="4" cols="50" name="price" id="price" ng-model="newEvent.price">
@@ -180,13 +160,9 @@
 						<input type="text" class="form-control" rows="4" cols="50" name="img1200x300" id="img1200x300" ng-model="newEvent.images.img1200x300">
 					</div>
 
-
 					<!-- <button type="button" name="create" class="btn btn-primary" ng-click="model.createEvent(newEvent)">Create</button> -->
 					<button type="button" name="createEvent" class="btn btn-primary" ng-click="model.createEventDetails(newEvent, daysOfWeek)">Create Details</button>
-
-
 					</fieldset>
-
 				</form>
 			</div>
 		</div>

@@ -8,7 +8,7 @@ var endDate = new Date(2018, 7, 31);
 
 function calculateDays(start, end){
     var days = []
-    for (start; end>start; start.setDate(start.getDate()+1)){
+    for (start; end>==start; start.setDate(start.getDate()+1)){
         if(start.getDay() === 6 || start.getDay() === 1 || start.getDay() === 3){
             days.push(start.toDateString());
         }
