@@ -121,7 +121,11 @@ Todolist:
  -[x] when maker update the event details he can also change the dates of the event.
  -[x] maker can change the days per week.
  -[x] copy the program details for old days and put them in the new days.
+ -[x] change the tag of approved and special untill the admin confirm the update.
 
+
+13/July/2018
+-[] show the upcomming event details from the (event details day by day) for registered members on their profile.
 
 
 
@@ -149,9 +153,9 @@ Todo list:
 
 -[] work on the problem of still access event details by maker although maker signed out?
 
--[] show the upcomming event details from the (event details day by day) for registered members on their profile.
 
--[] when maker update event request approval from the admin.
+
+
 
 
 

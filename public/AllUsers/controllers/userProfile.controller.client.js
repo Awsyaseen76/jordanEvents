@@ -3,37 +3,43 @@
 		.module('jordanEvents')
 		.controller('userProfileController', userProfileController);
 
-	function userProfileController(userService, loggedUser, $location) {
+	function userProfileController(userService, loggedUser, $location, $sce) {
 		var model = this;
 
 		function init() {
 			model.userProfile = loggedUser;
 			model.loggedUser = loggedUser;
-			// var _userId = loggedUser._id;
-			// userService.findUserById(_userId)
-			// 	.then(function (userProfile){
-			// 		model.userProfile = userProfile;
-			// 		if (model.userProfile === 'error') {
-			// 			model.error = 'Please login with your email and password';
-			// 			return;
-			// 		} else {
-			// 			return model.userProfile;
-			// 		}
-			// 	});
-			// userService
-			// 		.checkUserLogin()
-			// 		.then(function(result){
-			// 			if(result){
-			// 				model.loggedUser = result;
-			// 			}
-			// 		});
+			model.upcommingProgram = [];
+			for(var i in model.userProfile.registeredEventsList){
+				inner: 
+				for(var e in model.userProfile.registeredEventsList[i].programDailyDetails){
+					if(new Date(e) >= new Date()){
+						var upcome = {}
+						model.upcommingProgram.push({event: model.userProfile.registeredEventsList[i].name, 
+													 date: new Date(e),
+													 programDetails: model.userProfile.registeredEventsList[i].programDailyDetails[e]});
+						break inner;
+					}
+				}
+			}
 		}
 		init();
+
+
 
 		model.logout = logout;
 		model.removeRegisteredEvent = removeRegisteredEvent;
 		model.totalPayments = totalPayments;
 		model.attendedDays = attendedDays;
+		model.trustedUrl = trustedUrl
+
+
+		function trustedUrl(videoLink){
+			var youtubeUrl = "https://www.youtube.com/embed/";
+			var urlParts = videoLink.split("/");
+			youtubeUrl += urlParts[urlParts.length-1];
+			return $sce.trustAsResourceUrl(youtubeUrl);
+		}
 
 		function attendedDays(eventId){
 			var attended = 0;
@@ -54,7 +60,6 @@
 			var totals = 0;
 			var balance = 0;
 			for(var i in loggedUser.payments){
-				console.log(eventId , loggedUser.payments[i].eventId);
 				if(eventId === loggedUser.payments[i].eventId){
 					totals+= JSON.parse(loggedUser.payments[i].paymentAmount)
 				}

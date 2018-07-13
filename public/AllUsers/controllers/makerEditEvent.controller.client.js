@@ -82,6 +82,9 @@
 				}
 			}
 
+			if(updatedEvent.eventDays.length === 0){
+				updatedEvent.eventDays = eventDays;
+			}
 			
 			// When update: check if the days per week is changed
 			for(var e in model.selectedEvent.eventDays){
@@ -105,7 +108,7 @@
 						updatedEvent.programDailyDetails[updatedEvent.eventDays[d]] = detailsArray[d];
 					}
 
-					console.log(updatedEvent);
+					// console.log(updatedEvent);
 					break;
 				}
 			}
@@ -118,7 +121,7 @@
 
 
 		function updateEvent(updatedEvent){
-			console.log(updatedEvent);
+			// console.log(updatedEvent);
 			var eventId = model.selectedEvent._id;
 			eventsService
 				.updateEvent(updatedEvent, eventId)
