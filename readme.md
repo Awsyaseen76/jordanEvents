@@ -125,7 +125,7 @@ Todolist:
 
 
 13/July/2018
--[] show the upcomming event details from the (event details day by day) for registered members on their profile.
+-[x] show the upcomming event details from the (event details day by day) for registered members on their profile.
 
 
 
