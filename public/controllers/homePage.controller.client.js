@@ -3,6 +3,7 @@
 		.module('jordanEvents')
 		.controller('homePageController', homePageController);
 
+	
 	function homePageController(userService, $location, eventsService, $route){
 		var model = this;
 		model.position = {
@@ -51,7 +52,7 @@
 			    model.position.currentposition.lng = position.coords.longitude;
 
     			// MapBox Maps
-			    mapboxgl.accessToken = 'pk.eyJ1Ijoiam9yZGFuZXZlbnRzMjAxOCIsImEiOiJjampsOG5iYzcwb2J4M3ZxdndtN2t5d2dpIn0.i26m3jy0GiMJcTmgd3nxCg';
+			    mapboxgl.accessToken = process.env.mapboxAccessToken;
 				var map = new mapboxgl.Map({
 					container: 'mapContainer',
 					style: 'mapbox://styles/mapbox/streets-v10',

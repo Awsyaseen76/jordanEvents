@@ -125,8 +125,12 @@ Todolist:
 
 
 13/July/2018
--[x] show the upcomming event details from the (event details day by day) for registered members on their profile.
+ -[x] show the upcomming event details from the (event details day by day) for registered members on their profile.
 
+15/July/2018
+ -[x] use mapbox Maps as an alternative to google maps.
+ -[x] show markers on Map.
+ -[x] zoome the map to show all the available markers.
 
 
 
