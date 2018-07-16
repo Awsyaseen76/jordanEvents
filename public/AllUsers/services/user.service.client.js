@@ -21,10 +21,14 @@
 		this.updateProfile = updateProfile;
 		this.makePayment = makePayment;
 		this.confirmAttendance = confirmAttendance;
+		
 
 
 		function init() {}
 		init();
+
+
+		
 
 		function confirmAttendance(totalAttended){
 			var url = '/api/maker/confirmAttendance';

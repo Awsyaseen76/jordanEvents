@@ -25,6 +25,7 @@ var eventsSchema = mongoose.Schema({
 			},
 			approved: Boolean,
 			special: Boolean,
+			coordinates: [Number],
 			registeredMembers: [{type: mongoose.Schema.Types.ObjectId, ref: 'usersDB'}]
 }, {collection: 'events'});
 

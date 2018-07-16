@@ -131,12 +131,16 @@ app.put('/api/user/updateProfile', updateProfile);
 app.post('/api/maker/makePayment', makePayment);
 app.put('/api/maker/confirmAttendance', confirmAttendance);
 
+
 // ---------------------------------- /APIs requests ----------------------------------
 
 	
 
 
 // ------------------------------ Functions ------------------------------
+
+
+
 
 function confirmAttendance(req, res){
 	

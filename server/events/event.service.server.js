@@ -14,6 +14,27 @@ module.exports = function(app) {
 	app.put('/api/event/', updateEvent);
 	app.delete('/api/event/', removeEvent);
 	app.put('/api/admin/updateEventByAdmin/:eventId', checkAdmin, updateEventByAdmin);
+	app.get('/api/mapConfig', mapConfig);
+	
+
+	function mapConfig(req, res){
+		var mapParams = {};
+		mapParams.mapBoxKey = process.env.mapboxAccessToken;
+
+		eventsDB
+			.getAllEvents()
+			.then(function(events){
+				mapParams.eventsList = events;
+				// for(var e in events){
+				// 	mapParams.events.push({
+				// 					eventId: events[e]._id,
+				// 					eventName: events[e].name,
+				// 					eventCoordinates: events[e].coordinates
+				// 	})
+				// }
+				res.send(mapParams);
+			})
+	}
 
 
 	function checkAdmin(req, res, next){

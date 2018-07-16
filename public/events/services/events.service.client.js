@@ -16,6 +16,12 @@
 		this.updateEvent = updateEvent;
 		this.removeEvent = removeEvent;
 		this.updateEventByAdmin = updateEventByAdmin;
+		this.mapConfig = mapConfig;
+		
+
+		function mapConfig(){
+			return $http.get('/api/mapConfig');
+		}
 
 		function updateEventByAdmin(event){
 			return $http.put('/api/admin/updateEventByAdmin/'+event._id, event)
