@@ -12,6 +12,7 @@
 			model.confirmAttendance = confirmAttendance;
 			model.today = new Date();
 			model.attendanceArray = [];
+			// model.attendanceArray2 = [];
 			model.countAttendance = countAttendance;
 
 
@@ -26,6 +27,16 @@
 					.then(function(eventDetails){
 						model.eventDetails = eventDetails;
 						for(var x in eventDetails.registeredMembers){
+							// for(var a in eventDetails.registeredMembers[x].attendedEvents){
+							// 	if(eventDetails.registeredMembers[x].attendedEvents[a].date === new Date().toDateString() && eventDetails.registeredMembers[x].attendedEvents[a].eventId === eventDetails._id && eventDetails.registeredMembers[x]._id === ){
+							// 		model.attendanceArray2.push({
+							// 			eventId: model.eventDetails._id,
+							// 			userId: model.eventDetails.registeredMembers[x]._id,
+							// 			date: new Date().toDateString(),
+							// 			attended: eventDetails.registeredMembers[x].attendedEvents[a].attended
+							// 		})
+							// 	}
+							// }
 							for(var j in eventDetails.registeredMembers[x].payments){
 								if(eventDetails.registeredMembers[x].payments[j].eventId === eventDetails._id){
 									model.grandTotalPayments+= JSON.parse(eventDetails.registeredMembers[x].payments[j].paymentAmount);
@@ -50,9 +61,10 @@
 
 
 			function countAttendance(attendees){
-				// console.log(attendees);
+				console.log(attendees)
 				model.attendedM = 0;
 				model.attendanceArray = [];
+				// console.log(model.attendanceArray2)
 				
 				for(var m in model.eventDetails.registeredMembers){
 					model.attendanceArray.push({
@@ -74,43 +86,14 @@
 				}
 
 
-				// console.log(model.attendanceArray);
 				for(var j in model.attendanceArray){
 					if(model.attendanceArray[j].attended === true){
-						// console.log('model.attendedM')
 						model.attendedM+=1;
 					}
 				}
 				console.log(model.attendanceArray);
 			}
-			// this one is working
-			// function confirmAttendance(totalAttended){
-			// 	// make a default false attendance for all mambers
-			// 	for(var m in model.eventDetails.registeredMembers){
-			// 		model.eventDetails.registeredMembers[m].attendedEvents.push({
-			// 			eventId: model.eventDetails._id,
-			// 			[model.today.toDateString()]: false 
-			// 		})
-			// 	}
-
-			// 	outer:
-			// 	for(var j in model.eventDetails.registeredMembers){
-			// 		inner:
-			// 		for(var i in totalAttended){
-			// 			if(model.eventDetails.registeredMembers[j]._id === totalAttended[i].userId){
-			// 				// loop on the registered events of a member
-			// 				for(var r in model.eventDetails.registeredMembers[j].attendedEvents){
-			// 					if(model.eventDetails.registeredMembers[j].attendedEvents[r].eventId === model.eventDetails._id && Object.keys(model.eventDetails.registeredMembers[j].attendedEvents[r])[1] === model.today.toDateString()){
-			// 						model.eventDetails.registeredMembers[j].attendedEvents[r][model.today.toDateString()] = totalAttended[i].attended;
-			// 						// totalAttended[i].splice(i, 1);
-			// 						break inner;
-			// 					}
-			// 				}
-			// 			} 
-			// 		}
-			// 	}
-			// 	console.log(model.eventDetails.registeredMembers);
-			// }
+			
 
 			// make it on the database
 			function confirmAttendance(totalAttended){

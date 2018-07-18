@@ -132,7 +132,9 @@ Todolist:
  -[x] show markers on Map.
  -[x] zoome the map to show all the available markers.
 
-
+18/July/2018
+ -[x] show the popup on marker when mouse enter and hide it when leave.
+ -[x] change the marker symbol to private one.
 
 
 
@@ -158,7 +160,7 @@ Todo list:
 -[] work on the problem of still access event details by maker although maker signed out?
 
 
-
+-[] work on the attendance not keep add attendance to the array on the database but filter the attendance if the event is the same and the date is the same just update the attendance not add new on.
 
 
 
