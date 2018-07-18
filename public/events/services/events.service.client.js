@@ -16,11 +16,11 @@
 		this.updateEvent = updateEvent;
 		this.removeEvent = removeEvent;
 		this.updateEventByAdmin = updateEventByAdmin;
-		this.mapConfig = mapConfig;
+		this.eventConfig = eventConfig;
 		
 
-		function mapConfig(){
-			return $http.get('/api/mapConfig');
+		function eventConfig(){
+			return $http.get('/api/eventConfig');
 		}
 
 		function updateEventByAdmin(event){
