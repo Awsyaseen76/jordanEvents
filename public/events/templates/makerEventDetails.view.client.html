@@ -67,9 +67,14 @@
 	<p>{{model.eventDetails.expiryDate | date}}</p>
   <h3>Members:</h3>
   <!-- <a href="#!/makerProfile/countAttendance" class="btn btn-success">Count Attendances</a> -->
-  <label for="searchMember" class="text-danger">Search members:<input class="form-control" type="text" name="searchMember" ng-model="searchMember"></label>
+  <div class="form-group row">
+    <div class="col-sm-5">
+      <label for="searchMember" class="text-danger" style="display: inline;"><h4>Search members:</h4></label>
+      <input type="text" class="form-control" name="searchMember" id="searchMember" ng-model="searchMember">
+    </div>
+  </div>
   <table>
-    <thead>
+    <thead class="bg-warning">
       <th>Name</th>
       <th>Payments</th>
       <th>Balance</th>

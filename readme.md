@@ -136,7 +136,9 @@ Todolist:
  -[x] show the popup on marker when mouse enter and hide it when leave.
  -[x] change the marker symbol to private one.
 
-
+19/July/2018
+ -[x] The carousel now is sliding automatically
+ -[x] work on the attendance not keep add attendance to the array on the database but filter the attendance if the event is the same and the date is the same just update the attendance not add new on.
 
 
 
@@ -155,12 +157,10 @@ Todo list:
 
 -[] recheck if the password not correct when login what happend?
 
--[] work on the carousel why it is not working automatically?
-
 -[] work on the problem of still access event details by maker although maker signed out?
 
 
--[] work on the attendance not keep add attendance to the array on the database but filter the attendance if the event is the same and the date is the same just update the attendance not add new on.
+
 
 
 
