@@ -14,11 +14,7 @@
 				.then(function(result){
 					var eventsParams = result.data;
 					var mapBoxKey = eventsParams.mapBoxKey;
-					model.mapBoxKey = mapBoxKey;
 					model.eventsList = eventsParams.eventsList;
-
-					console.log(eventsParams);
-					console.log(model.eventsList);
 					for(var e in model.eventsList){
 						mapFeatures.push({"type": "Feature",
 							              "properties": {
