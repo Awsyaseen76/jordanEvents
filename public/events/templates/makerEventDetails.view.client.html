@@ -67,6 +67,7 @@
 	<p>{{model.eventDetails.expiryDate | date}}</p>
   <h3>Members:</h3>
   <!-- <a href="#!/makerProfile/countAttendance" class="btn btn-success">Count Attendances</a> -->
+  <label for="searchMember" class="text-danger">Search members:<input class="form-control" type="text" name="searchMember" ng-model="searchMember"></label>
   <table>
     <thead>
       <th>Name</th>
@@ -76,7 +77,7 @@
       <th>Payments details</th>
       <th>Attendance</th>
     </thead>
-    <tr ng-repeat="user in model.eventDetails.registeredMembers">
+    <tr ng-repeat="user in model.eventDetails.registeredMembers | filter: searchMember">
       <td>{{user.name.firstName}} {{user.name.lastName}}</td>
       <td>
         {{model.getTotals(user, model.eventDetails._id).eventId.total}}
