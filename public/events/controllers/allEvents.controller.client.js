@@ -26,17 +26,17 @@
 					                    }
 							            })
 					}
-					function getLocation() {
-					    if (navigator.geolocation) {
-					        navigator.geolocation.getCurrentPosition(showPosition);
-					    } else { 
-					        console.log("Geolocation is not supported by this browser.");
-					    }
-					};
+					// function getLocation() {
+					//     if (navigator.geolocation) {
+					//         navigator.geolocation.getCurrentPosition(showPosition);
+					//     } else { 
+					//         console.log("Geolocation is not supported by this browser.");
+					//     }
+					// };
 
-					function showPosition(position){
-						model.position.currentposition.lat = position.coords.latitude; 
-						model.position.currentposition.lng = position.coords.longitude;
+					// function showPosition(position){
+						// model.position.currentposition.lat = position.coords.latitude; 
+						// model.position.currentposition.lng = position.coords.longitude;
 
 						// MapBox Maps
 					    // Get the access token from the server
@@ -46,7 +46,8 @@
 						var map = new mapboxgl.Map({
 							container: 'mapContainer',
 							style: 'mapbox://styles/mapbox/streets-v10',
-							center: [model.position.currentposition.lng, model.position.currentposition.lat],
+							center: [35.87741988743201, 32.003009804995955],
+							// center: [model.position.currentposition.lng, model.position.currentposition.lat],
 							zoom: 15
 						});
 
@@ -130,8 +131,8 @@
 
 							});
 						});
-					}
-					getLocation()
+					// }
+					// getLocation()
 
 				});
 

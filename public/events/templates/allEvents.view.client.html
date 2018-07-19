@@ -64,30 +64,6 @@
 		</div>
 	</div>
 
-  <div id='map' style='width: 400px; height: 300px;'></div>
-  <script>
-    function getLocation() {
-      if (navigator.geolocation) {
-          navigator.geolocation.getCurrentPosition(showPosition);
-      } else { 
-          console.log("Geolocation is not supported by this browser.");
-      }
-    };
-
-    function showPosition(position){
-      mapboxgl.accessToken = "pk.eyJ1Ijoiam9yZGFuZXZlbnRzMjAxOCIsImEiOiJjampsOG5iYzcwb2J4M3ZxdndtN2t5d2dpIn0.i26m3jy0GiMJcTmgd3nxCg";
-      var map = new mapboxgl.Map({
-          container: 'map',
-          style: 'mapbox://styles/mapbox/streets-v9',
-          center: [position.coords.longitude, position.coords.latitude],
-          zoom: 15
-      });
-      
-    }
-    getLocation()
-  </script>
-
-
 
   <!-- Map div -->
   <div class="map" id="mapContainer"></div>
