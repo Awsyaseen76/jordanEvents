@@ -201,6 +201,7 @@ input:checked + .slider:before {
   bottom: 0;
   height: 400px;
   width: 100%;
+  margin-top: 30px;
 }
 
 

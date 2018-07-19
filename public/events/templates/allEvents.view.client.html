@@ -45,7 +45,7 @@
 
 
 <div class="container aws-margin10">
-	<label>Filter by name: <input type="text" name="searchByName" ng-model="searchByName"> </label>
+	<label for="searchByName">Filter by name: <input type="text" name="searchByName" ng-model="searchByName"> </label>
   <h1>All available events</h1>
 	<hr class="my-3">
 	<div class="container">
@@ -64,6 +64,17 @@
 		</div>
 	</div>
 
+  <div id='map' style='width: 400px; height: 300px;'></div>
+  <script>
+  mapboxgl.accessToken = "pk.eyJ1Ijoiam9yZGFuZXZlbnRzMjAxOCIsImEiOiJjampsOG5iYzcwb2J4M3ZxdndtN2t5d2dpIn0.i26m3jy0GiMJcTmgd3nxCg";
+  var map = new mapboxgl.Map({
+      container: 'map',
+      style: 'mapbox://styles/mapbox/streets-v9'
+  });
+  </script>
+
+
+
   <!-- Map div -->
-  <div class="container aws-margin10 map" id="mapContainer"></div>
+  <div class="map" id="mapContainer"></div>
 </div>
