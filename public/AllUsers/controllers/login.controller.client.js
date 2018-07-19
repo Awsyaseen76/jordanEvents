@@ -20,11 +20,18 @@
 		}
 		init();
 
+              
 
 		function login(user) {
 			model.error = null;
 			if (!user) {
 				model.error = 'Please fill the required fields';
+				return;
+			}else if(!user.email){
+				model.error = 'Please fill the email field';
+				return;
+			}else if(!user.password){
+				model.error = 'Please fill the password field';
 				return;
 			}
 			userService
@@ -32,11 +39,12 @@
 				.then(
 					// if sccess
 					function(matchedUser){
+						console.log(matchedUser)
 						if(matchedUser.data === "Bad Request"){
 							model.error = 'Please double check the email field';
 							return;
 						}else if (matchedUser.data === "Unauthorized") {
-							model.error = 'Please check your email and password';
+							model.error = 'Please check your email and/or password';
 							return;
 						} else {
 							$location.url('/profile');

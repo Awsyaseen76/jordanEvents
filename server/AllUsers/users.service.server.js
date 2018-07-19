@@ -163,37 +163,6 @@ function confirmAttendance(req, res){
 	    res.send(totalResult);
 	});
 
-
-
-
-
-
-
-	// var totalAttended = req.body;
-	// var totalResult = [];
-	// for(var i in totalAttended){
-	// 	console.log('i is: ',i);
-	// 	usersDB
-	// 		.confirmAttendance(totalAttended[i])
-	// 		.then(function(result){
-	// 			// console.log(result);
-	// 			totalResult.push(result);
-	// 			console.log(JSON.parse(i));
-	// 			if(JSON.parse(i) === totalAttended.length-1){
-	// 				console.log('Aws Yaseen Ahmed');
-	// 				// console.log(totalResult[0]);
-	// 				res.send(totalResult);
-	// 			}
-	// 		});		
-
-	// }
-
-	// usersDB
-	// 	.confirmAttendance(totalAttended)
-	// 	.then(function(result){
-	// 		// console.log(result);
-	// 		res.send(result);
-	// 	});
 }
 
 
@@ -418,9 +387,11 @@ function userStrategy(username, password, done) {
 			function(user){
 				if(!user){
 					return done(null, false);
+				} else if(user && !bcrypt.compareSync(password, user.password)){
+					return done(null, false)
 				} else if(user && bcrypt.compareSync(password, user.password)){
 					return done(null, user);
-				}
+				} 
 			},
 			function(err){
 				if(err){
