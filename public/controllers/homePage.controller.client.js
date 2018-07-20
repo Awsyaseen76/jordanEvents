@@ -12,21 +12,7 @@
 		function init(){
 			getLocation();
 			
-			function getLocation() {
-			    if (navigator.geolocation) {
-			        navigator.geolocation.getCurrentPosition(showPosition);
-			    } else { 
-			        console.log("Geolocation is not supported by this browser.");
-			    }
-			};	
 
-			function showPosition(position){
-				model.position.lat = position.coords.latitude; 
-				model.position.lng = position.coords.longitude;
-			}
-			
-			
-			
 			// model.loggedUser = null;
 			userService
 				.checkUserLogin()
@@ -54,6 +40,20 @@
 					}		
 				});
 
+			function getLocation() {
+				console.log('im here')
+			    if (navigator.geolocation) {
+			        navigator.geolocation.getCurrentPosition(showPosition);
+			    } else { 
+			        console.log("Geolocation is not supported by this browser.");
+			    }
+			};	
+
+			function showPosition(position){
+				model.position.latitude = position.coords.latitude; 
+				model.position.longitude = position.coords.longitude;
+			}
+			
 			// This make the carousel works and set the sliding time
 			$(document).ready(function() {
 	          $('.carousel').carousel({
@@ -63,10 +63,16 @@
 		}
 
 		init();
+
 		model.position = {}
 
 		model.logout = logout;
+		model.getPosition = getPosition;
 
+		function getPosition(){
+			model.position.lng = model.position.longitude;
+			model.position.lat = model.position.longitude;
+		}
 
 		function logout(){
 			userService
