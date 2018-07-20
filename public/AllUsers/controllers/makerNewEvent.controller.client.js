@@ -64,22 +64,17 @@
 						}
 					}
 				}
-				// console.log(eventDays);
 				newEvent.eventDays = eventDays;
 				model.newEvent = newEvent;
-				// console.log(model.newEvent);
 				model.newEventMain = false;
 				model.newEventProgramDetails = true;
-				// console.log(newEvent);
 			}
 
 			
 			function createEvent(newEvent){
-				console.log(newEvent)
 				newEvent.makerId = _makerId;
 				eventsService.addNewEvent(newEvent)
 					.then(function(addedEvent){
-						console.log(addedEvent);
 						$location.url('/makerProfile/eventsList');
 					});
 			}

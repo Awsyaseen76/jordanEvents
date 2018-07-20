@@ -21,7 +21,6 @@
 			userService
 				.updateProfile(updatedUserProfile)
 				.then(function(result){
-					console.log(result.data);
 					console.log('Profile Updated');
 				})
 				$location.url('/profile');

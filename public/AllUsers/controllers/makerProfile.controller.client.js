@@ -15,11 +15,9 @@
 		init();
 
 		function updateMakerProfile(updatedMakerProfile){
-			console.log(updatedMakerProfile);
 			userService
 				.updateProfile(updatedMakerProfile)
 				.then(function(result){
-					console.log(result.data);
 					console.log('Profile Updated');
 					$location.url('/profile')
 				})

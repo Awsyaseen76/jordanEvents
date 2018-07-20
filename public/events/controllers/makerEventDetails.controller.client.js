@@ -61,10 +61,8 @@
 
 
 			function countAttendance(attendees){
-				console.log(attendees)
 				model.attendedM = 0;
 				model.attendanceArray = [];
-				// console.log(model.attendanceArray2)
 				
 				for(var m in model.eventDetails.registeredMembers){
 					model.attendanceArray.push({
@@ -91,7 +89,6 @@
 						model.attendedM+=1;
 					}
 				}
-				console.log(model.attendanceArray);
 			}
 			
 
@@ -100,7 +97,6 @@
 				userService
 					.confirmAttendance(totalAttended)
 					.then(function(result){
-						console.log(result.data);
 					})
 			}
 
@@ -118,12 +114,9 @@
 			function makePayment(userId, eventId, payment){
 				payment.eventId = eventId;
 				payment.userId = userId;
-				// console.log(eventId);
-				// console.log(payment);
 				userService
 					.makePayment(payment)
 					.then(function(result){
-						// console.log(result.data);
 					})
 				$route.reload()
 			}

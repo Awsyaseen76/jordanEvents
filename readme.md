@@ -140,6 +140,8 @@ Todolist:
  -[x] The carousel now is sliding automatically
  -[x] work on the attendance not keep add attendance to the array on the database but filter the attendance if the event is the same and the date is the same just update the attendance not add new on.
 
+20/July/2018
+ -[x] Modify the error message of incorrect login.
 
 
 Todo list:
@@ -155,10 +157,9 @@ Todo list:
 
 -[] create a list of members they registered online removed from the list after pay and registered them on the event registered members.
 
--[] recheck if the password not correct when login what happend?
-
 -[] work on the problem of still access event details by maker although maker signed out?
 
+-[] add option when creating new event to have the location from the map
 
 
 

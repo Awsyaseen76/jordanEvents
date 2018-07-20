@@ -38,7 +38,6 @@
 		function makePayment(payment){
 			var url = '/api/maker/makePayment';
 			return $http.post(url, payment);
-			// console.log(payment);
 		}
 
 		function updateProfile(updatedProfile){
@@ -107,7 +106,6 @@
 			var url = '/api/user/login';
 			return $http.post(url, {username: username, password: password})
 				.then(function(response) {
-					console.log(response)
 					if(response.data === null){
 						return '0';
 					}

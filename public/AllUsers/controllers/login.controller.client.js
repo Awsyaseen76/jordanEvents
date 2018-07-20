@@ -39,7 +39,6 @@
 				.then(
 					// if sccess
 					function(matchedUser){
-						console.log(matchedUser)
 						if(matchedUser.data === "Bad Request"){
 							model.error = 'Please double check the email field';
 							return;

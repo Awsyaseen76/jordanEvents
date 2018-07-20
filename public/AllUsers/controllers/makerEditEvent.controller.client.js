@@ -107,8 +107,6 @@
 					for(var d in updatedEvent.eventDays){
 						updatedEvent.programDailyDetails[updatedEvent.eventDays[d]] = detailsArray[d];
 					}
-
-					// console.log(updatedEvent);
 					break;
 				}
 			}
@@ -121,7 +119,6 @@
 
 
 		function updateEvent(updatedEvent){
-			// console.log(updatedEvent);
 			var eventId = model.selectedEvent._id;
 			eventsService
 				.updateEvent(updatedEvent, eventId)

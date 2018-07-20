@@ -5,20 +5,28 @@
 
 	function homePageController(userService, $location, eventsService, $route){
 		var model = this;
-		// model.position = {
-		// 				currentposition: {}
-		// };
 
 		// model.eventsPlaces = [];
 		// var eventsParams = [];
 
 		function init(){
-			// This make the carousel works and set the sliding time
-			$(document).ready(function() {
-	          $('.carousel').carousel({
-	            interval: 3000
-	          })
-	        });
+			getLocation();
+			
+			function getLocation() {
+			    if (navigator.geolocation) {
+			        navigator.geolocation.getCurrentPosition(showPosition);
+			    } else { 
+			        console.log("Geolocation is not supported by this browser.");
+			    }
+			};	
+
+			function showPosition(position){
+				model.position.lat = position.coords.latitude; 
+				model.position.lng = position.coords.longitude;
+			}
+			
+			
+			
 			// model.loggedUser = null;
 			userService
 				.checkUserLogin()
@@ -46,9 +54,16 @@
 					}		
 				});
 
-				
+			// This make the carousel works and set the sliding time
+			$(document).ready(function() {
+	          $('.carousel').carousel({
+	            interval: 3000
+	          })
+	        });
 		}
+
 		init();
+		model.position = {}
 
 		model.logout = logout;
 
