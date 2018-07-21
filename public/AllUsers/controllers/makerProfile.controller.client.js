@@ -10,6 +10,7 @@
 
 		function init() {
 			model.loggedMaker = loggedMaker;
+			loggedMaker.DOB = new Date(loggedMaker.DOB);
 			model.makerProfile = loggedMaker;
 		}
 		init();

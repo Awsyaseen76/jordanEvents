@@ -50,13 +50,12 @@
 </div>
 
 <div>
-  <info>click to get position</info>
   <button ng-click="model.getPosition()">Get Location</button>
   <div>
-    <label for="Longtude">Longtude: {{model.position.lng}}</label>
-    <!-- <input type="text" name="Longtude" ng-model="model.position.lng"> -->
-    <label for="Latitue">Latitue: {{model.position.lat}}</label>
-    <!-- <input type="text" name="Latitue" ng-model="model.position.lat"> -->
+    <!-- <label for="Longtude">Longtude: {{model.position.lng}}</label> -->
+    <input type="text" name="latText" id="latText" ng-model="model.position.lat">
+    <!-- <label for="Latitue">Latitue: {{model.position.lat}}</label> -->
+    <input type="text" name="lngText" id="lngText" ng-model="model.position.lng">
   </div>
 </div>
 <!-- <div class="container aws-margin10" style="width: 640px; height: 480px" id="mapContainer"></div> -->

@@ -7,6 +7,7 @@
 		var model = this;
 
 		function init() {
+			loggedUser.DOB = new Date(loggedUser.DOB);
 			model.userProfile = loggedUser;
 			model.loggedUser = loggedUser;
 		}

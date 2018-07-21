@@ -103,19 +103,19 @@
 
 					<div>
 						<div class="weekDays-selector">
-						  <input type="checkbox" id="weekday-sat" class="weekday" ng-model="daysOfWeek.Sat"/>
+						  <input type="checkbox" id="weekday-sat" class="weekday" ng-model="model.daysOfWeek.Sat"/>
 						  <label for="weekday-sat">Sat</label>
-						  <input type="checkbox" id="weekday-sun" class="weekday" ng-model="daysOfWeek.Sun"/>
+						  <input type="checkbox" id="weekday-sun" class="weekday" ng-model="model.daysOfWeek.Sun"/>
 						  <label for="weekday-sun">Sun</label>
-						  <input type="checkbox" id="weekday-mon" class="weekday" ng-model="daysOfWeek.Mon"/>
+						  <input type="checkbox" id="weekday-mon" class="weekday" ng-model="model.daysOfWeek.Mon"/>
 						  <label for="weekday-mon">Mon</label>
-						  <input type="checkbox" id="weekday-tue" class="weekday" ng-model="daysOfWeek.Tue"/>
+						  <input type="checkbox" id="weekday-tue" class="weekday" ng-model="model.daysOfWeek.Tue"/>
 						  <label for="weekday-tue">Tue</label>
-						  <input type="checkbox" id="weekday-wed" class="weekday" ng-model="daysOfWeek.Wed"/>
+						  <input type="checkbox" id="weekday-wed" class="weekday" ng-model="model.daysOfWeek.Wed"/>
 						  <label for="weekday-wed">Wed</label>
-						  <input type="checkbox" id="weekday-thu" class="weekday" ng-model="daysOfWeek.Thu"/>
+						  <input type="checkbox" id="weekday-thu" class="weekday" ng-model="model.daysOfWeek.Thu"/>
 						  <label for="weekday-thu">Thu</label>
-						  <input type="checkbox" id="weekday-fri" class="weekday" ng-model="daysOfWeek.Fri"/>
+						  <input type="checkbox" id="weekday-fri" class="weekday" ng-model="model.daysOfWeek.Fri"/>
 						  <label for="weekday-fri">Fri</label>
 						</div>
 					</div>
@@ -123,6 +123,11 @@
 					<div class="form-group">
 						<label for="price">Price:</label>
 						<input type="text" class="form-control" name="price" id="price" ng-model="model.selectedEvent.price">
+					</div>
+
+					<div>
+						<label for="address">Address:</label>
+						<input class="form-control" type="text" name="address" id="address" ng-model="model.selectedEvent.address">
 					</div>
 
 					<div class="form-group">
@@ -135,7 +140,7 @@
 						<input type="text" class="form-control" rows="4" cols="50" name="img1200x300" id="img1200x300" ng-model="model.selectedEvent.images.img1200x300">
 					</div>
 
-					<button type="button" name="save" class="btn btn-primary" ng-click="model.updateMainEventDetails(model.selectedEvent, daysOfWeek)">Update Details</button>
+					<button type="button" name="save" class="btn btn-primary" ng-click="model.updateMainEventDetails(model.selectedEvent, model.daysOfWeek)">Update Details</button>
 					<button type="button" name="cancel1" class="btn btn-danger" ng-click="model.cancelUpdate()">Cancel</button>
 					</fieldset>
 

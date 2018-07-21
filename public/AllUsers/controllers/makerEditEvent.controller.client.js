@@ -133,7 +133,39 @@
 				.then(function(event){
 					event.startingDate = new Date(event.startingDate);
 					event.expiryDate = new Date(event.expiryDate);
+					
 					model.selectedEvent = event;
+
+					// Reverse the selected days
+					// 0: Sun   1: Mon   2: Tue   3: Wed    4: Thu  5: Fri  6: Sat 			
+					var daysOfWeek = {Sun:false, Mon:false, Tue:false, Wed:false, Thu:false, Fri:false, Sat:false}
+					for(var i in model.selectedEvent.daysPerWeek){
+						switch (model.selectedEvent.daysPerWeek[i]) {
+							case 0:
+								daysOfWeek.Sun = true;
+								break;
+							case 1:
+								daysOfWeek.Mon = true;
+								break;
+							case 2:
+								daysOfWeek.Tue = true;
+								break;
+							case 3:
+								daysOfWeek.Wed = true;
+								break;
+							case 4:
+								daysOfWeek.Thu = true;
+								break;
+							case 5:
+								daysOfWeek.Fri = true;
+								break;
+							case 6:
+								daysOfWeek.Sat = true;
+								break;
+						}
+					}
+					model.daysOfWeek = daysOfWeek;
+					console.log(model.selectedEvent.daysPerWeek)
 				});
 		}
 

@@ -8,8 +8,12 @@
 
 		// model.eventsPlaces = [];
 		// var eventsParams = [];
+		var latText = document.getElementById('latText');
+		var lngText = document.getElementById('lngText');
 
 		function init(){
+			
+
 			getLocation();
 			
 
@@ -41,7 +45,6 @@
 				});
 
 			function getLocation() {
-				console.log('im here')
 			    if (navigator.geolocation) {
 			        navigator.geolocation.getCurrentPosition(showPosition);
 			    } else { 
@@ -70,8 +73,13 @@
 		model.getPosition = getPosition;
 
 		function getPosition(){
-			model.position.lng = model.position.longitude;
-			model.position.lat = model.position.longitude;
+			if(model.position.latitude){
+				latText.value = model.position.latitude;
+				lngText.value = model.position.longitude;
+				return
+			} 
+			// model.position.lng = model.position.longitude;
+			// model.position.lat = model.position.latitude;
 		}
 
 		function logout(){

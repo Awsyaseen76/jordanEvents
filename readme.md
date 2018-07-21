@@ -141,7 +141,18 @@ Todolist:
  -[x] work on the attendance not keep add attendance to the array on the database but filter the attendance if the event is the same and the date is the same just update the attendance not add new on.
 
 20/July/2018
- -[x] Modify the error message of incorrect login.
+ -[x] Fix the error message of incorrect credential login.
+
+21/July/2018
+ -[x] when update the event by maker the days will displayed so if not updated will still the same.
+
+22/July/2018
+ -[] add option when creating new event to have the location from the map
+
+
+
+
+
 
 
 Todo list:
@@ -160,6 +171,8 @@ Todo list:
 -[] work on the problem of still access event details by maker although maker signed out?
 
 -[] add option when creating new event to have the location from the map
+
+-[] add member feedback
 
 
 
