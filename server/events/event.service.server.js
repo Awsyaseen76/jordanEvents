@@ -15,6 +15,12 @@ module.exports = function(app) {
 	app.delete('/api/event/', removeEvent);
 	app.put('/api/admin/updateEventByAdmin/:eventId', checkAdmin, updateEventByAdmin);
 	app.get('/api/eventConfig', eventConfig);
+	app.get('/api/getMapBoxKey', getMapBoxKey);
+
+	function getMapBoxKey(req, res){
+		var mapBoxKey = process.env.mapboxAccessToken;
+		res.send(mapBoxKey);
+	}
 	
 
 	function eventConfig(req, res){

@@ -147,7 +147,7 @@ Todolist:
  -[x] when update the event by maker the days will displayed so if not updated will still the same.
 
 22/July/2018
- -[] add option when creating new event to have the location from the map
+ -[] add option when creating new event to have the location from current location or from the map
 
 
 

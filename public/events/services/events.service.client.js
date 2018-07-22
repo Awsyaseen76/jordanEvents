@@ -17,7 +17,12 @@
 		this.removeEvent = removeEvent;
 		this.updateEventByAdmin = updateEventByAdmin;
 		this.eventConfig = eventConfig;
-		
+		this.getMapBoxKey = getMapBoxKey;
+
+
+		function getMapBoxKey(){
+			return $http.get('/api/getMapBoxKey');
+		}
 
 		function eventConfig(){
 			return $http.get('/api/eventConfig');
