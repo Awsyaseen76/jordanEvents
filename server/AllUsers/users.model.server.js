@@ -22,6 +22,19 @@ usersDB.resetPassword = resetPassword;
 usersDB.updateProfile = updateProfile;
 usersDB.makePayment = makePayment;
 usersDB.confirmAttendance = confirmAttendance;
+usersDB.submitFeedback = submitFeedback;
+
+
+function submitFeedback(feedbackObject){
+	var userId = feedbackObject.userId;
+	feedbackObject.date = new Date();
+	return usersDB
+		.findUserById(userId)
+		.then(function(user){
+			user.userFeedback.push(feedbackObject);
+			return user.save();
+		});
+}
 
 
 function confirmAttendance(totalAttended){

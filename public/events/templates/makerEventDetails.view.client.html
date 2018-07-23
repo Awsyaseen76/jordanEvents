@@ -55,18 +55,18 @@
   <img class="img-fluid rounded mb-4" ng-src="{{model.eventDetails.images.img1200x300}}" alt="">
   <h3>Event Name: </h3>
 	<p>{{model.eventDetails.name}}</p>
-	<h3>Event Category: </h3>
+	<!-- <h3>Event Category: </h3>
 	<p>{{model.eventDetails.category}}</p>
 	<h3>Event Sub-Category: </h3>
 	<p>{{model.eventDetails.subcategory}}</p>
 	<h3>Event Details: </h3>
-	<p>{{model.eventDetails.details}}</p>
+	<p>{{model.eventDetails.details}}</p> -->
 	<h3>Start date: </h3>
 	<p>{{model.eventDetails.startingDate | date}}</p>
 	<h3>End date: </h3>
 	<p>{{model.eventDetails.expiryDate | date}}</p>
-  <h3>Event Address: </h3>
-  <p>{{model.eventDetails.address}}</p>
+  <!-- <h3>Event Address: </h3>
+  <p>{{model.eventDetails.address}}</p> -->
   <h3>Members:</h3>
   <!-- <a href="#!/makerProfile/countAttendance" class="btn btn-success">Count Attendances</a> -->
   <div class="form-group row">
@@ -227,5 +227,28 @@
 
 	
 	<a href="#!/makerProfile" class="btn btn-lg btn-danger">Cancel</a>
+<br>
+<br>
+<hr>
+
+  <div>
+    <h4 class="text-success">Event feedbacks:</h4>
+    <table class="table table-hover">
+      <thead>
+        <tr>
+          <th width="20%">Date</th>
+          <th width="20%">Member</th>
+          <th width="80%">Feedback</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr ng-repeat="feedback in model.eventFeedback">
+          <td>{{feedback.date | date}}</td>
+          <td>{{feedback.userName}}</td>
+          <td>{{feedback.feedbackText}}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
 
 </div>

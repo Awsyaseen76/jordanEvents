@@ -147,9 +147,10 @@ Todolist:
  -[x] when update the event by maker the days will displayed so if not updated will still the same.
 
 22/July/2018
- -[] add option when creating new event to have the location from current location or from the map
+ -[x] add option when creating new event to have the location from current location or from the map
 
-
+23/July/2018
+ -[x] Member can write feedback shown on member profile page and maker event details page.
 
 
 
@@ -170,11 +171,15 @@ Todo list:
 
 -[] work on the problem of still access event details by maker although maker signed out?
 
--[] add option when creating new event to have the location from the map
+-[] profile details about each coach in event.
 
--[] add member feedback
-
-
+Notes:
+	-[] discout for siblings 10% for both.
+	-[] special discount by admin.
+	-[] siblings and friends code (add tag code for friends for family on registration choose the group name)
+	-[] price based on daily price to calculate the registered days then the start and end time event fixed.
+	-[] freeze once during the event for the days they want to freeze.
+	-[] attendance by the number for each member.
 
 
 

@@ -20,6 +20,7 @@
 				model.loggedMaker = loggedMaker;
 				model.error2 = null;
 				model.grandTotalPayments = 0;
+				model.eventFeedback = [];
 				var eventId = $routeParams.eventId;
 				
 				eventsService
@@ -40,6 +41,15 @@
 							for(var j in eventDetails.registeredMembers[x].payments){
 								if(eventDetails.registeredMembers[x].payments[j].eventId === eventDetails._id){
 									model.grandTotalPayments+= JSON.parse(eventDetails.registeredMembers[x].payments[j].paymentAmount);
+								}
+							}
+						}
+						for(var f in model.eventDetails.registeredMembers){
+							for(var e in model.eventDetails.registeredMembers[f].userFeedback){
+								if(model.eventDetails.registeredMembers[f].userFeedback[e].eventId === eventId){
+									var feed = model.eventDetails.registeredMembers[f].userFeedback[e];
+									feed.userName = model.eventDetails.registeredMembers[f].name.firstName + " " + model.eventDetails.registeredMembers[f].name.lastName;
+									model.eventFeedback.push(feed);
 								}
 							}
 						}

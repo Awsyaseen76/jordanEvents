@@ -3,13 +3,15 @@
 		.module('jordanEvents')
 		.controller('userProfileController', userProfileController);
 
-	function userProfileController(userService, loggedUser, $location, $sce) {
+	function userProfileController(userService, loggedUser, $location, $sce, $route) {
 		var model = this;
 
 		function init() {
 			model.userProfile = loggedUser;
 			model.loggedUser = loggedUser;
 			model.upcommingProgram = [];
+			model.registeredEventsList = model.userProfile.registeredEventsList;
+
 			for(var i in model.userProfile.registeredEventsList){
 				inner: 
 				for(var e in model.userProfile.registeredEventsList[i].programDailyDetails){
@@ -26,12 +28,24 @@
 		init();
 
 
-
 		model.logout = logout;
 		model.removeRegisteredEvent = removeRegisteredEvent;
 		model.totalPayments = totalPayments;
 		model.attendedDays = attendedDays;
-		model.trustedUrl = trustedUrl
+		model.trustedUrl = trustedUrl;
+		model.submitFeedback = submitFeedback;
+
+		function submitFeedback(eventId, eventName,feedbackText){
+			var feedbackObject = {userId: model.loggedUser._id, eventId: eventId, eventName: eventName,feedbackText: feedbackText};
+			userService
+				.submitFeedback(feedbackObject)
+				.then(function(result){
+					console.log(result.data);
+					$route.reload();
+				}, function(error){
+					console.log(error);
+				});
+		}
 
 
 		function trustedUrl(videoLink){

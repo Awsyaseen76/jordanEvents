@@ -148,7 +148,8 @@
 					          </div>
 					        </div>
       					</div>
-						<!-- upcomming progrma -->
+						<!-- /upcomming progrma -->
+
 
 						<div class="row">
 							<div class="card border-success col-xl-4 aws-margin10" ng-repeat='event in model.userProfile.registeredEventsList' style="max-width: 20rem;">
@@ -166,6 +167,47 @@
 							  </div>
 							</div>
 						</div>
+
+
+						<!-- Feedback -->
+						<div>
+						<div class="row" style="margin-top: 50px; border: solid; border-width: 5px; border-color: lightgrey;  border-radius: 25px; padding: 20px;">
+							<div class="col-sm-12">
+								<h3 class="text-success">Give us a feedback:</h3>
+							</div>
+							<div class="col-sm-6" style="margin: 5px;">
+								<select ng-model="selectedEvent" class="custom-select" ng-options="event.name for event in model.registeredEventsList">
+									<option value="" disabled >Select event...</option>
+								</select>
+							</div>
+							<div class="col-sm-10" style="margin: 5px;">
+								<textarea name="feedback" class="form-control" ng-model="feedbackText"></textarea>
+							</div>
+							<div class="col-sm-4" style="margin: 5px;">
+								<a class="btn btn-success form-control" ng-click="model.submitFeedback(selectedEvent._id, selectedEvent.name, feedbackText)">Submit</a>
+							</div>
+							<div class="col-sm-12" style="margin-top: 50px;">
+								<h4 class="text-success">Your feedbacks:</h4>
+									<table class="table table-hover">
+									  <thead>
+									    <tr>
+									      <th width="20%">Date</th>
+									      <th width="20%">Event name</th>
+									      <th width="60%">Feedback</th>
+									    </tr>
+									  </thead>
+									  <tbody>
+									    <tr ng-repeat="feedback in model.userProfile.userFeedback">
+									      <td>{{feedback.date | date}}</td>
+									      <td>{{feedback.eventName}}</td>
+									      <td>{{feedback.feedbackText}}</td>
+									    </tr>
+									  </tbody>
+									</table>
+							</div>
+						</div>
+						<!-- </div> -->
+						<!-- /Feedback -->
 					</div>
 			</div>
 		</div>

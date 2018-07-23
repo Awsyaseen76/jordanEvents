@@ -21,6 +21,7 @@
 		this.updateProfile = updateProfile;
 		this.makePayment = makePayment;
 		this.confirmAttendance = confirmAttendance;
+		this.submitFeedback = submitFeedback
 		
 
 
@@ -28,7 +29,10 @@
 		init();
 
 
-		
+		function submitFeedback(feedbackObject){
+			var url = '/api/user/submitFeedback'
+			return $http.put(url, feedbackObject);
+		}
 
 		function confirmAttendance(totalAttended){
 			var url = '/api/maker/confirmAttendance';

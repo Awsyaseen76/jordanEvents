@@ -130,6 +130,7 @@ app.post('/api/resetPassword/:token', checkToken, resetPassword);
 app.put('/api/user/updateProfile', updateProfile);
 app.post('/api/maker/makePayment', makePayment);
 app.put('/api/maker/confirmAttendance', confirmAttendance);
+app.put('/api/user/submitFeedback', submitFeedback);
 
 
 // ---------------------------------- /APIs requests ----------------------------------
@@ -140,7 +141,17 @@ app.put('/api/maker/confirmAttendance', confirmAttendance);
 // ------------------------------ Functions ------------------------------
 
 
-
+function submitFeedback(req, res){
+	var feedbackObject = req.body;	
+	usersDB
+		.submitFeedback(feedbackObject)
+		.then(function(result){
+			if(result){
+				res.send('feedback submitted');
+				
+			}
+		});
+}
 
 function confirmAttendance(req, res){
 	

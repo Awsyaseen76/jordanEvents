@@ -51,6 +51,7 @@ var usersSchema = mongoose.Schema({
     address: String,
     payments: [],
     attendedEvents: [],
+    userFeedback: [],
     // totalOfPayments: [],
     notes: String,
     resetPasswordToken: String,
