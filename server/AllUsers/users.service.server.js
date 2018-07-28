@@ -128,7 +128,7 @@ app.post('/api/userProfile/uploadProfilePic', upload.single('profilePicture'), u
 app.post('/api/forgetPassword/:email', forgetPassword);
 app.post('/api/resetPassword/:token', checkToken, resetPassword);
 app.put('/api/user/updateProfile', updateProfile);
-app.post('/api/maker/makePayment', makePayment);
+app.put('/api/maker/makePayment', makePayment);
 app.put('/api/maker/confirmAttendance', confirmAttendance);
 app.put('/api/user/submitFeedback', submitFeedback);
 
@@ -194,7 +194,7 @@ function updateProfile(req, res){
 		.then(function(result){
 			console.log(result);
 			res.send(result);
-		})
+		});
 }
 
 // Do the action here

@@ -18,7 +18,12 @@
 		this.updateEventByAdmin = updateEventByAdmin;
 		this.eventConfig = eventConfig;
 		this.getMapBoxKey = getMapBoxKey;
+		this.addToDiscountedMembers = addToDiscountedMembers;
 
+
+		function addToDiscountedMembers(discount){
+			return $http.put('/api/event/addToDiscountedMembers', discount);
+		}
 
 		function getMapBoxKey(){
 			return $http.get('/api/getMapBoxKey');

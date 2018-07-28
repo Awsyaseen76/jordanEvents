@@ -68,18 +68,19 @@
   <!-- <h3>Event Address: </h3>
   <p>{{model.eventDetails.address}}</p> -->
   <h3>Members:</h3>
-  <!-- <a href="#!/makerProfile/countAttendance" class="btn btn-success">Count Attendances</a> -->
   <div class="form-group row">
     <div class="col-sm-5">
       <label for="searchMember" class="text-danger" style="display: inline;"><h4>Search members:</h4></label>
       <input type="text" class="form-control" name="searchMember" id="searchMember" ng-model="searchMember">
     </div>
   </div>
+  <p class="text-danger" ng-show="model.giveADiscountError">{{model.giveADiscountError}}</p>
   <table>
     <thead class="bg-warning">
       <th>Name</th>
       <th>Payments</th>
       <th>Balance</th>
+      <th>Discount</th>
       <th>Make a payment</th>
       <th>Payments details</th>
       <th>Attendance</th>
@@ -92,9 +93,46 @@
       <td>
         {{model.getTotals(user, model.eventDetails._id).eventId.balance}}
       </td>
+      
+      <!-- Discount Modal -->
       <td>
-    
-    <!-- Make a payment Modal -->
+        <button type="button" class="btn btn-danger" data-toggle="modal" ng-disabled="model.hadDiscount(user._id)" data-target="#discountModal-{{$index}}">Discount</button>
+      
+        <div class="modal fade" id="discountModal-{{$index}}" role="dialog">
+            <div class="modal-dialog">
+            
+              <!-- Modal content-->
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h5 class="modal-title">Give A Discount</h5>
+                </div>
+                <div class="modal-body">
+                  <form>
+                    <label>Discount type:</label>
+                    <select id="discountSelector" ng-model="model.selectedDiscount" class="custom-select" ng-options="discount.name for discount in model.discountTypes" ng-change="model.selectDiscount(user.name)">
+                    </select>
+                    <input type="text" name="familyTag" class="form-control" ng-model="model.discountTags.familyTag" ng-show="model.thereIsFamilyDiscount">
+                    <input type="text" name="groupTag" class="form-control" ng-model="model.discountTags.groupTag" ng-show="model.thereIsGroupDiscount">
+                    <select ng-model="specialDiscountType" class="custom-select" ng-options="special.name for special in model.discountTypes[3].types" ng-show="model.thereIsSpecialDiscount">
+                    </select>
+                    <br>
+                    <input type="submit" class="btn btn-success pull-right" name="giveADiscount" ng-click="model.giveADiscount(user._id, model.eventDetails._id, model.selectedDiscount.name, model.discountTags, specialDiscountType.name)" data-dismiss="modal">
+                  </form>
+                </div>
+                <div class="modal-f ooter">
+                  <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                </div>
+              </div>
+              
+            </div>
+          </div>
+      </td>
+      <!-- /Discount modal -->
+
+
+
+      <!-- Make a payment Modal -->
+      <td>
           <button type="button" class="btn btn-info" data-toggle="modal" data-target="#makePaymentModal-{{$index}}">Pay</button>
 
           <div class="modal fade" id="makePaymentModal-{{$index}}" role="dialog">
@@ -108,9 +146,17 @@
                 </div>
                 <div class="modal-body">
                   <form>
-                    <input type="date" name="dateOfpayment" ng-model="payment.dateOfpayment">
-                    <input type="text" name="amount" ng-model="payment.amount">
-                    <input type="submit" name="makePayment" ng-click="model.makePayment(user._id, model.eventDetails._id, payment)" data-dismiss="modal">
+                    <label>Date:</label>
+                    <input type="date" name="dateOfpayment" ng-model="paymentDate" class="form-control">
+                    <label>Payment type:</label>
+                    <select ng-model="model.typeOfPayment" class="custom-select" ng-options="paymentType.name for paymentType in model.paymentTypes" ng-change="model.selectPaymentType(model.typeOfPayment, user)">
+                    </select>
+                    <br>
+                    <label>Payment amount:</label>
+                    <input type="text" name="amount" id="paymentAmount" ng-model="model.paymentAmount">
+                    <br>
+                    <br>
+                    <input type="submit" class="btn btn-success pull-right" name="makePayment" ng-click="model.makePayment(user._id, model.eventDetails._id, paymentDate, model.paymentAmount)" data-dismiss="modal">
                   </form>
                 </div>
                 <div class="modal-footer">
@@ -126,7 +172,7 @@
 
     <!-- Payment Details modal -->
       <td>
-          <button type="button" class="btn btn-info" data-toggle="modal" data-target="#paymentsModal-{{$index}}">Deatils</button>
+          <button type="button" class="btn btn-info" data-toggle="modal" data-target="#paymentsModal-{{$index}}">Details</button>
 
           <div class="modal fade" id="paymentsModal-{{$index}}" role="dialog">
             <div class="modal-dialog">
@@ -150,6 +196,10 @@
                   </table>
                   <h5><b>Total payments:</b> {{model.getTotals(user, model.eventDetails._id).eventId.total | currency:"JOD "}}</h5>
                   <h5><b>Balance:</b> {{model.getTotals(user, model.eventDetails._id).eventId.balance | currency:"JOD "}}</h5>
+                  <h5><b>Event price: </b> {{model.getTotals(user, model.eventDetails._id).eventId.eventPrice | currency:"JOD "}}</h5>
+                  <h5><b>Discount type: </b> {{model.getTotals(user, model.eventDetails._id).eventId.discountType}}</h5>
+                  <h5><b>Discount Tag: </b> {{model.getTotals(user, model.eventDetails._id).eventId.discountTag}}</h5>
+                  
                 </div>
                 <div class="modal-footer">
                   <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
@@ -176,16 +226,15 @@
 
     <!-- footer -->
     <tr>
-      <td>{{model.eventDetails.registeredMembers.length}}</td>
-      <td>{{model.grandTotalPayments}}</td>
-      <td>{{ model.grandTotalPayments - model.eventDetails.registeredMembers.length * model.eventDetails.price}}</td>
+      <td></td>
+      <td></td>
+      <td></td>
       <td></td>
       <td></td>
       <!-- <td><button class="btn btn-success" ng-click="model.makeAttendance(user._id, model.eventDetails._id)">Attendance</button> </td> -->
       
       <!-- Attendance Modal -->
       <td><button class="btn btn-success" ng-click="model.countAttendance(model.attend)" data-toggle="modal" data-target="#makeAttendanceModal">Attendance</button> </td>
-
 
       <div class="modal fade" id="makeAttendanceModal" role="dialog">
             <div class="modal-dialog">
@@ -218,6 +267,24 @@
 
 
     </tr>
+    <tr style="background: bisque; color: darkred;">
+      <td><h3>Event Summary:</h3></td>
+      <td></td>
+    </tr>
+    <tr style="background: bisque; color: darkred;">
+        <td>
+          <h5>Total of members: </h5>
+          <h5>Total Income from the event: </h5>
+          <h5>Total of Payments: </h5>
+          <h5>Event payments balance: </h5>
+        </td>
+        <td>
+          <h5>{{model.eventDetails.registeredMembers.length}}</h5>
+          <h5>{{model.totalIncomeFromEvent}}</h5>
+          <h5>{{model.grandTotalPayments}}</h5>
+          <h5>{{model.grandTotalPayments - model.totalIncomeFromEvent}}</h5>
+        </td>
+      </tr>
   </table>
 
 

@@ -15,6 +15,26 @@ eventsDB.updateEvent = updateEvent;
 eventsDB.removeEvent = removeEvent;
 eventsDB.updateEventByAdmin = updateEventByAdmin;
 eventsDB.addMemberToEvent = addMemberToEvent;
+eventsDB.addToDiscountedMembers = addToDiscountedMembers;
+
+
+function addToDiscountedMembers(discount){
+	var eventId = discount.eventId;
+	return eventsDB
+				.findById(eventId)
+				.then(function(event){
+					for(var u in event.discountedMembers){
+						if(event.discountedMembers[u].userId === discount.userId){
+							var err = 'You Already had a '+ event.discountedMembers[u].discountType+'!'
+							return (err);
+						}else{
+							event.discountedMembers.push(discount);
+							return event.save();
+							
+						}
+					}
+				});
+}
 
 
 function addMemberToEvent(eventId, userId){
@@ -23,7 +43,7 @@ function addMemberToEvent(eventId, userId){
 			.then(function(event){
 				event.registeredMembers.push(userId);
 				return event.save();
-			})
+			});
 }
 
 

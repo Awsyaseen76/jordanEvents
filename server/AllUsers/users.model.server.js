@@ -62,13 +62,14 @@ function confirmAttendance(totalAttended){
 
 
 function makePayment(payment){
+	var userId = payment.userId;
 	return usersDB
-				.findById(payment.userId)
+				.findById(userId)
 				.then(function (user){
 					user.payments.push(
 								{eventId: payment.eventId,
-								 paymentDate: payment.dateOfpayment,
-								 paymentAmount: JSON.parse(payment.amount)});
+								 paymentDate: payment.paymentDate,
+								 paymentAmount: JSON.parse(payment.paymentAmount)});
 					return user.save();
 				});
 				// 	if(user.totalOfPayments.length === 0){
@@ -109,7 +110,7 @@ function updateProfile(updatedProfile){
 			.findByIdAndUpdate(updatedProfile._id, updatedProfile)
 			.then(function(result){
 				return result;
-			})
+			});
 }
 
 function resetPassword(user, newPassword){

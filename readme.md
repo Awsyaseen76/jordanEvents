@@ -152,7 +152,52 @@ Todolist:
 23/July/2018
  -[x] Member can write feedback shown on member profile page and maker event details page.
 
+24/July/2018
+ -[] Price based on daily price to calculate the registered days then the start and end time event fixed.
 
+28/July/2018
+ -[x] event maker can give discount for particular user.
+ -[x] the discount types are:
+ 	1. Family: for family members give 10%.
+ 			   with a discount tag for the family members calculated with father name and last name with the calculated hour+day+month+year (AwsAhmed02862018);
+ 	2. Group: for group members like fiends give 10%. 
+ 			  with a discount tag for the group members the maker should give a special name for the group name should added before the calculated tag that calculated like the family tag.
+ 	3. Special: with four types:
+	 		  special25: give 25% discount, the discount tag will be special25.
+	 		  special50: give 50% discount, the discount tag will be special50.
+	 		  special75: give 75% discount, the discount tag will be special75.
+	 		  special100: give 100% discount, the discount tag will be special100.
+ -[x] Payment:
+ 			1. select the payment type:
+ 				DownPayment: The payment amount show the minimum payment calculated as a session price.
+ 				Weekly: The payment amount show the weekly payment calculated as event price / 4.
+ 				Full: The payment amount show the balance of the user (the remaining amount).
+ -[x] The details now showing:
+ 			Total payments
+			Balance
+			Event price
+			Discount type
+			Discount Tag
+ -[x] The event details now showing: 
+			Event Summary:
+				Total of members
+				Total Income from the event
+				Total of Payments
+				Event payments balance
+
+
+
+
+
+Payment module:
+	price calculation:
+		. devide event price on days of the event.
+		. select the payment type: weekly then multiply price by days per week or full payment then multiply by days of the event.
+	Discount procedure:
+		. with first payment maker add tag for discount:
+			- siblings tag by adding father name as the tag then this tag affect the price by multiply by 0.9 to discount 10%.
+			- friends tag by adding group tag name from a list [champs, legends, lions, winners, ...] then this tag affect the price by multiply by 0.9 to discount 10%.
+			- special discount price applied by the admin of the event with password field and dicount amount field this amount multiplied by the price.
 
 
 
@@ -177,7 +222,7 @@ Notes:
 	-[] discout for siblings 10% for both.
 	-[] special discount by admin.
 	-[] siblings and friends code (add tag code for friends for family on registration choose the group name)
-	-[] price based on daily price to calculate the registered days then the start and end time event fixed.
+	-[] 
 	-[] freeze once during the event for the days they want to freeze.
 	-[] attendance by the number for each member.
 
@@ -186,7 +231,15 @@ Notes:
 
 
 
-
+calculate the remaining sessions and price:
+	event sessions: 13
+	remaining sessions: 
+				loop the eventDays
+				if today >= eventDays[x]
+				then eventDays still the same
+				 from today count the eventDays
+	today we miss 4 sessions
+	the event price will be:    (eventPrice/eventSessions) * remaining sessions
 
 
 

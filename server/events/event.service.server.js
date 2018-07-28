@@ -16,6 +16,18 @@ module.exports = function(app) {
 	app.put('/api/admin/updateEventByAdmin/:eventId', checkAdmin, updateEventByAdmin);
 	app.get('/api/eventConfig', eventConfig);
 	app.get('/api/getMapBoxKey', getMapBoxKey);
+	app.put('/api/event/addToDiscountedMembers', addToDiscountedMembers);
+
+
+	function addToDiscountedMembers(req, res){
+		var discount = req.body;
+		eventsDB
+			.addToDiscountedMembers(discount)
+			.then(function(result){
+				res.send(result);
+			});
+	}
+
 
 	function getMapBoxKey(req, res){
 		var mapBoxKey = process.env.mapboxAccessToken;
@@ -32,7 +44,7 @@ module.exports = function(app) {
 			.then(function(events){
 				eventsParams.eventsList = events;
 				res.send(eventsParams);
-			})
+			});
 	}
 
 
