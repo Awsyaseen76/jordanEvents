@@ -59,7 +59,7 @@
 		</div>  
 
 		<!-- Attendance -->
-		<div class="col-sm-2">
+		<div class="col-sm-4">
 			<button class="btn btn-success" data-toggle="modal" data-target="#todayAttendance" style="width: 100%;" ng-click="model.countAttendance()"><b>Today attendance</b></button>
 			
 			<!-- todayAttendance modal -->
@@ -451,7 +451,10 @@
 				<tr ng-repeat="freezed in model.getFreezedMembers()">
 					<td>{{freezed.userName.firstName}} {{freezed.userName.lastName}}</td>
 					<td>
-						<span ng-repeat="day in freezed.days">{{day}}, </span>
+						
+						<span ng-repeat="day in freezed.days" >&#x2299; {{day}} &emsp;</span>
+						
+						<!-- <span ng-repeat="day in freezed.days">  {{day}} || </span> -->
 					</td>
 				</tr>
 			</tbody>
