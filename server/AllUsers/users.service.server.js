@@ -131,6 +131,8 @@ app.put('/api/user/updateProfile', updateProfile);
 app.put('/api/maker/makePayment', makePayment);
 app.put('/api/maker/confirmAttendance', confirmAttendance);
 app.put('/api/user/submitFeedback', submitFeedback);
+app.put('/api/user/updateUserEventParameters', updateUserEventParameters);
+app.put('/api/user/freezeMembership', freezeMembership);
 
 
 // ---------------------------------- /APIs requests ----------------------------------
@@ -139,6 +141,25 @@ app.put('/api/user/submitFeedback', submitFeedback);
 
 
 // ------------------------------ Functions ------------------------------
+
+function freezeMembership(req, res){
+	var freezeObject = req.body;
+	usersDB
+		.freezeMembership(freezeObject)
+		.then(function(result){
+			res.send(result);
+		});
+}
+
+
+function updateUserEventParameters(req, res){
+	var discount = req.body;
+	usersDB
+		.updateUserEventParameters(discount)
+		.then(function (result){
+			res.send(result);
+		});
+}
 
 
 function submitFeedback(req, res){

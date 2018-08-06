@@ -185,7 +185,14 @@ Todolist:
 				Total of Payments
 				Event payments balance
 
-
+06/Aug/2018
+ -[x] huge amendment on the schema that now every user have a userEventParameters that collect each event main parameter, calculate the price for each user based on the discount and the event days for the particular user if he/she register after the event started, collect the attendance, payments, feedbacks, freezeDays.
+ -[x] maker have to give discount to calculate userEventParameters if no discount then choose "No discount".
+ -[x] the payment calculated based on user discount, eventDays for user.
+ -[x] the details show the discount type and tag also.
+ -[x] the attendance now in seperate modal, and could taken multiple times throught the day, and it shows the totals.
+ -[x] freeze memberShip for each user, the modal will show show the days from today to as a checkbox to select the days the user want to freeze, after submit the user could not freeze again as it once per the event, if he try to do that then the checkboxes will be disabled, for the user that had freezed days they will shown on bottomn of the modal.
+ -[x] the feedback is workinng just fine.
 
 
 
@@ -219,27 +226,46 @@ Todo list:
 -[] profile details about each coach in event.
 
 Notes:
-	-[] discout for siblings 10% for both.
-	-[] special discount by admin.
-	-[] siblings and friends code (add tag code for friends for family on registration choose the group name)
-	-[] 
-	-[] freeze once during the event for the days they want to freeze.
 	-[] attendance by the number for each member.
 
 
 
 
-
-
-calculate the remaining sessions and price:
-	event sessions: 13
-	remaining sessions: 
-				loop the eventDays
-				if today >= eventDays[x]
-				then eventDays still the same
-				 from today count the eventDays
-	today we miss 4 sessions
-	the event price will be:    (eventPrice/eventSessions) * remaining sessions
+User actions from starting register for particular evet:
+	- User register for event
+	- the {eventParams} added to user.[userEventParameters] in user database containing:
+        eventId: String,
+        discountType: String,
+        discountTag: String,
+        percentage: Number,
+        eventDays: [String],
+        discountedEventPrice: Number,
+        normalEventPrice: Number,
+        freezeDays: [String],
+        payments: [{date: Date, amount: Number}],
+        attendedDays: [{date: String,attended: Boolean}],
+        feedbacks: [{date: Date, eventName: String, feedback: String}]
+	- maker list the registered members
+	- when user ask maker to officially register by pay for the event the maker steps are:
+		1. decide if he want to give a discount?
+			if yes:
+				1. giveADiscount() function will alter.
+				2. loop a user.userEventParameters search for the eventId, if found check:
+					user.userEventParameters.discountType
+					if null then update the discount type, tag with values
+					else send error.
+			if No:
+				1. select no discount to fill the userEventParameters with data.
+		2. Pay:
+			loop a user.userEventParameters search for the eventId, if found:
+				1. loop user.userEventParameters.payments
+				2. select the payment date and type.
+				3. the amount will appear in the textBox below.
+				4. submit.
+	- datails show user's payments and the totals with the discount type and tag.
+	- maker can tage the attendance for the date throught the same day multiple times even after submit, and the modal will show to totals in the bottomn.
+	- maker can give a freeze for user membership once through the event by selecting the days the user want to freeze, if the user already had a freezed days then the checkboxes of the days will be disabled and note displayed that the user already had a freezed days, the freezed days appear on the bottomn of the modal.
+	
 
 
 

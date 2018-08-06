@@ -21,8 +21,8 @@
 		this.addToDiscountedMembers = addToDiscountedMembers;
 
 
-		function addToDiscountedMembers(discount){
-			return $http.put('/api/event/addToDiscountedMembers', discount);
+		function addToDiscountedMembers(ids){
+			return $http.put('/api/event/addToDiscountedMembers', ids);
 		}
 
 		function getMapBoxKey(){

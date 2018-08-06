@@ -14,9 +14,23 @@
 			model.attendanceArray = [];
 			model.countAttendance = countAttendance;
 			model.specialDiscountAmount = 1;
+			model.hadDiscount = hadDiscount;
+			model.selectDiscount = selectDiscount;
+			model.selectPaymentType = selectPaymentType;
+			model.giveADiscountError = false;
+			model.giveADiscount = giveADiscount;
+			model.getUserPayments = getUserPayments;
+			model.getGrandTotals = getGrandTotals;
+			model.getEventFeedbacks = getEventFeedbacks;
+			model.getAttendance = getAttendance;
+			model.freezeMember = freezeMember;
+			model.prepareFreezeDays = prepareFreezeDays;
+			model.getFreezedMembers = getFreezedMembers;
 			// this is temporary in future the event maker created the discountTypes array
 			model.discountTypes = [
 									{name: 'Discount type...',
+									 amount: 0},
+									{name: 'No discount',
 									 amount: 0},
 									{name: 'family',
 									 amount: 10},
@@ -40,77 +54,93 @@
 									{name: 'Full payment'},
 								 ];
 
-
-			model.selectDiscount = selectDiscount;
-			model.selectPaymentType = selectPaymentType;
-			model.giveADiscountError = false;
-			model.giveADiscount = giveADiscount;
-
+			// model.calculateSessions = calculateSessions;
+			// model.getTotalIncome = getTotalIncome;
 
 
 			function init(){
 				model.loggedMaker = loggedMaker;
 				model.error2 = null;
 				model.grandTotalPayments = 0;
-				model.eventFeedback = [];
 				var eventId = $routeParams.eventId;
 				
 				// for default select option the first one is the title
 				model.selectedDiscount = model.discountTypes[0];
 				model.typeOfPayment = model.paymentTypes[0];
 				model.thereIsSpecialDiscount = false;
-				model.hadDiscount = hadDiscount;
+				// model.hadDiscount = hadDiscount;
 
 				eventsService
 					.findEventByEventId(eventId)
 					.then(function(eventDetails){
+						model.eventFeedbacks = [];
+						model.freezedMembers = [];
 						model.eventDetails = eventDetails;
 						model.discountedMembers = eventDetails.discountedMembers;
 						// loop on the registered members
-						for(var x in eventDetails.registeredMembers){
+						// for(var f in model.eventDetails.registeredMembers){	
+							model.grandTotals = 0;
+							for(var i in model.eventDetails.registeredMembers){
+								model.grandTotals += getTotals(model.eventDetails.registeredMembers[i], model.eventDetails._id).totalOfPayments;
+							}
+						// }
+
+						for(var x in model.eventDetails.registeredMembers){
 							// Calculate the grand total payments
-							for(var j in eventDetails.registeredMembers[x].payments){
-								if(eventDetails.registeredMembers[x].payments[j].eventId === eventDetails._id){
-									model.grandTotalPayments+= JSON.parse(eventDetails.registeredMembers[x].payments[j].paymentAmount);
+							for(var j in model.eventDetails.registeredMembers[x].userEventParameters){
+								if(model.eventDetails.registeredMembers[x].userEventParameters[j].eventId === model.eventDetails._id){
+									for(var s in model.eventDetails.registeredMembers[x].userEventParameters[j].payments){
+										model.grandTotalPayments+= model.eventDetails.registeredMembers[x].userEventParameters[j].payments[s].amount;
+									}
+									// collect the feedbacks
+									for(var f in model.eventDetails.registeredMembers[x].userEventParameters[j].feedbacks){
+										var feed = model.eventDetails.registeredMembers[x].userEventParameters[j].feedbacks[f];
+										feed.userName = model.eventDetails.registeredMembers[x].name.firstName + " " + model.eventDetails.registeredMembers[x].name.lastName;
+										model.eventFeedbacks.push(feed);
+									}
+									if(model.eventDetails.registeredMembers[x].userEventParameters[j].freezeDays.length > 0){
+										// for(var z in model.eventDetails.registeredMembers[x].userEventParameters[j]){
+											var freeze = {};
+											freeze.userName = model.eventDetails.registeredMembers[x].name;
+											freeze.days = model.eventDetails.registeredMembers[x].userEventParameters[j].freezeDays;
+											model.freezedMembers.push(freeze);
+										// }
+									}
 								}
 							}
-							// Collect the feedbacks
-							for(var e in model.eventDetails.registeredMembers[x].userFeedback){
-								if(model.eventDetails.registeredMembers[x].userFeedback[e].eventId === eventId){
-									var feed = model.eventDetails.registeredMembers[x].userFeedback[e];
-									feed.userName = model.eventDetails.registeredMembers[x].name.firstName + " " + model.eventDetails.registeredMembers[f].name.lastName;
-									model.eventFeedback.push(feed);
-								}
-							}
+							// // Collect the feedbacks
+							// for(var e in model.eventDetails.registeredMembers[x].userFeedback){
+							// 	if(model.eventDetails.registeredMembers[x].userFeedback[e].eventId === eventId){
+							// 		var feed = model.eventDetails.registeredMembers[x].userFeedback[e];
+							// 		feed.userName = model.eventDetails.registeredMembers[x].name.firstName + " " + model.eventDetails.registeredMembers[f].name.lastName;
+							// 		model.eventFeedbacks.push(feed);
+							// 	}
+							// }
 						}
 						// Calculate the total income from the event
 						var totalOfMembers = model.eventDetails.registeredMembers.length;
 						var membersWithoutDiscount = totalOfMembers - model.discountedMembers.length;
-						var incomeFromNoDiscount = membersWithoutDiscount * model.eventDetails.price; 
+						// var incomeFromNoDiscount = membersWithoutDiscount * model.eventDetails.price; 
+						var incomeFromNoDiscount = 0; 
 						var incomeFromDiscounted = 0;
 
-						for(var n in model.discountedMembers){
-							incomeFromDiscounted += model.eventDetails.price* model.discountedMembers[n].percentage;
+						// for(var n in model.discountedMembers){
+						// 	incomeFromDiscounted += model.eventDetails.price* model.discountedMembers[n].percentage;
+						// }
+						for(var n in model.eventDetails.registeredMembers){
+							for(var k in model.eventDetails.registeredMembers[n].userEventParameters){
+								if(model.eventDetails.registeredMembers[n].userEventParameters[k].eventId === model.eventDetails._id){
+									incomeFromDiscounted += model.eventDetails.registeredMembers[n].userEventParameters[k].discountedEventPrice;
+									incomeFromNoDiscount += model.eventDetails.registeredMembers[n].userEventParameters[k].normalEventPrice;
+								}
+							}
 						}
 						model.totalIncomeFromEvent = incomeFromDiscounted + incomeFromNoDiscount ;
 					});
 			}
 			init();
 
-			// Check if user had a discount then disabled the discount button
-			function hadDiscount(userId, cb){
-				var alreadyHad = false;
-				for(var d in model.discountedMembers){
-					if(model.discountedMembers[d].userId === userId){
-						alreadyHad = true;
-					}
-				}
-				if(cb){
-					cb(alreadyHad);
-				}else{
-					return alreadyHad;
-				}
-			}
+			
 
 
 			function selectDiscount(name){
@@ -137,6 +167,11 @@
 					model.thereIsFamilyDiscount = false;
 					model.thereIsGroupDiscount = false;
 					return;
+				}else if(model.selectedDiscount.name === 'No discount'){
+					model.thereIsSpecialDiscount = false;
+					model.thereIsFamilyDiscount = false;
+					model.thereIsGroupDiscount = false;
+					return;
 				}else if(model.selectedDiscount.name === 'Discount type...'){
 					model.thereIsSpecialDiscount = false;
 					model.thereIsFamilyDiscount = false;
@@ -146,43 +181,101 @@
 
 			}
 
-			
+
+			// function calculateSessions(){
+			// 	var newEventDays;
+			// 	var today = new Date();
+			// 	var daysPerWeek = model.eventDetails.daysPerWeek;
+			// 	var weeks, days;
+				
+			// 	// create event days array starting from the payment date
+			// 	eventDaysLoop:
+			// 	for(var d in model.eventDetails.eventDays){
+			// 		if(today <= new Date(model.eventDetails.eventDays[d])){
+			// 			newEventDays = model.eventDetails.eventDays.slice(d);
+			// 			break eventDaysLoop;
+			// 		}
+			// 	}
+
+			// 	// calculating weeks and days
+			// 	if(newEventDays.length%daysPerWeek.length === 0){
+			// 		weeks = newEventDays.length/daysPerWeek.length;
+			// 		days = 0;
+			// 		return {eventDays: newEventDays, weeksDays:{weeks: weeks, days: days}};
+			// 	}else {
+			// 		weeks = Math.floor(newEventDays.length/daysPerWeek.length);
+			// 		days = newEventDays.length%daysPerWeek.length;
+			// 		return {eventDays: newEventDays, weeksDays:{weeks: weeks, days: days}};
+			// 	}
+			// }
+
+
+
+// steps of payment:
+//		1. maker show registered members.
+// 		2. if he want to give a discount select discount button.
+// 		3. make a payment by select Pay button.
+// 		4. seslect Date
+// 		5. select payment type.
+// 		6. selectPaymentType function:
+//			- check if this is the first payment (looping user.payments for this eventId)
+// 				. if it is the first payment (newUser):
+// 					1. call calculateSessions() which return the event days.
+// 					2. check if user had discount then get the discount type and tag.
+// 					3. create memberObject containing:
+// 						{userId, discountType, discoutTag, eventDays, totalPrice, freezeDays}
+// 				. if not: 
+// 					1. the eventDays are the same of the eventDetails.eventDays.
+// 					2. check if user had discount then get the discount type and tag.
+// 					3. search for user in members array
+// 			- create an eventMembers array:
+// 			- 
+// 
+
+
+
+// Create {{{{{{{{{eventMembers}}}}}}}}} object instead of discounted members 
+// store:
+// {userId, discountType, discoutTag, eventDays, totalPrice, freezeDays}
+// ?????Freeze???????
+// when member ask for freezing days:
+// 1. check if he had already use the freeze before.
+// 2. if not select show a modal of the remaining dates to select the freezign days from
+// 3. add the freezed dates array to the user eventMembers[user].freezeDays.
+// 4. when event days end push the users from eventMembers whome they had freeze to the new event they will create.
+// 5. when user register for new event check if he already had a freezed days and deduct them from the event price.
+
 
 			function selectPaymentType(paymentType, user){
-				 
 				var eventId = model.eventDetails._id;
-				var balance = getTotals(user, eventId).eventId.balance;
-				var eventPrice = null;
-				var eventSessions = model.eventDetails.eventDays.length;
-				// var discountedMembers = model.eventDetails.discountedMembers;
-				for(var d in model.discountedMembers){
-					if(model.discountedMembers[d].userId === user._id){
-						eventPrice = model.eventDetails.price * model.discountedMembers[d].percentage; 
+				
+				getTotals(user, eventId, function(totals){
+					model.totals = totals;
+					switch (paymentType.name) {
+						case 'Weekly payment':
+							model.paymentAmount = model.totals.discountedWeeklyPrice;
+							break;
+						case 'Full payment':
+							model.paymentAmount = Math.abs(model.totals.balance);
+							// document.getElementById('paymentAmount').value = model.paymentAmount;
+							break;
+						case 'Down payment':
+							model.paymentAmount = model.totals.discountedDailyPrice;
+							// document.getElementById('paymentAmount').value = model.paymentAmount;
+							break;
+						case 'Payment type...':
+							model.paymentAmount = 0;
+							// document.getElementById('paymentAmount').value = '';
+							break;
 					}
-				}if(!eventPrice){
-					eventPrice = model.eventDetails.price;
-				}
-				switch (paymentType.name) {
-					case 'Weekly payment':
-						model.paymentAmount = eventPrice/4;
-						break;
-					case 'Full payment':
-						model.paymentAmount = Math.abs(balance);
-						// document.getElementById('paymentAmount').value = model.paymentAmount;
-						break;
-					case 'Down payment':
-						model.paymentAmount = eventPrice/eventSessions;
-						// document.getElementById('paymentAmount').value = model.paymentAmount;
-						break;
-					case 'Payment type...':
-						model.paymentAmount = 0;
-						// document.getElementById('paymentAmount').value = '';
-						break;
-				}
-				console.log(paymentType.name, eventPrice, model.paymentAmount);
+				});
 			}
 
-			function giveADiscount(userId, eventId, discountName, discountTags, specialDiscountType){
+
+
+
+
+			function giveADiscount(user, eventId, discountName, discountTags, specialDiscountType){
 				// Check first if the user already had a discount before...
 				// for(var d in model.discountedMembers){
 				// 	if(model.discountedMembers[d].userId === userId){
@@ -191,6 +284,7 @@
 				// }
 				// How to cancel the request????????????
 				var discount = {};
+				var userId = user._id;
 				discount.userId = userId;
 				discount.eventId = eventId;
 				switch (discountName){
@@ -226,102 +320,170 @@
 						discount.discountTag = discountTags.groupTag;
 						discount.percentage = 0.9;
 						break;
+					case 'No discount':
+						discount.discountType = discountName;
+						discount.discountTag = discountName;
+						discount.percentage = 1;
+						break;
 				}
-				// discountedMembers.push(discount);
-				// console.log(discountedMembers);
-				hadDiscount(userId, function(alreadyHad){
-					if(!alreadyHad){
-						eventsService
-							.addToDiscountedMembers(discount)
-							.then(function(result){
-								if(result.data._id){
-									console.log('User Added...');
-									model.giveADiscountError = false;
-								}else{
-									model.giveADiscountError = result.data;
-								}
-								$route.reload();
-							});
-					}	
+				
+				
+				// call getTotals instead of hadDiscout()
+				getTotals(user, eventId, function(totals){
+					var ids = {userId: userId, eventId: eventId};
+					discount.eventDays = totals.newEventDays;
+					discount.discountedEventPrice = ((model.eventDetails.price / model.eventDetails.eventDays.length)*discount.percentage) * discount.eventDays.length;
+					discount.normalEventPrice = (model.eventDetails.price / model.eventDetails.eventDays.length) * totals.newEventDays.length;
+						if(discount.discountType !== 'No discount'){
+							eventsService
+								.addToDiscountedMembers(ids)
+								.then(function(result){
+									if(result.data._id){
+										console.log('User Added...');
+										model.giveADiscountError = false;
+									}else{
+										model.giveADiscountError = result.data;
+									}
+								});
+							discount.normalEventPrice = 0;
+							userService
+								.updateUserEventParameters(discount)
+								.then(function(result){
+									if(result.data._id){
+										console.log('User updated...');
+										$route.reload();
+									}else{
+										model.giveADiscountError = result.data;	
+									}
+								});
+						}else{
+							discount.discountedEventPrice = 0;
+							userService
+								.updateUserEventParameters(discount)
+								.then(function(result){
+									if(result.data._id){
+										console.log('User updated...');
+										$route.reload();
+									}else{
+										model.giveADiscountError = result.data;	
+									}
+								});
+						}
+
 				});
 				
 
-				// $scope.form.discountForm.$setPristine();
-				// $('#discountForm').trigger("reset()");
-				// document.getElementById('discountForm').$setPristine();
 			}
 
+			function getUserPayments(user, eventId){
+				for(var e in user.userEventParameters){
+					if(user.userEventParameters[e].eventId === eventId){
+						return user.userEventParameters[e].payments;
+					}
+				}
+			}
 
+			function getGrandTotals(){
+				console.log(model.eventDetails);
+				var grandTotal = 0;
+				for(var i in model.eventDetails.registeredMembers){
+					grandTotal += getTotals(model.eventDetails.registeredMembers[i], model.eventDetails._id).totalOfPayments;
+				}
+				return grandTotal;
+			}
 
-
-			function countAttendance(attendees){
-				model.attendedM = 0;
-				model.attendanceArray = [];
+			function getTotals(user, eventId, callBack){
+				var totals = {};
+				var eventPrice = null;
+				// var discountTag = null;
+				totals.totalOfPayments = 0;
+				// var discountType = null;
+				var originalDailyPrice = model.eventDetails.price/model.eventDetails.eventDays.length;
 				
-				for(var m in model.eventDetails.registeredMembers){
-					model.attendanceArray.push({
-						eventId: model.eventDetails._id,
-						userId: model.eventDetails.registeredMembers[m]._id,
-						date: new Date().toDateString(),
-						attended: false
-					});
+				
+				var today = new Date();
+				var daysPerWeek = model.eventDetails.daysPerWeek;
+				
+				// create event days array starting from the payment date
+				eventDaysLoop:
+				for(var d in model.eventDetails.eventDays){
+					if(today <= new Date(model.eventDetails.eventDays[d])){
+						totals.newEventDays = model.eventDetails.eventDays.slice(d);
+						break eventDaysLoop;
+					}
 				}
 
+				// calculating weeks
+				totals.eventWeeks = Math.ceil(totals.newEventDays.length/daysPerWeek.length);
+					
 
-				for(var n in model.attendanceArray){
-					for(var x in Object.keys(attendees)){
-						if(Object.keys(attendees)[x] === model.attendanceArray[n].userId){
-							model.attendanceArray[n].attended = attendees[Object.keys(attendees)[x]];
-							Object.keys(attendees).splice(x, 1);
+
+				// Calculate the event price for user whom have a discount
+				for(var e in user.userEventParameters){
+					if(user.userEventParameters[e].eventId === eventId){
+						totals.discountedDailyPrice = originalDailyPrice * user.userEventParameters[e].percentage;
+						totals.fullEventPrice = totals.discountedDailyPrice * totals.newEventDays.length;
+						// totals.eventNormalPrice = originalDailyPrice * totals.newEventDays.length;
+						totals.discountedWeeklyPrice = totals.fullEventPrice/totals.eventWeeks;
+						totals.discountType = user.userEventParameters[e].discountType;
+						totals.discountTag = user.userEventParameters[e].discountTag;
+						totals.userPayments = user.userEventParameters[e].payments;
+						for(var x in user.userEventParameters[e].payments){
+							totals.totalOfPayments+= JSON.parse(user.userEventParameters[e].payments[x].amount);	
 						}
 					}
 				}
 
+				totals.balance = totals.totalOfPayments - totals.fullEventPrice;
 
-				for(var j in model.attendanceArray){
-					if(model.attendanceArray[j].attended === true){
-						model.attendedM+=1;
-					}
-				}
-			}
-			
-
-			// make it on the database
-			function confirmAttendance(totalAttended){
-				userService
-					.confirmAttendance(totalAttended)
-					.then(function(result){
-					});
-			}
-
-			
-			function getTotals(user, eventId){
-				var eventPrice = null;
-				var discountTag = null;
-				// Calculate the event price for user that they have a discount
-				for(var d in model.discountedMembers){
-					if(model.discountedMembers[d].userId === user._id){
-						eventPrice = model.eventDetails.price * model.discountedMembers[d].percentage;
-						discountType = model.discountedMembers[d].discountType; 
-						discountTag = model.discountedMembers[d].discountTag;
-					}
+				if(callBack){
+					callBack(totals);
+				}else{
+					return totals;
 				}
 				
+				// for(var d in model.discountedMembers){
+				// 	if(model.discountedMembers[d].userId === user._id){
+				// 		eventPrice = model.eventDetails.price * model.discountedMembers[d].percentage;
+				// 		discountType = model.discountedMembers[d].discountType; 
+				// 		discountTag = model.discountedMembers[d].discountTag;
+				// 	}
+				// }
+				
 
-				var totalOfPayments = 0;
 				// search for the user if he is in the discounted members then calculate the price and the balance
 				// Calculate user's total of payments
-				for(var x in user.payments){
-					if(user.payments[x].eventId === eventId){
-						totalOfPayments+= JSON.parse(user.payments[x].paymentAmount);
-					}
-				}
-				if(eventPrice){
-					return {eventId:{eventPrice: eventPrice, discountType: discountType, discountTag: discountTag, total: totalOfPayments, balance: totalOfPayments-eventPrice}};	
-				}else{
-					return {eventId:{eventPrice: model.eventDetails.price, discountType: 'No discount.', discountTag: 'No discount', total: totalOfPayments, balance: totalOfPayments-model.eventDetails.price}};
-				}
+				
+				// for(var x in user.payments){
+				// 	if(user.payments[x].eventId === eventId){
+				// 		totalOfPayments+= JSON.parse(user.payments[x].paymentAmount);
+				// 	}
+				// }
+				// if(eventPrice !== model.eventDetails.price){
+				// 	return {eventPrice: eventPrice, discountType: discountType, discountTag: discountTag, total: totalOfPayments, balance: totalOfPayments-eventPrice};	
+				// }else{
+				// 	return {eventPrice: model.eventDetails.price, discountType: 'No discount.', discountTag: 'No discount', total: totalOfPayments, balance: totalOfPayments-model.eventDetails.price};
+				// }
+				
+
+				// return totals;
 			}
+
+
+
+
+
+
+
+			// Check if user had a discount to disabled the discount button
+			function hadDiscount(userId){
+				var hadIt = false;
+				if(model.eventDetails.discountedMembers.indexOf(userId) !== -1){
+					hadIt = true;
+				}
+				return hadIt;
+			}
+
 
 			function makePayment(userId, eventId, paymentDate, paymentAmount){
 				var payment = {};
@@ -337,6 +499,154 @@
 					});
 			}
 
+			function getEventFeedbacks(){
+				return model.eventFeedbacks;
+			}
+
+
+			function countAttendance(){
+				model.attendedM = 0;
+				model.attendanceArray = [];
+				
+				for(var m in model.eventDetails.registeredMembers){
+					// console.log(model.eventDetails.registeredMembers[m]);
+					parametersLoop:
+					for(var p in model.eventDetails.registeredMembers[m].userEventParameters){
+						for(var h in model.eventDetails.registeredMembers[m].userEventParameters[p]){
+							if(model.eventDetails.registeredMembers[m].userEventParameters[p].eventId === model.eventDetails._id){
+								for(var a in model.eventDetails.registeredMembers[m].userEventParameters[p].attendedDays){
+									if(model.eventDetails.registeredMembers[m].userEventParameters[p].attendedDays.length === 0){
+										attended = false;
+										break parametersLoop;
+									}
+									else if(model.eventDetails.registeredMembers[m].userEventParameters[p].attendedDays[a].date === new Date().toDateString()){
+										attended = model.eventDetails.registeredMembers[m].userEventParameters[p].attendedDays[a].attended;
+										break parametersLoop;
+									}
+								}
+							}
+						}
+						attended = false;
+					}
+					model.attendanceArray.push({
+						name: model.eventDetails.registeredMembers[m].name,
+						userId: model.eventDetails.registeredMembers[m]._id,
+						eventId: model.eventDetails._id,
+						date: new Date().toDateString(),
+						attended: attended
+					});
+				}
+				console.log(model.attendanceArray);
+			}
+
+
+			// function countAttendance(attendees){
+			// 	model.attendedM = 0;
+			// 	model.attendanceArray = [];
+				
+			// 	for(var m in model.eventDetails.registeredMembers){
+			// 		model.attendanceArray.push({
+			// 			eventId: model.eventDetails._id,
+			// 			userId: model.eventDetails.registeredMembers[m]._id,
+			// 			date: new Date().toDateString(),
+			// 			attended: false
+			// 		});
+			// 	}
+
+
+			// 	for(var n in model.attendanceArray){
+			// 		for(var x in Object.keys(attendees)){
+			// 			if(Object.keys(attendees)[x] === model.attendanceArray[n].userId){
+			// 				model.attendanceArray[n].attended = attendees[Object.keys(attendees)[x]];
+			// 				Object.keys(attendees).splice(x, 1);
+			// 			}
+			// 		}
+			// 	}
+
+
+			// 	for(var j in model.attendanceArray){
+			// 		if(model.attendanceArray[j].attended === true){
+			// 			model.attendedM+=1;
+			// 		}
+			// 	}
+			// }
+			
+
+
+			// make it on the database
+			function confirmAttendance(totalAttended){
+				console.log(totalAttended);
+				userService
+					.confirmAttendance(totalAttended)
+					.then(function(result){
+						console.log(result);
+					});
+			}
+
+
+			function getAttendance(attended){				
+				var att = {};
+				att.attended = attended.filter(function(a){
+					return a.attended === true;
+				});
+				att.missed = attended.filter(function(a){
+					return a.attended === false;
+				});
+				return att;
+			}
+
+			
+			function prepareFreezeDays(user){
+				model.userUseFreezeBefore = false;
+				// check if user already freeze before
+				for(var p in user.userEventParameters){
+					if(user.userEventParameters[p].eventId === model.eventDetails._id){
+						if(user.userEventParameters[p].freezeDays.length >0){
+							model.userUseFreezeBefore = true;
+							model.alreadyFreezedDays = user.userEventParameters[p].freezeDays;
+						}
+					}
+				}
+				model.freezedDays = {};
+				var t = user.userEventParameters.filter(function(parameter){return parameter.eventId === model.eventDetails._id});
+				model.daysToFreezeFrom = t[0].eventDays.filter(function(day){return new Date(day) >= new Date()});
+			}
+
+
+			function freezeMember(userId, eventId, days){
+				// collect freezed days
+				var final = [];
+				// filter the selected days from the days
+				for(var i in days){
+					if(days[i] === true){
+						final.push(i);
+					}
+				}
+				var freezeObject = {userId: userId, eventId: eventId, days: final};
+				// make it on DB
+				userService
+					.freezeMembership(freezeObject)
+					.then(function(result){
+						console.log(result.data);
+					});
+			}
+
+			function getFreezedMembers(){
+				// var freezed = [];
+				// for(var u in model.eventDetails.registeredMembers){
+				// 	for(var p in model.eventDetails.registeredMembers[u].userEventParameters){
+				// 		if(model.eventDetails.registeredMembers[u].userEventParameters[p].eventId === model.eventDetails._id && model.eventDetails.registeredMembers[u].userEventParameters[p].freezeDays.length > 0){
+				// 			freezed.push({
+				// 				userName: model.eventDetails.registeredMembers[u].name,
+				// 				freezedDays: model.eventDetails.registeredMembers[u].userEventParameters[p].freezeDays
+				// 			});
+				// 		}
+				// 	}
+				// }
+				// console.log(model.freezedMembers)
+				return model.freezedMembers;
+			}
+			
 
 			function logout(){
 				userService

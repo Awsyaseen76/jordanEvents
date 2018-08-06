@@ -197,10 +197,10 @@
 									    </tr>
 									  </thead>
 									  <tbody>
-									    <tr ng-repeat="feedback in model.userProfile.userFeedback">
-									      <td>{{feedback.date | date}}</td>
-									      <td>{{feedback.eventName}}</td>
-									      <td>{{feedback.feedbackText}}</td>
+									    <tr ng-repeat="feed in model.userFeedbacks">
+									      <td>{{feed.date | date}}</td>
+									      <td>{{feed.eventName}}</td>
+									      <td>{{feed.feedback}}</td>
 									    </tr>
 									  </tbody>
 									</table>

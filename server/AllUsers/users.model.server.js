@@ -23,84 +23,143 @@ usersDB.updateProfile = updateProfile;
 usersDB.makePayment = makePayment;
 usersDB.confirmAttendance = confirmAttendance;
 usersDB.submitFeedback = submitFeedback;
+usersDB.updateUserEventParameters = updateUserEventParameters;
+usersDB.freezeMembership = freezeMembership;
+
+
+function freezeMembership(freezeObject){
+	var userId = freezeObject.userId;
+	var eventId = freezeObject.eventId;
+	var days = freezeObject.days;
+	return usersDB
+				.findById(userId)
+				.then(function(user){
+					for(var p in user.userEventParameters){
+						if(user.userEventParameters[p].eventId === eventId){
+							user.userEventParameters[p].freezeDays = days;
+							return user.save();
+						}
+					}
+				});
+}
+
+function updateUserEventParameters(discount){
+	var userId = discount.userId;
+	var eventId = discount.eventId;
+	return usersDB
+				.findById(userId)
+				.then(function (user){
+					for(var e in user.userEventParameters){
+						if(user.userEventParameters[e].eventId === eventId){
+							if(user.userEventParameters[e].discountType === ''){
+							 	user.userEventParameters[e].discountType = discount.discountType;
+							 	user.userEventParameters[e].discountTag = discount.discountTag;
+							 	user.userEventParameters[e].percentage = discount.percentage;
+							 	user.userEventParameters[e].discountedEventPrice = discount.discountedEventPrice;
+							 	user.userEventParameters[e].normalEventPrice = discount.normalEventPrice;
+							 	user.userEventParameters[e].eventDays = discount.eventDays;
+							 	return user.save();								
+							}else{
+								var err = 'You Already had a discount!';
+								return err;
+							}
+						}
+					}
+				});
+}
 
 
 function submitFeedback(feedbackObject){
 	var userId = feedbackObject.userId;
-	feedbackObject.date = new Date();
+	var eventId = feedbackObject.eventId;
+	var feedDate = new Date();
+	// var feedbackObject = {userId: model.loggedUser._id, eventId: eventId, eventName: eventName, feedbackText: feedbackText};
+	var feed = {date: feedDate, eventName: feedbackObject.eventName, feedback: feedbackObject.feedbackText};
 	return usersDB
-		.findUserById(userId)
+		.findById(userId)
 		.then(function(user){
-			user.userFeedback.push(feedbackObject);
+			// user.userFeedback.push(feedbackObject);
+			for(var i in user.userEventParameters){
+				if(user.userEventParameters[i].eventId === eventId){
+					user.userEventParameters[i].feedbacks.push(feed);
+				}
+			}
 			return user.save();
 		});
 }
 
 
-function confirmAttendance(totalAttended){
+function confirmAttendance(attendedUser){
 	return usersDB
-		.findById(totalAttended.userId)
+		.findById(attendedUser.userId)
 		.then(function(user){
-			// loop the attendedEvents if the event and the date is the same remove the old one and update the attended with the new object
-			for(var i in user.attendedEvents){
-				if(user.attendedEvents[i].eventId === totalAttended.eventId && user.attendedEvents[i].date === totalAttended.date){
-					user.attendedEvents.splice(i,1);
-					user.attendedEvents.push({eventId: totalAttended.eventId, 
-									  date: totalAttended.date, 
-									  attended: totalAttended.attended
-									});
+			// loop the userEventParameters
+			for(var i in user.userEventParameters){
+				if(user.userEventParameters[i].eventId === attendedUser.eventId){
+					for(var j in user.userEventParameters[i].attendedDays){
+						if(user.userEventParameters[i].attendedDays.length === 0){
+							user.userEventParameters[i].attendedDays.push({
+								date: attendedUser.date,
+								attended: attendedUser.attended
+							});
+							return user.save();
+						}else if(user.userEventParameters[i].attendedDays[j].date === attendedUser.date){
+							user.userEventParameters[i].attendedDays[j].attended = attendedUser.attended;
+							return user.save();
+						}
+					}
+					user.userEventParameters[i].attendedDays.push({
+						date: attendedUser.date,
+						attended: attendedUser.attended
+					});
 					return user.save();
 				}
+
 			}
-			user.attendedEvents.push({eventId: totalAttended.eventId, 
-									  date: totalAttended.date, 
-									  attended: totalAttended.attended
-									});
-			return user.save();
+			// loop the attendedEvents if the event and the date is the same remove the old one and update the attended with the new object
+			// for(var i in user.attendedEvents){
+			// 	if(user.attendedEvents[i].eventId === attendedUser.eventId && user.attendedEvents[i].date === attendedUser.date){
+			// 		user.attendedEvents.splice(i,1);
+			// 		user.attendedEvents.push({eventId: attendedUser.eventId, 
+			// 						  date: attendedUser.date, 
+			// 						  attended: attendedUser.attended
+			// 						});
+			// 		return user.save();
+			// 	}
+			// }
+			// user.attendedEvents.push({eventId: attendedUser.eventId, 
+			// 						  date: attendedUser.date, 
+			// 						  attended: attendedUser.attended
+			// 						});
+			// return user.save();
 		});
 }
 
 
 function makePayment(payment){
 	var userId = payment.userId;
+	var eventId = payment.eventId;
+	var paymentDate = payment.paymentDate;
+	var paymentAmount = payment.paymentAmount;
 	return usersDB
-				.findById(userId)
-				.then(function (user){
-					user.payments.push(
-								{eventId: payment.eventId,
-								 paymentDate: payment.paymentDate,
-								 paymentAmount: JSON.parse(payment.paymentAmount)});
-					return user.save();
-				});
-				// 	if(user.totalOfPayments.length === 0){
-				// 		user.totalOfPayments.push({
-				// 			eventId: payment.eventId,
-				// 			totalAmount: JSON.parse(payment.amount)
-				// 		});
-				// 		return user.save();
-				// 	}
-				// 	for(var i in user.totalOfPayments){
-				// 		console.log(user.totalOfPayments[i].eventId === payment.eventId);
-				// 		if(user.totalOfPayments[i].eventId === payment.eventId){
-				// 			var totalPayment = user.totalOfPayments[i].totalAmount + JSON.parse(payment.amount);
-				// 			console.log(totalPayment);
-				// 			user.set({
-				// 				totalOfPayments[i].eventId: payment.eventId,
-				// 				totalOfPayments[i].totalAmount: totalPayment
-											
-				// 			});
-				// 			// user.totalOfPayments[i].totalAmount = JSON.parse(payment.amount)
-				// 			console.log(user.totalOfPayments[i].totalAmount)
-				// 			return user.save();
-				// 		}
-				// 	}
-				// 	console.log('im here');
-				// 	user.totalOfPayments.push({
-				// 		eventId: payment.eventId,
-				// 		totalAmount: JSON.parse(payment.amount)
-				// 	})	
-				// 	return user.save();
-				// })
+			.findById(userId)
+			.then(function(user){
+				for(var i in user.userEventParameters){
+					if(user.userEventParameters[i].eventId === eventId){
+						user.userEventParameters[i].payments.push({date: paymentDate, amount: paymentAmount});
+						return user.save();
+					}
+				}
+			});
+	// return usersDB
+	// 			.findById(userId)
+	// 			.then(function (user){
+	// 				user.payments.push(
+	// 							{eventId: payment.eventId,
+	// 							 paymentDate: payment.paymentDate,
+	// 							 paymentAmount: JSON.parse(payment.paymentAmount)});
+	// 				return user.save();
+	// 			});
 }
 
 
@@ -204,6 +263,21 @@ function addEventId(userId, eventId){
 function addEventToUserEventsList(userId, eventId){
 	return findUserById(userId)
 				.then(function(user){
+					// this will be instead of registeredEventsList
+					var eventParams = {
+					 	eventId: eventId,
+					 	discountType: '',
+					 	discountTag: '',
+					 	percentage: 1,
+					 	eventDays: [],
+					 	discountedEventPrice: 0,
+					 	freezeDays: [],
+					 	payments: [],
+					 	attendedDays: [],
+					 	feedbacks: []
+					};
+					user.userEventParameters.push(eventParams);
+					// ////////////
 					user.registeredEventsList.push(eventId);
 					return user.save();
 		});

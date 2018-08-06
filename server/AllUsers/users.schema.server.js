@@ -20,6 +20,42 @@ var usersSchema = mongoose.Schema({
 	},
 	events: [{type: mongoose.Schema.Types.ObjectId, ref: 'eventsDB'}],
 	registeredEventsList: [{type: mongoose.Schema.Types.ObjectId, ref:'eventsDB'}],
+	userEventParameters: [
+        {
+            _id: false,
+            eventId: String,
+            discountType: String,
+            discountTag: String,
+            percentage: Number,
+            eventDays: [String],
+            discountedEventPrice: Number,
+            normalEventPrice: Number,
+            freezeDays: [String],
+            payments: [
+            	{
+            		_id: false,
+            		date: Date,
+            		amount: Number
+            	}
+            ],
+            attendedDays: [
+            	{
+            		_id: false,
+            		date: String,
+            		attended: Boolean	
+            	}
+            ],
+            feedbacks: [
+            	{
+            		_id: false,
+            		date: Date,
+            		eventName: String,
+            		feedback: String
+            	}
+            ]
+        }
+
+	],
 	google: {
         id: String,
         token: String

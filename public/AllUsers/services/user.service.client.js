@@ -22,12 +22,24 @@
 		this.makePayment = makePayment;
 		this.confirmAttendance = confirmAttendance;
 		this.submitFeedback = submitFeedback;
+		this.updateUserEventParameters = updateUserEventParameters;
+		this.freezeMembership = freezeMembership;
 		
 
 
 		function init() {}
 		init();
 
+
+		function freezeMembership(freezeObject){
+			var url = '/api/user/freezeMembership';
+			return $http.put(url, freezeObject);
+		}
+
+		function updateUserEventParameters(discount){
+			var url = '/api/user/updateUserEventParameters';
+			return $http.put(url, discount);
+		}
 
 		function submitFeedback(feedbackObject){
 			var url = '/api/user/submitFeedback';

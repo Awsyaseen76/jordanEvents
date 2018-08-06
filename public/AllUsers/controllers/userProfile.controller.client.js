@@ -10,18 +10,24 @@
 			model.userProfile = loggedUser;
 			model.loggedUser = loggedUser;
 			model.upcommingProgram = [];
+			model.userFeedbacks = [];
 			model.registeredEventsList = model.userProfile.registeredEventsList;
-
+			// get the upcomming daily program item
 			for(var i in model.userProfile.registeredEventsList){
 				inner: 
 				for(var e in model.userProfile.registeredEventsList[i].programDailyDetails){
 					if(new Date(e) >= new Date()){
-						var upcome = {}
+						// var upcome = {}
 						model.upcommingProgram.push({event: model.userProfile.registeredEventsList[i].name, 
 													 date: new Date(e),
 													 programDetails: model.userProfile.registeredEventsList[i].programDailyDetails[e]});
 						break inner;
 					}
+				}
+			}
+			for(var j in model.userProfile.userEventParameters){
+				for(var f in model.userProfile.userEventParameters[j].feedbacks){
+					model.userFeedbacks.push(model.userProfile.userEventParameters[j].feedbacks[f]);
 				}
 			}
 		}
@@ -36,7 +42,7 @@
 		model.submitFeedback = submitFeedback;
 
 		function submitFeedback(eventId, eventName,feedbackText){
-			var feedbackObject = {userId: model.loggedUser._id, eventId: eventId, eventName: eventName,feedbackText: feedbackText};
+			var feedbackObject = {userId: model.loggedUser._id, eventId: eventId, eventName: eventName, feedbackText: feedbackText};
 			userService
 				.submitFeedback(feedbackObject)
 				.then(function(result){

@@ -20,9 +20,9 @@ module.exports = function(app) {
 
 
 	function addToDiscountedMembers(req, res){
-		var discount = req.body;
+		var ids = req.body;
 		eventsDB
-			.addToDiscountedMembers(discount)
+			.addToDiscountedMembers(ids)
 			.then(function(result){
 				res.send(result);
 			});

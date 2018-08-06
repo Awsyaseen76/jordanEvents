@@ -18,17 +18,18 @@ eventsDB.addMemberToEvent = addMemberToEvent;
 eventsDB.addToDiscountedMembers = addToDiscountedMembers;
 
 
-function addToDiscountedMembers(discount){
-	var eventId = discount.eventId;
+function addToDiscountedMembers(ids){
+	var eventId = ids.eventId;
+	var userId = ids.userId;
 	return eventsDB
 				.findById(eventId)
 				.then(function(event){
 					for(var u in event.discountedMembers){
-						if(event.discountedMembers[u].userId === discount.userId){
-							var err = 'You Already had a '+ event.discountedMembers[u].discountType+'!'
+						if(event.discountedMembers[u] === userId){
+							var err = 'You Already had a discount!';
 							return (err);
 						}else{
-							event.discountedMembers.push(discount);
+							event.discountedMembers.push(userId);
 							return event.save();
 							
 						}
