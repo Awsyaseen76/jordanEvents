@@ -17,7 +17,19 @@ module.exports = function(app) {
 	app.get('/api/eventConfig', eventConfig);
 	app.get('/api/getMapBoxKey', getMapBoxKey);
 	app.put('/api/event/addToDiscountedMembers', addToDiscountedMembers);
+	app.put('/api/event/addExpense', addExpense);
 
+
+	function addExpense(req, res){
+		var expense = req.body;
+		var eventId = expense.eventId;
+		delete(expense.eventId);
+		eventsDB
+			.addExpense(eventId, expense)
+			.then(function(result){
+				res.send(result);
+			});
+	}
 
 	function addToDiscountedMembers(req, res){
 		var ids = req.body;

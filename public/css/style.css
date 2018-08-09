@@ -101,6 +101,17 @@ table#t01 th {
     background-color: #036;
     color: white;
 }
+
+
+/* No new line*/
+table td, th{
+    white-space: nowrap;
+}
+table td:last-child{
+    width:100%;
+}
+
+
 /* /table style*/
 
 
@@ -203,7 +214,6 @@ input:checked + .slider:before {
   width: 100%;
   /*margin-top: 30px;*/
 }
-
 
 
 

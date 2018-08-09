@@ -264,9 +264,34 @@ User actions from starting register for particular evet:
 				4. submit.
 	- datails show user's payments and the totals with the discount type and tag.
 	- maker can tage the attendance for the date throught the same day multiple times even after submit, and the modal will show to totals in the bottomn.
-	- maker can give a freeze for user membership once through the event by selecting the days the user want to freeze, if the user already had a freezed days then the checkboxes of the days will be disabled and note displayed that the user already had a freezed days, the freezed days appear on the bottomn of the modal.
-	
+	- Freeze membership:
+		1. [x] maker can give a freeze for user membership once through the event by selecting the days the user want to freeze, if the user already had a freezed days then the checkboxes of the days will be disabled and note displayed that the user already had a freezed days, the freezed days appear on the bottomn of the modal.
+		2. [ ] next time when user register for the same event recognised by event name if the user have freezed days when maker choose the discount type to create the userEventParameters loop on the userEventParameters searching for the old event if the user had sfreezedDays, if yes; calculate the event days will be by starting from the day that the user register then deduct the freezed days from the result then remove the freezed days from that event.
+	- [x] creat additional modal to collect expenses by date select the category(salary, hospitality, rental fees, misc) then textbox for details.
+	- [x] create additional button and modal for the attendance history for each member.
+	- [ ] Maker has the ability to choose which comments to be published on the main page.
 
+
+
+	 
+
+
+
+Notes:
+06/Aug/2018
+	- group and family tag to be shown on the discount modal.
+	- delete the freezed days from the next event.
+	- maker decided to publish the comments on main page.
+	- create additional button and modal for the attendance history for each member.
+	- creat additional modal to collect expenses by date select the category(salary, hospitality, rental fees) then textbox for details. export to excel.
+	- create memberShip serial number (today.getFullYear()+serial) Year0001 20180001 continiouse for all members.
+	- report for families and groups for maker tab for family other for groups with members.
+	- mahdi modal
+	- export expenses to excel.
+
+Important:
+ - give the maker option to create a new event from previouse one data so the name will be the same
+ - User with freezed membership should appear disabled on attendance
 
 
 

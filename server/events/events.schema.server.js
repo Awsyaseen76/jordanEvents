@@ -28,7 +28,16 @@ var eventsSchema = mongoose.Schema({
 			address: String,
 			coordinates: [Number],
 			registeredMembers: [{type: mongoose.Schema.Types.ObjectId, ref: 'usersDB'}],
-			discountedMembers: []
+			discountedMembers: [],
+			expenses: [
+						{
+							_id: false,
+							expenseDate: Date, 
+							expenseType: String, 
+							expenseDetails: String, 
+							expenseAmount: Number
+						}
+					  ]
 }, {collection: 'events'});
 
 module.exports = eventsSchema;

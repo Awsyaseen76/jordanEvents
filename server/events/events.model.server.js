@@ -16,6 +16,20 @@ eventsDB.removeEvent = removeEvent;
 eventsDB.updateEventByAdmin = updateEventByAdmin;
 eventsDB.addMemberToEvent = addMemberToEvent;
 eventsDB.addToDiscountedMembers = addToDiscountedMembers;
+eventsDB.addExpense = addExpense;
+
+
+function addExpense(eventId, expense){
+	// var eventId = expense.eventId;
+	return eventsDB
+				.findById(eventId)
+				.then(function(event){
+					// delete(expense.eventId);
+					// console.log(expense);
+					event.expenses.push(expense);
+					return event.save();
+				});
+}
 
 
 function addToDiscountedMembers(ids){

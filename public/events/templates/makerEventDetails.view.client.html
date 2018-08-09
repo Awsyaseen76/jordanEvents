@@ -41,12 +41,175 @@
 
 	<!-- Event Image -->
 	<img class="img-fluid rounded mb-4" ng-src="{{model.eventDetails.images.img1200x300}}" alt="">
-	<h3>Event Name: </h3>
-	<p>{{model.eventDetails.name}}</p>
-	<h3>Start date: </h3>
-	<p>{{model.eventDetails.startingDate | date}}</p>
-	<h3>End date: </h3>
-	<p>{{model.eventDetails.expiryDate | date}}</p>
+	<div class="row">
+		<div class="col-sm-4">
+			<h3>Event Name: </h3>
+		</div>
+		<div class="col-sm-4">
+			<h3>Start date: </h3>
+		</div>
+		<div class="col-sm-4">
+			<h3>End date: </h3>
+		</div>
+	</div>
+	<div class="row" style="color: #093">
+		<div class="col-sm-4">
+			<h5>{{model.eventDetails.name}}</h5>
+		</div>
+		<div class="col-sm-4">
+			<h5>{{model.eventDetails.startingDate | date}}</h5>
+		</div>
+		<div class="col-sm-4">
+			<h5>{{model.eventDetails.expiryDate | date}}</h5>
+		</div>
+	</div>
+
+	<br>
+
+<!-- Expenses -->
+	<div class="row">
+		<div class="col-sm-4">
+			<button class="btn btn-success" ng-click="model.prepareExpenses()" data-toggle="modal" data-target="#eventExpensesModal"><b>Event expeses</b></button>
+		</div>
+	</div>
+	<div class="modal fade" id="eventExpensesModal" role="dialog">
+		<div class="modal-dialog modal-lg">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h5 class="modal-title">Expenses..</h5>
+				</div>
+				<div class="modal-body">
+					<form id="expensesForm">
+						<div class="row">
+							<div class="col-sm-3">
+								<p><b>Date</b></p>
+							</div>
+							<div class="col-sm-3">
+								<p><b>Expenses type</b></p>
+							</div>
+							<div class="col-sm-3">
+								<p><b>Expense details</b></p>
+							</div>
+							<div class="col-sm-3">
+								<p><b>Amount</b></p>
+							</div>
+						</div>
+						<div class="row">
+							<div class="col-sm-3" style="margin-top: -10px;">
+								<input type="date" name="expensesDate" ng-model="expenses.date" class="form-control">
+							</div>
+							<div class="col-sm-3" style="margin-top: -10px;">
+								<select id="expensesSelector" class="custom-select" ng-options="expense.name for expense in model.expensesTypes" ng-model="model.selectedExpenseType"></select>
+							</div>
+							<div class="col-sm-3" style="margin-top: -10px;">
+								<input type="text" name="expenseDetails" class="form-control" ng-model="expenses.details">
+							</div>
+							<div class="col-sm-3" style="margin-top: -10px;">
+								<input type="text" name="expenseAmount" class="form-control" ng-model="expenses.amount">
+							</div>
+						</div>
+						
+						<br>
+						<input type="submit" class="btn btn-success pull-right" name="addExpense" ng-click="model.addExpense(expenses, model.selectedExpenseType)" data-dismiss="modal">
+					</form>
+					<br>
+				</div>
+			
+				<hr>
+				
+
+				<div>
+					<div class="row">
+						<label for="searchExpense" class="col-sm-3" style="margin-left: 20px;"><b>Search expense: </b></label>
+						<input type="text" class="form-control col-sm-7" name="searchExpense" id="searchExpense" ng-model="searchExpense">
+					</div>
+					<br>
+					<div style="width: 80%; margin: auto;">
+						<table class="table table-hover">
+							<thead>
+								<th>Date</th>
+								<th>Type</th>
+								<th width="50%">Details</th>
+								<th>Amount</th>
+							</thead>
+							<tr ng-repeat="ex in model.eventExpenses | filter: searchExpense">
+								<td>{{ex.expenseDate | date:"dd/MM/yyyy"}}</td>
+								<td>{{ex.expenseType}}</td>
+								<td width="50%">{{ex.expenseDetails}}</td>
+								<td>{{ex.expenseAmount | currency: 'JOD '}}</td>
+							</tr>
+						</table>
+					</div>
+				</div>
+
+				<br>
+				<br>
+				<!-- Summary of expenses -->
+				<div style="width: 80%; margin: auto;">
+					<table>
+						<tr>
+							<thead style="background: #fc9; color: #036;">
+								<th width="70%"><h3>Expenses Summary:</h3></th>
+								<th width="30%"></th>
+							</thead>
+						</tr>
+						<tr style="background: bisque; color: darkred;" ng-repeat="(key, value) in model.expensesSummary">
+							<td width="70%"><b>Total of {{key}}: </b></td>
+							<td width="30%">{{value}}</td>
+						</tr>
+						<tr  style="background: #fff9ff; color: #360;">
+							<td width="70%"><b>Total income: </b></td>
+							<td width="30%">{{model.totalIncomeFromEvent}}</td>
+						</tr>
+						<tr  style="background: #36c; color: #ffffe1;">
+							<td width="70%"><b>Profit / Loss: </b></td>
+							<td width="30%">{{model.totalIncomeFromEvent - model.totalOfExpenses}}</td>
+						</tr>
+
+
+
+						<!-- <tr style="background: bisque; color: darkred;">
+							<td width="70%"><b>Total of salaries: </b></td>
+							<td width="30%">{{model.expensesSummary.salaryEx | currency:"JOD "}}</td>
+						</tr>
+						<tr style="background: bisque; color: darkred;">
+							<td width="70%"><b>Total of hospitality fees: </b></td>
+							<td width="30%">{{model.expensesSummary.hospitalityEx | currency:"JOD "}}</td>
+						</tr>
+						<tr style="background: bisque; color: darkred;">
+							<td width="70%"><b>Total of rental fees: </b></td>
+							<td width="30%">{{model.expensesSummary.rentalFees | currency:"JOD "}}</td>
+						</tr>
+						<tr style="background: bisque; color: darkred;">
+							<td width="70%"><b>Total of misc. fees: </b></td>
+							<td width="30%">{{model.expensesSummary.miscEx | currency:"JOD "}}</td>
+						</tr>
+						<tr style="background: bisque; color: darkred;">
+							<td width="70%"><b></b></td>
+							<td width="30%"></td>
+						</tr>
+						<tr style="background: bisque; color: #006333;">
+							<td width="70%"><b>Profit / Loss: </b></td>
+							<td width="30%">?????</td>
+						</tr> -->
+					</table>
+				</div>
+			<!-- Summary of expenses -->
+			<br>
+						
+				<div class="modal-footer">
+					<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+				</div>
+			</div>
+		</div>
+	</div>
+<!-- / Expeses -->
+	
+	<br>
+	<hr>
+	<br>
+
+
 	<h3>Members:</h3>
 	<div class="form-group row">
 		<div class="col-sm-3"  style="padding: auto; height: 100%;">
@@ -148,14 +311,15 @@
 	<p class="text-danger" ng-show="model.giveADiscountError">{{model.giveADiscountError}}</p>
 	<table>
 		<thead class="bg-warning">
-			<th>Name</th>
-			<th>Payments</th>
-			<th>Balance</th>
-			<th>Discount</th>
-			<th></th>
-			<th>Make a payment</th>
-			<th>Payments details</th>
-			<th>Freeze member</th>
+			<th width="">Name</th>
+			<th width="">Payments</th>
+			<th width="">Balance</th>
+			<th width="">Discount</th>
+			<!-- <th width=""></th> -->
+			<th width="">Make a payment</th>
+			<th width="">Payments details</th>
+			<th width="">Freeze member</th>
+			<th width="">Attend/Miss</th>
 			<!-- <th>Attendance</th> -->
 		</thead>
 		<tr ng-repeat="user in model.eventDetails.registeredMembers | filter: searchMember">
@@ -174,40 +338,39 @@
 
 			
 				<div class="modal fade" id="discountModal-{{$index}}" role="dialog">
-						<div class="modal-dialog">
-						
-							<!-- Modal content-->
-							<div class="modal-content">
-								<div class="modal-header">
-									<h5 class="modal-title">Give A Discount</h5>
-								</div>
-								<div class="modal-body">
-									<form>
-										<label>Discount type:</label>
-										<select id="discountSelector" ng-model="model.selectedDiscount" class="custom-select" ng-options="discount.name for discount in model.discountTypes" ng-change="model.selectDiscount(user.name)">
-										</select>
-										<input type="text" name="familyTag" class="form-control" ng-model="model.discountTags.familyTag" ng-show="model.thereIsFamilyDiscount">
-										<input type="text" name="groupTag" class="form-control" ng-model="model.discountTags.groupTag" ng-show="model.thereIsGroupDiscount">
-										<select ng-model="specialDiscountType" class="custom-select" ng-options="special.name for special in model.discountTypes[4].types" ng-show="model.thereIsSpecialDiscount">
-										</select>
-										<br>
-										<input type="submit" class="btn btn-success pull-right" name="giveADiscount" ng-click="model.giveADiscount(user, model.eventDetails._id, model.selectedDiscount.name, model.discountTags, specialDiscountType.name)" data-dismiss="modal">
-									</form>
-								</div>
-								<div class="modal-f ooter">
-									<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-								</div>
+					<div class="modal-dialog">
+						<!-- Modal content-->
+						<div class="modal-content">
+							<div class="modal-header">
+								<h5 class="modal-title">Give A Discount</h5>
 							</div>
-							
+							<div class="modal-body">
+								<form>
+									<label>Discount type:</label>
+									<select id="discountSelector" ng-model="model.selectedDiscount" class="custom-select" ng-options="discount.name for discount in model.discountTypes" ng-change="model.selectDiscount(user.name)">
+									</select>
+									<input type="text" name="familyTag" class="form-control" ng-model="model.discountTags.familyTag" ng-show="model.thereIsFamilyDiscount">
+									<input type="text" name="groupTag" class="form-control" ng-model="model.discountTags.groupTag" ng-show="model.thereIsGroupDiscount">
+									<select ng-model="specialDiscountType" class="custom-select" ng-options="special.name for special in model.discountTypes[4].types" ng-show="model.thereIsSpecialDiscount">
+									</select>
+									<br>
+									<input type="submit" class="btn btn-success pull-right" name="giveADiscount" ng-click="model.giveADiscount(user, model.eventDetails._id, model.selectedDiscount.name, model.discountTags, specialDiscountType.name)" data-dismiss="modal">
+								</form>
+							</div>
+							<div class="modal-f ooter">
+								<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+							</div>
 						</div>
+						
 					</div>
+				</div>
 			</td>
 			<!-- /Discount modal -->
 
 
 
 			<!-- Make a payment Modal -->
-			<td></td>
+			<!-- <td></td> -->
 			<td>
 					<button type="button" class="btn btn-info" data-toggle="modal" data-target="#makePaymentModal-{{$index}}">Pay</button>
 
@@ -330,7 +493,59 @@
 				<!-- / Freeze modal -->
 			</td>
 		<!-- / Freeze member -->
+			<td class="text-center">
+				<button type="button" class="btn btn-info" data-toggle="modal" data-target="#attendanceReportModal-{{$index}}" ng-click="model.attendanceReport(user)">Att report</button>
 
+				<div class="modal fade" id="attendanceReportModal-{{$index}}" role="dialog">
+						<div class="modal-dialog">
+						
+							<!-- Modal content-->
+							<div class="modal-content">
+								<div class="modal-header">
+									<h5 class="modal-title">Attendance report..</h5>
+									<button type="button" class="close" data-dismiss="modal">&times;</button>
+								</div>
+								<div class="modal-body">
+									<table>
+										<thead>
+											<th width="70%">Date</th>
+											<th>Atten / Missed</th>
+										</thead>
+										<tr ng-repeat="att in model.attendanceReport.attendedDays">
+											<td>{{att.date}}</td>
+											<td class="text-center">{{att.attMiss}}</td>
+										</tr>
+									</table>
+									<br>
+									<div style="width: 50%">
+										<table>
+											<tr style="background-color: lightgreen; color: black">
+												<td><b>Total days:</b></td>
+												<td>{{model.attendanceReport.attendedTotals + model.attendanceReport.missedTotals}}</td>
+											</tr>
+											<tr style="background-color: lightgreen; color: black">
+												<td><b>Attended:</b></td>
+												<td>{{model.attendanceReport.attendedTotals}}</td>
+											</tr>
+											<tr style="background-color: lightgreen; color: black">
+												<td><b>Missed:</b></td>
+												<td>{{model.attendanceReport.missedTotals}}</td>
+											</tr>
+										</table>
+									</div>
+									<!-- <h5><b>Total days:</b> {{model.attendanceReport.attended.attendedTotals + model.attendanceReport.missed.missedTotals}}</h5>
+									<h5><b>Attended:</b> {{model.attendanceReport.attended.attendedTotals}}</h5>
+									<h5><b>Missed: </b> {{model.attendanceReport.missed.missedTotals}}</h5> -->
+
+								</div>
+								<div class="modal-footer">
+									<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+								</div>
+							</div>
+							
+						</div>
+					</div>
+			</td>
 
 			
 

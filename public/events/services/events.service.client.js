@@ -19,7 +19,12 @@
 		this.eventConfig = eventConfig;
 		this.getMapBoxKey = getMapBoxKey;
 		this.addToDiscountedMembers = addToDiscountedMembers;
+		this.addExpense = addExpense;
 
+
+		function addExpense(expense){
+			return $http.put('/api/event/addExpense', expense);
+		}
 
 		function addToDiscountedMembers(ids){
 			return $http.put('/api/event/addToDiscountedMembers', ids);
