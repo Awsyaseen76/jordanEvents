@@ -28,6 +28,16 @@ var eventsSchema = mongoose.Schema({
 			address: String,
 			coordinates: [Number],
 			registeredMembers: [{type: mongoose.Schema.Types.ObjectId, ref: 'usersDB'}],
+			originalEventId: String,
+			frozeMembers: [
+								{
+									_id: false, 
+									userId: String,
+									eventId: String,
+									userFullName: String,
+									days: []
+								}
+							],
 			discountedMembers: [],
 			expenses: [
 						{

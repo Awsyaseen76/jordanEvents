@@ -25,6 +25,23 @@ usersDB.confirmAttendance = confirmAttendance;
 usersDB.submitFeedback = submitFeedback;
 usersDB.updateUserEventParameters = updateUserEventParameters;
 usersDB.freezeMembership = freezeMembership;
+usersDB.removeFrozeDays = removeFrozeDays;
+
+
+function removeFrozeDays(ids){
+	var userId = ids.userId;
+	var originalEventId = ids.originalEventId;
+	return usersDB
+				.findById(userId)
+				.then(function(user){
+					for(var i in user.userEventParameters){
+						if(user.userEventParameters[i].eventId === originalEventId){
+							user.userEventParameters[i].freezeDays.splice(0, user.userEventParameters[i].freezeDays.length);
+							return user.save();
+						}
+					}
+				});
+}
 
 
 function freezeMembership(freezeObject){

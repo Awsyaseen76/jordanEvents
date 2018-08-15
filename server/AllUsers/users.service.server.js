@@ -133,6 +133,7 @@ app.put('/api/maker/confirmAttendance', confirmAttendance);
 app.put('/api/user/submitFeedback', submitFeedback);
 app.put('/api/user/updateUserEventParameters', updateUserEventParameters);
 app.put('/api/user/freezeMembership', freezeMembership);
+app.delete('/api/user/removeFrozeDays/:userId/:eventId', removeFrozeDays);
 
 
 // ---------------------------------- /APIs requests ----------------------------------
@@ -141,6 +142,20 @@ app.put('/api/user/freezeMembership', freezeMembership);
 
 
 // ------------------------------ Functions ------------------------------
+
+function removeFrozeDays(req, res){
+	// var ids = req.params;
+	var ids = {};
+	ids.userId = req.params.userId;
+	ids.originalEventId = req.params.originalEventId;
+	console.log(ids);
+	usersDB
+		.removeFrozeDays(ids)
+		.then(function(result){
+			res.send(result);
+		});
+}
+
 
 function freezeMembership(req, res){
 	var freezeObject = req.body;

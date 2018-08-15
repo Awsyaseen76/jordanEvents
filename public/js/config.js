@@ -132,6 +132,15 @@
 				}
 			})
 
+			.when('/makerProfile/reNewEvent/:eventId', {
+				templateUrl: 'AllUsers/templates/makerReNewEvent.view.client.html',
+				controller: 'makerReNewEventController',
+				controllerAs: 'model',
+				resolve: {
+					loggedMaker: isMaker
+				}
+			})
+
 			.when('/makerProfile/editEvent', {
 				templateUrl: 'AllUsers/templates/makerEditEvent.view.client.html',
 				controller: 'makerEditEventController',

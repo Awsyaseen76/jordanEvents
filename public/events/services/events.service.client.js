@@ -20,7 +20,21 @@
 		this.getMapBoxKey = getMapBoxKey;
 		this.addToDiscountedMembers = addToDiscountedMembers;
 		this.addExpense = addExpense;
+		this.addToFrozeMembers = addToFrozeMembers;
+		// this.removeFromFrozeMembers = removeFromFrozeMembers;
+		this.removeFrozen = removeFrozen;
 
+
+		function removeFrozen(ids){
+			var userId = ids.userId;
+			var eventId = String(ids.eventId);
+			var originalEventId = ids.originalEventId;
+			return $http.put('/api/event/removeFrozen', ids);
+		}
+
+		function addToFrozeMembers(freezeObject){
+			return $http.put('/api/event/addToFrozeMembers', freezeObject);
+		}
 
 		function addExpense(expense){
 			return $http.put('/api/event/addExpense', expense);

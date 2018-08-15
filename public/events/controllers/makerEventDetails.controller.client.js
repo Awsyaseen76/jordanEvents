@@ -3,7 +3,7 @@
 		.module('jordanEvents')
 		.controller('makerEventDetails', makerEventDetails);
 
-	function makerEventDetails($scope, $routeParams, eventsService, userService, $location, $route, loggedMaker) {
+	function makerEventDetails($routeParams, eventsService, userService, $location, $route, loggedMaker) {
 
 		var model = this;
 		model.logout = logout;
@@ -25,10 +25,15 @@
 		model.getAttendance = getAttendance;
 		model.freezeMember = freezeMember;
 		model.prepareFreezeDays = prepareFreezeDays;
-		model.getFreezedMembers = getFreezedMembers;
+		model.getFrozeMembers = getFrozeMembers;
 		model.prepareExpenses = prepareExpenses;
 		model.addExpense = addExpense;
-		model.attendanceReport = attendanceReport;
+		model.attendanceReportCreater = attendanceReportCreater;
+		// model.removeFrozen = removeFrozen;
+
+
+
+
 		// this is temporary in future the event maker created the discountTypes array
 		model.discountTypes = [{
 				name: 'Discount type...',
@@ -109,7 +114,7 @@
 				.findEventByEventId(eventId)
 				.then(function(eventDetails) {
 					model.eventFeedbacks = [];
-					model.freezedMembers = [];
+					model.frozeMembers = [];
 					model.eventDetails = eventDetails;
 					model.discountedMembers = eventDetails.discountedMembers;
 					model.grandTotals = 0;
@@ -137,7 +142,7 @@
 									var freeze = {};
 									freeze.userName = model.eventDetails.registeredMembers[x].name;
 									freeze.days = model.eventDetails.registeredMembers[x].userEventParameters[j].freezeDays;
-									model.freezedMembers.push(freeze);
+									model.frozeMembers.push(freeze);
 									// }
 								}
 							}
@@ -273,9 +278,9 @@
 		// when member ask for freezing days:
 		// 1. check if he had already use the freeze before.
 		// 2. if not select show a modal of the remaining dates to select the freezign days from
-		// 3. add the freezed dates array to the user eventMembers[user].freezeDays.
+		// 3. add the froze dates array to the user eventMembers[user].freezeDays.
 		// 4. when event days end push the users from eventMembers whome they had freeze to the new event they will create.
-		// 5. when user register for new event check if he already had a freezed days and deduct them from the event price.
+		// 5. when user register for new event check if he already had a froze days and deduct them from the event price.
 
 
 		function selectPaymentType(paymentType, user) {
@@ -285,14 +290,14 @@
 				model.totals = totals;
 				switch (paymentType.name) {
 					case 'Weekly payment':
-						model.paymentAmount = model.totals.discountedWeeklyPrice;
+						model.paymentAmount = Number(model.totals.discountedWeeklyPrice.toFixed(2));
 						break;
 					case 'Full payment':
 						model.paymentAmount = Math.abs(model.totals.balance);
 						// document.getElementById('paymentAmount').value = model.paymentAmount;
 						break;
 					case 'Down payment':
-						model.paymentAmount = model.totals.discountedDailyPrice;
+						model.paymentAmount = Number(model.totals.discountedDailyPrice.toFixed(2));
 						// document.getElementById('paymentAmount').value = model.paymentAmount;
 						break;
 					case 'Payment type...':
@@ -313,6 +318,7 @@
 			// 	}
 			// }
 			// How to cancel the request????????????
+			
 			var discount = {};
 			var userId = user._id;
 			discount.userId = userId;
@@ -367,6 +373,12 @@
 				discount.eventDays = totals.newEventDays;
 				discount.discountedEventPrice = ((model.eventDetails.price / model.eventDetails.eventDays.length) * discount.percentage) * discount.eventDays.length;
 				discount.normalEventPrice = (model.eventDetails.price / model.eventDetails.eventDays.length) * totals.newEventDays.length;
+				for(var f in model.eventDetails.frozeMembers){
+					if(model.eventDetails.frozeMembers[f].userId === user._id && model.eventDetails.frozeMembers[f].days.length >0){
+						discount.discountedEventPrice -= ((model.eventDetails.price / model.eventDetails.eventDays.length) * discount.percentage) * (model.eventDetails.frozeMembers[f].days.length);
+						discount.normalEventPrice -= ((model.eventDetails.price / model.eventDetails.eventDays.length) * discount.percentage) * (model.eventDetails.frozeMembers[f].days.length);
+					}
+				}
 				if (discount.discountType !== 'No discount') {
 					eventsService
 						.addToDiscountedMembers(ids)
@@ -403,9 +415,23 @@
 						});
 				}
 
+				for(var v in model.eventDetails.frozeMembers){
+					if(model.eventDetails.frozeMembers[v].userId === user._id){
+						removeFrozen(user._id, model.eventDetails._id, model.eventDetails.originalEventId);						
+					}
+				}
 			});
+			
+		}
 
-
+		function removeFrozen(userId, eventId, originalEventId){
+			console.log(originalEventId);
+			ids = {userId: userId, eventId: eventId, originalEventId: originalEventId};
+			eventsService
+				.removeFrozen(ids)
+				.then(function(result){
+					console.log(result.data);
+				});
 		}
 
 		function getUserPayments(user, eventId) {
@@ -455,7 +481,12 @@
 			for (var e in user.userEventParameters) {
 				if (user.userEventParameters[e].eventId === eventId) {
 					totals.discountedDailyPrice = originalDailyPrice * user.userEventParameters[e].percentage;
-					totals.fullEventPrice = totals.discountedDailyPrice * totals.newEventDays.length;
+					// totals.fullEventPrice = totals.discountedDailyPrice * totals.newEventDays.length;
+					if(user.userEventParameters[e].normalEventPrice >0){
+						totals.fullEventPrice = user.userEventParameters[e].normalEventPrice;
+					}else{
+						totals.fullEventPrice = user.userEventParameters[e].discountedEventPrice;
+					}
 					// totals.eventNormalPrice = originalDailyPrice * totals.newEventDays.length;
 					totals.discountedWeeklyPrice = totals.fullEventPrice / totals.eventWeeks;
 					totals.discountType = user.userEventParameters[e].discountType;
@@ -468,6 +499,7 @@
 			}
 
 			totals.balance = totals.totalOfPayments - totals.fullEventPrice;
+
 
 			if (callBack) {
 				callBack(totals);
@@ -624,7 +656,7 @@
 
 
 		// get attendance report
-		function attendanceReport(user){
+		function attendanceReportCreater(user){
 			var attReport = {
 						attendedDays: [],
 						attendedTotals: 0,
@@ -646,7 +678,7 @@
 				}
 			}
 			model.attendanceReport = attReport;
-			console.log(attReport);
+			return attReport;
 		}
 
 
@@ -661,11 +693,11 @@
 				if (user.userEventParameters[p].eventId === model.eventDetails._id) {
 					if (user.userEventParameters[p].freezeDays.length > 0) {
 						model.userUseFreezeBefore = true;
-						model.alreadyFreezedDays = user.userEventParameters[p].freezeDays;
+						model.alreadyFrozeDays = user.userEventParameters[p].freezeDays;
 					}
 				}
 			}
-			model.freezedDays = {};
+			model.frozeDays = {};
 			var t = user.userEventParameters.filter(function(parameter) {
 				return parameter.eventId === model.eventDetails._id;
 			});
@@ -675,9 +707,10 @@
 		}
 
 
-		function freezeMember(userId, eventId, days) {
-			// collect freezed days
+		function freezeMember(userId, fullUserName, eventId, days) {
+			// collect froze days
 			var final = [];
+			userFullName = fullUserName.firstName+' '+fullUserName.middleName+' '+fullUserName.lastName;
 			// filter the selected days from the days
 			for (var i in days) {
 				if (days[i] === true) {
@@ -686,6 +719,7 @@
 			}
 			var freezeObject = {
 				userId: userId,
+				userFullName: userFullName,
 				eventId: eventId,
 				days: final
 			};
@@ -695,22 +729,28 @@
 				.then(function(result) {
 					console.log(result.data);
 				});
+			eventsService
+				.addToFrozeMembers(freezeObject)
+				.then(function(result){
+					console.log(result.data);
+				});
 		}
 
-		function getFreezedMembers() {
-			// var freezed = [];
+		function getFrozeMembers() {
+			
+			// var froze = [];
 			// for(var u in model.eventDetails.registeredMembers){
 			// 	for(var p in model.eventDetails.registeredMembers[u].userEventParameters){
 			// 		if(model.eventDetails.registeredMembers[u].userEventParameters[p].eventId === model.eventDetails._id && model.eventDetails.registeredMembers[u].userEventParameters[p].freezeDays.length > 0){
-			// 			freezed.push({
+			// 			froze.push({
 			// 				userName: model.eventDetails.registeredMembers[u].name,
-			// 				freezedDays: model.eventDetails.registeredMembers[u].userEventParameters[p].freezeDays
+			// 				frozeDays: model.eventDetails.registeredMembers[u].userEventParameters[p].freezeDays
 			// 			});
 			// 		}
 			// 	}
 			// }
-			// console.log(model.freezedMembers)
-			return model.freezedMembers;
+			// console.log(model.frozeMembers)
+			return model.frozeMembers;
 		}
 
 
@@ -735,7 +775,7 @@
 		function prepareExpenses() {
 			model.eventExpenses = model.eventDetails.expenses;
 			var grouped = groupBy(model.eventExpenses, 'expenseType', 'expenseAmount');
-			console.log(grouped);
+			// console.log(grouped);
 			model.expensesSummary = grouped;
 			var totalExpenses = 0;
 			for(var i in grouped){

@@ -223,7 +223,9 @@
 
 		<!-- Attendance -->
 		<div class="col-sm-4">
-			<button class="btn btn-success" data-toggle="modal" data-target="#todayAttendance" style="width: 100%;" ng-click="model.countAttendance()"><b>Today attendance</b></button>
+			<button class="btn btn-success" data-toggle="modal" data-target="#todayAttendance" style="width: 100%;" ng-click="model.countAttendance()">
+				<b>Today attendance</b>
+			</button>
 			
 			<!-- todayAttendance modal -->
 			<div class="modal fade" id="todayAttendance" role="dialog">
@@ -260,8 +262,8 @@
 												<td style="padding-left: 30px;">
 													{{attendedUser.name.firstName}} {{attendedUser.name.middleName}} {{attendedUser.name.lastName}}
 												</td>
-												<td class="pull-right" style="padding-right: 30px;">
-													<label class="switch">
+												<td style="padding-right: 30px;">
+													<label class="switch pull-right">
 														<input type="checkbox" ng-model="attendedUser.attended">
 														<span class="slider round"></span>
 													</label>
@@ -315,12 +317,10 @@
 			<th width="">Payments</th>
 			<th width="">Balance</th>
 			<th width="">Discount</th>
-			<!-- <th width=""></th> -->
 			<th width="">Make a payment</th>
 			<th width="">Payments details</th>
 			<th width="">Freeze member</th>
 			<th width="">Attend/Miss</th>
-			<!-- <th>Attendance</th> -->
 		</thead>
 		<tr ng-repeat="user in model.eventDetails.registeredMembers | filter: searchMember">
 			<td>{{user.name.firstName}} {{user.name.lastName}}</td>
@@ -346,13 +346,24 @@
 							</div>
 							<div class="modal-body">
 								<form>
-									<label>Discount type:</label>
-									<select id="discountSelector" ng-model="model.selectedDiscount" class="custom-select" ng-options="discount.name for discount in model.discountTypes" ng-change="model.selectDiscount(user.name)">
-									</select>
-									<input type="text" name="familyTag" class="form-control" ng-model="model.discountTags.familyTag" ng-show="model.thereIsFamilyDiscount">
-									<input type="text" name="groupTag" class="form-control" ng-model="model.discountTags.groupTag" ng-show="model.thereIsGroupDiscount">
-									<select ng-model="specialDiscountType" class="custom-select" ng-options="special.name for special in model.discountTypes[4].types" ng-show="model.thereIsSpecialDiscount">
-									</select>
+									<div class="row">
+										<label class="col-sm-4">Discount type:</label>
+										<select id="discountSelector" ng-model="model.selectedDiscount" class="col-sm-7 custom-select" ng-options="discount.name for discount in model.discountTypes" ng-change="model.selectDiscount(user.name)">
+										</select>
+									</div>
+									<div class="row" ng-show="model.thereIsFamilyDiscount">
+										<label class="col-sm-4">Family tag:</label>
+										<input type="text" name="familyTag" class="col-sm-7 form-control" ng-model="model.discountTags.familyTag" >
+									</div>
+									<div class="row" ng-show="model.thereIsGroupDiscount">
+										<label class="col-sm-4">Group tag:</label>
+										<input type="text" name="groupTag" class="col-sm-7 form-control" ng-model="model.discountTags.groupTag">
+									</div>
+									<div class="row" ng-show="model.thereIsSpecialDiscount">
+										<label class="col-sm-4">Special type:</label>
+										<select ng-model="specialDiscountType" class="col-sm-7 custom-select" ng-options="special.name for special in model.discountTypes[4].types">
+										</select>
+									</div>
 									<br>
 									<input type="submit" class="btn btn-success pull-right" name="giveADiscount" ng-click="model.giveADiscount(user, model.eventDetails._id, model.selectedDiscount.name, model.discountTags, specialDiscountType.name)" data-dismiss="modal">
 								</form>
@@ -384,19 +395,31 @@
 									<h5 class="modal-title">Make a payment</h5>
 								</div>
 								<div class="modal-body">
-									<form>
-										<label>Date:</label>
-										<input type="date" name="dateOfpayment" ng-model="paymentDate" class="form-control">
-										<label>Payment type:</label>
-										<select ng-model="model.typeOfPayment" class="custom-select" ng-options="paymentType.name for paymentType in model.paymentTypes" ng-change="model.selectPaymentType(model.typeOfPayment, user)">
-										</select>
-										<br>
-										<label>Payment amount:</label>
-										<input type="text" name="amount" id="paymentAmount" ng-model="model.paymentAmount">
-										<br>
-										<br>
-										<input type="submit" class="btn btn-success pull-right" name="makePayment" ng-click="model.makePayment(user._id, model.eventDetails._id, paymentDate, model.paymentAmount)" data-dismiss="modal">
-									</form>
+									<div style="width: 90%;">
+										<form>
+											<div class="row">
+												<label class="col-sm-5">Date:</label>
+												<input class="col-sm-7 form-control" type="date" name="dateOfpayment" ng-model="paymentDate">
+											</div>
+											<br>
+											<div class="row">
+												<label class="col-sm-5">Payment type:</label>
+												<select class="col-sm-7 custom-select" ng-model="model.typeOfPayment" ng-options="paymentType.name for paymentType in model.paymentTypes" ng-change="model.selectPaymentType(model.typeOfPayment, user)">
+												</select>
+											</div>
+											<br>
+											<div class="row">
+												<label class="col-sm-5">Payment amount:</label>
+												<input class="col-sm-7 form-control" type="text" name="amount" id="paymentAmount" ng-model="model.paymentAmount">
+											</div>
+											<br>
+											<br>
+											<div class="row">
+												<label class="col-sm-5"></label>
+												<input type="submit" class="col-sm-7 btn btn-success" name="makePayment" ng-click="model.makePayment(user._id, model.eventDetails._id, paymentDate, model.paymentAmount)" data-dismiss="modal">
+											</div>
+										</form>
+									</div>
 								</div>
 								<div class="modal-footer">
 									<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
@@ -425,19 +448,51 @@
 								<div class="modal-body">
 									<table>
 										<thead>
-											<th>Amount</th>
-											<th>Date</th>
+											<th width="40%">Date</th>
+											<th width="60%">Amount</th>
 										</thead>
 										<tr ng-repeat="payment in model.getUserPayments(user, model.eventDetails._id)">
-											<td>{{payment.amount | currency: "JOD "}}</td>
 											<td>{{payment.date | date}}</td>
+											<td>{{payment.amount | currency: "JOD "}}</td>
 										</tr>
 									</table>
-									<h5><b>Total payments:</b> {{model.getTotals(user, model.eventDetails._id).totalOfPayments | currency:"JOD "}}</h5>
-									<h5><b>Balance:</b> {{model.getTotals(user, model.eventDetails._id).balance | currency:"JOD "}}</h5>
-									<h5><b>Event price: </b> {{model.getTotals(user, model.eventDetails._id).fullEventPrice | currency:"JOD "}}</h5>
-									<h5><b>Discount type: </b> {{model.getTotals(user, model.eventDetails._id).discountType}}</h5>
-									<h5><b>Discount Tag: </b> {{model.getTotals(user, model.eventDetails._id).discountTag}}</h5>
+									<br>
+									<hr>
+									<br>
+
+									<div style="width: 80%; margin: auto;">
+										<table>
+											<thead>
+												<th width="70%" style="background-color: lightgreen;"><b>Payments summary:</b></th>
+												<th width="30%" style="background-color: lightgreen;"></th>
+											</thead>
+											<tr style="background-color: lightyellow;">
+												<td><b>Total payments:</b></td>
+												<td>{{model.getTotals(user, model.eventDetails._id).totalOfPayments | currency:"JOD "}}</td>
+											</tr>
+											<tr style="background-color: lightyellow;">
+												<td><b>Balance:</b></td>
+												<td>{{model.getTotals(user, model.eventDetails._id).balance | currency:"JOD "}}</td>
+											</tr>
+											<tr style="background-color: lightyellow;">
+												<td><b>Event price:</b></td>
+												<td>{{model.getTotals(user, model.eventDetails._id).fullEventPrice | currency:"JOD "}}</td>
+											</tr>
+											<tr style="background-color: lightyellow;">
+												<td><b>Discount type:</b></td>
+												<td>{{model.getTotals(user, model.eventDetails._id).discountType}}</td>
+											</tr>
+											<tr style="background-color: lightyellow;">
+												<td><b>Discount Tag:</b></td>
+												<td>{{model.getTotals(user, model.eventDetails._id).discountTag}}</td>
+											</tr>
+										</table>
+									</div>
+									<!-- <h5><b>Total payments:</b> {{model.getTotals(user, model.eventDetails._id).totalOfPayments | currency:"JOD "}}</h5> -->
+									<!-- <h5><b>Balance:</b> {{model.getTotals(user, model.eventDetails._id).balance | currency:"JOD "}}</h5> -->
+									<!-- <h5><b>Event price: </b> {{model.getTotals(user, model.eventDetails._id).fullEventPrice | currency:"JOD "}}</h5> -->
+									<!-- <h5><b>Discount type: </b> {{model.getTotals(user, model.eventDetails._id).discountType}}</h5> -->
+									<!-- <h5><b>Discount Tag: </b> {{model.getTotals(user, model.eventDetails._id).discountTag}}</h5> -->
 
 								</div>
 								<div class="modal-footer">
@@ -454,6 +509,7 @@
 		<!-- Freeze member -->
 			<td>
 				<button type="button" class="btn btn-secondary" data-toggle="modal" data-target="#freezeMemberModal-{{$index}}" ng-click="model.prepareFreezeDays(user)"><b>Freeze Membership</b></button>
+				
 
 				<!-- Freeze modal -->
 				<div class="modal fade" id="freezeMemberModal-{{$index}}" role="dialog">
@@ -466,25 +522,29 @@
 									<button type="button" class="close" data-dismiss="modal">&times;</button>
 								</div>
 								<div class="modal-body">
-									<form>
-										<label>Select freezed days:</label>
-										<br>
-										<label class="text-danger" ng-show="model.userUseFreezeBefore">User already freeze membership before!</label>
-										<div class="form-group">
-											<label class="checkbox-inline" ng-repeat="day in model.daysToFreezeFrom">
-												<input type="checkbox" ng-disabled="model.userUseFreezeBefore" style="margin-left: 15px;" name="freezedDays" ng-model="model.freezedDays[day]"> {{day}}
-											</label>
-										</div>
-									</form>
-									<div ng-show="model.userUseFreezeBefore">
-										<h5>User freezed days:</h5>
+									<div>	
+										<form>
+											<label><b>Select froze days:</b></label>
+											<br>
+											<label class="text-danger" ng-show="model.userUseFreezeBefore">User already freeze membership before!</label>
+											<div>
+												<div style="display: block; float: left;" ng-repeat="day in model.daysToFreezeFrom">
+													<label>
+														<input type="checkbox" ng-disabled="model.userUseFreezeBefore" style="margin-left: 15px;" name="frozeDays" ng-model="model.frozeDays[day]"> {{day}}
+													</label>
+												</div>
+											</div>
+										</form>
+									</div>
+									<div style="clear: left;" ng-show="model.userUseFreezeBefore">
+										<h5>User froze days:</h5>
 										<ul>
-											<li ng-repeat="day in model.alreadyFreezedDays">{{day}}</li>
+											<li ng-repeat="day in model.alreadyFrozeDays">{{day}}</li>
 										</ul>
 									</div>
 								</div>
 								<div class="modal-footer">
-									<button type="button" class="btn btn-success" ng-disabled="model.userUseFreezeBefore" data-dismiss="modal" ng-click="model.freezeMember(user._id, model.eventDetails._id, model.freezedDays)">Submit</button>
+									<button type="button" class="btn btn-success" ng-disabled="model.userUseFreezeBefore" data-dismiss="modal" ng-click="model.freezeMember(user._id, user.name, model.eventDetails._id, model.frozeDays)">Submit</button>
 								</div>
 							</div>
 							
@@ -494,7 +554,7 @@
 			</td>
 		<!-- / Freeze member -->
 			<td class="text-center">
-				<button type="button" class="btn btn-info" data-toggle="modal" data-target="#attendanceReportModal-{{$index}}" ng-click="model.attendanceReport(user)">Att report</button>
+				<button type="button" class="btn btn-info" data-toggle="modal" data-target="#attendanceReportModal-{{$index}}" ng-click="model.attendanceReportCreater(user)">Att report</button>
 
 				<div class="modal fade" id="attendanceReportModal-{{$index}}" role="dialog">
 						<div class="modal-dialog">
@@ -521,15 +581,15 @@
 										<table>
 											<tr style="background-color: lightgreen; color: black">
 												<td><b>Total days:</b></td>
-												<td>{{model.attendanceReport.attendedTotals + model.attendanceReport.missedTotals}}</td>
+												<td class="text-center">{{model.attendanceReport.attendedTotals + model.attendanceReport.missedTotals}}</td>
 											</tr>
 											<tr style="background-color: lightgreen; color: black">
 												<td><b>Attended:</b></td>
-												<td>{{model.attendanceReport.attendedTotals}}</td>
+												<td class="text-center">{{model.attendanceReport.attendedTotals}}</td>
 											</tr>
 											<tr style="background-color: lightgreen; color: black">
 												<td><b>Missed:</b></td>
-												<td>{{model.attendanceReport.missedTotals}}</td>
+												<td class="text-center">{{model.attendanceReport.missedTotals}}</td>
 											</tr>
 										</table>
 									</div>
@@ -596,6 +656,7 @@
 		<tr style="background: bisque; color: darkred;">
 			<td><h3>Event Summary:</h3></td>
 			<td></td>
+			<td></td>
 		</tr>
 		<tr style="background: bisque; color: darkred;">
 			<td>
@@ -604,6 +665,7 @@
 				<h5>Total of Payments: </h5>
 				<h5>Event payments balance: </h5>
 			</td>
+			<td></td>
 			<td>
 				<h5>{{model.eventDetails.registeredMembers.length}}</h5>
 				<h5>{{model.totalIncomeFromEvent | currency: "JOD "}}</h5>
@@ -649,33 +711,31 @@
 
 <br>
 <br>
-<br>
-<br>
 <hr>
-<!-- Freezed member list -->
+<!-- Froze member list -->
 	<div>
-		<h4 class="text-success">Freezed members:</h4>
+		<h4 class="text-success">Froze members:</h4>
 		<table class="table table-hover">
 			<thead>
 				<tr>
 					<th width="20%">Member</th>
-					<th width="80%">Feedback</th>
+					<th width="80%">Froze Days</th>
 				</tr>
 			</thead>
 			<tbody>
-				<tr ng-repeat="freezed in model.getFreezedMembers()">
-					<td>{{freezed.userName.firstName}} {{freezed.userName.lastName}}</td>
+				<!-- <tr ng-repeat="froze in model.getFrozeMembers()"> -->
+				<tr ng-repeat="froze in model.eventDetails.frozeMembers">
+					<td>{{froze.userFullName}}</td>
 					<td>
-						
-						<span ng-repeat="day in freezed.days" >&#x2299; {{day}} &emsp;</span>
-						
-						<!-- <span ng-repeat="day in freezed.days">  {{day}} || </span> -->
+						<span ng-repeat="day in froze.days" >&#x2299; {{day}} &emsp;</span>
 					</td>
 				</tr>
 			</tbody>
 		</table>
 	</div>
-<!-- /Freezed member list -->
+<!-- /Froze member list -->
+	
+
 
 <br>
 <br>

@@ -1,13 +1,14 @@
 (function(){
 	angular
 		.module('jordanEvents')
-		.controller('makerNewEventController', makerNewEventController);
+		.controller('makerReNewEventController', makerReNewEventController);
 
-		function makerNewEventController($location, eventsService, loggedMaker, userService){
+		function makerReNewEventController($location, $routeParams, eventsService, loggedMaker, userService){
 			var model = this;
 			function init(){
-				model.newEventMain = true;
+				var eventId = $routeParams.eventId;
 				model.loggedMaker = loggedMaker;
+				
 				eventsService
 					.getMapBoxKey()
 					.then(function(mapBoxKey){
@@ -40,17 +41,32 @@
 							    document.getElementById('mapLat').innerHTML = model.mapLocation.latitude;
 							    document.getElementById('mapLng').innerHTML = model.mapLocation.longitude;
 							});
-
 						});	
-						
-						
- 						
-
 					});
+
+				eventsService
+					.findEventByEventId(eventId)
+					.then(function(eventDetails){
+						// model.eventDetails = eventDetails;
+						var oldEvent = eventDetails;
+						var oldEventId = oldEvent._id;
+						var unnecessaryProperties = ['created', 'eventDays', 'registeredMembers', 'discountedMembers', 'expenses', '_id', 'startingDate', 'expiryDate', 'makerId', 'special', '__v', 'approved', 'programDailyDetails'];
+						for(var i in unnecessaryProperties){
+							// console.log(oldEvent[unnecessaryProperties[i]]);
+							delete(oldEvent[unnecessaryProperties[i]]);
+						}
+						model.newEvent = oldEvent;
+						model.newEvent.originalEventId = oldEventId;
+						// console.log(model.newEvent);
+						model.eventDetailsMain = true;
+					});
+
 			}
+
 			init();
 			var _makerId = loggedMaker._id;
-			
+
+
 			model.createEvent = createEvent;
 			model.logout = logout;
 			model.createEventDetails = createEventDetails;
@@ -80,7 +96,7 @@
 				document.getElementById('mapLatitude').value = model.mapLocation.latitude;
 			}
 
-			function createEventDetails(newEvent, daysOfWeek, mapLocation){
+			function createEventDetails(reNewed, newEvent, daysOfWeek, mapLocation){
 				// create dates based on start-end dates and the days of the weeks
 				var start = new Date(newEvent.startingDate);
 				var end = new Date(newEvent.expiryDate);
@@ -125,18 +141,27 @@
 					}
 				}
 				newEvent.eventDays = eventDays;
-				newEvent.coordinates = [mapLocation.longitude, mapLocation.latitude];
-				model.newEvent = newEvent;
-				model.newEventMain = false;
-				model.newEventProgramDetails = true;
+				if(mapLocation.longitude === 0){
+					newEvent.coordinates = model.newEvent.coordinates;	
+				}else{
+					newEvent.coordinates = [mapLocation.longitude, mapLocation.latitude];
+				}
+				
+				for(var n in newEvent){
+					model.newEvent[n] = newEvent[n];
+				}
+
+				// model.newEvent = newEvent;
+				model.eventDetailsMain = false;
+				model.eventProgramDetails = true;
 			}
 
 			
-			function createEvent(newEvent){
-				newEvent.makerId = _makerId;
-				console.log(newEvent.makerId);
+			function createEvent(reNewedEvent){
+				reNewedEvent.makerId = _makerId;
+				console.log(reNewedEvent);
 				eventsService
-					.addNewEvent(newEvent)
+					.addNewEvent(reNewedEvent)
 					.then(function(addedEvent){
 						$location.url('/makerProfile/eventsList');
 					});

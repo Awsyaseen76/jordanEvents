@@ -18,7 +18,31 @@ module.exports = function(app) {
 	app.get('/api/getMapBoxKey', getMapBoxKey);
 	app.put('/api/event/addToDiscountedMembers', addToDiscountedMembers);
 	app.put('/api/event/addExpense', addExpense);
+	app.put('/api/event/addToFrozeMembers', addToFrozeMembers);
+	// app.delete('/api/event/removeFromFrozeMembers/:userId/:eventId', removeFromFrozeMembers);
+	// app.put('/api/event/removeFrozen/:userId/:eventId/:originalEventId', removeFrozen);
+	app.put('/api/event/removeFrozen', removeFrozen);
 
+
+	function removeFrozen(req, res){
+		var ids = req.body;
+		console.log(ids);
+		eventsDB
+			.removeFrozen(ids)
+			.then(function(result){
+				res.send(result);
+			});
+	}
+
+
+	function addToFrozeMembers(req, res){
+		var freezeObject = req.body;
+		eventsDB
+			.addToFrozeMembers(freezeObject)
+			.then(function(result){
+				res.send(result);
+			});
+	}
 
 	function addExpense(req, res){
 		var expense = req.body;

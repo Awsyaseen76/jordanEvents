@@ -24,12 +24,19 @@
 		this.submitFeedback = submitFeedback;
 		this.updateUserEventParameters = updateUserEventParameters;
 		this.freezeMembership = freezeMembership;
+		this.removeFrozeDays = removeFrozeDays;
 		
 
 
 		function init() {}
 		init();
 
+
+		function removeFrozeDays(ids){
+			var userId = ids.userId;
+			var originalEventId = ids.originalEventId;
+			return $http.delete('/api/user/removeFrozeDays/'+userId+'/'+originalEventId);
+		}
 
 		function freezeMembership(freezeObject){
 			var url = '/api/user/freezeMembership';

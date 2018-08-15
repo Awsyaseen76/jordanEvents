@@ -191,7 +191,7 @@ Todolist:
  -[x] the payment calculated based on user discount, eventDays for user.
  -[x] the details show the discount type and tag also.
  -[x] the attendance now in seperate modal, and could taken multiple times throught the day, and it shows the totals.
- -[x] freeze memberShip for each user, the modal will show show the days from today to as a checkbox to select the days the user want to freeze, after submit the user could not freeze again as it once per the event, if he try to do that then the checkboxes will be disabled, for the user that had freezed days they will shown on bottomn of the modal.
+ -[x] freeze memberShip for each user, the modal will show show the days from today to as a checkbox to select the days the user want to freeze, after submit the user could not freeze again as it once per the event, if he try to do that then the checkboxes will be disabled, for the user that had froze days they will shown on bottomn of the modal.
  -[x] the feedback is workinng just fine.
 
 
@@ -265,33 +265,40 @@ User actions from starting register for particular evet:
 	- datails show user's payments and the totals with the discount type and tag.
 	- maker can tage the attendance for the date throught the same day multiple times even after submit, and the modal will show to totals in the bottomn.
 	- Freeze membership:
-		1. [x] maker can give a freeze for user membership once through the event by selecting the days the user want to freeze, if the user already had a freezed days then the checkboxes of the days will be disabled and note displayed that the user already had a freezed days, the freezed days appear on the bottomn of the modal.
-		2. [ ] next time when user register for the same event recognised by event name if the user have freezed days when maker choose the discount type to create the userEventParameters loop on the userEventParameters searching for the old event if the user had sfreezedDays, if yes; calculate the event days will be by starting from the day that the user register then deduct the freezed days from the result then remove the freezed days from that event.
+		1. [x] maker can give a freeze for user membership once through the event by selecting the days the user want to freeze, if the user already had a froze days then the checkboxes of the days will be disabled and note displayed that the user already had a froze days, the froze days appear on the bottomn of the modal.
+		2. [x] Store the froze members on event frozeMembers Array, and on the userEventParameters.
+		3. [x] Create a button on the event list for the maker to ReCreate an event, when clicked call the reCreateEvent() function that first step on it is copying the event data and store it in temporary object named reNewedEvent.
+		4. [x] remove unnecessary properties from the temporary object: _id, created, makerId, special, __v, approved, registeredMembers, discountedMembers, expenses.
+		5. [x] redirect to the page of creating new event with the modified object (reNewedEvent) to fill the form from it.
+		6. [x] add originalEventId to the event object to indicate that this is renewed event and the removal of the frozen members will be based on it to solve the problem of on which event the user get back the frozen dates from.
+		7. [x] next time when user register for the same event recognised by originalEventId if the user have froze days when maker choose the discount type to create the userEventParameters loop on the userEventParameters searching for the originalEventId if the user had frozeDays, if yes; calculate the event days will be with steps:
+				starting from the day that the user register.
+				calculate the discounted price daily and full price.
+				calculate the froze days price by * daily price then deduct the amount from the result 
+				remove the froze days from the new event and from the userEventParameters.
 	- [x] creat additional modal to collect expenses by date select the category(salary, hospitality, rental fees, misc) then textbox for details.
+	- [x] create filtered totals to calculate each expense category.
 	- [x] create additional button and modal for the attendance history for each member.
+	
+
 	- [ ] Maker has the ability to choose which comments to be published on the main page.
-
-
-
-	 
 
 
 
 Notes:
 06/Aug/2018
-	- group and family tag to be shown on the discount modal.
-	- delete the freezed days from the next event.
+	[x] group and family tag to be shown on the discount modal.
+	[x] delete the froze days from the next event.
+	[x] create additional button and modal for the attendance history for each member.
+	[x] creat additional modal to collect expenses by date select the category(salary, hospitality, rental fees) then textbox for details.
 	- maker decided to publish the comments on main page.
-	- create additional button and modal for the attendance history for each member.
-	- creat additional modal to collect expenses by date select the category(salary, hospitality, rental fees) then textbox for details. export to excel.
 	- create memberShip serial number (today.getFullYear()+serial) Year0001 20180001 continiouse for all members.
 	- report for families and groups for maker tab for family other for groups with members.
-	- mahdi modal
 	- export expenses to excel.
 
 Important:
- - give the maker option to create a new event from previouse one data so the name will be the same
- - User with freezed membership should appear disabled on attendance
+ [x] give the maker option to create a new event from previouse one data so the name will be the same
+ - User with froze membership should appear disabled on attendance
 
 
 

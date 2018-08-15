@@ -17,15 +17,53 @@ eventsDB.updateEventByAdmin = updateEventByAdmin;
 eventsDB.addMemberToEvent = addMemberToEvent;
 eventsDB.addToDiscountedMembers = addToDiscountedMembers;
 eventsDB.addExpense = addExpense;
+eventsDB.addToFrozeMembers = addToFrozeMembers;
+eventsDB.removeFrozen = removeFrozen;
 
-
-function addExpense(eventId, expense){
-	// var eventId = expense.eventId;
+function removeFrozen(ids){
+	console.log(ids);
+	var eventId = ids.eventId;
+	var userId = ids.userId;
+	var originalEventId = ids.originalEventId;
 	return eventsDB
 				.findById(eventId)
 				.then(function(event){
-					// delete(expense.eventId);
-					// console.log(expense);
+					for(var f in event.frozeMembers){
+						if(event.frozeMembers[f].userId === userId){
+							event.frozeMembers.splice(f,1);
+						}
+					}
+					event.save();
+					return usersDB.findById(userId);
+				})
+				.then(function(user){
+					for(var i in user.userEventParameters){
+						if(user.userEventParameters[i].eventId === originalEventId){
+							user.userEventParameters[i].freezeDays.splice(0, user.userEventParameters[i].freezeDays.length);
+						}
+					}
+					return user.save();
+				});
+}
+
+
+
+
+function addToFrozeMembers(freezeObject){
+	var eventId = freezeObject.eventId;
+	return eventsDB
+			.findById(eventId)
+			.then(function(event){
+				event.frozeMembers.push(freezeObject);
+				return event.save();
+			});
+}
+
+
+function addExpense(eventId, expense){
+	return eventsDB
+				.findById(eventId)
+				.then(function(event){
 					event.expenses.push(expense);
 					return event.save();
 				});
@@ -45,7 +83,6 @@ function addToDiscountedMembers(ids){
 						}else{
 							event.discountedMembers.push(userId);
 							return event.save();
-							
 						}
 					}
 				});

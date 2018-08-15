@@ -129,7 +129,8 @@
 		}
 
 		function selectEvent(eventId){
-			eventsService.findEventByEventId(eventId)
+			eventsService
+				.findEventByEventId(eventId)
 				.then(function(event){
 					event.startingDate = new Date(event.startingDate);
 					event.expiryDate = new Date(event.expiryDate);
@@ -138,7 +139,7 @@
 
 					// Reverse the selected days
 					// 0: Sun   1: Mon   2: Tue   3: Wed    4: Thu  5: Fri  6: Sat 			
-					var daysOfWeek = {Sun:false, Mon:false, Tue:false, Wed:false, Thu:false, Fri:false, Sat:false}
+					var daysOfWeek = {Sun:false, Mon:false, Tue:false, Wed:false, Thu:false, Fri:false, Sat:false};
 					for(var i in model.selectedEvent.daysPerWeek){
 						switch (model.selectedEvent.daysPerWeek[i]) {
 							case 0:
