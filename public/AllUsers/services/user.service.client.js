@@ -25,11 +25,21 @@
 		this.updateUserEventParameters = updateUserEventParameters;
 		this.freezeMembership = freezeMembership;
 		this.removeFrozeDays = removeFrozeDays;
+		this.getAllFeedbacks = getAllFeedbacks;
+		this.updateFeedbackByAdmin = updateFeedbackByAdmin;
 		
 
 
 		function init() {}
 		init();
+
+		function updateFeedbackByAdmin(feedback){
+			return $http.put('/api/admin/updateFeedbackByAdmin', feedback);
+		}
+
+		function getAllFeedbacks(){
+			return $http.get('/api/user/getAllFeedbacks');
+		}
 
 
 		function removeFrozeDays(ids){

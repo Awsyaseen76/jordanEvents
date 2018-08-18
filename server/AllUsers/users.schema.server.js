@@ -50,7 +50,9 @@ var usersSchema = mongoose.Schema({
             		_id: false,
             		date: Date,
             		eventName: String,
-            		feedback: String
+            		feedback: String,
+                    userId: String,
+                    approved: Boolean
             	}
             ]
         }

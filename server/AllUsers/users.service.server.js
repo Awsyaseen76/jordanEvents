@@ -134,6 +134,8 @@ app.put('/api/user/submitFeedback', submitFeedback);
 app.put('/api/user/updateUserEventParameters', updateUserEventParameters);
 app.put('/api/user/freezeMembership', freezeMembership);
 app.delete('/api/user/removeFrozeDays/:userId/:eventId', removeFrozeDays);
+app.get('/api/user/getAllFeedbacks', getAllFeedbacks);
+app.put('/api/admin/updateFeedbackByAdmin', updateFeedbackByAdmin);
 
 
 // ---------------------------------- /APIs requests ----------------------------------
@@ -143,12 +145,56 @@ app.delete('/api/user/removeFrozeDays/:userId/:eventId', removeFrozeDays);
 
 // ------------------------------ Functions ------------------------------
 
+
+function updateFeedbackByAdmin(req, res){
+	var feedback = req.body;
+	usersDB
+		.updateFeedbackByAdmin(feedback)
+		.then(function(result){
+			res.send(result);
+		});
+}
+
+
+
+function getAllFeedbacks(req, res){
+	usersDB
+		.getAllFeedbacks()
+		.then(function(users){
+			var feeds = [];
+			for(var i in users){
+				for(var j in users[i].userEventParameters){
+					if(users[i].userEventParameters[j].feedbacks && users[i].userEventParameters[j].feedbacks.length>0){
+						// console.log((users[i].userEventParameters[j].feedbacks));
+						for(var f in users[i].userEventParameters[j].feedbacks){
+							if(users[i].userEventParameters[j].feedbacks[f].feedback){
+								var temp = {};
+								temp.feedback = users[i].userEventParameters[j].feedbacks[f].feedback;
+								temp.userName = users[i].name.firstName+" "+users[i].name.lastName;
+								temp.eventName = users[i].userEventParameters[j].feedbacks[f].eventName;
+								temp.date = users[i].userEventParameters[j].feedbacks[f].date;
+								temp.approved = users[i].userEventParameters[j].feedbacks[f].approved;
+								temp.userId = users[i].userEventParameters[j].feedbacks[f].userId;
+								feeds.push(temp);
+							}
+						}
+					}
+				}	
+			}
+			// console.log('the feeds are:');
+			// console.log(feeds);
+			res.send(feeds);
+		});
+}
+
+
+
 function removeFrozeDays(req, res){
 	// var ids = req.params;
 	var ids = {};
 	ids.userId = req.params.userId;
 	ids.originalEventId = req.params.originalEventId;
-	console.log(ids);
+	// console.log(ids);
 	usersDB
 		.removeFrozeDays(ids)
 		.then(function(result){
@@ -178,7 +224,7 @@ function updateUserEventParameters(req, res){
 
 
 function submitFeedback(req, res){
-	var feedbackObject = req.body;	
+	var feedbackObject = req.body;
 	usersDB
 		.submitFeedback(feedbackObject)
 		.then(function(result){
@@ -228,7 +274,7 @@ function updateProfile(req, res){
 	usersDB
 		.updateProfile(updatedProfile)
 		.then(function(result){
-			console.log(result);
+			// console.log(result);
 			res.send(result);
 		});
 }

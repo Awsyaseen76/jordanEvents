@@ -26,6 +26,37 @@ usersDB.submitFeedback = submitFeedback;
 usersDB.updateUserEventParameters = updateUserEventParameters;
 usersDB.freezeMembership = freezeMembership;
 usersDB.removeFrozeDays = removeFrozeDays;
+usersDB.getAllFeedbacks = getAllFeedbacks;
+usersDB.updateFeedbackByAdmin = updateFeedbackByAdmin;
+
+function updateFeedbackByAdmin(feedback){
+	// console.log(feedback);
+	userId = feedback.userId;
+	return usersDB
+			.findById(userId)
+			.then(function(user){
+				// console.log(user);
+				for(var i in user.userEventParameters){
+					for(var j in user.userEventParameters[i].feedbacks){
+						// for(var f in user.userEventParameters[i].feedbacks){
+							if(user.userEventParameters[i].feedbacks[j].eventName === feedback.eventName && user.userEventParameters[i].feedbacks[j].feedback === feedback.feedback){
+								user.userEventParameters[i].feedbacks[j].approved = feedback.approved;
+								return user.save();
+							}
+						// }
+					}
+				}
+			});
+}
+
+
+function getAllFeedbacks(){
+	return usersDB
+				.find({userType: "user"})
+				.then(function(users){
+					return users;
+				});
+}
 
 
 function removeFrozeDays(ids){
@@ -91,7 +122,7 @@ function submitFeedback(feedbackObject){
 	var eventId = feedbackObject.eventId;
 	var feedDate = new Date();
 	// var feedbackObject = {userId: model.loggedUser._id, eventId: eventId, eventName: eventName, feedbackText: feedbackText};
-	var feed = {date: feedDate, eventName: feedbackObject.eventName, feedback: feedbackObject.feedbackText};
+	var feed = {date: feedDate, eventName: feedbackObject.eventName, feedback: feedbackObject.feedbackText, userId: userId, approved: false};
 	return usersDB
 		.findById(userId)
 		.then(function(user){

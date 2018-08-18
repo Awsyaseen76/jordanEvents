@@ -44,6 +44,7 @@
 	<br>
 	<a href="" ng-click="model.getAllUsers()" class="btn btn-warning"> list of users</a>
 	<a href="" ng-click="model.getAllEvents()" class="btn btn-primary"> list of events</a>
+	<a href="" ng-click="model.getAllFeedbacks()" class="btn btn-warning"> list of feedbacks</a>
 </div>
 
 <br>
@@ -113,3 +114,35 @@
 	</table>
 </div>
 <!-- / All Events -->
+
+
+<!-- All Feedbacks -->
+<div ng-show="model.feedbacks" >
+	<table class="table table-responsive-sm table-hover">
+		<thead class="table-primary">
+			<tr>
+				<th>Name</th>
+				<th>Event</th>
+				<th>Date</th>
+				<th>Feedback</th>
+				<th>Approved?</th>
+				<th>Confirm</th>
+			</tr>
+		</thead>
+		<tbody >
+			<tr ng-repeat="feedback in model.feedbacks">
+				<td>{{feedback.userName}}</td>
+				<td>{{feedback.eventName}}</td>
+				<td>{{feedback.date | date}}</td>
+				<td>{{feedback.feedback}}</td>
+				<td>
+					<input type="checkbox" name="approvedFeedback" ng-model="feedback.approved">
+				</td>
+				<td>
+					<a class="btn btn-primary" href="" ng-click="model.updateFeedbackByAdmin(feedback)">Update</a>
+				</td>
+			</tr>
+		</tbody>
+	</table>
+</div>
+<!-- / All Users -->

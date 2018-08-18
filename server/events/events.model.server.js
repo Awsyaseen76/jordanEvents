@@ -21,7 +21,7 @@ eventsDB.addToFrozeMembers = addToFrozeMembers;
 eventsDB.removeFrozen = removeFrozen;
 
 function removeFrozen(ids){
-	console.log(ids);
+	// console.log(ids);
 	var eventId = ids.eventId;
 	var userId = ids.userId;
 	var originalEventId = ids.originalEventId;

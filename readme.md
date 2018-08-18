@@ -281,7 +281,7 @@ User actions from starting register for particular evet:
 	- [x] create additional button and modal for the attendance history for each member.
 	
 
-	- [ ] Maker has the ability to choose which comments to be published on the main page.
+	- [x] Admin has the ability to choose which comments to be published on the main page.
 
 
 
@@ -291,7 +291,7 @@ Notes:
 	[x] delete the froze days from the next event.
 	[x] create additional button and modal for the attendance history for each member.
 	[x] creat additional modal to collect expenses by date select the category(salary, hospitality, rental fees) then textbox for details.
-	- maker decided to publish the comments on main page.
+	[x]Admin decided to publish the comments on main page.
 	- create memberShip serial number (today.getFullYear()+serial) Year0001 20180001 continiouse for all members.
 	- report for families and groups for maker tab for family other for groups with members.
 	- export expenses to excel.

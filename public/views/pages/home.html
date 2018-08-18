@@ -130,6 +130,28 @@
       </div>
       <!-- /Available Events -->
 
+      <br>
+      <br>
+      
+      <blockquote><h4>Random Feedbacks</h4></blockquote>
+      <div class="feedbackContainer">
+        <div class="feedbackContent">
+          <div ng-repeat="feedback in model.feedbacks" ng-show="feedback.approved">
+            <h3 style="color: #090; text-align: left; clear: both;"><span>&#8220;</span>{{feedback.feedback}}<span>&#8221;</span></h3>
+            <div class="pull-right">
+              <h5 style="color: darkviolet; text-align: center;">{{feedback.eventName}}</h5>
+              <p style="margin-top: -10px; text-align: center;">{{feedback.userName}}</p>
+              <p style="margin-top: -20px; text-align: center;">on: {{feedback.date | date}}:</p>
+            </div>
+            <br>
+            <br>
+            <br>
+            <!-- <p>{{feedback.approved}}</p> -->
+          </div>
+        </div>
+      </div>
+
+
       <!-- Partners -->
       <h2>Our Partners</h2>
       <div class="row">

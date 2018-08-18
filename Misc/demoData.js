@@ -65,13 +65,6 @@
 
 
 
-
-
-
-
-
-
-
 // Tennis
 {
     "_id": {
@@ -104,11 +97,9 @@
         "Wed Sep 26 2018",
         "Sat Sep 29 2018"
     ],
-    "registeredMembers": [
-        {
-            "$oid": "5b09f6368a512300047bb1a8"
-        }
-    ],
+    "registeredMembers": [{
+        "$oid": "5b09f6368a512300047bb1a8"
+    }],
     "name": "Tennis",
     "category": "Sport",
     "subcategory": "Tennis",
@@ -148,15 +139,6 @@
 
 
 
-
-
-
-
-
-
-
-
-
 // Swimming
 {
     "_id": {
@@ -190,11 +172,9 @@
         35.90018343228817,
         31.9859723233632
     ],
-    "registeredMembers": [
-        {
-            "$oid": "5b09f6368a512300047bb1a8"
-        }
-    ],
+    "registeredMembers": [{
+        "$oid": "5b09f6368a512300047bb1a8"
+    }],
     "daysPerWeek": [
         1,
         3,
@@ -227,12 +207,6 @@
         "5b09f6368a512300047bb1a8"
     ]
 }
-
-
-
-
-
-
 
 
 
@@ -269,14 +243,11 @@
         35.831666705479904,
         31.97074372597298
     ],
-    "registeredMembers": [
-        {
-            "$oid": "5b09f6368a512300047bb1a8"
-        },
-        {
-            "$oid": "5aff61d364423c365d5d2bb6"
-        }
-    ],
+    "registeredMembers": [{
+        "$oid": "5b09f6368a512300047bb1a8"
+    }, {
+        "$oid": "5aff61d364423c365d5d2bb6"
+    }],
     "daysPerWeek": [
         1,
         3,
@@ -313,51 +284,31 @@
     "discountedMembers": [
         "5aff61d364423c365d5d2bb6"
     ],
-    "expenses": [
-        {
-            "expenseDate": {
-                "$date": "2018-08-08T21:00:00.000Z"
-            },
-            "expenseType": "Salary",
-            "expenseDetails": "Majid",
-            "expenseAmount": 100
+    "expenses": [{
+        "expenseDate": {
+            "$date": "2018-08-08T21:00:00.000Z"
         },
-        {
-            "expenseDate": {
-                "$date": "2018-08-08T21:00:00.000Z"
-            },
-            "expenseType": "Hospitality",
-            "expenseDetails": "water",
-            "expenseAmount": 10
-        }
-    ],
-    "frozeMembers": [
-        {
-            "days": [
-                "Sat Sep 29 2018",
-                "Wed Sep 26 2018"
-            ],
-            "userId": "5b09f6368a512300047bb1a8",
-            "userFullName": "Abdelrahman Aws Yaseen",
-            "eventId": "5b00936c816d9c0004eb89e9"
-        }
-    ]
+        "expenseType": "Salary",
+        "expenseDetails": "Majid",
+        "expenseAmount": 100
+    }, {
+        "expenseDate": {
+            "$date": "2018-08-08T21:00:00.000Z"
+        },
+        "expenseType": "Hospitality",
+        "expenseDetails": "water",
+        "expenseAmount": 10
+    }],
+    "frozeMembers": [{
+        "days": [
+            "Sat Sep 29 2018",
+            "Wed Sep 26 2018"
+        ],
+        "userId": "5b09f6368a512300047bb1a8",
+        "userFullName": "Abdelrahman Aws Yaseen",
+        "eventId": "5b00936c816d9c0004eb89e9"
+    }]
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 

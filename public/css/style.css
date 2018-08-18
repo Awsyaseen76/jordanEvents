@@ -216,112 +216,74 @@ input:checked + .slider:before {
 
 
 
-
-/* navbar menu */
-/** {box-sizing: border-box;}*/
-
-/*html, body {
-	margin: 0;
-	height: 100%;
-}*/
-
-/*body {
-	font-family: Arial, Helvetica, sans-serif;
-}*/
-
-
-
-
-
-
-/*experement of the navbar manually*/
-/*.main-nav{
-	height: 48px;
-	background-color: beige;
-	border-bottom: 3px solid #cc2700;
-	line-height: 48px;
-	padding: 0 16px;
+/*Quotation*/
+*, *:before, *:after{
+    margin: 0;
+    padding: 0;
+    direction: ltr;
+    box-sizing: border-box;
 }
 
-.menu {
-	display: inline-block;
-	list-style: none;
-	margin: 0;
-	padding: 0;
+blockquote {
+    border-radius: 3px;
+    position: relative;  /*  <--- */
+    font-style: italic;
+    text-align: center;
+    padding: 1rem 1.2rem;
+    width: 80%;  /* create space for the quotes */
+    color: #4a4a4a;
+    margin: auto;
+    color: #ffc;
+    background: #369;
 }
 
-.menu li {
-	display: inline-block;
+blockquote:before,
+blockquote:after{
+    font-family: FontAwesome;
+    position: absolute;
+    top: 13px;
+    color: gold;
+    font-size: 400%;
 }
-
-.menu li > a{
-	text-decoration: none;
-	color: #003f00;
-	font-weight: bold;
-	padding: 0 14px;
+blockquote:before{
+    content: "\f10d";
+    margin-right: 13px;
+    right: 100%;
 }
-
-.menu li.close{
-	display: none;
-}
-
-.mobile-btn {
-	display: none;
-	float: right;
+blockquote:after{
+    content: "\f10e";
+    margin-left: 13px;
+    left: 100%;  
 }
 
 
-@media (max-width: 768px) {
-	.menu {
-		position: absolute;
-		top: 0;
-		right: 0;
-		display: block;
-		background-color: beige;
-		width: 300px;
-		height: 100%;
-		z-index: 3;
-		transform: translateX(300px);
-		transition: all 400ms ease-in-out;
-	}
 
-	.menu.open{
-		transform: translateX(0);
-	}
 
-	.menu li{
-		display: block;
-		padding: 0 14px;
-	}
 
-	.menu li.close{
-		display: block;
-		text-align: right;
-	}
 
-	.mobile-btn{
-		display: inline-block;
-	}
-
-	.overlay{
-		position: fixed;
-		top: 0;
-		left: 0;
-		height: 100%;
-		width: 100%;
-		background-color: rgba(0,0,0,.4);
-		opacity: 0;
-		z-index: -1;
-		transition: opacity 300ms linear;
-	}
-
-	.overlay.open{
-		z-index: 1;
-		opacity: 1;
-	}
-
+/* feedback div setting */
+.feedbackContainer { 
+  width: 80%; 
+  height:150px; 
+  padding:0 10px; 
+  overflow:hidden; 
+  margin: auto;
+  margin-bottom: 20px;
+  background-color: antiquewhite;
+  text-align: center;
 }
-*/
+
+.feedbackContent { 
+  padding: 30px;
+}
+
+
+
+
+
+
+
+
 
 
 

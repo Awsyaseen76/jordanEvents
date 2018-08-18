@@ -18,6 +18,22 @@
 		model.getAllUsers = getAllUsers;
 		model.getAllEvents = getAllEvents;
 		model.updateEventByAdmin = updateEventByAdmin;
+		model.getAllFeedbacks = getAllFeedbacks;
+		model.updateFeedbackByAdmin = updateFeedbackByAdmin;
+
+		function updateFeedbackByAdmin(feedback){
+			userService
+				.updateFeedbackByAdmin(feedback)
+				.then(getAllFeedbacks);
+		}
+
+		function getAllFeedbacks(){
+			userService
+				.getAllFeedbacks()
+				.then(function(feedbacks){
+					model.feedbacks = feedbacks.data;
+				});
+		}
 
 		function getAllUsers(){
 			model.events = null;
