@@ -29,6 +29,7 @@
 		model.prepareExpenses = prepareExpenses;
 		model.addExpense = addExpense;
 		model.attendanceReportCreater = attendanceReportCreater;
+		model.isUserFreezeToday = isUserFreezeToday;
 		// model.removeFrozen = removeFrozen;
 
 
@@ -459,7 +460,6 @@
 			// var discountType = null;
 			var originalDailyPrice = model.eventDetails.price / model.eventDetails.eventDays.length;
 
-
 			var today = new Date();
 			var daysPerWeek = model.eventDetails.daysPerWeek;
 
@@ -504,6 +504,7 @@
 			if (callBack) {
 				callBack(totals);
 			} else {
+				model.userTotals = totals;
 				return totals;
 			}
 
@@ -568,12 +569,22 @@
 		function countAttendance() {
 			model.attendedM = 0;
 			model.attendanceArray = [];
+			var userFrozeToday = false;
 
 			for (var m in model.eventDetails.registeredMembers) {
 				// console.log(model.eventDetails.registeredMembers[m]);
-				parametersLoop: for (var p in model.eventDetails.registeredMembers[m].userEventParameters) {
+				parametersLoop:
+				for (var p in model.eventDetails.registeredMembers[m].userEventParameters) {
 					for (var h in model.eventDetails.registeredMembers[m].userEventParameters[p]) {
 						if (model.eventDetails.registeredMembers[m].userEventParameters[p].eventId === model.eventDetails._id) {
+							// Check if the user freeze for this day?
+							checkFreeze:
+							for(var j in model.eventDetails.registeredMembers[m].userEventParameters[p].freezeDays){
+								if(model.eventDetails.registeredMembers[m].userEventParameters[p].freezeDays[j] === new Date().toDateString()){
+									userFrozeToday = true;
+									break parametersLoop;
+								}
+							}
 							for (var a in model.eventDetails.registeredMembers[m].userEventParameters[p].attendedDays) {
 								if (model.eventDetails.registeredMembers[m].userEventParameters[p].attendedDays.length === 0) {
 									attended = false;
@@ -587,13 +598,16 @@
 					}
 					attended = false;
 				}
-				model.attendanceArray.push({
-					name: model.eventDetails.registeredMembers[m].name,
-					userId: model.eventDetails.registeredMembers[m]._id,
-					eventId: model.eventDetails._id,
-					date: new Date().toDateString(),
-					attended: attended
-				});
+				// console.log(!userFrozeToday);
+				if(!userFrozeToday){
+					model.attendanceArray.push({
+						name: model.eventDetails.registeredMembers[m].name,
+						userId: model.eventDetails.registeredMembers[m]._id,
+						eventId: model.eventDetails._id,
+						date: new Date().toDateString(),
+						attended: attended
+					});
+				}
 			}
 			console.log(model.attendanceArray);
 		}
@@ -683,6 +697,20 @@
 
 
 
+		function isUserFreezeToday(user){
+			var frozeToday = true;
+			for(var i in user.userEventParameters){
+				if(user.userEventParameters[i].eventId === model.eventDetails._id){
+					for(var j in user.userEventParameters[i].freezeDays){
+						if(user.userEventParameters[i].freezeDays[j] === new Date().toDateString()){
+							return frozeToday;
+						}
+					}
+				}
+			}
+			frozeToday = false;
+			return frozeToday;
+		}
 
 
 
@@ -751,6 +779,21 @@
 			// }
 			// console.log(model.frozeMembers)
 			return model.frozeMembers;
+		}
+
+
+		function isUserFreezeToday(user){
+			for(var i in user.userEventParameters){
+				if(user.userEventParameters[i].eventId === model.eventDetails._id){
+					for(var j in user.userEventParameters[i].freezeDays){
+						if(user.userEventParameters[i].freezeDays[j] === new Date().toDateString()){
+							return true;
+						}else{
+							return false;
+						}
+					}
+				}
+			}
 		}
 
 
