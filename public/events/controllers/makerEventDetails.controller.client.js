@@ -31,6 +31,9 @@
 		model.attendanceReportCreater = attendanceReportCreater;
 		model.isUserFreezeToday = isUserFreezeToday;
 		model.removeFrozen = removeFrozen;
+		model.showPaidMembers = showPaidMembers;
+
+		
 
 
 
@@ -119,9 +122,20 @@
 					model.eventDetails = eventDetails;
 					model.discountedMembers = eventDetails.discountedMembers;
 					model.grandTotals = 0;
+					model.paidMembers = [];
+					model.unPaidMembers = [];
 
 					for (var i in model.eventDetails.registeredMembers) {
 						model.grandTotals += getTotals(model.eventDetails.registeredMembers[i], model.eventDetails._id).totalOfPayments;
+						for(var l in model.eventDetails.registeredMembers[i].userEventParameters){
+							if(model.eventDetails.registeredMembers[i].userEventParameters[l].eventId == model.eventDetails._id){
+								if(model.eventDetails.registeredMembers[i].userEventParameters[l].payments.length>0){
+									model.paidMembers.push(model.eventDetails.registeredMembers[i]);
+								}else{
+									model.unPaidMembers.push(model.eventDetails.registeredMembers[i]);
+								}
+							}
+						}
 					}
 					// }
 
@@ -482,8 +496,6 @@
 						break frozeMembersLoop;
 					}
 				}
-
-			console.log('the days are:', totals.newEventDays);
 			
 			// calculating weeks
 			totals.eventWeeks = Math.ceil(totals.newEventDays.length / daysPerWeek.length);
@@ -883,6 +895,16 @@
 					document.getElementById('expensesForm').reset();
 					$route.reload();
 				});
+		}
+
+
+		function showPaidMembers(v){
+			if(v){
+				// console.log(model.eventDetails.registeredMembers)
+				model.eventDetails.registeredMembers = model.paidMembers;
+			}else{
+				model.eventDetails.registeredMembers = model.unPaidMembers;
+			}
 		}
 
 

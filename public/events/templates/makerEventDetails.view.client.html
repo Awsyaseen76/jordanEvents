@@ -212,17 +212,23 @@
 
 	<h3>Members:</h3>
 	<div class="form-group row">
-		<div class="col-sm-3"  style="padding: auto; height: 100%;">
+		<div class="col-sm-4"  style="padding: auto; height: 100%;">
 			<label for="searchMember" class="text-danger" style="display: block; height: 100%;">
 				<h4 style="padding-top: 3px;">Search members:</h4>
 			</label>
+			<label for="showPaidMembers"><h5>Show paid/unpaid members only:</h5></label>
+			<label class="switch pull-right">
+				<input type="checkbox" id="showPaidMembers" ng-change="model.showPaidMembers(showPaidMembers.value)" ng-model="showPaidMembers.value">
+				<span class="slider round"></span>
+			</label>
 		</div>
+
 		<div class="col-sm-5">
 			<input type="text" class="form-control" name="searchMember" id="searchMember" ng-model="searchMember">
 		</div>  
 
 		<!-- Attendance -->
-		<div class="col-sm-4">
+		<div class="col-sm-3">
 			<button class="btn btn-success" data-toggle="modal" data-target="#todayAttendance" style="width: 100%;" ng-click="model.countAttendance()">
 				<b>Today attendance</b>
 			</button>
@@ -660,17 +666,17 @@
 
 		<!-- footer -->
 		<tr style="height: 50px;">
-			<td> </td>
-			<td> </td>
-			<td> </td>
-			<td> </td>
-			<td> </td>
-			<td> </td>
+			<!-- <td> </td> -->
+			<!-- <td> </td> -->
+			<!-- <td> </td> -->
+			<!-- <td> </td> -->
+			<!-- <td> </td> -->
+			<!-- <td> </td> -->
 			
 			<!-- Attendance Modal -->
-			<td>
+			<!-- <td> -->
 				<!-- <button class="btn btn-success" ng-click="model.countAttendance(model.attend)" data-toggle="modal" data-target="#makeAttendanceModal">Attendance</button>  -->
-			</td>
+			<!-- </td> -->
 
 			<!-- <div class="modal fade" id="makeAttendanceModal" role="dialog">
 				<div class="modal-dialog">
