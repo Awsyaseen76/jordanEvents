@@ -30,6 +30,8 @@ module.exports = function(app) {
 		eventsDB
 			.removeFrozen(ids)
 			.then(function(result){
+				console.log('the result of remove frozen is: ');
+				console.log(result);
 				res.send(result);
 			});
 	}

@@ -26,9 +26,9 @@
 
 
 		function removeFrozen(ids){
-			var userId = ids.userId;
+			var userId = String(ids.userId);
 			var eventId = String(ids.eventId);
-			var originalEventId = ids.originalEventId;
+			var originalEventId = String(ids.originalEventId);
 			return $http.put('/api/event/removeFrozen', ids);
 		}
 

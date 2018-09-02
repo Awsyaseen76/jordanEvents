@@ -30,7 +30,7 @@
 		model.addExpense = addExpense;
 		model.attendanceReportCreater = attendanceReportCreater;
 		model.isUserFreezeToday = isUserFreezeToday;
-		// model.removeFrozen = removeFrozen;
+		model.removeFrozen = removeFrozen;
 
 
 
@@ -374,8 +374,10 @@
 				discount.eventDays = totals.newEventDays;
 				discount.discountedEventPrice = ((model.eventDetails.price / model.eventDetails.eventDays.length) * discount.percentage) * discount.eventDays.length;
 				discount.normalEventPrice = (model.eventDetails.price / model.eventDetails.eventDays.length) * totals.newEventDays.length;
+				// Check if the user had frozen days to compensates
 				for(var f in model.eventDetails.frozeMembers){
-					if(model.eventDetails.frozeMembers[f].userId === user._id && model.eventDetails.frozeMembers[f].days.length >0){
+					if(model.eventDetails.frozeMembers[f].userId === user._id && model.eventDetails.frozeMembers[f].days.length >0 && model.eventDetails.frozeMembers[f].compensated == false){
+						// Calculate the discounted daily price then multiply by frozenDays then deduct the number from the final discountedEventPrice
 						discount.discountedEventPrice -= ((model.eventDetails.price / model.eventDetails.eventDays.length) * discount.percentage) * (model.eventDetails.frozeMembers[f].days.length);
 						discount.normalEventPrice -= ((model.eventDetails.price / model.eventDetails.eventDays.length) * discount.percentage) * (model.eventDetails.frozeMembers[f].days.length);
 					}
@@ -459,19 +461,30 @@
 			totals.totalOfPayments = 0;
 			// var discountType = null;
 			var originalDailyPrice = model.eventDetails.price / model.eventDetails.eventDays.length;
-
+			totals.originalDailyPrice = originalDailyPrice;
 			var today = new Date();
 			var daysPerWeek = model.eventDetails.daysPerWeek;
 
 			// create event days array starting from the payment date
 			eventDaysLoop:
 				for (var d in model.eventDetails.eventDays) {
+					// var dayInEventDays = new Date(model.eventDetails.eventDays[d]);
 					if (today <= new Date(model.eventDetails.eventDays[d])) {
 						totals.newEventDays = model.eventDetails.eventDays.slice(d);
 						break eventDaysLoop;
 					}
 				}
 
+			frozeMembersLoop:
+				for(var z in model.eventDetails.frozeMembers){
+					if(model.eventDetails.frozeMembers[z].userId == user._id){
+						totals.userFrozeDetails = model.eventDetails.frozeMembers[z];
+						break frozeMembersLoop;
+					}
+				}
+
+			console.log('the days are:', totals.newEventDays);
+			
 			// calculating weeks
 			totals.eventWeeks = Math.ceil(totals.newEventDays.length / daysPerWeek.length);
 
@@ -713,6 +726,20 @@
 		}
 
 
+		// function isUserFreezeToday(user){
+		// 	for(var i in user.userEventParameters){
+		// 		if(user.userEventParameters[i].eventId === model.eventDetails._id){
+		// 			for(var j in user.userEventParameters[i].freezeDays){
+		// 				if(user.userEventParameters[i].freezeDays[j] === new Date().toDateString()){
+		// 					return true;
+		// 				}else{
+		// 					return false;
+		// 				}
+		// 			}
+		// 		}
+		// 	}
+		// }
+
 
 		function prepareFreezeDays(user) {
 			model.userUseFreezeBefore = false;
@@ -765,7 +792,6 @@
 		}
 
 		function getFrozeMembers() {
-			
 			// var froze = [];
 			// for(var u in model.eventDetails.registeredMembers){
 			// 	for(var p in model.eventDetails.registeredMembers[u].userEventParameters){
@@ -779,21 +805,6 @@
 			// }
 			// console.log(model.frozeMembers)
 			return model.frozeMembers;
-		}
-
-
-		function isUserFreezeToday(user){
-			for(var i in user.userEventParameters){
-				if(user.userEventParameters[i].eventId === model.eventDetails._id){
-					for(var j in user.userEventParameters[i].freezeDays){
-						if(user.userEventParameters[i].freezeDays[j] === new Date().toDateString()){
-							return true;
-						}else{
-							return false;
-						}
-					}
-				}
-			}
 		}
 
 

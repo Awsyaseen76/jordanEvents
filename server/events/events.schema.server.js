@@ -35,7 +35,8 @@ var eventsSchema = mongoose.Schema({
 									userId: String,
 									eventId: String,
 									userFullName: String,
-									days: []
+									days: [],
+									compensated: {type: Boolean, default: false}
 								}
 							],
 			discountedMembers: [],

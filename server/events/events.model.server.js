@@ -28,22 +28,36 @@ function removeFrozen(ids){
 	return eventsDB
 				.findById(eventId)
 				.then(function(event){
+					console.log('the found event is:');
+					console.log(event);
 					for(var f in event.frozeMembers){
 						if(event.frozeMembers[f].userId === userId){
-							event.frozeMembers.splice(f,1);
+							// instead of remove the frozen members set the compensated to true
+							// event.frozeMembers.splice(f,1);
+							event.frozeMembers[f].compensated = true;
+							console.log('compensated after is: ',event.frozeMembers[f].compensated);
 						}
 					}
-					event.save();
-					return usersDB.findById(userId);
+					return event.save();
+					// return usersDB.findById(userId);
 				})
-				.then(function(user){
-					for(var i in user.userEventParameters){
-						if(user.userEventParameters[i].eventId === originalEventId){
-							user.userEventParameters[i].freezeDays.splice(0, user.userEventParameters[i].freezeDays.length);
-						}
-					}
-					return user.save();
-				});
+				// .then(function(user){
+				.then(
+					usersDB
+						.findById(userId)
+						.then(function(user){
+							console.log('the user is: ');
+							console.log(user);
+							for(var i in user.userEventParameters){
+								if(user.userEventParameters[i].eventId === originalEventId){
+									user.userEventParameters[i].freezeDays.splice(0, user.userEventParameters[i].freezeDays.length);
+								}
+							}
+							return user.save();
+							
+						})
+
+					);
 }
 
 

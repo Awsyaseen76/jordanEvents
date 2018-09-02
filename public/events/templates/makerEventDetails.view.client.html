@@ -477,15 +477,29 @@
 												<!-- <td>{{model.getTotals(user, model.eventDetails._id).balance | currency:"JOD "}}</td> -->
 												<td>{{model.userTotals.balance | currency:"JOD "}}</td>
 											</tr>
+
 											<tr style="background-color: lightyellow;">
-												<td><b>Event price:</b></td>
-												<!-- <td>{{model.getTotals(user, model.eventDetails._id).fullEventPrice | currency:"JOD "}}</td> -->
-												<td>{{model.userTotals.fullEventPrice | currency:"JOD "}}</td>
+												<td></td>
+												<td></td>
+											</tr>
+											<tr style="background-color: lightgreen;">
+												<td><b>Event price brekdown:</b></td>
+												<td></td>
 											</tr>
 											<tr style="background-color: lightyellow;">
-												<td><b>Event days:</b></td>
+												<td><b>Registered Event days:</b></td>
 												<td>{{model.userTotals.newEventDays.length}}</td>
 											</tr>
+											<tr style="background-color: lightyellow;">
+												<td><b>Original event price:</b></td>
+												<td>{{model.userTotals.originalDailyPrice * model.userTotals.newEventDays.length}}</td>
+											</tr>
+
+											<tr style="background-color: lightyellow;">
+												<td><b>Discounted price:</b></td>
+												<td>{{model.userTotals.discountedDailyPrice * model.userTotals.newEventDays.length}}</td>
+											</tr>											
+
 											<tr style="background-color: lightyellow;">
 												<td><b>Discount type:</b></td>
 												<!-- <td>{{model.getTotals(user, model.eventDetails._id).discountType}}</td> -->
@@ -496,6 +510,23 @@
 												<!-- <td>{{model.getTotals(user, model.eventDetails._id).discountTag}}</td> -->
 												<td>{{model.userTotals.discountTag}}</td>
 											</tr>
+
+											<tr style="background-color: lightyellow;" ng-show="model.userTotals.userFrozeDetails">
+												<td><b>Froze days:</b></td>
+												<td>{{model.userTotals.userFrozeDetails.days.length}}</td>
+											</tr>
+
+											<tr style="background-color: lightyellow;" ng-show="model.userTotals.userFrozeDetails">
+												<td><b>Froze amount:</b></td>
+												<td>{{model.userTotals.userFrozeDetails.days.length * model.userTotals.discountedDailyPrice}}</td>
+											</tr>
+
+											<tr style="background-color: lightyellow;">
+												<td><b>Total Event price:</b></td>
+												<!-- <td>{{model.getTotals(user, model.eventDetails._id).fullEventPrice | currency:"JOD "}}</td> -->
+												<td>{{model.userTotals.fullEventPrice | currency:"JOD "}}</td>
+											</tr>
+											
 										</table>
 									</div>
 									<!-- <h5><b>Total payments:</b> {{model.getTotals(user, model.eventDetails._id).totalOfPayments | currency:"JOD "}}</h5> -->
@@ -739,6 +770,7 @@
 					<td>
 						<span ng-repeat="day in froze.days" >&#x2299; {{day}} &emsp;</span>
 					</td>
+					<td>{{froze.compensated}}</td>
 				</tr>
 			</tbody>
 		</table>

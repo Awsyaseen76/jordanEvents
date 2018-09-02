@@ -689,8 +689,8 @@ function addEventToUserEventsList(req, res){
 			eventsDB
 				.addMemberToEvent(event._id, userId)
 				.then(function (result){
-					console.log(result)
-				})
+					console.log(result);
+				});
 			res.send(user);
 		});
 }

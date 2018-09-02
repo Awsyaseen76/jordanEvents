@@ -283,6 +283,18 @@ User actions from starting register for particular evet:
 
 	- [x] Admin has the ability to choose which comments to be published on the main page.
 
+	- [x] show the details of the price breakdown to include:
+		original price
+		discounte type
+		discounted price
+		event days
+		daily price
+		registered days
+		froze days
+		froze days amount
+		total event price
+
+	- [ ] On maker event details page show just paid members and put checkbox to show the unpaid members to make them pay.
 
 
 Notes:
@@ -295,6 +307,7 @@ Notes:
 	- create memberShip serial number (today.getFullYear()+serial) Year0001 20180001 continiouse for all members.
 	- report for families and groups for maker tab for family other for groups with members.
 	- export expenses to excel.
+	- fix the Event Summary in maker event details to show totals right at startup.
 
 Important:
  [x] give the maker option to create a new event from previouse one data so the name will be the same
