@@ -319,3 +319,34 @@ Important:
 
 
 
+Notes Oct 22
+
+Registration form.
+	1. create a link for the parents registrations.
+	2. filled by the registerer employee.
+	Registration form:
+		player name: first, middle, last.
+		DOB
+		Gender
+		Nationality
+		School name
+		Grade
+		Home address (Map)
+		Parent / Guardian name: first, middle, last.
+		Mobile No. with International code.
+		Secondary / emergency mobile No.
+		Email
+		Please list those people including in addition to parents / guardians who are permitted to pick your child.
+		Name: first, middle, last.
+		Phone: 
+		Please list any medical problems including any requireing maintinance medication (i.e. Diabetic, Asthma, Seizures)
+		Child photo
+
+
+
+
+
+
+
+
+
