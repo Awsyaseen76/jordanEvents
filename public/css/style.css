@@ -108,6 +108,10 @@ body {
   font-family: 'Poiret One', cursive;
 }
 
+.poiret-font{
+  font-family: 'Poiret One', cursive;
+}
+
 .carousel-item {
   height: 65vh;
   min-height: 300px;
