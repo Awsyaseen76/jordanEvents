@@ -24,7 +24,7 @@
 					                        "type": "Point",
 					                        "coordinates": model.eventsList[e].coordinates
 					                    }
-							            })
+							            });
 					}
 					// function getLocation() {
 					//     if (navigator.geolocation) {
@@ -48,7 +48,7 @@
 							style: 'mapbox://styles/mapbox/streets-v10',
 							center: [35.87741988743201, 32.003009804995955],
 							// center: [model.position.currentposition.lng, model.position.currentposition.lat],
-							zoom: 15
+							zoom: 10
 						});
 
 						// Show map controller

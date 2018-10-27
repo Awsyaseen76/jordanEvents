@@ -1,12 +1,16 @@
 
 
 <!-- Navigation -->
-    <nav class="navbar fixed-top navbar-expand-lg navbar-light bg-white fixed-top wojo-menu">
-      <a class="navbar-brand" href="index.html"><img class="wojo-logo" src="./img/logo/wojo.jpg"> </a>
-      <div class="container">
-        <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
-          <span class="navbar-toggler-icon"></span>
-        </button>
+    <nav class="navbar navbar-expand-md navbar-light bg-white sticky-nav-top">
+      <div class="container-fluid">
+        <div class="navbar-header ml-auto">
+            <a class="navbar-brand" href="index.html">
+              <img class="menu-logo" src="./img/logo/wojo.png">
+            </a>
+            <button class="navbar-toggler collapsed ml-auto" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+              <span class="navbar-toggler-icon"></span>
+            </button>
+        </div>
         <div class="collapse navbar-collapse" id="navbarResponsive">
           <ul class="navbar-nav ml-auto">
             <li class="nav-item">
@@ -40,8 +44,8 @@
 
 <!--  -->
 
-<div class="container aws-margin10">
-	<div class="jumbotron" >
+<div class="container-fluid aws-margin10">
+	<!-- <div class="jumbotron" > -->
 		<!-- static picture -->
 		<!-- <img class="mx-auto d-block profile-img"  ng-src="{{model.userProfile.profileImage}}" > -->
 		
@@ -171,7 +175,8 @@
 
 						<!-- Feedback -->
 						<div>
-						<div class="row" style="margin-top: 50px; border: solid; border-width: 5px; border-color: lightgrey;  border-radius: 25px; padding: 20px;">
+						<!-- <div class="row" style="margin-top: 50px; border: solid; border-width: 5px; border-color: lightgrey;  border-radius: 25px; padding: 20px;"> -->
+						<div class="row" style="margin-top: 50px;">
 							<div class="col-sm-12">
 								<h3 class="text-success">Give us a feedback:</h3>
 							</div>
@@ -186,9 +191,17 @@
 							<div class="col-sm-4" style="margin: 5px;">
 								<a class="btn btn-success form-control" ng-click="model.submitFeedback(selectedEvent._id, selectedEvent.name, feedbackText)">Submit</a>
 							</div>
-							<div class="col-sm-12" style="margin-top: 50px;">
-								<h4 class="text-success">Your feedbacks:</h4>
-									<table class="table table-hover">
+						</div>
+							<div style="margin-top: 50px;">
+								<h3 class="text-success">Previous feedbacks:</h3>
+								<div ng-repeat="feed in model.userFeedbacks">
+									<h4><em>{{feed.eventName}}</em></h4>
+									<p class="pull-right" style="margin: 0px; color: green;">{{feed.date | date}}</p>
+									<br>
+									<h5>"{{feed.feedback}}"</h5>
+									<hr>
+								</div>
+									<!-- <table class="table table-hover">
 									  <thead>
 									    <tr>
 									      <th width="20%">Date</th>
@@ -203,16 +216,16 @@
 									      <td>{{feed.feedback}}</td>
 									    </tr>
 									  </tbody>
-									</table>
+									</table> -->
 							</div>
-						</div>
+						<!-- </div> -->
 						<!-- </div> -->
 						<!-- /Feedback -->
 					</div>
 			</div>
 		</div>
 	</div>
-</div>	  	
+<!-- </div>	  	 -->
 
 
 
