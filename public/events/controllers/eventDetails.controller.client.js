@@ -20,6 +20,7 @@
 					.then(function(result){
 						if(result){
 							model.loggedUser = result;
+							model.loggedUser.DOB = new Date(model.loggedUser.DOB);
 						}
 					});
 
@@ -40,26 +41,27 @@
 
 
 
-			function eventRegistration(event){
-				if (!model.loggedUser){
-					model.error1 = 'Please login or register to register on this event';
-					$('html, body').animate({ scrollTop: 0 }, 'slow');
-					return;
-				} else {
-					var userId = model.loggedUser._id;
-					var eventsList = model.loggedUser.registeredEventsList;
-					for(var e in eventsList){
-						if(eventsList[e]._id === event._id){
-							model.error2 = 'You already registered for this event';
-							return;
-						}
-					}
-					userService
-						.addEventToUserEventsList(event)
-						.then(function (response){
-						$location.url('/userProfile');
-					});
-				}
+			function eventRegistration(event, user){
+				console.log(user);
+				// if (!model.loggedUser){
+				// 	model.error1 = 'Please login or sign-up to register on this event';
+				// 	$('html, body').animate({ scrollTop: 0 }, 'slow');
+				// 	return;
+				// } else {
+				// 	var userId = model.loggedUser._id;
+				// 	var eventsList = model.loggedUser.registeredEventsList;
+				// 	for(var e in eventsList){
+				// 		if(eventsList[e]._id === event._id){
+				// 			model.error2 = 'You already registered for this event';
+				// 			return;
+				// 		}
+				// 	}
+				// 	userService
+				// 		.addEventToUserEventsList(event)
+				// 		.then(function (response){
+				// 		$location.url('/userProfile');
+				// 	});
+				// }
 			}
 
 		}

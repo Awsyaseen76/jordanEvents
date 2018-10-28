@@ -47,53 +47,51 @@
 
 
 <div class="container aws-margin10 ">
-	<div class="col-xs-12 login-style">
-	  <h1>Welcome back..</h1>
-	  <!-- <hr class="my-4"> -->
-    <br>
-	  <form>
-	  	<fieldset>
-			  <div class="form-group">
-		      	<label for="email">Email address</label>
-		      	<input type="email" 
-		      			class="form-control" 
-		      			id="email" 
-		      			aria-describedby="emailHelp" 
-		      			placeholder="Enter email" 
-		      			ng-model="model.user.email">
-		      	<small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
-		      	<div nd-show="error" class="text-danger">{{model.error}}</div>
-	    	</div>
-	    	
-	    	<div class="form-group">
-		      	<label for="password">Password</label>
-		      	<input type="password" 
-		      			class="form-control" 
-      					id="password" 
-      					placeholder="Password" 
-      					ng-model="model.user.password">
-			</div>
-	  	
-	  		<button type="submit" class="btn btn-success" ng-click="model.login(model.user)">Login</button>
-        
-            
-          
-	  		
-	  		<!-- register with google -->
+	<div class="jumbotron">
+    <div class="col-xs-12">
+  	  <h1 class="poiret-font"><strong>Welcome back champ..</strong></h1>
+  	  <!-- <hr class="my-4"> -->
+      <br>
+  	  <form>
+  	  	<fieldset>
+  			  <div class="form-group">
+  		      	<label for="email">Email address</label>
+  		      	<input type="email" 
+  		      			class="form-control" 
+  		      			id="email" 
+  		      			aria-describedby="emailHelp" 
+  		      			placeholder="Enter email" 
+  		      			ng-model="model.user.email">
+  		      	<small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
+  		      	<div nd-show="error" class="text-danger">{{model.error}}</div>
+  	    	</div>
+  	    	
+  	    	<div class="form-group">
+  		      	<label for="password">Password</label>
+  		      	<input type="password" 
+  		      			class="form-control" 
+        					id="password" 
+        					placeholder="Password" 
+        					ng-model="model.user.password">
+  			</div>
+  	  	
+  	  		<button type="submit" class="btn btn-success" ng-click="model.login(model.user)">Login</button>
+  	  		
+  	  		<!-- register with google -->
 
-	  		<!-- <a href="/jordanEvents/auth/google" class="btn btn-danger">
-    			<span class="fa fa-google-plus"></span>
-    			Google
-			</a> -->
+  	  		<!-- <a href="/jordanEvents/auth/google" class="btn btn-danger">
+      			<span class="fa fa-google-plus"></span>
+      			Google
+  			</a> -->
 
-	  		<!-- end register with google -->
+  	  		<!-- end register with google -->
 
+  	  		<a class="btn btn-warning" href="#!/register" role="button">Register</a>
 
-	  		<a class="btn btn-warning" href="#!/register" role="button">Register</a>
-
-        <br><br>
-        <p>Forget password? click <span> <a href="#!/forgetPassword">here</a> </span> to reset password.</p>
-	  	</fieldset>
-	  </form>
-	</div>
+          <br><br>
+          <p>Forget password? click <span> <a href="#!/forgetPassword">here</a> </span> to reset password.</p>
+  	  	</fieldset>
+  	  </form>
+  	</div>
+  </div>
 </div>

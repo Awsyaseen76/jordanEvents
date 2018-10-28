@@ -325,12 +325,12 @@ Registration form.
 	1. create a link for the parents registrations.
 	2. filled by the registerer employee.
 	Registration form:
-		player name: first, middle, last.
-		DOB
-		Gender
+		[x] player name: first, middle, last.
+		[x] DOB
+		[x] Gender
 		Nationality
-		School name
-		Grade
+		[x] School name
+		[x] Grade
 		Home address (Map)
 		Parent / Guardian name: first, middle, last.
 		Mobile No. with International code.
