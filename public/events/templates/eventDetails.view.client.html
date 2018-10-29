@@ -88,7 +88,7 @@
 
 
 
-  <!-- Expenses -->
+  <!-- Registration info -->
   <div class="row">
     <div class="col-sm-4">
       <button class="btn btn-success" data-toggle="modal" data-target="#eventRegistrationModal"><b>Register</b></button>
@@ -237,7 +237,7 @@
           <div class="form-row">
             <div class="form-group col-md-12">
               <label for="notes">Notes:</label>
-              <input type="text" class="form-control" id="notes" placeholder="Notes..." ng-model="model.loggedUser.notes">
+              <input type="text" class="form-control" id="notes" name="notes" placeholder="Notes..." ng-model="model.loggedUser.notes">
             </div>
           </div>
 
@@ -250,7 +250,7 @@
               <!-- <input type="checkbox"  name="termsAcceptance" id="termsAcceptance" required ng-model="model.loggedUser.termsAcceptance"> <label for="termsAcceptance">I read and agree the terms and conditions.</label> -->
               <br>
               <div class="form-check">
-                <input class="form-check-input" type="checkbox" value="" ng-model="model.loggedUser.termsAcceptance" id="termsAcceptance">
+                <input class="form-check-input" type="checkbox" value="" ng-model="model.loggedUser.termsAcceptance" id="termsAcceptance" name="termsAcceptance">
                 <label class="form-check-label" for="termsAcceptance">
                   I read and agree the terms and conditions.
                 </label>
@@ -259,15 +259,9 @@
             </div>
           </div>
 
-
-
-
-
-
-            
             
             <br>
-            <input type="submit" class="btn btn-success pull-right" name="register" ng-click="model.eventRegistration(model.eventDetails, model.loggedUser)" data-dismiss="modal">
+            <input type="submit" class="btn btn-success pull-right" name="register" ng-click="model.eventRegistration(model.eventDetails, model.loggedUser)" >
           </form>
           <br>
         </div>
@@ -275,7 +269,7 @@
       </div>
     </div>
   </div>
-<!-- / Expeses -->
+<!-- / Registration info -->
 
 
 
