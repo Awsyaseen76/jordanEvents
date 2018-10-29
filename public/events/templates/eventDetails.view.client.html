@@ -82,18 +82,19 @@
   <p>{{model.eventDetails.price | currency:"JOD "}}</p>
 	<br>
 
-	<a href="" class="btn btn-lg btn-success" ng-click="model.eventRegistration(model.eventDetails)">Register</a>
-	<a href="#!/allEvents" class="btn btn-lg btn-danger">Cancel</a>
+	<!-- <a href="" class="btn btn-lg btn-success" ng-click="model.eventRegistration(model.eventDetails)">Register</a> -->
+	<button class="btn btn-lg btn-success" data-toggle="modal" data-target="#eventRegistrationModal"><b>Register</b></button>
+  <a href="#!/allEvents" class="btn btn-lg btn-danger">Cancel</a>
 
 
 
 
   <!-- Registration info -->
-  <div class="row">
+  <!-- <div class="row">
     <div class="col-sm-4">
       <button class="btn btn-success" data-toggle="modal" data-target="#eventRegistrationModal"><b>Register</b></button>
     </div>
-  </div>
+  </div> -->
   <div class="modal fade" id="eventRegistrationModal" role="dialog">
     <div class="modal-dialog modal-lg">
       <div class="modal-content">
