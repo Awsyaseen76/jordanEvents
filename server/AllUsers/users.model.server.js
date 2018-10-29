@@ -308,7 +308,7 @@ function addEventId(userId, eventId){
 		});
 }
 
-function addEventToUserEventsList(userId, eventId){
+function addEventToUserEventsList(userId, eventId, userDetails){
 	return findUserById(userId)
 				.then(function(user){
 					// this will be instead of registeredEventsList

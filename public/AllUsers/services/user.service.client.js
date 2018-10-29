@@ -93,9 +93,10 @@
 			return $http.get('/api/user/getAllUsers');
 		}
 
-		function addEventToUserEventsList(event){
+		function addEventToUserEventsList(event, user){
+			var parameters = {eventDetails: event, userDetails: user};
 			var url = '/api/addEventToUser';
-				return $http.post(url, event);
+				return $http.post(url, parameters);
 		}
 
 		function removeRegisteredEvent(userId, eventId){

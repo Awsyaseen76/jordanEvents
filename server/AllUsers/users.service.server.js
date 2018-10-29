@@ -681,18 +681,34 @@ function checkAdmin(req, res, next){
 }
 
 function addEventToUserEventsList(req, res){
-	var userId = req.user._id;
-	var event = req.body;
+	var parameters = req.body;
+	var eventDetails = parameters.eventDetails;
+	var userDetails = parameters.userDetails;
+	var userId = userDetails._id;
+	var eventId = eventDetails._id;
 	usersDB
-		.addEventToUserEventsList(userId, event._id)
-		.then(function(user){
-			eventsDB
-				.addMemberToEvent(event._id, userId)
-				.then(function (result){
-					console.log(result);
-				});
-			res.send(user);
-		});
+		.updateProfile(userDetails)
+			.then(function(updatedUser){
+				usersDB	
+					.addEventToUserEventsList(userId, eventId)
+						.then(function(user){
+							eventsDB
+								.addMemberToEvent(eventId, userId)
+									.then(function (result){
+										console.log(result);
+									});
+							res.send(user);
+						});
+			});
+		// .addEventToUserEventsList(userId, eventId, userDetails)
+		// .then(function(user){
+		// 	eventsDB
+		// 		.addMemberToEvent(eventId, userId)
+		// 		.then(function (result){
+		// 			console.log(result);
+		// 		});
+		// 	res.send(user);
+		// });
 }
 
 function removeRegisteredEvent(req, res){
