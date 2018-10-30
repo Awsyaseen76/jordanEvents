@@ -21,6 +21,12 @@
 					}
 				});
 
+			userService
+				.getAllMakers()
+				.then(function(makers){
+					model.makersList = makers.data;
+				});
+
 			eventsService
 				.getAllEvents()
 				.then(function(events){

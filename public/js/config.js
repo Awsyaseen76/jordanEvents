@@ -20,6 +20,8 @@
 			})
 
 			.when('/login', {
+
+
 				templateUrl: 'AllUsers/templates/login.view.client.html',
 				controller: 'loginController',
 				controllerAs: 'model'
@@ -100,6 +102,12 @@
 				controller: 'eventDetailsController',
 				controllerAs: 'model'
 			})
+
+			.when('/makerEventsList/:makerId',{
+				templateUrl: 'events/templates/eventsListByMaker.view.client.html',
+				controller: 'allEventsController',
+				controllerAs: 'model'
+			})			
 			
 			// .when('/loginMaker', {
 			// 	templateUrl: 'makers/templates/loginMaker.view.client.html',

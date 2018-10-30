@@ -27,6 +27,7 @@
 		this.removeFrozeDays = removeFrozeDays;
 		this.getAllFeedbacks = getAllFeedbacks;
 		this.updateFeedbackByAdmin = updateFeedbackByAdmin;
+		this.getAllMakers = getAllMakers;
 		
 
 
@@ -91,6 +92,10 @@
 
 		function getAllUsers(){
 			return $http.get('/api/user/getAllUsers');
+		}
+
+		function getAllMakers(){
+			return $http.get('/api/user/getAllMakers');
 		}
 
 		function addEventToUserEventsList(event, user){

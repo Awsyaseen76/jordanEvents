@@ -361,3 +361,5 @@ Notes on Oct 30 2018:
 		* Category age group
 
 
+create new page copy from allEvents tweaked the it will accept the maker id on the href like the evenId when click on event to filter the events and show just the specific maker events.
+

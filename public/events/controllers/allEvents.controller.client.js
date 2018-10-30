@@ -3,12 +3,20 @@
 		.module('jordanEvents')
 		.controller('allEventsController', allEventsController);
 
-	function allEventsController(eventsService, userService, $location){
+	function allEventsController($routeParams, eventsService, userService, $location){
 		var model = this;
 		model.position = {currentposition: {}};
 		var mapFeatures = [];
 		
 		function init(){
+			if($routeParams.makerId){
+				var makerId = $routeParams.makerId;
+				eventsService
+					.createMakerEventsList(makerId)
+					.then(function(eventsByMaker){
+						model.eventsListByMaker = eventsByMaker.data;
+					});
+			}
 			eventsService
 				.eventConfig()
 				.then(function(result){
@@ -126,7 +134,7 @@
 							    // Change it back to a pointer when it leaves and hide the popup.
 							    map.on('mouseleave', 'places', function (e) {
 							        map.getCanvas().style.cursor = '';
-							        popup.remove()
+							        popup.remove();
 							    });
 
 							});

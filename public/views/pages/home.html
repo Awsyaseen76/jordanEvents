@@ -43,12 +43,15 @@
   <div>
     
   </div>
+
+  <br>
+  <br>
 <!-- UIB carousel -->
 
 
 
 <!-- carousel -->
-    <div>
+    <!-- <div>
     <header>
       <div id="homePageCarousel" class="carousel slide" data-ride="carousel">
         <ol class="carousel-indicators">
@@ -75,7 +78,7 @@
               <p>Based on the most famouse international program.</p>
             </div>
           </div>
-        </div>
+        </div> -->
         <!-- the left and right buttons -->
         <!-- <a class="carousel-control-prev" href="#homePageCarousel" role="button" data-slide="prev">
           <span class="carousel-control-prev-icon" aria-hidden="true"></span>
@@ -85,9 +88,9 @@
           <span class="carousel-control-next-icon" aria-hidden="true"></span>
           <span class="sr-only">Next</span>
         </a> -->
-      </div>
+      <!-- </div>
     </header>
-    </div>
+    </div> -->
 <!-- /carousel -->
 
 
@@ -95,11 +98,27 @@
 
 
 <!-- Page Content -->
+    <br>
+    <br>
+
     <div class="container">
+      <div class="row">
+        <!-- <div class="col-lg-4 mb-4" ng-repeat="event in model.eventsList | filter:{approved: true}"> -->
+        <div class="col-md-6 mb-0" ng-repeat="maker in model.makersList">
+          <div class="card h-100 text-center">
+            <a href="#!/makerEventsList/{{maker._id}}">
+              <img class="card-img-top" ng-src="{{maker.profileImage}}" alt="{{maker.name.firstName}}"> 
+            </a>
+          </div>
+        </div>
+      </div>
 
       <br><br>
+      
+
+
       <!-- Special event -->
-      <div class="row" ng-show="model.specialEvent">
+      <!-- <div class="row" ng-show="model.specialEvent">
         <div class="col-lg-6">
           <img class="img-fluid rounded mb-4" ng-src="{{model.specialEvent.images.img750x450}}" alt="">
         </div>
@@ -109,13 +128,13 @@
           <p ng-cloak>{{model.specialEvent.details}}</p>
           <a href="#!/allEvents/{{model.specialEvent._id}}">More details...</a>
         </div>
-      </div>
+      </div> -->
       <!-- /Special event -->
     
-    <br><br><br>
+    <!-- <br><br><br> -->
 
       <!-- Available events -->
-      <h2>Available events</h2>
+<!--       <h2>Available events</h2>
       <div class="row">
         <div class="col-lg-4 mb-4" ng-repeat="event in model.eventsList | filter:{approved: true}">
           <div class="card h-100 text-center">
@@ -131,13 +150,13 @@
             </div>
           </div>
         </div>
-      </div>
+      </div> -->
       <!-- /Available Events -->
 
       <br>
       <br>
       
-      <blockquote><h4>Random Feedbacks</h4></blockquote>
+      <!-- <blockquote><h4>Random Feedbacks</h4></blockquote>
       <div class="feedbackContainer">
         <div class="feedbackContent">
           <div ng-repeat="feedback in model.feedbacks" ng-show="feedback.approved">
@@ -150,11 +169,10 @@
             <br>
             <br>
             <br>
-            <!-- <p>{{feedback.approved}}</p> -->
           </div>
         </div>
       </div>
-
+ -->
 
       <!-- Partners -->
       <h2>Our Partners</h2>

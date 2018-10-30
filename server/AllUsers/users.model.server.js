@@ -8,6 +8,7 @@ module.exports = usersDB;
 usersDB.addNewUser = addNewUser;
 usersDB.loginUser = loginUser;
 usersDB.getAllUsers = getAllUsers;
+usersDB.getAllMakers = getAllMakers;
 usersDB.findUserById = findUserById;
 usersDB.findUserByEmail = findUserByEmail;
 usersDB.addEventId = addEventId;
@@ -286,6 +287,11 @@ function getAllUsers(){
 				.populate('events')
 				.populate('registeredEventsList')
 				.exec();
+}
+
+function getAllMakers(){
+	return usersDB
+				.find({userType: 'maker'});
 }
 
 function findUserById(userId){

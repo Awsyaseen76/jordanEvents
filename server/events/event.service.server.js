@@ -6,9 +6,11 @@ module.exports = function(app) {
 
 	// http handlers
 	app.get('/api/allEvents', getAllEvents);
+	app.get('/api/allEvents/:makerId', findEventsByMakerId);
 	// app.get('/api/event/:eventId', findEvent);
 	// app.get('/api/event/', findEvent);
 	app.get('/api/makerEvents/:makerId', findEventsByMakerId);
+	app.get('/api/makerEventsList/:makerId', createMakerEventsList);
 	app.get('/api/event/:eventId', findEventByEventId);
 	app.post('/api/event/', addNewEvent);
 	app.put('/api/event/', updateEvent);
@@ -23,6 +25,16 @@ module.exports = function(app) {
 	// app.put('/api/event/removeFrozen/:userId/:eventId/:originalEventId', removeFrozen);
 	app.put('/api/event/removeFrozen', removeFrozen);
 
+
+	function createMakerEventsList(req, res){
+		var makerId = req.params.makerId;
+		eventsDB
+			.createMakerEventsList(makerId)
+			.then(function(result){
+				res.send(result);
+				return;
+			});
+	}
 
 	function removeFrozen(req, res){
 		var ids = req.body;

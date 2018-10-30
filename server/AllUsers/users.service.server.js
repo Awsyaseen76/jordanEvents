@@ -105,6 +105,7 @@ var async			= require('async');
 // ---------------------------------- APIs requests ----------------------------------
 
 app.get('/api/user/getAllUsers', getAllUsers);
+app.get('/api/user/getAllMakers', getAllMakers);
 app.get('/api/user/findUserById/:userId', findUserById);
 app.get('/api/user/findUserByEmail/:userEmail', findUserByEmail);
 app.post('/api/user/login', passport.authenticate('localUser'), loginUser);
@@ -597,6 +598,20 @@ function getAllUsers(req, res) {
 		.then(function(result){
 			if(result){
 				res.send(result);
+				return;
+			} else {
+				res.send('error');
+				return;
+			}
+		});
+}
+
+function getAllMakers(req, res){
+	usersDB
+		.getAllMakers()
+		.then(function(makers){
+			if(makers){
+				res.send(makers);
 				return;
 			} else {
 				res.send('error');

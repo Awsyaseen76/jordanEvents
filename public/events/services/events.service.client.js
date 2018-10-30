@@ -23,6 +23,11 @@
 		this.addToFrozeMembers = addToFrozeMembers;
 		// this.removeFromFrozeMembers = removeFromFrozeMembers;
 		this.removeFrozen = removeFrozen;
+		this.createMakerEventsList = createMakerEventsList;
+
+		function createMakerEventsList(makerId){
+			return $http.get('/api/makerEventsList/' + makerId);
+		}
 
 
 		function removeFrozen(ids){

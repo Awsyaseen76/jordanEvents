@@ -134,6 +134,8 @@
 				.then(function(event){
 					event.startingDate = new Date(event.startingDate);
 					event.expiryDate = new Date(event.expiryDate);
+					event.sessionStartTime = new Date (event.sessionStartTime);
+					event.sessionEndTime = new Date (event.sessionEndTime);
 					
 					model.selectedEvent = event;
 
