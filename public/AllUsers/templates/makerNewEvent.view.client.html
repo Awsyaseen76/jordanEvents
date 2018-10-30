@@ -74,11 +74,17 @@
 						<label for="subcategory">Sub-Category:</label>
 						<input class="form-control" type="text" name="subcategory" id="subcategory" ng-model="newEvent.subcategory">
 					</div>
+					
+					<div class="form-group">
+						<label for="ageGroup">Age Group:</label>
+						<input class="form-control" type="text" name="ageGroup" id="ageGroup" ng-model="newEvent.ageGroup">
+					</div>
 
 					<div class="form-group">
 						<label for="details">Details:</label>
 						<textarea class="form-control" rows="4" cols="50" name="details" id="details" ng-model="newEvent.details"></textarea>
 					</div>
+
 
 					<div class="form-group">
 						<label for="startingDate">Starting Date:</label>
@@ -89,6 +95,16 @@
 						<label for="expiryDate">End Date:</label>
 						<input type="date" class="form-control" rows="4" cols="50" name="expiryDate" id="expiryDate" ng-model="newEvent.expiryDate">
 					</div>
+
+					<div class="form-group">
+						<label for="sessionStartTime">Session's starting time:</label>
+						<input type="time" class="form-control" rows="4" cols="50" name="sessionStartTime" id="sessionStartTime" ng-model="newEvent.sessionStartTime">
+					</div>
+
+					<div class="form-group">
+						<label for="sessionEndTime">Session's end time:</label>
+						<input type="time" class="form-control" rows="4" cols="50" name="sessionEndTime" id="sessionEndTime" ng-model="newEvent.sessionEndTime">
+					</div>					
 
 					<div>
 						<div class="weekDays-selector">

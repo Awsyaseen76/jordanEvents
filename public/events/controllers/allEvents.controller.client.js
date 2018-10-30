@@ -45,7 +45,7 @@
 						// Initilise the map 
 						var map = new mapboxgl.Map({
 							container: 'mapContainer',
-							style: 'mapbox://styles/mapbox/streets-v10',
+							style: 'mapbox://styles/mapbox/satellite-streets-v9',
 							center: [35.87741988743201, 32.003009804995955],
 							// center: [model.position.currentposition.lng, model.position.currentposition.lat],
 							zoom: 10

@@ -88,6 +88,10 @@
 						<input class="form-control" type="text" name="subcategory" id="subcategory" ng-model="model.selectedEvent.subcategory">
 					</div>
 
+					<div class="form-group">
+						<label for="ageGroup">Age Group:</label>
+						<input class="form-control" type="text" name="ageGroup" id="ageGroup" ng-model="model.selectedEvent.ageGroup">
+					</div>
 
 					<div class="form-group">
 						<label for="details">Details:</label>
@@ -103,6 +107,16 @@
 					<div class="form-group">
 						<label for="category">End date:</label>
 						<input class="form-control" type="date" name="category" id="category" ng-model="model.selectedEvent.expiryDate">
+					</div>
+
+					<div class="form-group">
+						<label for="sessionStartTime">Session's starting time:</label>
+						<input type="time" class="form-control" rows="4" cols="50" name="sessionStartTime" id="sessionStartTime" ng-model="model.selectedEvent.sessionStartTime">
+					</div>
+
+					<div class="form-group">
+						<label for="sessionEndTime">Session's end time:</label>
+						<input type="time" class="form-control" rows="4" cols="50" name="sessionEndTime" id="sessionEndTime" ng-model="model.selectedEvent.sessionEndTime">
 					</div>
 
 					<div>

@@ -42,12 +42,11 @@
 
 
 			function eventRegistration(event, user){
-				console.log(user);
-				
-
 				if (!model.loggedUser){
 					model.error1 = 'Please login or sign-up to register on this event';
+					$('#eventRegistrationModal').modal('hide');
 					$('html, body').animate({ scrollTop: 0 }, 'slow');
+
 					return;
 				} else {
 					var userId = model.loggedUser._id;

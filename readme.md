@@ -328,14 +328,14 @@ Registration form.
 		[x] player name: first, middle, last.
 		[x] DOB
 		[x] Gender
-		Nationality
+		[x] Nationality
 		[x] School name
 		[x] Grade
 		Home address (Map)
 		Parent / Guardian name: first, middle, last.
 		Mobile No. with International code.
 		Secondary / emergency mobile No.
-		Email
+		[x] Email
 		Please list those people including in addition to parents / guardians who are permitted to pick your child.
 		Name: first, middle, last.
 		Phone: 
@@ -343,10 +343,21 @@ Registration form.
 		Child photo
 
 
-
-
-
-
-
+Notes on Oct 30 2018:
+	To add the point with star
+	Each event has the following data:
+		Name 
+		Category 
+		Subcategory 
+		Details 
+		Starting date
+		Expiry date
+		Days per week
+		Price
+		Images: 1200x300 ---- 750x450
+		Address
+		Location on map
+		* Session time from: to:
+		* Category age group
 
 

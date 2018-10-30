@@ -302,9 +302,9 @@ function checkToken(req, res, next){
 							html: 
 								'<div align="center" style="background-color: beige">'+
 										'<br><br>'+
-										'<img src="cid:jordanEventsLogo001" style="width: 200px; height: 200px;"/>'+
+										'<img src="cid:whatsOnJordanLogo001" style="width: 311px; height: 194px;"/>'+
 										'<br>'+
-										'<p style="color: indianred; font-size: 2em;">Welcome '+ result.name.firstName + '!'+'</p>'+
+										'<p style="color: #DB685F; font-size: 2em;">Welcome '+ result.name.firstName + '!'+'</p>'+
 										'<p style="font-size: 1.5em;" > You are receiving this because you (or someone else) have requested the reset of the password for your account.</p>'+
 										'<br>'+
 										'<p style="font-size: 1.5em;">This is to confirm that your password has been changed successfully. </p>'+
@@ -313,15 +313,15 @@ function checkToken(req, res, next){
 										'<br>'+ 
 										'<p style="font-size: 1.5em;"> http://' + req.headers.host + '/#!/login'+'</p>'+
 										'<br>'+
-										'<p style="font-size: 1.5em;">Jordan Events Team</p>'+
+										'<p style="font-size: 1.5em;">Whats on Jordan Team</p>'+
 										'<br>'+
 										'<p> --   </p>'+
 								'</div>',
 								
 								attachments: [{
-						        	filename: 'jordanEvents.jpg',
-						        	path: __dirname+'/../../public/img/logo/jordanEvents.jpg',
-						        	cid: 'jordanEventsLogo001' 
+						        	filename: 'wojo.jpg',
+						        	path: __dirname+'/../../public/img/logo/wojo.jpg',
+						        	cid: 'whatsOnJordanLogo001' 
 						    	}]
 							
 						};
@@ -376,7 +376,7 @@ function forgetPassword(req, res){
 					html: 
 						'<div align="center" style="background-color: beige">'+
 								'<br><br>'+
-								'<img src="cid:jordanEventsLogo001" style="width: 200px; height: 200px;"/>'+
+								'<img src="cid:whatsOnJordanLogo001" style="width: 200px; height: 200px;"/>'+
 								'<br>'+
 								'<p style="color: indianred; font-size: 2em;">Welcome '+ user.name.firstName + '!'+'</p>'+
 								'<p style="font-size: 1.5em;" > You are receiving this because you (or someone else) have requested the reset of the password for your account.</p>'+
@@ -387,15 +387,15 @@ function forgetPassword(req, res){
 								'<br>'+
 								'<p style="font-size: 1.5em;">If you did not request this, please ignore this email and your password will remain unchanged. </p>'+
 								'<br>'+
-								'<p style="font-size: 1.5em;">Jordan Events Team</p>'+
+								'<p style="font-size: 1.5em;">What\'s on Jordan Team</p>'+
 								'<br>'+
 								'<p> --   </p>'+
 						'</div>',
 						
 						attachments: [{
-				        	filename: 'jordanEvents.jpg',
-				        	path: __dirname+'/../../public/img/logo/jordanEvents.jpg',
-				        	cid: 'jordanEventsLogo001' 
+				        	filename: 'wojo.jpg',
+				        	path: __dirname+'/../../public/img/logo/wojo.jpg',
+				        	cid: 'whatsOnJordanLogo001' 
 				    	}]
 					
 				};
@@ -481,7 +481,7 @@ function userStrategy(username, password, done) {
 				if(!user){
 					return done(null, false);
 				} else if(user && !bcrypt.compareSync(password, user.password)){
-					return done(null, false)
+					return done(null, false);
 				} else if(user && bcrypt.compareSync(password, user.password)){
 					return done(null, user);
 				} 
@@ -623,21 +623,21 @@ function addNewUser(req, res){
 						html: 
 							'<div align="center" style="background-color: beige">'+
 									'<br><br>'+
-									'<img src="cid:jordanEventsLogo001" style="width: 200px; height: 200px;"/>'+
+									'<img src="cid:whatsOnJordanLogo001" style="width: 200px; height: 200px;"/>'+
 									'<br>'+
 									'<h1 style="color: indianred; font-size: 6em;">Welcome '+ addedUser.name.firstName + '!'+'</h1>'+
 									'<h3 style="font-size: 3em;" >Your registration has been completed...</h3>'+
 									'<br>'+
-									'<p style="font-size: 2em;">You can now enjouy our services by logging in to <a href="http://jordanevents.herokuapp.com">our site</a> and register for deferents activities</p>'+
+									'<p style="font-size: 2em;">You can now enjouy our services by logging in to <a href="www.whatsonjordan.com">our site</a> and register for deferents activities</p>'+
 									'<br>'+
-									'<h3 style="font-size: 3em;">Jordan Events Team</h3>'+
+									'<h3 style="font-size: 3em;">What\'s on Jordan Team</h3>'+
 									'<br><br><br><br><br>'+
 							'</div>',
 							
 							attachments: [{
-					        	filename: 'jordanEvents.jpg',
-					        	path: __dirname+'/../../public/img/logo/jordanEvents.jpg',
-					        	cid: 'jordanEventsLogo001' 
+					        	filename: 'wojo.jpg',
+					        	path: __dirname+'/../../public/img/logo/wojo.jpg',
+					        	cid: 'whatsOnJordanLogo001' 
 					    	}]
 						
 						};
