@@ -45,14 +45,17 @@
 
 @media (min-width: 769px) {
   .sticky-nav-top{
-    height: 101px;
+    height: 150px;
+    margin-top: 0px;
+    margin-bottom: 50px;
   }
   .menu-logo{
-    width: 202px;
-    height: 100px;
+    width: 200px;
+    height: 134px;
     margin-right: 0;
     margin-left: 20px;
-    margin-top: auto;
+    margin-top: 15px;
+    margin-bottom: 30px;
     position: fixed;
       top: 0;
       left: 0;
@@ -65,12 +68,15 @@
   .sticky-nav-top{
     height: auto;
     font-size: 1em;
+    margin-top: 0px;
+    margin-bottom: 40px;
   }
   .menu-logo{
-    width: 101px;
-    height: 56px;
+    width: 112px;
+    height: 75px;
     margin-right: 0;
-    margin-top: auto;
+    margin-top: 5px;
+    margin-left: 10px;
     position: fixed;
       top: 0;
       left: 0;

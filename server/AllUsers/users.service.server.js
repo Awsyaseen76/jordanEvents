@@ -320,8 +320,8 @@ function checkToken(req, res, next){
 								'</div>',
 								
 								attachments: [{
-						        	filename: 'wojo.jpg',
-						        	path: __dirname+'/../../public/img/logo/wojo.jpg',
+						        	filename: 'wojo2.jpg',
+						        	path: __dirname+'/../../public/img/logo/wojo2.jpg',
 						        	cid: 'whatsOnJordanLogo001' 
 						    	}]
 							
@@ -394,8 +394,8 @@ function forgetPassword(req, res){
 						'</div>',
 						
 						attachments: [{
-				        	filename: 'wojo.jpg',
-				        	path: __dirname+'/../../public/img/logo/wojo.jpg',
+				        	filename: 'wojo2.jpg',
+				        	path: __dirname+'/../../public/img/logo/wojo2.jpg',
 				        	cid: 'whatsOnJordanLogo001' 
 				    	}]
 					
@@ -650,8 +650,8 @@ function addNewUser(req, res){
 							'</div>',
 							
 							attachments: [{
-					        	filename: 'wojo.jpg',
-					        	path: __dirname+'/../../public/img/logo/wojo.jpg',
+					        	filename: 'wojo2.jpg',
+					        	path: __dirname+'/../../public/img/logo/wojo2.jpg',
 					        	cid: 'whatsOnJordanLogo001' 
 					    	}]
 						
