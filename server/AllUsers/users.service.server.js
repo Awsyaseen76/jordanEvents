@@ -401,6 +401,8 @@ function forgetPassword(req, res){
 					
 				};
 				transporter.sendMail(mailOptions, function(error, info){
+					if(error){console.log(error);}
+					console.log(info);
 					console.log('Email sent to: ' + user.email);
 					res.sendStatus(200);
 				});
