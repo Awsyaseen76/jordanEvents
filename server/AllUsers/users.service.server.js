@@ -297,15 +297,15 @@ function checkToken(req, res, next){
 					.then(function(result){
 						// send email to reset password
 						var mailOptions = {
-							from: 'jordanevents2018@gmail.com',
+							from: 'whatsonjordan@gmail.com',
 							to: result.email,
 							subject: 'Password changed...',
 							html: 
 								'<div align="center" style="background-color: beige">'+
 										'<br><br>'+
-										'<img src="cid:whatsOnJordanLogo001" style="width: 311px; height: 194px;"/>'+
+										'<img src="cid:whatsOnJordanLogo001" style="width: 300px; height: 200px;"/>'+
 										'<br>'+
-										'<p style="color: #DB685F; font-size: 2em;">Welcome '+ result.name.firstName + '!'+'</p>'+
+										'<p style="color: #DB685F; font-size: 4em;">Welcome '+ result.name.firstName + '!'+'</p>'+
 										'<p style="font-size: 1.5em;" > You are receiving this because you (or someone else) have requested the reset of the password for your account.</p>'+
 										'<br>'+
 										'<p style="font-size: 1.5em;">This is to confirm that your password has been changed successfully. </p>'+
@@ -371,15 +371,15 @@ function forgetPassword(req, res){
         	.then(function(user){
 				// send email to reset password
 				var mailOptions = {
-					from: 'jordanevents2018@gmail.com',
+					from: 'whatsonjordan@gmail.com',
 					to: userEmail,
 					subject: 'Password reset...',
 					html: 
 						'<div align="center" style="background-color: beige">'+
 								'<br><br>'+
-								'<img src="cid:whatsOnJordanLogo001" style="width: 200px; height: 200px;"/>'+
+								'<img src="cid:whatsOnJordanLogo001" style="width: 300px; height: 200px;"/>'+
 								'<br>'+
-								'<p style="color: indianred; font-size: 2em;">Welcome '+ user.name.firstName + '!'+'</p>'+
+								'<p style="color: #DB685F; font-size: 4em;">Welcome '+ user.name.firstName + '!'+'</p>'+
 								'<p style="font-size: 1.5em;" > You are receiving this because you (or someone else) have requested the reset of the password for your account.</p>'+
 								'<br>'+
 								'<p style="font-size: 1.5em;">Please click on the following link, or paste this into your browser to complete the process: </p>'+
@@ -390,7 +390,7 @@ function forgetPassword(req, res){
 								'<br>'+
 								'<p style="font-size: 1.5em;">What\'s on Jordan Team</p>'+
 								'<br>'+
-								'<p> --   </p>'+
+								'<p> .   </p>'+
 						'</div>',
 						
 						attachments: [{
@@ -632,20 +632,20 @@ function addNewUser(req, res){
 					return err;
 				}else{
 					var mailOptions = {
-						from: 'jordanevents2018@gmail.com',
+						from: 'whatsonjordan@gmail.com',
 						to: addedUser.email,
 						subject: 'Registration complete',
 						html: 
 							'<div align="center" style="background-color: beige">'+
 									'<br><br>'+
-									'<img src="cid:whatsOnJordanLogo001" style="width: 200px; height: 200px;"/>'+
+									'<img src="cid:whatsOnJordanLogo001" style="width: 300px; height: 200px;"/>'+
 									'<br>'+
-									'<h1 style="color: indianred; font-size: 6em;">Welcome '+ addedUser.name.firstName + '!'+'</h1>'+
-									'<h3 style="font-size: 3em;" >Your registration has been completed...</h3>'+
+									'<h1 style="color: #DB685F; font-size: 4em;">Welcome '+ addedUser.name.firstName + '!'+'</h1>'+
+									'<h3 style="font-size: 2em;" >Your registration has been completed...</h3>'+
 									'<br>'+
-									'<p style="font-size: 2em;">You can now enjouy our services by logging in to <a href="www.whatsonjordan.com">our site</a> and register for deferents activities</p>'+
+									'<p style="font-size: 1.5em;">You can now enjouy our services by logging in to <a href="www.whatsonjordan.com">our site</a> and register for deferents activities</p>'+
 									'<br>'+
-									'<h3 style="font-size: 3em;">What\'s on Jordan Team</h3>'+
+									'<h3 style="font-size: 2em;">What\'s on Jordan Team</h3>'+
 									'<br><br><br><br><br>'+
 							'</div>',
 							
