@@ -279,10 +279,7 @@ User actions from starting register for particular evet:
 	- [x] creat additional modal to collect expenses by date select the category(salary, hospitality, rental fees, misc) then textbox for details.
 	- [x] create filtered totals to calculate each expense category.
 	- [x] create additional button and modal for the attendance history for each member.
-	
-
 	- [x] Admin has the ability to choose which comments to be published on the main page.
-
 	- [x] show the details of the price breakdown to include:
 		original price
 		discounte type
@@ -293,10 +290,7 @@ User actions from starting register for particular evet:
 		froze days
 		froze days amount
 		total event price
-
 	- [ ] On maker event details page show just paid members and put checkbox to show the unpaid members to make them pay.
-
-
 Notes:
 06/Aug/2018
 	[x] group and family tag to be shown on the discount modal.
@@ -308,7 +302,6 @@ Notes:
 	- report for families and groups for maker tab for family other for groups with members.
 	- export expenses to excel.
 	- fix the Event Summary in maker event details to show totals right at startup.
-
 Important:
  [x] give the maker option to create a new event from previouse one data so the name will be the same
  - User with froze membership should appear disabled on attendance
@@ -363,3 +356,6 @@ Notes on Oct 30 2018:
 
 create new page copy from allEvents tweaked the it will accept the maker id on the href like the evenId when click on event to filter the events and show just the specific maker events.
 
+
+
+add the terms and conditions to the event details and show them on the registration form
