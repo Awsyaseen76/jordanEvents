@@ -44,12 +44,6 @@
 
 
 
-
-
-
-
-
-
 <div class="container container-top-125">
 	<h1 class="text-danger">Event details:</h1>
 	<hr>
@@ -73,7 +67,7 @@
 	<h3>Event Sub-Category: </h3>
 	<p>{{model.eventDetails.subcategory}}</p>
 	<h3>Age Category: </h3>
-  <p>{{model.eventDetails.ageGroup}}</p>
+  <p>{{model.eventDetails.ageGroup.ageGroupTitle}}: Ages from: {{model.eventDetails.ageGroup.ageFrom}} To: {{model.eventDetails.ageGroup.ageTo}} years old.</p>
   <h3>Event Details: </h3>
 	<p>{{model.eventDetails.details}}</p>
 	<h3>Event Address: </h3>
@@ -252,10 +246,10 @@
 
           <hr class="my-4">
 
-          <div class="form-row">
+          <div class="form-row" ng-show="model.eventDetails.termsAndConditions">
             <div class="form-group col-md-12">
               <label for="termsAndConditions">Terms and conditions:</label>
-              <textarea class="form-control" rows='5'  id="termsAndConditions" disabled>the terms and conditions details the terms and conditions details the terms and conditions details the terms and conditions details the terms and conditions details the terms and conditions details the terms and conditions details the terms and conditions details the terms and conditions details the terms and conditions details the terms and conditions details the terms and conditions details the terms and conditions details the terms and conditions details the terms and conditions details the terms and conditions details the terms and conditions details the terms and conditions details the terms and conditions details the terms and conditions details the terms and conditions details the terms and conditions details the terms and conditions details the terms and conditions details the terms and conditions details the terms and conditions detailsthe terms and conditions details the terms and conditions details the terms and conditions details the terms and conditions details the terms and conditions details the terms and conditions details the terms and conditions details the terms and conditions details the terms and conditions details the terms and conditions details the terms and conditions details the terms and conditions details the terms and conditions detailsthe terms and conditions details the terms and conditions details the terms and conditions details the terms and conditions details the terms and conditions details the terms and conditions details the terms and conditions details the terms and conditions details the terms and conditions details the terms and conditions details the terms and conditions details the terms and conditions details the terms and conditions detailsthe terms and conditions details the terms and conditions details the terms and conditions details the terms and conditions details the terms and conditions details the terms and conditions details the terms and conditions details the terms and conditions details the terms and conditions details the terms and conditions details the terms and conditions details the terms and conditions details the terms and conditions detailsthe terms and conditions details the terms and conditions details the terms and conditions details the terms and conditions details the terms and conditions details the terms and conditions details the terms and conditions details the terms and conditions details the terms and conditions details the terms and conditions details the terms and conditions details the terms and conditions details the terms and conditions details</textarea>
+              <textarea class="form-control" rows='5'  id="termsAndConditions" disabled ng-model="model.eventDetails.termsAndConditions"></textarea>
               <!-- <input type="checkbox"  name="termsAcceptance" id="termsAcceptance" required ng-model="model.loggedUser.termsAcceptance"> <label for="termsAcceptance">I read and agree the terms and conditions.</label> -->
               <br>
               <div class="form-check">

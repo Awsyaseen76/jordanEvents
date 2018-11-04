@@ -5,7 +5,7 @@ var eventsSchema = mongoose.Schema({
 			category: String,
 			subcategory: String,
 			details: String,
-			ageGroup: String,
+			ageGroup: {ageGroupTitle: String, ageFrom: Number, ageTo: Number},
 			created: {type: Date, default: Date.now()},
 			makerId: {type: mongoose.Schema.Types.ObjectId, ref: 'usersDB'},
 			startingDate: Date,
@@ -16,6 +16,7 @@ var eventsSchema = mongoose.Schema({
 			eventDays: [],
 			programDailyDetails: {},
 			price: Number,
+			termsAndConditions: String,
 			images:{
 				img750x450: {
 					type: String,

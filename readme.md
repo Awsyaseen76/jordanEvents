@@ -359,3 +359,4 @@ create new page copy from allEvents tweaked the it will accept the maker id on t
 
 
 add the terms and conditions to the event details and show them on the registration form
+add ages from to fields in the schema and then showed in the event details, so the filter will work on the logged user age automatically. each user see different events based on the DOB.
