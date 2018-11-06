@@ -56,7 +56,7 @@
   </div>
   <div class="row">
     <div class="col-md-3">
-      <input type="text" class="form-control" name="searchByName" ng-model="searchByName" placeholder="Filter by Event name">
+      <input type="text" class="form-control" name="searchByName" ng-model="search.name" placeholder="Filter by Event name">
     </div>
     <div class="col-md-3">
       <input type="text" class="form-control" name="searchBySubcategory" ng-model="search.subcategory" placeholder="Filter by Event Subcategory">
@@ -71,7 +71,7 @@
   <hr class="my-3">
   <div class="container">
     <div class="row">
-        <div class="col-lg-4 mb-4" ng-repeat="event in model.eventsList | filter:{approved: true} | filter:searchByName | filter:search" style="max-width: 20rem;">
+        <div class="col-lg-4 mb-4" ng-repeat="event in model.eventsList | filter:{approved: true} | filter:search" style="max-width: 20rem;">
           <div class="card h-100 text-center">
             <img class="card-img-top" ng-src="{{event.images.img750x450}}" alt="{{event.name}}">
             <div class="card-body">
