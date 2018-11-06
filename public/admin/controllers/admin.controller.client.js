@@ -28,6 +28,8 @@
 		}
 
 		function getAllFeedbacks(){
+			model.events = null;
+			model.users = null;
 			userService
 				.getAllFeedbacks()
 				.then(function(feedbacks){
@@ -37,6 +39,7 @@
 
 		function getAllUsers(){
 			model.events = null;
+			model.feedbacks = null;
 			return userService
 				.getAllUsers()
 				.then(function (users){
@@ -48,6 +51,7 @@
 
 		function getAllEvents(){
 			model.users = null;
+			model.feedbacks = null;
 			eventsService
 					.getAllEvents()
 					.then(function(events){

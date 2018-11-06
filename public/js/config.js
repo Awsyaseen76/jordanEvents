@@ -20,8 +20,6 @@
 			})
 
 			.when('/login', {
-
-
 				templateUrl: 'AllUsers/templates/login.view.client.html',
 				controller: 'loginController',
 				controllerAs: 'model'

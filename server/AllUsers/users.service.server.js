@@ -676,6 +676,12 @@ function addNewUser(req, res){
 
 function checkUserLogin(req, res){
 	console.log('step 8');
+	if(req.user){
+		var birthDay = new Date(req.user.DOB);
+		var today = new Date();
+		req.user.age =  Math.abs((new Date(today - birthDay.getTime())).getUTCFullYear() - 1970);
+		console.log(req.user.age)
+	}
 	res.send(req.isAuthenticated()? req.user : null);
 }
 

@@ -15,7 +15,6 @@ three parts of the prject:
 
 
 Todolist:
-
 - [x] Create the home page
 - [x] Add navbar
 - [x] Create user login
@@ -354,9 +353,10 @@ Notes on Oct 30 2018:
 		* Category age group
 
 
-create new page copy from allEvents tweaked the it will accept the maker id on the href like the evenId when click on event to filter the events and show just the specific maker events.
+[x] create new page copy from allEvents tweaked the it will accept the maker id on the href like the evenId when click on event to filter the events and show just the specific maker events.
 
 
 
-add the terms and conditions to the event details and show them on the registration form
-add ages from to fields in the schema and then showed in the event details, so the filter will work on the logged user age automatically. each user see different events based on the DOB.
+[x] add the terms and conditions to the event details and show them on the registration form
+[x] add ages from to fields in the schema and then showed in the event details
+[] the filter will work on the logged user age automatically. each user see different events based on the DOB.

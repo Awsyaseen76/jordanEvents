@@ -48,45 +48,37 @@
 
 
 <div class="container container-top-125">
-    <!-- <div class="row">
-      <div class="col-md-4">
-        <h1>All available events</h1>
-      </div>
-      <div class="col-md-8">
-        <label for="searchByName">Filter by name:</label> 
-        <input type="text" name="searchByName" ng-model="searchByName">
-      </div>
-    </div>
-   -->
+    
   <div class="row">
-    <div class="col-md-5">
+    <div class="col-md-12">
       <h1 class="poiret-font" style="padding-top: 1px;"><strong>All available events</strong></h1>
     </div>
-    <div class="col-md-7" style="padding-top: 10px;">
+  </div>
+  <div class="row">
+    <div class="col-md-3">
       <input type="text" class="form-control" name="searchByName" ng-model="searchByName" placeholder="Filter by Event name">
     </div>
+    <div class="col-md-3">
+      <input type="text" class="form-control" name="searchBySubcategory" ng-model="search.subcategory" placeholder="Filter by Event Subcategory">
+    </div>
+    <div class="col-md-6 input-group">
+      <input type="number" class="form-control" name="searchByMaxAge" ng-model="searchByMaxAge" placeholder="Filter by age">
+      <span class="input-group-btn">  
+        <a class="btn btn-warning btn btn-default" ng-click="model.checkAge(searchByMaxAge)">Filter..</a>
+      </span>
+    </div>
   </div>
-	<hr class="my-3">
-	<div class="container">
-		<div class="row">
-			<!-- <div class="card border-success col-xl-4 aws-margin0" ng-repeat="event in model.eventsList | filter:{approved: true} | filter:searchByName" style="max-width: 20rem;">
-			  <div class="card-header text-danger"><h3>{{event.name}}</h3></div>
-			  <div class="card-body">
-			    <h5 class="card-title">Category: {{event.category}}</h5>
-			    <h5 class="card-title">Sub-Category: {{event.subcategory}}</h5>
-			    <p class="card-text">Starting Date: {{event.startingDate | date}}</p>
-			    <p class="card-text">End Date: {{event.expiryDate | date}}</p>
-          <p class="card-text">Address: {{event.address}}</p>
-			    <a href="#!/allEvents/{{event._id}}" class=" btn btn-default pull-right">More details...</a>
-			  </div> -->
-        <div class="col-lg-4 mb-4" ng-repeat="event in model.eventsList | filter:{approved: true} | filter:searchByName" style="max-width: 20rem;">
+  <hr class="my-3">
+  <div class="container">
+    <div class="row">
+        <div class="col-lg-4 mb-4" ng-repeat="event in model.eventsList | filter:{approved: true} | filter:searchByName | filter:search" style="max-width: 20rem;">
           <div class="card h-100 text-center">
             <img class="card-img-top" ng-src="{{event.images.img750x450}}" alt="{{event.name}}">
             <div class="card-body">
               <h4 class="card-title" ng-cloak>{{event.name}}</h4>
-              <h6 class="card-subtitle mb-2 text-muted" ng-cloak>{{event.category}}</h6>
-              <p class="card-text" ng-cloak>from: {{event.startingDate | date}}</p>
-              <p class="card-text" ng-cloak>to: {{event.expiryDate | date}}</p>
+              <h4 class="card-subtitle mb-2 text-muted" ng-cloak>{{event.category}}</h4>
+              <p class="card-text" ng-cloak>From: {{event.startingDate | date}}</p>
+              <p class="card-text" ng-cloak>To: {{event.expiryDate | date}}</p>
               <p class="card-text" ng-cloak>Address: {{event.address}}</p>
             </div>
             <div class="card-footer">

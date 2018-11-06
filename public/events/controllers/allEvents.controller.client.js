@@ -3,18 +3,36 @@
 		.module('jordanEvents')
 		.controller('allEventsController', allEventsController);
 
-	function allEventsController($routeParams, eventsService, userService, $location){
+	function allEventsController($routeParams, eventsService, userService, $location, $route){
 		var model = this;
 		model.position = {currentposition: {}};
 		var mapFeatures = [];
 		
 		function init(){
+			// To indicate that the events list is including all the events
+			model.filtered = false;
+			userService
+					.checkUserLogin()
+					.then(function(result){
+						if(result){
+							model.loggedUser = result;
+							var birthDay = new Date(model.loggedUser.DOB);
+							var today = new Date();
+							model.loggedUser.age =  Math.abs((new Date(today - birthDay.getTime())).getUTCFullYear() - 1970);
+							console.log(model.loggedUser.age);
+						}
+					});
+			
 			if($routeParams.makerId){
 				var makerId = $routeParams.makerId;
 				eventsService
 					.createMakerEventsList(makerId)
 					.then(function(eventsByMaker){
-						model.eventsListByMaker = eventsByMaker.data;
+						if(model.loggedUser){
+							model.eventsListByMaker = eventsByMaker.data.filter(function(event){return (event.ageGroup.ageFrom<=model.loggedUser.age && event.ageGroup.ageTo>=model.loggedUser.age);});
+						}else{
+							model.eventsListByMaker = eventsByMaker.data;
+						}
 					});
 			}
 			eventsService
@@ -22,7 +40,13 @@
 				.then(function(result){
 					var eventsParams = result.data;
 					var mapBoxKey = eventsParams.mapBoxKey;
-					model.eventsList = eventsParams.eventsList;
+					if(model.loggedUser){
+						console.log(model.loggedUser.age);
+						model.eventsList = eventsParams.eventsList.filter(function(event){return (event.ageGroup.ageFrom<=model.loggedUser.age && event.ageGroup.ageTo>=model.loggedUser.age);});
+						console.log(model.eventsList)
+					}else{
+						model.eventsList = eventsParams.eventsList;
+					}
 					for(var e in model.eventsList){
 						mapFeatures.push({"type": "Feature",
 							              "properties": {
@@ -30,21 +54,11 @@
 					                      },
 					                      "geometry": {
 					                        "type": "Point",
-					                        "coordinates": model.eventsList[e].coordinates
+					                        "coordinates": model.eventsList[e].coordinates,
+					                        "zoom": 5
 					                    }
 							            });
 					}
-					// function getLocation() {
-					//     if (navigator.geolocation) {
-					//         navigator.geolocation.getCurrentPosition(showPosition);
-					//     } else { 
-					//         console.log("Geolocation is not supported by this browser.");
-					//     }
-					// };
-
-					// function showPosition(position){
-						// model.position.currentposition.lat = position.coords.latitude; 
-						// model.position.currentposition.lng = position.coords.longitude;
 
 						// MapBox Maps
 					    // Get the access token from the server
@@ -84,7 +98,7 @@
 								            "icon-allow-overlap": true,
 								            "icon-size": 0.20
 								        }
-								}
+								};
 
 								// Add the markers to the map
 								map.addLayer(placesOfEvents);
@@ -144,23 +158,34 @@
 
 				});
 
+			// userService
+			// 		.checkUserLogin()
+			// 		.then(function(result){
+			// 			if(result){
+			// 				model.loggedUser = result;
+			// 			}
+			// 		});
+			
+
 			// eventsService
 			// 	.getAllEvents()
 			// 	.then(function(events){
 			// 		model.eventsList = events;		
 			// 	});
-
-			userService
-					.checkUserLogin()
-					.then(function(result){
-						if(result){
-							model.loggedUser = result;
-						}
-					});
 		}
 		init();
-
+		model.checkAge = checkAge;
 		model.logout = logout;
+
+		function checkAge(age){
+			// temprary solving by reload to remove the filter and return to the original events list
+			if(model.filtered){
+				$route.reload();
+			}
+			console.log(age);
+			model.eventsList = model.eventsList.filter(function(event){return (event.ageGroup.ageFrom<=age && event.ageGroup.ageTo>=age);});
+			model.filtered = true;
+		}
 
 		function logout(){
 			userService
