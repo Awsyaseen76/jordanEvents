@@ -19,6 +19,12 @@
 				controllerAs: 'model'
 			})
 
+			.when('/allEvents/:makerId', {
+				templateUrl: 'events/templates/allEvents.view.client.html',
+				controller: 'allEventsController',
+				controllerAs: 'model'
+			})
+
 			.when('/login', {
 				templateUrl: 'AllUsers/templates/login.view.client.html',
 				controller: 'loginController',
@@ -95,17 +101,12 @@
 
 			})
 			
-			.when('/allEvents/:eventId',{
+			.when('/eventDetails/:eventId',{
 				templateUrl: 'events/templates/eventDetails.view.client.html',
 				controller: 'eventDetailsController',
 				controllerAs: 'model'
 			})
 
-			.when('/makerEventsList/:makerId',{
-				templateUrl: 'events/templates/eventsListByMaker.view.client.html',
-				controller: 'allEventsController',
-				controllerAs: 'model'
-			})			
 			
 			// .when('/loginMaker', {
 			// 	templateUrl: 'makers/templates/loginMaker.view.client.html',

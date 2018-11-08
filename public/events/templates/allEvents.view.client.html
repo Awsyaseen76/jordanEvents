@@ -61,17 +61,15 @@
     <div class="col-md-3">
       <input type="text" class="form-control" name="searchBySubcategory" ng-model="search.subcategory" placeholder="Filter by Event Subcategory">
     </div>
-    <div class="col-md-6 input-group">
-      <input type="number" class="form-control" name="searchByMaxAge" ng-model="searchByMaxAge" placeholder="Filter by age">
-      <span class="input-group-btn">  
-        <a class="btn btn-warning btn btn-default" ng-click="model.checkAge(searchByMaxAge)">Filter..</a>
-      </span>
+    <div class="col-md-3">
+      <input type="number" class="form-control" name="filterByAcceptedAge" ng-model="filterByAcceptedAge" placeholder="Filter by age">
+      
     </div>
   </div>
   <hr class="my-3">
   <div class="container">
     <div class="row">
-        <div class="col-lg-4 mb-4" ng-repeat="event in model.eventsList | filter:{approved: true} | filter:search" style="max-width: 20rem;">
+        <div class="col-lg-4 mb-4" ng-repeat="event in model.eventsList | filter:{approved: true} | filter:search | ageFilter:filterByAcceptedAge" style="max-width: 20rem;">
           <div class="card h-100 text-center">
             <img class="card-img-top" ng-src="{{event.images.img750x450}}" alt="{{event.name}}">
             <div class="card-body">
@@ -82,7 +80,7 @@
               <p class="card-text" ng-cloak>Address: {{event.address}}</p>
             </div>
             <div class="card-footer">
-              <a href="#!/allEvents/{{event._id}}">More details...</a>
+              <a href="#!/eventDetails/{{event._id}}">More details...</a>
             </div>
           </div>
         </div>

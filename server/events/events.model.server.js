@@ -19,7 +19,7 @@ eventsDB.addToDiscountedMembers = addToDiscountedMembers;
 eventsDB.addExpense = addExpense;
 eventsDB.addToFrozeMembers = addToFrozeMembers;
 eventsDB.removeFrozen = removeFrozen;
-eventsDB.createMakerEventsList = createMakerEventsList;
+// eventsDB.createMakerEventsList = createMakerEventsList;
 
 function removeFrozen(ids){
 	// console.log(ids);
@@ -129,16 +129,16 @@ function findEventsByMakerId(makerId){
 				.exec();
 }
 
-function createMakerEventsList(makerId){
-	var today = (new Date()).toISOString();
-	return eventsDB
-				.find({
-					makerId: makerId,
-					startingDate: {$gt: today}
-				})
-				.sort('startingDate')
-				.exec();
-}
+// function createMakerEventsList(makerId){
+// 	var today = (new Date()).toISOString();
+// 	return eventsDB
+// 				.find({
+// 					makerId: makerId,
+// 					startingDate: {$gt: today}
+// 				})
+// 				.sort('startingDate')
+// 				.exec();
+// }
 
 function getAllEvents(){
 	var today = (new Date()).toISOString();

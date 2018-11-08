@@ -359,4 +359,5 @@ Notes on Oct 30 2018:
 
 [x] add the terms and conditions to the event details and show them on the registration form
 [x] add ages from to fields in the schema and then showed in the event details
-[] the filter will work on the logged user age automatically. each user see different events based on the DOB.
+[x] the filter will work on the logged user age automatically. each user see different events based on the DOB.
+[x] create custom filter for the age accepted by events
