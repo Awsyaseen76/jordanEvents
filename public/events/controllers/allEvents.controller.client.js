@@ -11,6 +11,7 @@
 		function init(){
 			// To indicate that the events list is including all the events
 			// model.filtered = false;
+			model.loadingData = true;
 			userService
 					.checkUserLogin()
 					.then(function(result){
@@ -151,7 +152,7 @@
 							});
 						}
 					}
-				});
+				}).finally(function(){model.loadingData = false});
 		}
 		init();
 		

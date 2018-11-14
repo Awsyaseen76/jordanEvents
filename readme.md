@@ -361,3 +361,25 @@ Notes on Oct 30 2018:
 [x] add ages from to fields in the schema and then showed in the event details
 [x] the filter will work on the logged user age automatically. each user see different events based on the DOB.
 [x] create custom filter for the age accepted by events
+
+
+
+
+[] its the time to
+	[] ceate new event maker
+	[] create new event for three days and make it like real one
+	[] create members with real email (three or more members)
+	[] let the members register for the event
+	[] manage the event for all the event time
+	[] work on all the event options (discount, attendance, feedbak, renew the event, ..... etc)
+
+
+
+13 NOV 2018
+	[] check the barcode reader if it doable.
+	[] check the show just the paid members on maker event details view not working correct when chose the paid then turn the on off button it gives not all members but the unpaid members instead it should show all the members.
+	[] checkbox on members list in the maker view to check if the member receive the outfit with the date.
+	[] system documentation 
+	[] schedual to be shown on the maker view list to 
+
+	

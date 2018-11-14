@@ -81,10 +81,10 @@
 			var balance = 0;
 			for(var i in loggedUser.payments){
 				if(eventId === loggedUser.payments[i].eventId){
-					totals+= JSON.parse(loggedUser.payments[i].paymentAmount)
+					totals+= JSON.parse(loggedUser.payments[i].paymentAmount);
 				}
 			}
-			balance = totals - eventPrice
+			balance = totals - eventPrice;
 			return {totals: totals, balance: balance};
 		}
 

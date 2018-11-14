@@ -68,8 +68,18 @@
   </div>
   <hr class="my-3">
   <div class="container">
+        <div>
+          <div class="alert alert-danger" role="alert" ng-show="filteredEvents.length==0">
+            There are no events based on your filter!
+          </div>
+          <!-- {{filteredEvents.length}} -->
+        </div>
+
+        <div class="waitingCircle" ng-if="model.loadingData">
+          <img src="../../img/lg.dual-gear-loading-icon.gif">
+        </div>
     <div class="row">
-        <div class="col-lg-4 mb-4" ng-repeat="event in model.eventsList | filter:{approved: true} | filter:search | ageFilter:filterByAcceptedAge" style="max-width: 20rem;">
+        <div class="col-lg-4 mb-4" ng-repeat="event in filteredEvents = (model.eventsList | filter:{approved: true} | filter:search | ageFilter:filterByAcceptedAge)" style="max-width: 20rem;">
           <div class="card h-100 text-center">
             <img class="card-img-top" ng-src="{{event.images.img750x450}}" alt="{{event.name}}">
             <div class="card-body">
