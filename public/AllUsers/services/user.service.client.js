@@ -1,6 +1,6 @@
 (function() {
 	angular
-		.module('jordanEvents')
+		.module('whatsOnJordan')
 		.service('userService', userService);
 
 	function userService($http) {

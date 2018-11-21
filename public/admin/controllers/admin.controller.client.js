@@ -1,6 +1,6 @@
 (function() {
 	angular
-		.module('jordanEvents')
+		.module('whatsOnJordan')
 		.controller('adminController', adminController);
 
 	function adminController(userService, eventsService, loggedAdmin, $location) {

@@ -1,6 +1,6 @@
 // custom filter to use it filter the events by the age entered on the all events page
 angular
-	.module('jordanEvents')
+	.module('whatsOnJordan')
 	.filter('ageFilter', function(){
 		return function(events, age){
 			if(age){

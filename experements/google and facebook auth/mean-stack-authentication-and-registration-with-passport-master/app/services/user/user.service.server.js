@@ -314,12 +314,12 @@ module.exports = function(app) {
                 function(){
                     res.status(400).send(err);
                 }
-            )
+            );
     }
 
     function isAdmin(user) {
         if(user.roles.indexOf("admin") > 0) {
-            return true
+            return true;
         }
         return false;
     }
@@ -330,5 +330,5 @@ module.exports = function(app) {
         } else {
             next();
         }
-    };
-}
+    }
+};

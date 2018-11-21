@@ -1,6 +1,6 @@
 (function(){
 	angular
-		.module('jordanEvents')
+		.module('whatsOnJordan')
 		.controller('eventDetailsController', eventDetailsController);
 
 		function eventDetailsController($routeParams, eventsService, userService, $location){

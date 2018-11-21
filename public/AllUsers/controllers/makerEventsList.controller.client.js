@@ -1,6 +1,6 @@
 (function() {
 	angular
-		.module('jordanEvents')
+		.module('whatsOnJordan')
 		.controller('makerEventsListController', makerEventsListController);
 
 	function makerEventsListController(eventsService, $location, loggedMaker, userService) {

@@ -1,6 +1,6 @@
 (function() {
 	angular
-		.module('jordanEvents')
+		.module('whatsOnJordan')
 		.controller('registerController', registerController);
 
 	function registerController(userService, $location, $rootScope) {

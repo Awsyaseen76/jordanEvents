@@ -1,6 +1,6 @@
 (function() {
 	angular
-		.module('jordanEvents')
+		.module('whatsOnJordan')
 		.controller('updateUserProfile', updateUserProfile);
 
 	function updateUserProfile(userService, loggedUser, $location) {

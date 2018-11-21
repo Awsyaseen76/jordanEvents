@@ -1,4 +1,4 @@
 (function() {
 	angular
-		.module('jordanEvents', ['ngRoute']);
+		.module('whatsOnJordan', ['ngRoute']);
 })();

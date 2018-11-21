@@ -1,6 +1,6 @@
 (function(){
 	angular
-		.module('jordanEvents')
+		.module('whatsOnJordan')
 		.controller('homePageController', homePageController);
 
 	function homePageController(userService, $location, eventsService, $route, $interval){

@@ -1,4 +1,4 @@
-Project: jordanEvents
+Project: whatsonjordan
 Description:
 to list all the events that focuses on youth ages from 5 to 17 years old.
 three parts of the prject:
@@ -224,11 +224,6 @@ Todo list:
 
 -[] profile details about each coach in event.
 
-Notes:
-	-[] attendance by the number for each member.
-
-
-
 
 User actions from starting register for particular evet:
 	- User register for event
@@ -365,7 +360,7 @@ Notes on Oct 30 2018:
 
 
 
-[] its the time to
+[] its the time to test by:
 	[] ceate new event maker
 	[] create new event for three days and make it like real one
 	[] create members with real email (three or more members)

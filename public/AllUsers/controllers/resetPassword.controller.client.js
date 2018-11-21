@@ -1,6 +1,6 @@
 (function() {
 	angular
-		.module('jordanEvents')
+		.module('whatsOnJordan')
 		.controller('resetPasswordController', resetPasswordController);
 
 	function resetPasswordController(userService, $location, $routeParams) {

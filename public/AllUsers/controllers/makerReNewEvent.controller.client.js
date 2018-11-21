@@ -1,6 +1,6 @@
 (function(){
 	angular
-		.module('jordanEvents')
+		.module('whatsOnJordan')
 		.controller('makerReNewEventController', makerReNewEventController);
 
 		function makerReNewEventController($location, $routeParams, eventsService, loggedMaker, userService){
