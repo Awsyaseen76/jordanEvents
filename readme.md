@@ -56,27 +56,27 @@ Todolist:
 - [x] adding passport to user and maker
 
 30/Apr/2018
--[x] remove the user's id and maker's id from the browser url for more secure.
+- [x] remove the user's id and maker's id from the browser url for more secure.
 
 03/May/2018
--[x] encrypt the password for user and maker with salt and hash.
+- [x] encrypt the password for user and maker with salt and hash.
 
 04/May/2018
--[x] add google authentication.
+- [x] add google authentication.
 
 06/May/2018
--[x] deploy on heroku and connect the database via mLab as addons of heroku.
+- [x] deploy on heroku and connect the database via mLab as addons of heroku.
 
 07/May/2018
--[x] add profile image.
+- [x] add profile image.
 
 09/May/2018
--[x] rebuild the database to be just one collection for users with multi tags [user, maker, admin, superAdmin]. 
--[x] rebuild the login system to be just one login page if the tag is user go to user maker admin profile respectfuly. 
--[x] the admin decided if the user is a maker by add a tag maker to the record.
+- [x] rebuild the database to be just one collection for users with multi tags [user, maker, admin, superAdmin]. 
+- [x] rebuild the login system to be just one login page if the tag is user go to user maker admin profile respectfuly. 
+- [x] the admin decided if the user is a maker by add a tag maker to the record.
 
--[x] add the validity for each event and add filter to show just the valid events (add events validity for registration on database). 
--[x] redirect the registered user or maker direct to the profile not to the login page.
+- [x] add the validity for each event and add filter to show just the valid events (add events validity for registration on database). 
+- [x] redirect the registered user or maker direct to the profile not to the login page.
 
 
 
@@ -96,67 +96,67 @@ Todolist:
 	[x] a. the registration of the makers.
 	[x] b. confirm the publish of the event after added by the maker.
 	
- -[x] the maker can make payment for each user and to show the balance.
+ - [x] the maker can make payment for each user and to show the balance.
 
- -[x] add the payment for each user managed by the maker.
+ - [x] add the payment for each user managed by the maker.
 
- -[x] filter events by the starting date greater than today still not expired
- -[x] now we send email to user directly after register with image logo
- -[x] upload profile image with multer to folder
- -[x] upload / display profile image to/from AWS S3 bucket
- -[x] reset password with email confirmation
- -[x] The ability of update user profile
- -[x] add member to event then count on the makers events list
- -[x] maker can add payments for user event
- -[x] readd the ability of updating uploading profile image
- -[x] calculate payment details on maker view for each member
- -[x] add statement of account for each event on maker view
- -[x] fix the location after update profile and add price to new event
- -[x] maker can do payments and list payments details and take members attendance
- -[x] show payments and attended details on user profile
- -[x] create event details day by day calculating the days of the programs based on the days per week
+ - [x] filter events by the starting date greater than today still not expired
+ - [x] now we send email to user directly after register with image logo
+ - [x] upload profile image with multer to folder
+ - [x] upload / display profile image to/from AWS S3 bucket
+ - [x] reset password with email confirmation
+ - [x] The ability of update user profile
+ - [x] add member to event then count on the makers events list
+ - [x] maker can add payments for user event
+ - [x] readd the ability of updating uploading profile image
+ - [x] calculate payment details on maker view for each member
+ - [x] add statement of account for each event on maker view
+ - [x] fix the location after update profile and add price to new event
+ - [x] maker can do payments and list payments details and take members attendance
+ - [x] show payments and attended details on user profile
+ - [x] create event details day by day calculating the days of the programs based on the days per week
 
 12/July/2018
- -[x] when maker update the event details he can also change the dates of the event.
- -[x] maker can change the days per week.
- -[x] copy the program details for old days and put them in the new days.
- -[x] change the tag of approved and special untill the admin confirm the update.
+ - [x] when maker update the event details he can also change the dates of the event.
+ - [x] maker can change the days per week.
+ - [x] copy the program details for old days and put them in the new days.
+ - [x] change the tag of approved and special untill the admin confirm the update.
 
 
 13/July/2018
- -[x] show the upcomming event details from the (event details day by day) for registered members on their profile.
+ - [x] show the upcomming event details from the (event details day by day) for registered members on their profile.
 
 15/July/2018
- -[x] use mapbox Maps as an alternative to google maps.
- -[x] show markers on Map.
- -[x] zoome the map to show all the available markers.
+ - [x] use mapbox Maps as an alternative to google maps.
+ - [x] show markers on Map.
+ - [x] zoome the map to show all the available markers.
 
 18/July/2018
- -[x] show the popup on marker when mouse enter and hide it when leave.
- -[x] change the marker symbol to private one.
+ - [x] show the popup on marker when mouse enter and hide it when leave.
+ - [x] change the marker symbol to private one.
 
 19/July/2018
- -[x] The carousel now is sliding automatically
- -[x] work on the attendance not keep add attendance to the array on the database but filter the attendance if the event is the same and the date is the same just update the attendance not add new on.
+ - [x] The carousel now is sliding automatically
+ - [x] work on the attendance not keep add attendance to the array on the database but filter the attendance if the event is the same and the date is the same just update the attendance not add new on.
 
 20/July/2018
- -[x] Fix the error message of incorrect credential login.
+ - [x] Fix the error message of incorrect credential login.
 
 21/July/2018
- -[x] when update the event by maker the days will displayed so if not updated will still the same.
+ - [x] when update the event by maker the days will displayed so if not updated will still the same.
 
 22/July/2018
- -[x] add option when creating new event to have the location from current location or from the map
+ - [x] add option when creating new event to have the location from current location or from the map
 
 23/July/2018
- -[x] Member can write feedback shown on member profile page and maker event details page.
+ - [x] Member can write feedback shown on member profile page and maker event details page.
 
 24/July/2018
  -[] Price based on daily price to calculate the registered days then the start and end time event fixed.
 
 28/July/2018
- -[x] event maker can give discount for particular user.
- -[x] the discount types are:
+ - [x] event maker can give discount for particular user.
+ - [x] the discount types are:
  	1. Family: for family members give 10%.
  			   with a discount tag for the family members calculated with father name and last name with the calculated hour+day+month+year (AwsAhmed02862018);
  	2. Group: for group members like fiends give 10%. 
@@ -166,18 +166,18 @@ Todolist:
 	 		  special50: give 50% discount, the discount tag will be special50.
 	 		  special75: give 75% discount, the discount tag will be special75.
 	 		  special100: give 100% discount, the discount tag will be special100.
- -[x] Payment:
+ - [x] Payment:
  			1. select the payment type:
  				DownPayment: The payment amount show the minimum payment calculated as a session price.
  				Weekly: The payment amount show the weekly payment calculated as event price / 4.
  				Full: The payment amount show the balance of the user (the remaining amount).
- -[x] The details now showing:
+ - [x] The details now showing:
  			Total payments
 			Balance
 			Event price
 			Discount type
 			Discount Tag
- -[x] The event details now showing: 
+ - [x] The event details now showing: 
 			Event Summary:
 				Total of members
 				Total Income from the event
@@ -185,13 +185,13 @@ Todolist:
 				Event payments balance
 
 06/Aug/2018
- -[x] huge amendment on the schema that now every user have a userEventParameters that collect each event main parameter, calculate the price for each user based on the discount and the event days for the particular user if he/she register after the event started, collect the attendance, payments, feedbacks, freezeDays.
- -[x] maker have to give discount to calculate userEventParameters if no discount then choose "No discount".
- -[x] the payment calculated based on user discount, eventDays for user.
- -[x] the details show the discount type and tag also.
- -[x] the attendance now in seperate modal, and could taken multiple times throught the day, and it shows the totals.
- -[x] freeze memberShip for each user, the modal will show show the days from today to as a checkbox to select the days the user want to freeze, after submit the user could not freeze again as it once per the event, if he try to do that then the checkboxes will be disabled, for the user that had froze days they will shown on bottomn of the modal.
- -[x] the feedback is workinng just fine.
+ - [x] huge amendment on the schema that now every user have a userEventParameters that collect each event main parameter, calculate the price for each user based on the discount and the event days for the particular user if he/she register after the event started, collect the attendance, payments, feedbacks, freezeDays.
+ - [x] maker have to give discount to calculate userEventParameters if no discount then choose "No discount".
+ - [x] the payment calculated based on user discount, eventDays for user.
+ - [x] the details show the discount type and tag also.
+ - [x] the attendance now in seperate modal, and could taken multiple times throught the day, and it shows the totals.
+ - [x] freeze memberShip for each user, the modal will show show the days from today to as a checkbox to select the days the user want to freeze, after submit the user could not freeze again as it once per the event, if he try to do that then the checkboxes will be disabled, for the user that had froze days they will shown on bottomn of the modal.
+ - [x] the feedback is workinng just fine.
 
 
 
