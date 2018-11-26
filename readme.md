@@ -81,18 +81,18 @@ Todolist:
 
 
 - [x] changing the database and the logic:
-   Register [x] register template
-			[x] registerController
-			[x] user service client
-			[x] user service server
-			[x] user model
-			[x] user schema
-			[x] passport
-			[x] server
-			[x] database
+	- [x] register template
+	- [x] registerController
+	- [x] user service client
+	- [x] user service server
+	- [x] user model
+	- [x] user schema
+	- [x] passport
+	- [x] server
+	- [x] database
 
 
-[x] add the admin page to manage:
+- [x] add the admin page to manage:
 	[x] a. the registration of the makers.
 	[x] b. confirm the publish of the event after added by the maker.
 	
@@ -152,7 +152,7 @@ Todolist:
  - [x] Member can write feedback shown on member profile page and maker event details page.
 
 24/July/2018
- -[] Price based on daily price to calculate the registered days then the start and end time event fixed.
+ - [] Price based on daily price to calculate the registered days then the start and end time event fixed.
 
 28/July/2018
  - [x] event maker can give discount for particular user.
@@ -210,19 +210,19 @@ Payment module:
 Todo list:
 -------------
 
--[] check the barcode reader if it doable.
+- [] check the barcode reader if it doable.
 
--[] Admin controll user type (to create the maker).
+- [] Admin controll user type (to create the maker).
 
--[] add controll to maker to decide taking the member special discount (when make the payment and the balance --> check if there is a discount code putted by the maker on the members list).
+- [] add controll to maker to decide taking the member special discount (when make the payment and the balance --> check if there is a discount code putted by the maker on the members list).
 
--[] count registered members just if they hav a tag 'paid' which it released when make a payment.
+- [] count registered members just if they hav a tag 'paid' which it released when make a payment.
 
--[] create a list of members they registered online removed from the list after pay and registered them on the event registered members.
+- [] create a list of members they registered online removed from the list after pay and registered them on the event registered members.
 
--[] work on the problem of still access event details by maker although maker signed out?
+- [] work on the problem of still access event details by maker although maker signed out?
 
--[] profile details about each coach in event.
+- [] profile details about each coach in event.
 
 
 User actions from starting register for particular evet:
@@ -378,3 +378,18 @@ Notes on Oct 30 2018:
 	[] schedual to be shown on the maker view list to 
 
 	
+25 November 2018
+Albakry Notes:
+
+MySql
+sequelize
+EC2: how to deploy on EC2, deploy Node on ec2
+
+
+Docker:
+- Install Docker on your computer
+- Setup docker with mysql. Run image and connect to it with your computer
+
+Sequelpro:
+- Install SequelPro on your computer
+- Connect to the Database from sequelpro
